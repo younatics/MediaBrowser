@@ -7,11 +7,11 @@
 //
 
 import UIKit
-//import MBProgressHUD
+import MBProgressHUD
 import MediaPlayer
 import QuartzCore
-//import MBProgressHUD
-//import MapleBacon
+import MBProgressHUD
+import MapleBacon
 
 func floorcgf(x: CGFloat) -> CGFloat {
     return CGFloat(floorf(Float(x)))

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import DACircularProgress
+import DACircularProgress
 
 public class GridCell: UICollectionViewCell {
     let videoIndicatorPadding = CGFloat(10.0)
@@ -216,17 +216,17 @@ public class GridCell: UICollectionViewCell {
 
     //MARK: - Touches
 
-    public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         imageView.alpha = 0.6
         super.touchesBegan(touches, with: event)
     }
 
-    public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         imageView.alpha = 1
         super.touchesEnded(touches, with: event)
     }
 
-    public override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+    public override func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
         imageView.alpha = 1
         super.touchesCancelled(touches!, with: event)
     }
@@ -234,12 +234,12 @@ public class GridCell: UICollectionViewCell {
     //MARK: - Indicators
 
     private func hideLoadingIndicator() {
-        loadingIndicator.hidden = true
+        loadingIndicator.isHidden = true
     }
 
     private func showLoadingIndicator() {
         loadingIndicator.progress = 0
-        loadingIndicator.hidden = false
+        loadingIndicator.isHidden = false
         
         hideImageFailure()
     }

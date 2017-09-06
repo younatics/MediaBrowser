@@ -25,13 +25,15 @@ Awesome Media Browser
   s.source_files     = 'MediaBrowser/*.swift'
   s.resources        = "MediaBrowser/*.xcassets"
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '8.1'
 
   s.frameworks = 'ImageIO', 'QuartzCore', 'AssetsLibrary', 'MediaPlayer'
   s.weak_frameworks = 'Photos'
 
+
   s.dependency 'MBProgressHUD', '~> 0.9'
   s.dependency 'DACircularProgress', '~> 2.3'
-  s.dependency 'SDWebImage', '~> 3.7', '!= 3.7.2'
+  s.dependency 'MapleBacon'
+
   s.requires_arc = true
 end
