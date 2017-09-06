@@ -1,9 +1,9 @@
 //
 //  ZoomingScrollView.swift
-//  Pods
+//  MediaBrowser
 //
-//  Created by Tapani Saarinen on 06/09/15.
-//
+//  Created by Seungyoun Yi on 2017. 9. 6..
+//  Copyright © 2017년 Seungyoun Yi. All rights reserved.
 //
 
 import UIKit
@@ -17,13 +17,13 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     public weak var playButton: UIButton?
 
     private weak var photoBrowser: PhotoBrowser!
-	private var tapView = TapDetectingView(frame: CGRectZero) // for background taps
-	private var photoImageView = TapDetectingImageView(frame: CGRectZero)
+	private var tapView = TapDetectingView(frame: .zero) // for background taps
+	private var photoImageView = TapDetectingImageView(frame: .zero)
 	private var loadingIndicator = DACircularProgressView(frame: CGRectMake(140.0, 30.0, 40.0, 40.0))
     private var loadingError: UIImageView?
     
     public init(photoBrowser: PhotoBrowser) {
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
         
         // Setup
         index = Int.max

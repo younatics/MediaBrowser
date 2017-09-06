@@ -1,9 +1,9 @@
 //
 //  MWPhoto.swift
-//  MWPhotoBrowserSwift
+//  MediaBrowser
 //
-//  Created by Tapani Saarinen on 04/09/15.
-//  Original obj-c created by Michael Waterfall 2013
+//  Created by Seungyoun Yi on 2017. 9. 6..
+//  Copyright © 2017년 Seungyoun Yi. All rights reserved.
 //
 //
 

@@ -1,9 +1,9 @@
 //
 //  PhotoBrowser.swift
-//  Pods
+//  MediaBrowser
 //
-//  Created by Tapani Saarinen on 04/09/15.
-//
+//  Created by Seungyoun Yi on 2017. 9. 6..
+//  Copyright © 2017년 Seungyoun Yi. All rights reserved.
 //
 
 import UIKit
