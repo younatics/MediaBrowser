@@ -217,7 +217,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     //MARK: - Loading Progress
 
     public func setProgressFromNotification(notification: NSNotification) {
-        dispatch_async(DispatchQueue.main) {
+        DispatchQueue.main.async() {
             let dict = notification.object as! [String : AnyObject]
             
             if let photoWithProgress = dict["photo"] as? Photo,
@@ -293,7 +293,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         
         // Calculate Max
         var maxScale = 3.0
-        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Pad {
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             // Let them go a bit bigger on a bigger screen!
             maxScale = 4.0
         }
@@ -313,12 +313,11 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         // If we're zooming to fill then centralise
         if zoomScale != minScale {
             // Centralise
-            contentOffset = CGPointMake((imageSize.width * zoomScale - boundsSize.width) / 2.0,
-                                        (imageSize.height * zoomScale - boundsSize.height) / 2.0)
+            contentOffset = CGPoint(x: (imageSize.width * zoomScale - boundsSize.width) / 2.0, y: (imageSize.height * zoomScale - boundsSize.height) / 2.0)
         }
         
         // Disable scrolling initially until the first pinch to fix issues with swiping on an initally zoomed in photo
-        scrollEnabled = false
+        isScrollEnabled = false
         
         // If it's a video then disable zooming
         if displayingVideo() {
@@ -347,7 +346,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         
         if let le = loadingError {
             le.frame = CGRectMake(
-                floorcgf((bounds.size.width - le.frame.size.width) / 2.0),
+                floorcgf(x: (bounds.size.width - le.frame.size.width) / 2.0),
                 floorcgf((bounds.size.height - le.frame.size.height) / 2.0),
                 le.frame.size.width,
                 le.frame.size.height)
@@ -362,7 +361,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         
         // Horizontally
         if frameToCenter.size.width < boundsSize.width {
-            frameToCenter.origin.x = floorcgf((boundsSize.width - frameToCenter.size.width) / 2.0)
+            frameToCenter.origin.x = floorcgf(x: (boundsSize.width - frameToCenter.size.width) / 2.0)
         }
         else {
             frameToCenter.origin.x = 0.0
@@ -370,14 +369,14 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         
         // Vertically
         if frameToCenter.size.height < boundsSize.height {
-            frameToCenter.origin.y = floorcgf((boundsSize.height - frameToCenter.size.height) / 2.0)
+            frameToCenter.origin.y = floorcgf(x: (boundsSize.height - frameToCenter.size.height) / 2.0)
         }
         else {
             frameToCenter.origin.y = 0.0
         }
         
         // Center
-        if !CGRectEqualToRect(photoImageView.frame, frameToCenter) {
+        if !photoImageView.frame.equalTo(frameToCenter) {
             photoImageView.frame = frameToCenter
         }
     }
@@ -388,20 +387,20 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         return photoImageView
     }
 
-    public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         photoBrowser.cancelControlHiding()
     }
 
-    public func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView?) {
-        scrollEnabled = true // reset
+    public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        isScrollEnabled = true // reset
         photoBrowser.cancelControlHiding()
     }
 
-    public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         photoBrowser.hideControlsAfterDelay()
     }
 
-    public func scrollViewDidZoom(scrollView: UIScrollView) {
+    public func scrollViewDidZoom(_ scrollView: UIScrollView) {
         setNeedsLayout()
         layoutIfNeeded()
     }
@@ -410,8 +409,8 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
 
     private func handleSingleTap(touchPoint: CGPoint) {
         dispatch_after(
-            dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC))),
-            dispatch_get_main_queue())
+            DispatchTime.now(dispatch_time_t(DispatchTime.now()), Int64(0.2 * Double(NSEC_PER_SEC))),
+            DispatchQueue.main)
         {
             self.photoBrowser.toggleControls()
         }
@@ -424,7 +423,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         }
         
         // Cancel any single tap handling
-        NSObject.cancelPreviousPerformRequestsWithTarget(photoBrowser)
+        NSObject.cancelPreviousPerformRequests(withTarget: photoBrowser)
         
         // Zoom
         if zoomScale != minimumZoomScale && zoomScale != initialZoomScaleWithMinScale() {
@@ -436,7 +435,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
             let newZoomScale = ((maximumZoomScale + minimumZoomScale) / 2.0)
             let xsize = bounds.size.width / newZoomScale
             let ysize = bounds.size.height / newZoomScale
-            zoomToRect(CGRectMake(touchPoint.x - xsize / 2.0, touchPoint.y - ysize / 2.0, xsize, ysize), animated: true)
+            zoom(to: CGRectMake(touchPoint.x - xsize / 2.0, touchPoint.y - ysize / 2.0, xsize, ysize), animated: true)
         }
         
         // Delay controls
@@ -445,11 +444,11 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
 
     // Image View
     public func singleTapDetectedInImageView(view: UIImageView, touch: UITouch) {
-        handleSingleTap(touch.locationInView(view))
+        handleSingleTap(touchPoint: touch.location(in: view))
     }
     
     public func doubleTapDetectedInImageView(view: UIImageView, touch: UITouch) {
-        handleDoubleTap(touch.locationInView(view))
+        handleDoubleTap(touchPoint: touch.location(in: view))
     }
     
     public func tripleTapDetectedInImageView(view: UIImageView, touch: UITouch) {
@@ -459,26 +458,26 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     // Background View
     public func singleTapDetectedInView(view: UIView, touch: UITouch) {
         // Translate touch location to image view location
-        var touchX = touch.locationInView(view).x
-        var touchY = touch.locationInView(view).y
+        var touchX = touch.location(in: view).x
+        var touchY = touch.location(in: view).y
         touchX *= 1.0 / self.zoomScale
         touchY *= 1.0 / self.zoomScale
         touchX += self.contentOffset.x
         touchY += self.contentOffset.y
         
-        handleSingleTap(CGPointMake(touchX, touchY))
+        handleSingleTap(touchPoint: CGPoint(x: touchX, y: touchY))
     }
     
     public func doubleTapDetectedInView(view: UIView, touch: UITouch) {
         // Translate touch location to image view location
-        var touchX = touch.locationInView(view).x
-        var touchY = touch.locationInView(view).y
+        var touchX = touch.location(in: view).x
+        var touchY = touch.location(in: view).y
         touchX *= 1.0 / self.zoomScale
         touchY *= 1.0 / self.zoomScale
         touchX += self.contentOffset.x
         touchY += self.contentOffset.y
         
-        handleDoubleTap(CGPointMake(touchX, touchY))
+        handleDoubleTap(touchPoint: CGPoint(x: touchX, y: touchY))
     }
     
     public func tripleTapDetectedInView(view: UIView, touch: UITouch) {
