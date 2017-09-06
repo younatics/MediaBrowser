@@ -263,13 +263,13 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             
             previousButton = UIBarButtonItem(
                 image: previousButtonImage,
-                style: UIBarButtonItemStyle.Plain,
+                style: UIBarButtonItemStyle.plain,
                 target: self,
                 action: Selector("gotoPreviousPage"))
             
             nextButton = UIBarButtonItem(
                 image: nextButtonImage,
-                style: UIBarButtonItemStyle.Plain,
+                style: UIBarButtonItemStyle.plain,
                 target: self,
                 action: Selector("gotoNextPage"))
         }
@@ -374,8 +374,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             items.append(UIBarButtonItem(
                 image: UIImage.imageForResourcePath(path: "MWPhotoBrowserSwift.bundle/UIBarButtonItemGrid",
                     ofType: "png",
-                    inBundle: Bundle(forClass: PhotoBrowser.self)),
-                style: .Plain,
+                    inBundle: Bundle(for: PhotoBrowser.self)),
+                style: .plain,
                 target: self,
                 action: Selector("showGridAnimated")))
         }
@@ -691,9 +691,9 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     //MARK: - Rotation
-
-    public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.all
+    
+    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .all
     }
 
     public override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
@@ -1235,18 +1235,18 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             height = 32.0
         }
         
-        return CGRectMake(0.0, view.bounds.size.height - height, view.bounds.size.width, height).integral
+        return CGRect(x: 0.0, y: view.bounds.size.height - height, width: view.bounds.size.width, height: height).integral
     }
 
     func frameForCaptionView(captionView: CaptionView?, index: Int) -> CGRect {
         if let cw = captionView {
             let pageFrame = frameForPageAtIndex(index: index)
-            let captionSize = cw.sizeThatFits(CGSizeMake(pageFrame.size.width, 0.0))
-            let captionFrame = CGRectMake(
-                pageFrame.origin.x,
-                pageFrame.size.height - captionSize.height - (toolbar.superview != nil ? toolbar.frame.size.height : 0.0),
-                pageFrame.size.width,
-                captionSize.height)
+            let captionSize = cw.sizeThatFits(CGSize(width: pageFrame.size.width, height: 0.0))
+            let captionFrame = CGRect(
+                x: pageFrame.origin.x,
+                y: pageFrame.size.height - captionSize.height - (toolbar.superview != nil ? toolbar.frame.size.height : 0.0),
+                width: pageFrame.size.width,
+                height: captionSize.height)
             
             return captionFrame.integral
         }
@@ -1265,27 +1265,27 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             }
         }
         
-        let selectedButtonFrame = CGRectMake(
-            pageFrame.origin.x + pageFrame.size.width - selectedButton.frame.size.width - padding,
-            padding + yOffset,
-            selectedButton.frame.size.width,
-            selectedButton.frame.size.height)
+        let selectedButtonFrame = CGRect(
+            x: pageFrame.origin.x + pageFrame.size.width - selectedButton.frame.size.width - padding,
+            y: padding + yOffset,
+            width: selectedButton.frame.size.width,
+            height: selectedButton.frame.size.height)
         
         return selectedButtonFrame.integral
     }
 
     func frameForPlayButton(playButton: UIButton, atIndex index: Int) -> CGRect {
         let pageFrame = frameForPageAtIndex(index: index)
-        return CGRectMake(
-            CGFloat(floorf(Float(pageFrame.midX - playButton.frame.size.width / 2.0))),
-            CGFloat(floorf(Float(pageFrame.midY - playButton.frame.size.height / 2.0))),
-            playButton.frame.size.width,
-            playButton.frame.size.height)
+        return CGRect(
+            x: CGFloat(floorf(Float(pageFrame.midX - playButton.frame.size.width / 2.0))),
+            y: CGFloat(floorf(Float(pageFrame.midY - playButton.frame.size.height / 2.0))),
+            width: playButton.frame.size.width,
+            height: playButton.frame.size.height)
     }
 
     //MARK: - UIScrollView Delegate
 
-    public func scrollViewDidScroll(scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Checks
         if !viewIsActive || performingLayout || rotating {
             return
@@ -1790,20 +1790,19 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             hideControlsAfterDelay()
         }
     }
-
-    public override func prefersStatusBarHidden() -> Bool {
+    public override var prefersStatusBarHidden: Bool {
         if !leaveStatusBarAlone {
             return statusBarShouldBeHidden
         }
         
         return presentingViewControllerPrefersStatusBarHidden
     }
-
-    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-
-    public override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+    
+    public override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .slide
     }
 

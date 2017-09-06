@@ -29,11 +29,11 @@ public class GridViewController: UICollectionViewController {
         if let cv = collectionView {
             cv.register(GridCell.self, forCellWithReuseIdentifier: "GridCell")
             cv.alwaysBounceVertical = true
-            cv.backgroundColor = UIColor.whiteColor
+            cv.backgroundColor = UIColor.white
         }
     }
 
-    public override func viewWillDisappear(animated: Bool) {
+    public override func viewWillDisappear(_ animated: Bool) {
         // Cancel outstanding loading
         if let cv = collectionView {
             for cell in cv.visibleCells {
@@ -66,7 +66,7 @@ public class GridViewController: UICollectionViewController {
         // Check if current item is visible and if not, make it so!
         if let b = browser, b.numberOfPhotos > 0 {
             let currentPhotoIndexPath = NSIndexPath(forItem: b.currentIndex, inSection: 0)
-            let visibleIndexPaths = collectionView!.indexPathsForVisibleItems()
+            let visibleIndexPaths = collectionView!.indexPathsForVisibleItems
             
             var currentVisible = false
             
@@ -153,7 +153,7 @@ public class GridViewController: UICollectionViewController {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let value = CGFloat(floorf(Float((view.bounds.size.width - (columns - 1.0) * gutter - 2.0 * margin) / columns)))
         
-        return CGSizeMake(value, value)
+        return CGSize(width: value, height: value)
     }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {

@@ -54,7 +54,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         NotificationCenter.defaultCenter.addObserver(
             self,
             selector: Selector("setProgressFromNotification:"),
-            name: MWPHOTO_PROGRESS_NOTIFICATION,
+            name: NSNotification.Name(rawValue: MWPHOTO_PROGRESS_NOTIFICATION),
             object: nil)
         
         // Setup
@@ -71,7 +71,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     }
 
     deinit {
-        NotificationCenter.defaultCenter.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     func prepareForReuse() {

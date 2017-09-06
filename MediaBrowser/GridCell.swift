@@ -59,18 +59,18 @@ public class GridCell: UICollectionViewCell {
 
         selectedButton.setImage(
             UIImage.imageForResourcePath(
-                "MWPhotoBrowserSwift.bundle/ImageSelectedSmallOff",
+                path: "MWPhotoBrowserSwift.bundle/ImageSelectedSmallOff",
                 ofType: "png",
                 inBundle: Bundle(forClass: GridCell.self)),
             for: .Normal)
 
         selectedButton.setImage(UIImage.imageForResourcePath(
-                "MWPhotoBrowserSwift.bundle/ImageSelectedSmallOn",
+                path: "MWPhotoBrowserSwift.bundle/ImageSelectedSmallOn",
                 ofType: "png",
                 inBundle: Bundle(forClass: GridCell.self)),
-            for: .Selected)
+            for: .selected)
 
-        selectedButton.addTarget(self, action: Selector("selectionButtonPressed"), for: .touchDown)
+        selectedButton.addTarget(self, action: #selector(GridCell.selectionButtonPressed), for: .touchDown)
         selectedButton.isHidden = true
         selectedButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         addSubview(selectedButton)
@@ -82,16 +82,16 @@ public class GridCell: UICollectionViewCell {
         addSubview(loadingIndicator)
         
         // Listen for photo loading notifications
-        NotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: Selector("setProgressFromNotification:"),
-            name: MWPHOTO_PROGRESS_NOTIFICATION,
+            selector: Selector(("setProgressFromNotification:")),
+            name: NSNotification.Name(rawValue: MWPHOTO_PROGRESS_NOTIFICATION),
             object: nil)
         
-        NotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.defaultCenter.addObserver(
             self,
             selector: Selector("handlePhotoLoadingDidEndNotification:"),
-            name: MWPHOTO_LOADING_DID_END_NOTIFICATION,
+            name: NSNotification.Name(rawValue: MWPHOTO_LOADING_DID_END_NOTIFICATION),
             object: nil)
     }
 
@@ -100,7 +100,7 @@ public class GridCell: UICollectionViewCell {
     }
 
     deinit {
-        NotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     private weak var mwGridController: GridViewController?
@@ -228,7 +228,7 @@ public class GridCell: UICollectionViewCell {
 
     public override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         imageView.alpha = 1
-        super.touchesCancelled(touches!, withEvent: event)
+        super.touchesCancelled(touches!, with: event)
     }
 
     //MARK: - Indicators
@@ -252,7 +252,7 @@ public class GridCell: UICollectionViewCell {
                 error.image = UIImage.imageForResourcePath(
                     path: "MWPhotoBrowserSwift.bundle/ImageError",
                     ofType: "png",
-                    inBundle: Bundle(forClass: GridCell.self))
+                    inBundle: Bundle(for: GridCell.self))
         
                 error.isUserInteractionEnabled = false
                 error.sizeToFit()
@@ -289,9 +289,9 @@ public class GridCell: UICollectionViewCell {
             let mwp = mwPhoto, photosEqual(photoWithProgress, mwp)
         {
             if let progress = dict["progress"] as? String,
-                let progressVal =  NSNumberFormatter().numberFromString(progress)
+                let progressVal =  NumberFormatter().number(from: progress)
             {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async() {
                     self.loadingIndicator.progress = CGFloat(max(min(1.0, progressVal.floatValue), 1.0))
                     return
                 }
