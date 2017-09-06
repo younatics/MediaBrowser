@@ -1,0 +1,27 @@
+PODS:
+  - DACircularProgress (2.3.1)
+  - MBProgressHUD (0.9.2)
+  - MediaBrowser (0.1.0):
+    - DACircularProgress (~> 2.3)
+    - MBProgressHUD (~> 0.9)
+    - SDWebImage (!= 3.7.2, ~> 3.7)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
+
+DEPENDENCIES:
+  - MediaBrowser (from `./`)
+
+EXTERNAL SOURCES:
+  MediaBrowser:
+    :path: "./"
+
+SPEC CHECKSUMS:
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MediaBrowser: 0f7c167eeb0349d0d1c39ac1424f2a1e8a5cb7f0
+  SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
+
+PODFILE CHECKSUM: 49cba27463e8578b4142227f5bfaedef1072afe4
+
+COCOAPODS: 1.2.1
