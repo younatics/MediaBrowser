@@ -14,17 +14,17 @@ public class TapDetectingImageView: UIImageView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        userInteractionEnabled = true
+        isUserInteractionEnabled = true
     }
 
     public override init(image: UIImage?) {
         super.init(image: image)
-        userInteractionEnabled = true
+        isUserInteractionEnabled = true
     }
 
     public override init(image: UIImage?, highlightedImage: UIImage?) {
         super.init(image: image, highlightedImage: highlightedImage)
-        userInteractionEnabled = true
+        isUserInteractionEnabled = true
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -36,33 +36,33 @@ public class TapDetectingImageView: UIImageView {
             let tapCount = touch.tapCount
         
             switch tapCount {
-                case 1: handleSingleTap(touch)
-                case 2: handleDoubleTap(touch)
-                case 3: handleTripleTap(touch)
+                case 1: handleSingleTap(touch: touch)
+                case 2: handleDoubleTap(touch: touch)
+                case 3: handleTripleTap(touch: touch)
                 default: break
             }
         }
         
-        if let nr = nextResponder() {
+        if let nr = nextResponder {
             nr.touchesEnded(touches, withEvent: event)
         }
     }
 
     private func handleSingleTap(touch: UITouch) {
         if let td = tapDelegate {
-            td.singleTapDetectedInImageView(self, touch: touch)
+            td.singleTapDetectedInImageView(view: self, touch: touch)
         }
     }
 
     private func handleDoubleTap(touch: UITouch) {
         if let td = tapDelegate {
-            td.doubleTapDetectedInImageView(self, touch: touch)
+            td.doubleTapDetectedInImageView(view: self, touch: touch)
         }
     }
 
     private func handleTripleTap(touch: UITouch) {
         if let td = tapDelegate {
-            td.tripleTapDetectedInImageView(self, touch: touch)
+            td.tripleTapDetectedInImageView(view: self, touch: touch)
         }
     }
 }

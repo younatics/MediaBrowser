@@ -26,7 +26,7 @@ public class CaptionView: UIToolbar {
         setupCaption()
     }
     
-    public override func sizeThatFits(size: CGSize) -> CGSize {
+    public override func sizeThatFits(_ size: CGSize) -> CGSize {
         var maxHeight = CGFloat(9999.0)
         if label.numberOfLines > 0 {
             maxHeight = label.font.leading * CGFloat(label.numberOfLines)
@@ -35,49 +35,45 @@ public class CaptionView: UIToolbar {
         let textSize: CGSize
         
         if let text = label.text {
-            textSize = text.boundingRectWithSize(
-                CGSizeMake(size.width - labelPadding * 2.0, maxHeight),
-                options: .UsesLineFragmentOrigin,
+            textSize = text.boundingRect(
+                with: CGSize(width: size.width - labelPadding * 2.0, height: maxHeight),
+                options: .usesLineFragmentOrigin,
                 attributes: [NSFontAttributeName : label.font],
                 context: nil).size
         }
         else {
-            textSize = CGSizeMake(0.0, 0.0)
+            textSize = CGSize(width: 0, height: 0)
         }
         
-        return CGSizeMake(size.width, textSize.height + labelPadding * 2.0)
+        return CGSize(width: size.width, height: textSize.height + labelPadding * 2.0)
     }
 
     private func setupCaption() {
-        userInteractionEnabled = false
-        barStyle = .Default
-        tintColor = UIColor.clearColor()
-        barTintColor = UIColor.whiteColor()
-        backgroundColor = UIColor.whiteColor()
-        opaque = false
-        translucent = true
+        isUserInteractionEnabled = false
+        barStyle = .default
+        tintColor = UIColor.clear
+        barTintColor = UIColor.white
+        backgroundColor = UIColor.white
+        isOpaque = false
+        isTranslucent = true
         clipsToBounds = true
-        setBackgroundImage(nil, forToolbarPosition: .Any, barMetrics: .Default)
+        setBackgroundImage(nil, forToolbarPosition: .any, barMetrics: .default)
         autoresizingMask =
-            [.FlexibleWidth, .FlexibleTopMargin, .FlexibleLeftMargin, .FlexibleRightMargin]
+            [.flexibleWidth, .flexibleTopMargin, .flexibleLeftMargin, .flexibleRightMargin]
         
-        label = UILabel(frame: CGRectIntegral(CGRectMake(
-            labelPadding,
-            0.0,
-            self.bounds.size.width - labelPadding * 2.0,
-            self.bounds.size.height)))
+        label = UILabel(frame: CGRect(x: labelPadding, y: 0.0, width: self.bounds.size.width - labelPadding * 2.0, height: self.bounds.size.height))
             
-        label.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        label.opaque = false
-        label.backgroundColor = UIColor.clearColor()
-        label.textAlignment = NSTextAlignment.Center
-        label.lineBreakMode = .ByWordWrapping
+        label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        label.isOpaque = false
+        label.backgroundColor = UIColor.clear
+        label.textAlignment = NSTextAlignment.center
+        label.lineBreakMode = .byWordWrapping
         label.minimumScaleFactor = 0.6
         label.adjustsFontSizeToFitWidth = true
 
         label.numberOfLines = 0
-        label.textColor = UIColor.blackColor()
-        label.font = UIFont.systemFontOfSize(17.0)
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 17.0)
         
         if let p = photo {
             label.text = p.caption

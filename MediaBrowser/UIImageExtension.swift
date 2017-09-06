@@ -19,7 +19,7 @@ public extension UIImage {
     }
 
     class func clearImageWithSize(size: CGSize) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.mainScreen.scale)
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
         let blank = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return blank!

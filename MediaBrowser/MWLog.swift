@@ -10,7 +10,7 @@ import Foundation
 
 class MWLog: NSObject {
     static let queue = dispatch_queue_create("com.mwphotobrowser", nil)
-    static let formatter = NSDateFormatter()
+    static let formatter = DateFormatter()
     
     class func log(format: String) {
         formatter.dateStyle = NSDateFormatterStyle.NoStyle

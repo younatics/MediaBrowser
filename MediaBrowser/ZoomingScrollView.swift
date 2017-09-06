@@ -80,7 +80,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         captionView = nil
         selectedButton = nil
         playButton = nil
-        photoImageView.hidden = false
+        photoImageView.isHidden = false
         photoImageView.image = nil
         index = Int.max
     }
@@ -106,11 +106,11 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
 
     var imageHidden: Bool {
         set(hidden) {
-            photoImageView.hidden = hidden
+            photoImageView.isHidden = hidden
         }
         
         get {
-            return photoImageView.hidden
+            return photoImageView.isHidden
         }
     }
 
@@ -123,7 +123,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
                 mwPhoto!.cancelAnyLoading()
             }
             mwPhoto = p
-            if photoBrowser.imageForPhoto(mwPhoto) != nil {
+            if photoBrowser.imageForPhoto(photo: mwPhoto) != nil {
                 self.displayImage()
             }
             else {
@@ -147,13 +147,13 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
             contentSize = CGSizeMake(0.0, 0.0)
             
             // Get image from browser as it handles ordering of fetching
-            if let img = photoBrowser.imageForPhoto(photo) {
+            if let img = photoBrowser.imageForPhoto(photo: photo) {
                 // Hide indicator
                 hideLoadingIndicator()
                 
                 // Set image
                 photoImageView.image = img
-                photoImageView.hidden = false
+                photoImageView.isHidden = false
                 
                 // Setup photo frame
                 var photoImageViewFrame = CGRectZero
@@ -186,21 +186,21 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
                 if nil == loadingError {
                     loadingError = UIImageView()
                     loadingError!.image = UIImage.imageForResourcePath(
-                        "MWPhotoBrowserSwift.bundle/ImageError",
+                        path: "MWPhotoBrowserSwift.bundle/ImageError",
                         ofType: "png",
-                        inBundle: NSBundle(forClass: ZoomingScrollView.self))
+                        inBundle: Bundle(forClass: ZoomingScrollView.self))
                     
-                    loadingError!.userInteractionEnabled = false
+                    loadingError!.isUserInteractionEnabled = false
                     loadingError!.autoresizingMask =
-                        [.FlexibleLeftMargin, .FlexibleTopMargin, .FlexibleBottomMargin, .FlexibleRightMargin]
+                        [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin, .flexibleRightMargin]
                     
                     loadingError!.sizeToFit()
                     addSubview(loadingError!)
                 }
                 
                 loadingError!.frame = CGRectMake(
-                    floorcgf((bounds.size.width - loadingError!.frame.size.width) / 2.0),
-                    floorcgf((bounds.size.height - loadingError!.frame.size.height) / 2.0),
+                    floorcgf(x: (bounds.size.width - loadingError!.frame.size.width) / 2.0),
+                    floorcgf(x: (bounds.size.height - loadingError!.frame.size.height) / 2.0),
                     loadingError!.frame.size.width,
                     loadingError!.frame.size.height)
             }
@@ -217,11 +217,11 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     //MARK: - Loading Progress
 
     public func setProgressFromNotification(notification: NSNotification) {
-        dispatch_async(dispatch_get_main_queue()) {
+        dispatch_async(DispatchQueue.main) {
             let dict = notification.object as! [String : AnyObject]
             
             if let photoWithProgress = dict["photo"] as? Photo,
-                let p = self.photo, photoWithProgress.equals(p)
+                let p = self.photo, photoWithProgress.equals(photo: p)
             {
                 if let progress = dict["progress"] as? Float {
                     self.loadingIndicator.progress = CGFloat(max(min(1.0, progress), 0.0))
