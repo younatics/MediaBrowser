@@ -91,7 +91,7 @@ public class GridCell: UICollectionViewCell {
         
         NotificationCenter.default.addObserver(
             self,
-            selector: Selector("handlePhotoLoadingDidEndNotification:"),
+            selector: #selector(handlePhotoLoadingDidEndNotification),
             name: NSNotification.Name(rawValue: MWPHOTO_LOADING_DID_END_NOTIFICATION),
             object: nil)
     }

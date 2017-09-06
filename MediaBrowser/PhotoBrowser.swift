@@ -154,7 +154,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Listen for MWPhoto falsetifications
         NotificationCenter.default.addObserver(
             self,
-            selector: Selector("handlePhotoLoadingDidEndNotification:"),
+            selector: #selector(handlePhotoLoadingDidEndNotification),
             name: NSNotification.Name(rawValue: MWPHOTO_LOADING_DID_END_NOTIFICATION),
             object: nil)
     }
@@ -265,20 +265,20 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 image: previousButtonImage,
                 style: UIBarButtonItemStyle.plain,
                 target: self,
-                action: Selector("gotoPreviousPage"))
+                action: #selector(PhotoBrowser.gotoPreviousPage))
             
             nextButton = UIBarButtonItem(
                 image: nextButtonImage,
                 style: UIBarButtonItemStyle.plain,
                 target: self,
-                action: Selector("gotoNextPage"))
+                action: #selector(PhotoBrowser.gotoNextPage))
         }
         
         if displayActionButton {
             actionButton = UIBarButtonItem(
                 barButtonSystemItem: UIBarButtonSystemItem.action,
                 target: self,
-                action: Selector("actionButtonPressed:"))
+                action: Selector(("actionButtonPressed:")))
         }
         
         // Update
@@ -286,7 +286,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Swipe to dismiss
         if enableSwipeToDismiss {
-            let swipeGesture = UISwipeGestureRecognizer(target: self, action: Selector("doneButtonPressed:"))
+            let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(doneButtonPressed))
             swipeGesture.direction = [.down, .up]
             view.addGestureRecognizer(swipeGesture)
         }
@@ -322,7 +322,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 doneButton = UIBarButtonItem(
                     barButtonSystemItem: UIBarButtonSystemItem.done,
                     target: self,
-                    action: Selector("doneButtonPressed:"))
+                    action: #selector(doneButtonPressed))
                 
                 // Set appearance
                 if let done = doneButton {
@@ -378,7 +378,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     inBundle: Bundle(for: PhotoBrowser.self)),
                 style: .plain,
                 target: self,
-                action: Selector("showGridAnimated")))
+                action: #selector(PhotoBrowser.showGridAnimated)))
         }
         else {
             items.append(fixedSpace)
@@ -1032,7 +1032,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                         ofType: "png",
                         inBundle: Bundle(for: PhotoBrowser.self)), for: .highlighted)
                     
-                    playButton.addTarget(self, action: Selector("playButtonTapped:"), for: .touchUpInside)
+                    playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
                     playButton.sizeToFit()
                     playButton.frame = frameForPlayButton(playButton: playButton, atIndex: index)
                     pagingScrollView.addSubview(playButton)
@@ -1062,7 +1062,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     selectedButton.setImage(selectedOnImage, for: .selected)
                     selectedButton.sizeToFit()
                     selectedButton.adjustsImageWhenHighlighted = false
-                    selectedButton.addTarget(self, action: Selector("selectedButtonTapped:"), for: .touchUpInside)
+                    selectedButton.addTarget(self, action: #selector(selectedButtonTapped), for: .touchUpInside)
                     selectedButton.frame = frameForSelectedButton(selectedButton: selectedButton, atIndex: index)
                     pagingScrollView.addSubview(selectedButton)
                     page.selectedButton = selectedButton
@@ -1492,7 +1492,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
             NotificationCenter.default.addObserver(
                 self,
-                selector: Selector("videoFinishedCallback:"),
+                selector: #selector(videoFinishedCallback),
                 name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
                 object: player.moviePlayer)
 
@@ -1513,7 +1513,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             clearCurrentVideo()
             
             // Dismiss
-            if let errorObj: AnyObject? = notification.userInfo?[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] as AnyObject {
+            if let errorObj = notification.userInfo?[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] {
                 let error = MPMovieFinishReason(rawValue: errorObj as! Int)
             
                 if error == .playbackError {
@@ -1821,7 +1821,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             controlVisibilityTimer = Timer.scheduledTimer(
                 timeInterval: delayToHideElements,
                 target: self,
-                selector: Selector("hideControls"),
+                selector: #selector(PhotoBrowser.hideControls),
                 userInfo: nil,
                 repeats: false)
         }
