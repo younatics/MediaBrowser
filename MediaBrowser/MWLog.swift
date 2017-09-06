@@ -13,8 +13,8 @@ class MWLog: NSObject {
     static let formatter = DateFormatter()
     
     class func log(format: String) {
-        formatter.dateStyle = NSDateFormatterStyle.NoStyle
-        formatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        formatter.dateStyle = DateFormatter.Style.NoStyle
+        formatter.timeStyle = DateFormatter.Style.ShortStyle
         formatter.dateFormat = "HH:mm:ss.SSS"
         
         let tid = String(format: "%.05x", pthread_mach_thread_np(pthread_self()))

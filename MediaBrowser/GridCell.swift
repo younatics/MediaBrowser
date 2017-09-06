@@ -29,9 +29,9 @@ public class GridCell: UICollectionViewCell {
         
         // Image
         imageView.frame = self.bounds
-        imageView.contentMode = .ScaleAspectFill
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        imageView.autoresizingMask = [.flexibleHeight, .FlexibleWidth]
         imageView.autoresizesSubviews = true
         
         addSubview(imageView)

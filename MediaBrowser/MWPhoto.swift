@@ -21,7 +21,7 @@ public class MWPhoto: Photo {
     public var isVideo = false
     public var underlyingImage: UIImage?
 
-    private let uuid = NSUUID().UUIDString
+    private let uuid = NSUUID().uuidString
     private var image: UIImage?
     private var photoURL: NSURL?
     private var asset: PHAsset?
@@ -82,7 +82,7 @@ public class MWPhoto: Photo {
         }
         else
         if let a = asset {
-            if a.mediaType == PHAssetMediaType.Video {
+            if a.mediaType == PHAssetMediaType.video {
                 let options = PHVideoRequestOptions()
                 options.networkAccessAllowed = true
                 

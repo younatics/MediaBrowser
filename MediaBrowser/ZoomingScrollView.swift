@@ -32,13 +32,13 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         // Tap view for background
         tapView = TapDetectingView(frame: bounds)
         tapView.tapDelegate = self
-        tapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        tapView.backgroundColor = UIColor.whiteColor()
+        tapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tapView.backgroundColor = UIColor.white
         addSubview(tapView)
         
         // Image view
         photoImageView.tapDelegate = self
-        photoImageView.contentMode = UIViewContentMode.Center
+        photoImageView.contentMode = UIViewContentMode.center
         addSubview(photoImageView)
         
         // Loading indicator
@@ -51,19 +51,19 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         addSubview(loadingIndicator)
 
         // Listen progress notifications
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.defaultCenter().addObserver(
             self,
             selector: Selector("setProgressFromNotification:"),
             name: MWPHOTO_PROGRESS_NOTIFICATION,
             object: nil)
         
         // Setup
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.whiteColor
         delegate = self
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
         decelerationRate = UIScrollViewDecelerationRateFast
-        autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -71,7 +71,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.defaultCenter().removeObserver(self)
     }
 
     func prepareForReuse() {
@@ -144,7 +144,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
             maximumZoomScale = 1.0
             minimumZoomScale = 1.0
             zoomScale = 1.0
-            contentSize = CGSizeMake(0.0, 0.0)
+            contentSize = CGSize.zero
             
             // Get image from browser as it handles ordering of fetching
             if let img = photoBrowser.imageForPhoto(photo: photo) {
@@ -156,8 +156,8 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
                 photoImageView.isHidden = false
                 
                 // Setup photo frame
-                var photoImageViewFrame = CGRectZero
-                photoImageViewFrame.origin = CGPointZero
+                var photoImageViewFrame = CGRect.zero
+                photoImageViewFrame.origin = CGPoint.zero
                 photoImageViewFrame.size = img.size
                 photoImageView.frame = photoImageViewFrame
                 contentSize = photoImageViewFrame.size
@@ -188,7 +188,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
                     loadingError!.image = UIImage.imageForResourcePath(
                         path: "MWPhotoBrowserSwift.bundle/ImageError",
                         ofType: "png",
-                        inBundle: Bundle(forClass: ZoomingScrollView.self))
+                        inBundle: Bundle(for: ZoomingScrollView.self))
                     
                     loadingError!.isUserInteractionEnabled = false
                     loadingError!.autoresizingMask =
@@ -198,11 +198,11 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
                     addSubview(loadingError!)
                 }
                 
-                loadingError!.frame = CGRectMake(
-                    floorcgf(x: (bounds.size.width - loadingError!.frame.size.width) / 2.0),
-                    floorcgf(x: (bounds.size.height - loadingError!.frame.size.height) / 2.0),
-                    loadingError!.frame.size.width,
-                    loadingError!.frame.size.height)
+                loadingError!.frame = CGRect(
+                    x: floorcgf(x: (bounds.size.width - loadingError!.frame.size.width) / 2.0),
+                    y: floorcgf(x: (bounds.size.height - loadingError!.frame.size.height) / 2.0),
+                    width: loadingError!.frame.size.width,
+                    height: loadingError!.frame.size.height)
             }
         }
     }
@@ -251,7 +251,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         if let pb = photoBrowser, pb.zoomPhotosToFill {
             // Zoom image to fill if the aspect ratios are fairly similar
             let boundsSize = self.bounds.size
-            let imageSize = photoImageView.image != nil ? photoImageView.image!.size : CGSizeMake(0.0, 0.0)
+            let imageSize = photoImageView.image != nil ? photoImageView.image!.size : CGSize(width: 0.0, height: 0.0)
             let boundsAR = boundsSize.width / boundsSize.height
             let imageAR = imageSize.width / imageSize.height
             let xScale = boundsSize.width / imageSize.width    // the scale needed to perfectly fit the image width-wise

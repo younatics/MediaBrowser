@@ -34,12 +34,12 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var recycledPages = Set<ZoomingScrollView>()
 	private var currentPageIndex = 0
     private var previousPageIndex = Int.max
-    private var previousLayoutBounds = CGRectZero
+    private var previousLayoutBounds = CGRect.zero
 	private var pageIndexBeforeRotation = 0
 	
 	// Navigation & controls
 	private var toolbar = UIToolbar()
-	private var controlVisibilityTimer: NSTimer?
+	private var controlVisibilityTimer: Timer?
 	private var previousButton: UIBarButtonItem?
     private var nextButton: UIBarButtonItem?
     private var actionButton: UIBarButtonItem?
@@ -54,7 +54,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var previousNavBarHidden = false
     public var previousNavBarTranslucent = false
     public var previousNavBarStyle = UIBarStyle.Default
-    public var previousStatusBarStyle = UIStatusBarStyle.Default
+    public var previousStatusBarStyle = UIStatusBarStyle.default
     public var previousNavBarTintColor: UIColor?
     public var previousNavBarBarTintColor: UIColor?
     public var previousViewControllerBackButton: UIBarButtonItem?
@@ -78,7 +78,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var didSavePreviousStateOfNavBar = false
     public var skipNextPagingScrollViewPositioning = false
     public var viewHasAppearedInitially = false
-    public var currentGridContentOffset = CGPointMake(0, CGFloat.max)
+//    public var currentGridContentOffset = CGPointMake(0, CGFloat.greatestFiniteMagnitude)
+    public var currentGridContentOffset = CGPoint()(0, CGFloat.greatestFiniteMagnitude)
     
     var activityViewController: UIActivityViewController?
     
@@ -92,14 +93,14 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var startOnGrid = false
     public var autoPlayOnAppear = false
     public var hideControlsOnStartup = false
-    public var delayToHideElements = NSTimeInterval(5.0)
+    public var delayToHideElements = TimeInterval(5.0)
     
-    public var navBarTintColor = UIColor.blackColor()
-    public var navBarBarTintColor = UIColor.blackColor()
+    public var navBarTintColor = UIColor.black
+    public var navBarBarTintColor = UIColor.black
     public var navBarTranslucent = true
-    public var toolbarTintColor = UIColor.blackColor()
-    public var toolbarBarTintColor = UIColor.whiteColor()
-    public var toolbarBackgroundColor = UIColor.whiteColor()
+    public var toolbarTintColor = UIColor.black
+    public var toolbarBarTintColor = UIColor.white
+    public var toolbarBackgroundColor = UIColor.white
     
     public var captionAlpha = CGFloat(0.5)
     public var toolbarAlpha = CGFloat(0.8)
@@ -173,7 +174,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var copy = photos
         for p in copy {
             if let ph = p {
-                if let paci = photoAtIndex(currentIndex) {
+                if let paci = photoAtIndex(index: currentIndex) {
                     if preserveCurrent && ph.equals(paci) {
                         continue // skip current
                     }
@@ -194,8 +195,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     public override func didReceiveMemoryWarning() {
         // Release any cached data, images, etc that aren't in use.
-        releaseAllUnderlyingPhotos(true)
-        recycledPages.removeAll(keepCapacity: false)
+        releaseAllUnderlyingPhotos(preserveCurrent: true)
+        recycledPages.removeAll(keepingCapacity: false)
         
         // Releases the view if it doesn't have a superview.
         super.didReceiveMemoryWarning()
@@ -219,20 +220,20 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
         // View
-        navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+        navigationController?.navigationBar.backgroundColor = UIColor.white
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         view.clipsToBounds = true
         
         // Setup paging scrolling view
         let pagingScrollViewFrame = frameForPagingScrollView
         pagingScrollView = UIScrollView(frame: pagingScrollViewFrame)
-        pagingScrollView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        pagingScrollView.pagingEnabled = true
+        pagingScrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        pagingScrollView.isPagingEnabled = true
         pagingScrollView.delegate = self
         pagingScrollView.showsHorizontalScrollIndicator = false
         pagingScrollView.showsVerticalScrollIndicator = false
-        pagingScrollView.backgroundColor = UIColor.whiteColor()
+        pagingScrollView.backgroundColor = UIColor.white
         pagingScrollView.contentSize = contentSizeForPagingScrollView()
         view.addSubview(pagingScrollView)
         
@@ -242,10 +243,10 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         toolbar.barTintColor = toolbarBarTintColor
         toolbar.backgroundColor = toolbarBackgroundColor
         toolbar.alpha = 0.8
-        toolbar.setBackgroundImage(nil, forToolbarPosition: .Any, barMetrics: .Default)
-        toolbar.setBackgroundImage(nil, forToolbarPosition: .Any, barMetrics: .Compact)
-        toolbar.barStyle = .Default
-        toolbar.autoresizingMask = [.FlexibleTopMargin, .FlexibleWidth]
+        toolbar.setBackgroundImage(nil, forToolbarPosition: .any, barMetrics: .default)
+        toolbar.setBackgroundImage(nil, forToolbarPosition: .any, barMetrics: .compact)
+        toolbar.barStyle = .default
+        toolbar.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
         
         // Toolbar Items
         if displayNavArrows {
@@ -254,12 +255,12 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             let previousButtonImage = UIImage.imageForResourcePath(
                 arrowPathFormat + "Left",
                 ofType: "png",
-                inBundle: NSBundle(forClass: PhotoBrowser.self))
+                inBundle: Bundle(forClass: PhotoBrowser.self))
             
             let nextButtonImage = UIImage.imageForResourcePath(
                 arrowPathFormat + "Right",
                 ofType: "png",
-                inBundle: NSBundle(forClass: PhotoBrowser.self))
+                inBundle: Bundle(forClass: PhotoBrowser.self))
             
             previousButton = UIBarButtonItem(
                 image: previousButtonImage,
@@ -276,7 +277,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         if displayActionButton {
             actionButton = UIBarButtonItem(
-                barButtonSystemItem: UIBarButtonSystemItem.Action,
+                barButtonSystemItem: UIBarButtonSystemItem.action,
                 target: self,
                 action: Selector("actionButtonPressed:"))
         }

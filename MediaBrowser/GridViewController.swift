@@ -11,7 +11,7 @@ import UIKit
 public class GridViewController: UICollectionViewController {
     weak var browser: PhotoBrowser?
     var selectionMode = false
-    var initialContentOffset = CGPointMake(0.0, CGFloat.max)
+    var initialContentOffset = CGPointMake(0.0, CGFloat.greatestFiniteMagnitude)
     
     init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
@@ -27,16 +27,16 @@ public class GridViewController: UICollectionViewController {
         super.viewDidLoad()
         
         if let cv = collectionView {
-            cv.registerClass(GridCell.self, forCellWithReuseIdentifier: "GridCell")
+            cv.register(GridCell.self, forCellWithReuseIdentifier: "GridCell")
             cv.alwaysBounceVertical = true
-            cv.backgroundColor = UIColor.whiteColor()
+            cv.backgroundColor = UIColor.whiteColor
         }
     }
 
     public override func viewWillDisappear(animated: Bool) {
         // Cancel outstanding loading
         if let cv = collectionView {
-            for cell in cv.visibleCells() {
+            for cell in cv.visibleCells {
                 let c = cell as! GridCell
                 
                 if let p = c.photo {
@@ -58,7 +58,7 @@ public class GridViewController: UICollectionViewController {
 
     func adjustOffsetsAsRequired() {
         // Move to previous content offset
-        if initialContentOffset.y != CGFloat.max {
+        if initialContentOffset.y != CGFloat.greatestFiniteMagnitude {
             collectionView!.contentOffset = initialContentOffset
             collectionView!.layoutIfNeeded() // Layout after content offset change
         }
@@ -93,7 +93,7 @@ public class GridViewController: UICollectionViewController {
     private var gutter = CGFloat(5.0)
     
     public override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animateAlongsideTransition(nil) { _ in
+        coordinator.animate(alongsideTransition: nil) { _ in
             if let cv = self.collectionView {
                 cv.reloadData()
             }
@@ -104,7 +104,7 @@ public class GridViewController: UICollectionViewController {
 
     //MARK: - Collection View
 
-    public override func collectionView(view: UICollectionView, numberOfItemsInSection section: Int) -> NSInteger {
+    public override func collectionView(_ view: UICollectionView, numberOfItemsInSection section: Int) -> NSInteger {
         if let b = browser {
             return b.numberOfPhotos
         }
@@ -113,18 +113,18 @@ public class GridViewController: UICollectionViewController {
     }
 
     public override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("GridCell", forIndexPath: indexPath) as! GridCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridCell", for: indexPath as IndexPath) as! GridCell
         
         if let b = browser,
-            let photo = b.thumbPhotoAtIndex(indexPath.row)
+            let photo = b.thumbPhotoAtIndex(index: indexPath.row)
         {
             cell.photo = photo
             cell.gridController = self
             cell.selectionMode = selectionMode
             cell.index = indexPath.row
-            cell.selected = b.photoIsSelectedAtIndex(indexPath.row)
+            cell.selected = b.photoIsSelectedAtIndex(index: indexPath.row)
         
-            if let _ = b.imageForPhoto(photo) {
+            if let _ = b.imageForPhoto(photo: photo) {
                 cell.displayImage()
             }
             else {
