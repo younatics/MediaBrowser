@@ -1510,7 +1510,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     func clearCurrentVideo() {
         if currentVideoPlayerViewController != nil {
-            currentVideoLoadingIndicator!.removeFromSuperview()
+            currentVideoLoadingIndicator?.removeFromSuperview()
             currentVideoPlayerViewController = nil
             currentVideoLoadingIndicator = nil
             currentVideoIndex = Int.max
@@ -1519,14 +1519,12 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     func setVideoLoadingIndicatorVisible(visible: Bool, atPageIndex: Int) {
         if currentVideoLoadingIndicator != nil && !visible {
-            currentVideoLoadingIndicator!.removeFromSuperview()
+            currentVideoLoadingIndicator?.removeFromSuperview()
             currentVideoLoadingIndicator = nil
-        }
-        else
-        if nil == currentVideoLoadingIndicator && visible {
+        } else if currentVideoLoadingIndicator == nil && visible {
             currentVideoLoadingIndicator = UIActivityIndicatorView(frame: CGRect.zero)
-            currentVideoLoadingIndicator!.sizeToFit()
-            currentVideoLoadingIndicator!.startAnimating()
+            currentVideoLoadingIndicator?.sizeToFit()
+            currentVideoLoadingIndicator?.startAnimating()
             pagingScrollView.addSubview(currentVideoLoadingIndicator!)
             
             positionVideoLoadingIndicator()
