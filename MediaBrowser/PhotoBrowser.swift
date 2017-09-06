@@ -297,7 +297,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
     
     public override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animateAlongsideTransition(nil) { _ in
+        coordinator.animate(alongsideTransition: nil) { _ in
             self.toolbar.frame = self.frameForToolbar
         }
         
@@ -320,18 +320,18 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             {
                 // We're first on stack so show done button
                 doneButton = UIBarButtonItem(
-                    barButtonSystemItem: UIBarButtonSystemItem.Done,
+                    barButtonSystemItem: UIBarButtonSystemItem.done,
                     target: self,
                     action: Selector("doneButtonPressed:"))
                 
                 // Set appearance
                 if let done = doneButton {
-                    done.setBackgroundImage(nil, forState: .Normal, barMetrics: .Default)
-                    done.setBackgroundImage(nil, forState: .Normal, barMetrics: .Compact)
-                    done.setBackgroundImage(nil, forState: .Highlighted, barMetrics: .Default)
-                    done.setBackgroundImage(nil, forState: .Highlighted, barMetrics: .Compact)
-                    done.setTitleTextAttributes([String : AnyObject](), forState: .Normal)
-                    done.setTitleTextAttributes([String : AnyObject](), forState: .Highlighted)
+                    done.setBackgroundImage(nil, for: .Normal, barMetrics: .default)
+                    done.setBackgroundImage(nil, for: .Normal, barMetrics: .compact)
+                    done.setBackgroundImage(nil, for: .highlighted, barMetrics: .default)
+                    done.setBackgroundImage(nil, for: .highlighted, barMetrics: .compact)
+                    done.setTitleTextAttributes([String : AnyObject](), for: .Normal)
+                    done.setTitleTextAttributes([String : AnyObject](), for: .highlighted)
                     
                     self.navigationItem.rightBarButtonItem = done
                 }
@@ -345,15 +345,15 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                         previousViewController.navigationItem.backBarButtonItem!.title :
                         previousViewController.title
                     
-                    let newBackButton = UIBarButtonItem(title: backButtonTitle, style: .Plain, target: nil, action: nil)
+                    let newBackButton = UIBarButtonItem(title: backButtonTitle, style: .plain, target: nil, action: nil)
                     
                     // Appearance
-                    newBackButton.setBackButtonBackgroundImage(nil, forState: .Normal, barMetrics: .Default)
-                    newBackButton.setBackButtonBackgroundImage(nil, forState: .Normal, barMetrics: .Compact)
-                    newBackButton.setBackButtonBackgroundImage(nil, forState: .Highlighted, barMetrics: .Default)
-                    newBackButton.setBackButtonBackgroundImage(nil, forState: .Highlighted, barMetrics: .Compact)
-                    newBackButton.setTitleTextAttributes([String : AnyObject](), forState: .Normal)
-                    newBackButton.setTitleTextAttributes([String : AnyObject](), forState: .Highlighted)
+                    newBackButton.setBackButtonBackgroundImage(nil, for: .Normal, barMetrics: .default)
+                    newBackButton.setBackButtonBackgroundImage(nil, for: .Normal, barMetrics: .compact)
+                    newBackButton.setBackButtonBackgroundImage(nil, for: .highlighted, barMetrics: .default)
+                    newBackButton.setBackButtonBackgroundImage(nil, for: .highlighted, barMetrics: .compact)
+                    newBackButton.setTitleTextAttributes([String : AnyObject](), for: .Normal)
+                    newBackButton.setTitleTextAttributes([String : AnyObject](), for: .highlighted)
                     
                     previousViewControllerBackButton = previousViewController.navigationItem.backBarButtonItem // remember previous
                     previousViewController.navigationItem.backBarButtonItem = newBackButton
@@ -363,9 +363,9 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
         // Toolbar items
         var hasItems = false
-        let fixedSpace = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: self, action: nil)
+        let fixedSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
         fixedSpace.width = 32.0 // To balance action button
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         var items = [UIBarButtonItem]()
 
         // Left button - Grid
@@ -375,7 +375,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             items.append(UIBarButtonItem(
                 image: UIImage.imageForResourcePath("MWPhotoBrowserSwift.bundle/UIBarButtonItemGrid",
                     ofType: "png",
-                    inBundle: NSBundle(forClass: PhotoBrowser.self)),
+                    inBundle: Bundle(forClass: PhotoBrowser.self)),
                 style: .Plain,
                 target: self,
                 action: Selector("showGridAnimated")))
@@ -432,7 +432,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         updateNavigation()
         
         // Content offset
-        pagingScrollView.contentOffset = contentOffsetForPageAtIndex(currentPageIndex)
+        pagingScrollView.contentOffset = contentOffsetForPageAtIndex(index: currentPageIndex)
         tilePages()
         performingLayout = false
     }
@@ -450,7 +450,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
         if let pres = presenting {
-            return pres.prefersStatusBarHidden()
+            return pres.prefersStatusBarHidden
         }
         
         return false
@@ -458,7 +458,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     //MARK: - Appearance
 
-    public override dynamic func viewWillAppear(animated: Bool) {
+    public override dynamic func viewWillAppear(_ animated: Bool) {
         // Super
         super.viewWillAppear(animated)
         
@@ -466,14 +466,14 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if !viewHasAppearedInitially {
             leaveStatusBarAlone = presentingViewControllerPrefersStatusBarHidden
             // Check if status bar is hidden on first appear, and if so then ignore it
-            if CGRectEqualToRect(UIApplication.sharedApplication().statusBarFrame, CGRectZero) {
+            if UIApplication.shared.statusBarFrame.equalTo(CGRect.zero) {
                 leaveStatusBarAlone = true
             }
         }
         // Set style
-        if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Phone {
-            previousStatusBarStyle = UIApplication.sharedApplication().statusBarStyle
-            UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: animated)
+        if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
+            previousStatusBarStyle = UIApplication.shared.statusBarStyle
+            UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: animated)
         }
         
         // Navigation bar appearance
@@ -481,7 +481,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             storePreviousNavBarAppearance()
         }
         
-        setNavBarAppearance(animated)
+        setNavBarAppearance(animated: animated)
         
         // Update UI
         if hideControlsOnStartup {
@@ -493,25 +493,25 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Initial appearance
         if !viewHasAppearedInitially && startOnGrid {
-            showGrid(false)
+            showGrid(animated: false)
         }
         
         // If rotation occured while we're presenting a modal
         // and the index changed, make sure we show the right one falsew
         if currentPageIndex != pageIndexBeforeRotation {
-            jumpToPageAtIndex(pageIndexBeforeRotation, animated: false)
+            jumpToPageAtIndex(index: pageIndexBeforeRotation, animated: false)
         }
     }
 
-    public override dynamic func viewDidAppear(animated: Bool) {
+    public override dynamic func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewIsActive = true
         
         // Autoplay if first is video
         if !viewHasAppearedInitially && autoPlayOnAppear {
-            if let photo = photoAtIndex(currentPageIndex) {
+            if let photo = photoAtIndex(index: currentPageIndex) {
                 if photo.isVideo {
-                    playVideoAtIndex(currentPageIndex)
+                    playVideoAtIndex(index: currentPageIndex)
                 }
             }
         }
@@ -519,7 +519,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         viewHasAppearedInitially = true
     }
 
-    public override dynamic func viewWillDisappear(animated: Bool) {
+    public override dynamic func viewWillDisappear(_ animated: Bool) {
         // Detect if rotation occurs while we're presenting a modal
         pageIndexBeforeRotation = currentPageIndex
         
@@ -540,32 +540,32 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 viewIsActive = false
                 
                 // Bar state / appearance
-                restorePreviousNavBarAppearance(animated)
+                restorePreviousNavBarAppearance(animated: animated)
             }
         }
         
         // Controls
         navigationController?.navigationBar.layer.removeAllAnimations() // Stop all animations on nav bar
         
-        NSObject.cancelPreviousPerformRequestsWithTarget(self) // Cancel any pending toggles from taps
+        NSObject.cancelPreviousPerformRequests(withTarget: self) // Cancel any pending toggles from taps
         setControlsHidden(false, animated: false, permanent: true)
         
         // Status bar
-        if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Phone {
-            UIApplication.sharedApplication().setStatusBarStyle(previousStatusBarStyle, animated: animated)
+        if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
+            UIApplication.sharedApplication.setStatusBarStyle(previousStatusBarStyle, animated: animated)
         }
         
         // Super
         super.viewWillDisappear(animated)
     }
 
-    public override func willMoveToParentViewController(parent: UIViewController?) {
+    public override func willMove(toParentViewController parent: UIViewController?) {
         if parent != nil && hasBelongedToViewController {
             fatalError("PhotoBrowser Instance Reuse")
         }
     }
 
-    public override func didMoveToParentViewController(parent: UIViewController?) {
+    public override func didMoveToParentViewController(_ parent: UIViewController?) {
         if nil == parent {
             hasBelongedToViewController = true
         }
@@ -581,10 +581,10 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             navBar.tintColor = navBarTintColor
             navBar.barTintColor = navBarBarTintColor
             navBar.shadowImage = nil
-            navBar.translucent = navBarTranslucent
-            navBar.barStyle = .Default
-            navBar.setBackgroundImage(nil, forBarMetrics: .Default)
-            navBar.setBackgroundImage(nil, forBarMetrics: .Compact)
+            navBar.isTranslucent = navBarTranslucent
+            navBar.barStyle = .default
+            navBar.setBackgroundImage(nil, forBarMetrics: .default)
+            navBar.setBackgroundImage(nil, forBarMetrics: .compact)
         }
     }
 
@@ -593,12 +593,12 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         if let navi = navigationController {
             previousNavBarBarTintColor = navi.navigationBar.barTintColor
-            previousNavBarTranslucent = navi.navigationBar.translucent
+            previousNavBarTranslucent = navi.navigationBar.isTranslucent
             previousNavBarTintColor = navi.navigationBar.tintColor
-            previousNavBarHidden = navi.navigationBarHidden
+            previousNavBarHidden = navi.isNavigationBarHidden
             previousNavBarStyle = navi.navigationBar.barStyle
-            previousNavigationBarBackgroundImageDefault = navi.navigationBar.backgroundImageForBarMetrics(.Default)
-            previousNavigationBarBackgroundImageLandscapePhone = navi.navigationBar.backgroundImageForBarMetrics(.Compact)
+            previousNavigationBarBackgroundImageDefault = navi.navigationBar.backgroundImageForBarMetrics(.default)
+            previousNavigationBarBackgroundImageLandscapePhone = navi.navigationBar.backgroundImage(for: .Compact)
         }
     }
 
@@ -607,11 +607,11 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             navi.setNavigationBarHidden(previousNavBarHidden, animated: animated)
             let navBar = navi.navigationBar
             navBar.tintColor = previousNavBarTintColor
-            navBar.translucent = previousNavBarTranslucent
+            navBar.isTranslucent = previousNavBarTranslucent
             navBar.barTintColor = previousNavBarBarTintColor
             navBar.barStyle = previousNavBarStyle
-            navBar.setBackgroundImage(previousNavigationBarBackgroundImageDefault, forBarMetrics: UIBarMetrics.Default)
-            navBar.setBackgroundImage(previousNavigationBarBackgroundImageLandscapePhone, forBarMetrics: UIBarMetrics.Compact)
+            navBar.setBackgroundImage(previousNavigationBarBackgroundImageDefault, for: UIBarMetrics.Default)
+            navBar.setBackgroundImage(previousNavigationBarBackgroundImageLandscapePhone, forBarMetrics: UIBarMetrics.compact)
 
             // Restore back button if we need to
             if previousViewControllerBackButton != nil {
@@ -656,22 +656,22 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Adjust frames and configuration of each visible page
         for page in visiblePages {
             let index = page.index
-            page.frame = frameForPageAtIndex(index)
+            page.frame = frameForPageAtIndex(index: index)
             
             if let caption = page.captionView {
-                caption.frame = frameForCaptionView(caption, index: index)
+                caption.frame = frameForCaptionView(captionView: caption, index: index)
             }
             
             if let selected = page.selectedButton {
-                selected.frame = frameForSelectedButton(selected, atIndex: index)
+                selected.frame = frameForSelectedButton(selectedButton: selected, atIndex: index)
             }
             
             if let play = page.playButton {
-                play.frame = frameForPlayButton(play, atIndex: index)
+                play.frame = frameForPlayButton(playButton: play, atIndex: index)
             }
             
             // Adjust scales if bounds has changed since last time
-            if !CGRectEqualToRect(previousLayoutBounds, view.bounds) {
+            if !previousLayoutBounds.equalTo(view.bounds) {
                 // Update zooms for new bounds
                 page.setMaxMinZoomScalesForCurrentBounds()
                 previousLayoutBounds = view.bounds
@@ -682,8 +682,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         positionVideoLoadingIndicator()
         
         // Adjust contentOffset to preserve page location based on values collected prior to location
-        pagingScrollView.contentOffset = contentOffsetForPageAtIndex(indexPriorToLayout)
-        didStartViewingPageAtIndex(currentPageIndex) // initial
+        pagingScrollView.contentOffset = contentOffsetForPageAtIndex(index: indexPriorToLayout)
+        didStartViewingPageAtIndex(index: currentPageIndex) // initial
         
         // Reset
         currentPageIndex = indexPriorToLayout
@@ -694,10 +694,10 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     //MARK: - Rotation
 
     public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.All
+        return UIInterfaceOrientationMask.all
     }
 
-    public override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+    public override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         // Remember page index before rotation
         pageIndexBeforeRotation = currentPageIndex
         rotating = true
@@ -705,11 +705,11 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // In iOS 7 the nav bar gets shown after rotation, but might as well do this for everything!
         if areControlsHidden {
             // Force hidden
-            navigationController?.navigationBarHidden = true
+            navigationController?.isNavigationBarHidden = true
         }
     }
 
-    public override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+    public override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         // Perform layout
         currentPageIndex = pageIndexBeforeRotation
         
@@ -720,11 +720,11 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         layoutVisiblePages()
     }
 
-    public override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    public override func didRotateFromInterfaceOrientation(_ fromInterfaceOrientation: UIInterfaceOrientation) {
         rotating = false
         // Ensure nav bar isn't re-displayed
         if let navi = navigationController, areControlsHidden {
-            navi.navigationBarHidden = false
+            navi.isNavigationBarHidden = false
             navi.navigationBar.alpha = 0
         }
     }
@@ -741,7 +741,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Get data
         let photosNum = numberOfPhotos
-        releaseAllUnderlyingPhotos(true)
+        releaseAllUnderlyingPhotos(preserveCurrent: true)
         photos.removeAll()
         thumbPhotos.removeAll()
         
@@ -759,7 +759,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
         // Update layout
-        if isViewLoaded() {
+        if isViewLoaded {
             while pagingScrollView.subviews.count > 0 {
                 pagingScrollView.subviews.last!.removeFromSuperview()
             }
@@ -772,7 +772,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     var numberOfPhotos: Int {
         if photoCount == -1 {
             if let d = delegate {
-                photoCount = d.numberOfPhotosInPhotoBrowser(self)
+                photoCount = d.numberOfPhotosInPhotoBrowser(photoBrowser: self)
             }
             
             if let fpa = fixedPhotosArray {
@@ -793,7 +793,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if index < photos.count {
             if photos[index] == nil {
                 if let d = delegate {
-                    photo = d.photoAtIndex(index, photoBrowser: self)
+                    photo = d.photoAtIndex(index: index, photoBrowser: self)
                     
                     if nil == photo && fixedPhotosArray != nil && index < fixedPhotosArray!.count {
                         photo = fixedPhotosArray![index]
@@ -818,7 +818,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if index < thumbPhotos.count {
             if nil == thumbPhotos[index] {
                 if let d = delegate {
-                    photo = d.thumbPhotoAtIndex(index, photoBrowser: self)
+                    photo = d.thumbPhotoAtIndex(index: index, photoBrowser: self)
                 
                     if let p = photo {
                         thumbPhotos[index] = p
@@ -837,9 +837,9 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var captionView: CaptionView?
         
         if let d = delegate {
-            captionView = d.captionViewForPhotoAtIndex(index, photoBrowser: self)
+            captionView = d.captionViewForPhotoAtIndex(index: index, photoBrowser: self)
             
-            if let p = photoAtIndex(index), nil == captionView {
+            if let p = photoAtIndex(index: index), nil == captionView {
                 if p.caption.characters.count > 0 {
                     captionView = CaptionView(photo: p)
                 }
@@ -857,7 +857,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var value = false
         if displaySelectionButtons {
             if let d = delegate {
-                value = d.isPhotoSelectedAtIndex(index, photoBrowser: self)
+                value = d.isPhotoSelectedAtIndex(index: index, photoBrowser: self)
             }
         }
         
@@ -867,7 +867,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func setPhotoSelected(selected: Bool, atIndex index: Int) {
         if displaySelectionButtons {
             if let d = delegate {
-                d.selectedChanged(selected, index: index, photoBrowser: self)
+                d.selectedChanged(selected: selected, index: index, photoBrowser: self)
             }
         }
     }
@@ -887,7 +887,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     func loadAdjacentPhotosIfNecessary(photo: Photo) {
-        let page = pageDisplayingPhoto(photo)
+        let page = pageDisplayingPhoto(photo: photo)
         if let p = page {
             // If page is current page then initiate loading of previous and next pages
             let pageIndex = p.index
@@ -921,11 +921,11 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
         if let photo = notification.object as? Photo {
-            if let page = pageDisplayingPhoto(photo) {
+            if let page = pageDisplayingPhoto(photo: photo) {
                 if photo.underlyingImage != nil {
                     // Successful load
                     page.displayImage()
-                    loadAdjacentPhotosIfNecessary(photo)
+                    loadAdjacentPhotosIfNecessary(photo: photo)
                 }
                 else {
                     // Failed to load
@@ -944,8 +944,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Ignore padding as paging bounces encroach on that
         // and lead to false page loads
         let visibleBounds = pagingScrollView.bounds
-        var iFirstIndex = Int(floorf(Float((CGRectGetMinX(visibleBounds) + padding * 2.0) / CGRectGetWidth(visibleBounds))))
-        var iLastIndex  = Int(floorf(Float((CGRectGetMaxX(visibleBounds) - padding * 2.0 - 1.0) / CGRectGetWidth(visibleBounds))))
+        var iFirstIndex = Int(floorf(Float((visibleBounds.minX + padding * 2.0) / CGRectGetWidth(visibleBounds))))
+        var iLastIndex  = Int(floorf(Float((visibleBounds.maxX - padding * 2.0 - 1.0) / CGRectGetWidth(visibleBounds))))
         
         if iFirstIndex < 0 {
             iFirstIndex = 0
@@ -998,7 +998,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Add missing pages
         for index in iFirstIndex...iLastIndex {
-            if !isDisplayingPageForIndex(index) {
+            if !isDisplayingPageForIndex(index: index) {
                 // Add new page
                 var p = dequeueRecycledPage
                 if nil == p {
@@ -1008,46 +1008,46 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 let page = p!
                 
                 visiblePages.insert(page)
-                configurePage(page, forIndex: index)
+                configurePage(page: page, forIndex: index)
 
                 pagingScrollView.addSubview(page)
                 // MWLog(@"Added page at index %lu", (unsigned long)index)
                 
                 // Add caption
-                if let captionView = captionViewForPhotoAtIndex(index) {
-                    captionView.frame = frameForCaptionView(captionView, index: index)
+                if let captionView = captionViewForPhotoAtIndex(index: index) {
+                    captionView.frame = frameForCaptionView(captionView: captionView, index: index)
                     pagingScrollView.addSubview(captionView)
                     page.captionView = captionView
                 }
                 
                 // Add play button if needed
                 if page.displayingVideo() {
-                    let playButton = UIButton(type: .Custom)
+                    let playButton = UIButton(type: .custom)
                     playButton.setImage(UIImage.imageForResourcePath(
-                        "MWPhotoBrowserSwift.bundle/PlayButtonOverlayLarge",
+                        path: "MWPhotoBrowserSwift.bundle/PlayButtonOverlayLarge",
                         ofType: "png",
-                        inBundle: NSBundle(forClass: PhotoBrowser.self)), forState: .Normal)
+                        inBundle: Bundle(forClass: PhotoBrowser.self)), for: .Normal)
                     
                     playButton.setImage(UIImage.imageForResourcePath(
                         "MWPhotoBrowserSwift.bundle/PlayButtonOverlayLargeTap",
                         ofType: "png",
-                        inBundle: NSBundle(forClass: PhotoBrowser.self)), forState: .Highlighted)
+                        inBundle: Bundle(forClass: PhotoBrowser.self)), for: .Highlighted)
                     
-                    playButton.addTarget(self, action: Selector("playButtonTapped:"), forControlEvents: .TouchUpInside)
+                    playButton.addTarget(self, action: Selector("playButtonTapped:"), for: .touchUpInside)
                     playButton.sizeToFit()
-                    playButton.frame = frameForPlayButton(playButton, atIndex: index)
+                    playButton.frame = frameForPlayButton(playButton: playButton, atIndex: index)
                     pagingScrollView.addSubview(playButton)
                     page.playButton = playButton
                 }
                 
                 // Add selected button
                 if self.displaySelectionButtons {
-                    let selectedButton = UIButton(type: .Custom)
+                    let selectedButton = UIButton(type: .custom)
                     selectedButton.setImage(UIImage.imageForResourcePath(
-                        "MWPhotoBrowserSwift.bundle/ImageSelectedOff",
+                        path: "MWPhotoBrowserSwift.bundle/ImageSelectedOff",
                         ofType: "png",
-                        inBundle: NSBundle(forClass: PhotoBrowser.self)),
-                        forState: .Normal)
+                        inBundle: Bundle(forClass: PhotoBrowser.self)),
+                        for: .Normal)
                     
                     let selectedOnImage: UIImage?
                     if customImageSelectedIconName.characters.count > 0 {
@@ -1055,19 +1055,19 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     }
                     else {
                         selectedOnImage = UIImage.imageForResourcePath(
-                            "MWPhotoBrowserSwift.bundle/ImageSelectedOn",
+                            path: "MWPhotoBrowserSwift.bundle/ImageSelectedOn",
                             ofType: "png",
-                            inBundle: NSBundle(forClass: PhotoBrowser.self))
+                            inBundle: Bundle(forClass: PhotoBrowser.self))
                     }
                     
-                    selectedButton.setImage(selectedOnImage, forState: .Selected)
+                    selectedButton.setImage(selectedOnImage, for: .selected)
                     selectedButton.sizeToFit()
                     selectedButton.adjustsImageWhenHighlighted = false
-                    selectedButton.addTarget(self, action: Selector("selectedButtonTapped:"), forControlEvents: .TouchUpInside)
-                    selectedButton.frame = frameForSelectedButton(selectedButton, atIndex: index)
+                    selectedButton.addTarget(self, action: Selector("selectedButtonTapped:"), for: .touchUpInside)
+                    selectedButton.frame = frameForSelectedButton(selectedButton: selectedButton, atIndex: index)
                     pagingScrollView.addSubview(selectedButton)
                     page.selectedButton = selectedButton
-                    selectedButton.selected = photoIsSelectedAtIndex(index)
+                    selectedButton.isSelected = photoIsSelectedAtIndex(index: index)
                 }
             }
         }
@@ -1078,7 +1078,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         for page in copy {
             // Update selection
             if let selected = page.selectedButton {
-                selected.selected = photoIsSelectedAtIndex(page.index)
+                selected.selected = photoIsSelectedAtIndex(index: page.index)
             }
         }
     }
@@ -1107,7 +1107,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func pageDisplayingPhoto(photo: Photo) -> ZoomingScrollView? {
         var thePage: ZoomingScrollView?
         for page in visiblePages {
-            if page.photo != nil && page.photo!.equals(photo) {
+            if page.photo != nil && page.photo!.equals(photo: photo) {
                 thePage = page
                 break
             }
@@ -1116,10 +1116,10 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     func configurePage(page: ZoomingScrollView, forIndex index: Int) {
-        page.frame = frameForPageAtIndex(index)
+        page.frame = frameForPageAtIndex(index: index)
         page.index = index
-        page.photo = photoAtIndex(index)
-        page.backgroundColor = areControlsHidden ? UIColor.blackColor() : UIColor.whiteColor()
+        page.photo = photoAtIndex(index: index)
+        page.backgroundColor = areControlsHidden ? UIColor.blackColor : UIColor.whiteColor()
     }
 
     var dequeueRecycledPage: ZoomingScrollView? {
@@ -1175,7 +1175,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Load adjacent images if needed and the photo is already
         // loaded. Also called after photo has been loaded in background
-        let currentPhoto = photoAtIndex(index)
+        let currentPhoto = photoAtIndex(index: index)
         
         if let cp = currentPhoto {
             if cp.underlyingImage != nil {
@@ -1187,7 +1187,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Notify delegate
         if index != previousPageIndex {
             if let d = delegate {
-                d.didDisplayPhotoAtIndex(index, photoBrowser: self)
+                d.didDisplayPhotoAtIndex(index: index, photoBrowser: self)
             }
             previousPageIndex = index
         }
@@ -1202,7 +1202,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var frame = view.bounds// UIScreen.mainScreen().bounds
         frame.origin.x -= padding
         frame.size.width += (2.0 * padding)
-        return CGRectIntegral(frame)
+        return frame.integral
     }
 
     func frameForPageAtIndex(index: Int) -> CGRect {
@@ -1276,7 +1276,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     func frameForPlayButton(playButton: UIButton, atIndex index: Int) -> CGRect {
-        let pageFrame = frameForPageAtIndex(index)
+        let pageFrame = frameForPageAtIndex(index: index)
         return CGRectMake(
             CGFloat(floorf(Float(CGRectGetMidX(pageFrame) - playButton.frame.size.width / 2.0))),
             CGFloat(floorf(Float(CGRectGetMidY(pageFrame) - playButton.frame.size.height / 2.0))),
@@ -1297,7 +1297,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Calculate current page
         let visibleBounds = pagingScrollView.bounds
-        var index = Int(floorf(Float(CGRectGetMidX(visibleBounds) / CGRectGetWidth(visibleBounds))))
+        var index = Int(floorf(Float(visibleBounds.midX / visibleBounds.width)))
         if index < 0 {
             index = 0
         }
@@ -1310,16 +1310,16 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         currentPageIndex = index
         
         if currentPageIndex != previousCurrentPage {
-            didStartViewingPageAtIndex(index)
+            didStartViewingPageAtIndex(index: index)
         }
     }
 
-    public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         // Hide controls when dragging begins
         setControlsHidden(true, animated: true, permanent: false)
     }
 
-    public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Update nav when page changes
         updateNavigation()
     }
@@ -1349,7 +1349,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         else
         if photos > 1 {
             if let d = delegate {
-                title = d.titleForPhotoAtIndex(currentPageIndex, photoBrowser: self)
+                title = d.titleForPhotoAtIndex(index: currentPageIndex, photoBrowser: self)
             }
             
             if nil == title {
@@ -1363,23 +1363,23 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Buttons
         if let prev = previousButton {
-            prev.enabled = (currentPageIndex > 0)
+            prev.isEnabled = (currentPageIndex > 0)
         }
         
         if let next = nextButton {
-            next.enabled = (currentPageIndex < photos - 1)
+            next.isEnabled = (currentPageIndex < photos - 1)
         }
         
         // Disable action button if there is false image or it's a video
         if let ab = actionButton {
-            let photo = photoAtIndex(currentPageIndex)
+            let photo = photoAtIndex(index: currentPageIndex)
 
             if photo != nil && (photo!.underlyingImage == nil || photo!.isVideo) {
-                ab.enabled = false
-                ab.tintColor = UIColor.clearColor() // Tint to hide button
+                ab.isEnabled = false
+                ab.tintColor = UIColor.clear // Tint to hide button
             }
             else {
-                ab.enabled = true
+                ab.isEnabled = true
                 ab.tintColor = nil
             }
         }
@@ -1388,7 +1388,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func jumpToPageAtIndex(index: Int, animated: Bool) {
         // Change page
         if index < numberOfPhotos {
-            let pageFrame = frameForPageAtIndex(index)
+            let pageFrame = frameForPageAtIndex(index: index)
             pagingScrollView.setContentOffset(CGPointMake(pageFrame.origin.x - padding, 0), animated: animated)
             updateNavigation()
         }
@@ -1398,25 +1398,25 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     func gotoPreviousPage() {
-        showPreviousPhotoAnimated(false)
+        showPreviousPhotoAnimated(animated: false)
     }
     func gotoNextPage() {
-        showNextPhotoAnimated(false)
+        showNextPhotoAnimated(animated: false)
     }
 
     func showPreviousPhotoAnimated(animated: Bool) {
-        jumpToPageAtIndex(currentPageIndex - 1, animated: animated)
+        jumpToPageAtIndex(index: currentPageIndex - 1, animated: animated)
     }
 
     func showNextPhotoAnimated(animated: Bool) {
-        jumpToPageAtIndex(currentPageIndex + 1, animated: animated)
+        jumpToPageAtIndex(index: currentPageIndex + 1, animated: animated)
     }
 
     //MARK: - Interactions
 
     func selectedButtonTapped(sender: AnyObject) {
         let selectedButton = sender as! UIButton
-        selectedButton.selected = !selectedButton.selected
+        selectedButton.isSelected = !selectedButton.isSelected
     
         var index = Int.max
         for page in visiblePages {
@@ -1427,7 +1427,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
     
         if index != Int.max {
-            setPhotoSelected(selectedButton.selected, atIndex: index)
+            setPhotoSelected(selected: selectedButton.isSelected, atIndex: index)
         }
     }
 
@@ -1444,7 +1444,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         if index != Int.max {
             if nil == currentVideoPlayerViewController {
-                playVideoAtIndex(index)
+                playVideoAtIndex(index: index)
             }
         }
     }
@@ -1452,23 +1452,23 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     //MARK: - Video
 
     func playVideoAtIndex(index: Int) {
-        let photo = photoAtIndex(index)
+        let photo = photoAtIndex(index: index)
         
         // Valid for playing
         currentVideoIndex = index
         clearCurrentVideo()
-        setVideoLoadingIndicatorVisible(true, atPageIndex: index)
+        setVideoLoadingIndicatorVisible(visible: true, atPageIndex: index)
         
         // Get video and play
         if let p = photo {
             p.getVideoURL() { url in
                 if let u = url {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.playVideo(u, atPhotoIndex: index)
+                    dispatch_async(DispatchQueue.main) {
+                        self.playVideo(videoURL: u, atPhotoIndex: index)
                     }
                 }
                 else {
-                    self.setVideoLoadingIndicatorVisible(false, atPageIndex: index)
+                    self.setVideoLoadingIndicatorVisible(visible: false, atPageIndex: index)
                 }
             }
         }
@@ -1476,36 +1476,36 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     func playVideo(videoURL: NSURL, atPhotoIndex index: Int) {
         // Setup player
-        currentVideoPlayerViewController = MPMoviePlayerViewController(contentURL: videoURL)
+        currentVideoPlayerViewController = MPMoviePlayerViewController(contentURL: videoURL as URL!)
         
         if let player = currentVideoPlayerViewController {
             player.moviePlayer.prepareToPlay()
             player.moviePlayer.shouldAutoplay = true
-            player.moviePlayer.scalingMode = .AspectFit
-            player.modalTransitionStyle = .CrossDissolve
+            player.moviePlayer.scalingMode = .aspectFit
+            player.modalTransitionStyle = .crossDissolve
         
             // Remove the movie player view controller from the "playback did finish" falsetification observers
             // Observe ourselves so we can get it to use the crossfade transition
-            NSNotificationCenter.defaultCenter().removeObserver(
+            NotificationCenter.defaultCenter.removeObserver(
                 player,
                 name: MPMoviePlayerPlaybackDidFinishNotification,
                 object: player.moviePlayer)
         
-            NSNotificationCenter.defaultCenter().addObserver(
+            NotificationCenter.defaultCenter.addObserver(
                 self,
                 selector: Selector("videoFinishedCallback:"),
                 name: MPMoviePlayerPlaybackDidFinishNotification,
                 object: player.moviePlayer)
 
             // Show
-            presentViewController(player, animated: true, completion: nil)
+            present(player, animated: true, completion: nil)
         }
     }
 
     func videoFinishedCallback(notification: NSNotification) {
         if let player = currentVideoPlayerViewController {
             // Remove observer
-            NSNotificationCenter.defaultCenter().removeObserver(
+            NotificationCenter.defaultCenter.removeObserver(
                 self,
                 name: MPMoviePlayerPlaybackDidFinishNotification,
                 object: player.moviePlayer)
@@ -1514,13 +1514,13 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             clearCurrentVideo()
             
             // Dismiss
-            if let errorObj: AnyObject? = notification.userInfo?[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] {
+            if let errorObj: AnyObject? = notification.userInfo?[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] as AnyObject {
                 let error = MPMovieFinishReason(rawValue: errorObj as! Int)
             
-                if error == .PlaybackError {
+                if error == .playbackError {
                     // Error occured so dismiss with a delay incase error was immediate and we need to wait to dismiss the VC
                     dispatch_after(
-                        dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC))),
+                        dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), Int64(1.0 * Double(NSEC_PER_SEC))),
                         dispatch_get_main_queue())
                     {
                         self.dismissViewControllerAnimated(true, completion: nil)
@@ -1531,7 +1531,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             }
         }
         
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     func clearCurrentVideo() {
@@ -1561,15 +1561,15 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     func positionVideoLoadingIndicator() {
         if currentVideoLoadingIndicator != nil && currentVideoIndex != Int.max {
-            let frame = frameForPageAtIndex(currentVideoIndex)
-            currentVideoLoadingIndicator!.center = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame))
+            let frame = frameForPageAtIndex(index: currentVideoIndex)
+            currentVideoLoadingIndicator!.center = CGPointMake(CGRectGetMidX(frame), frame.midY)
         }
     }
 
     //MARK: - Grid
 
     func showGridAnimated() {
-        showGrid(true)
+        showGrid(animated: true)
     }
 
     func showGrid(animated: Bool) {
@@ -1584,7 +1584,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             let navBar = navigationController?.navigationBar
         {
             let bounds = view.bounds
-            let naviHeight = navBar.frame.height + UIApplication.sharedApplication().statusBarFrame.height
+            let naviHeight = navBar.frame.height + UIApplication.shared.statusBarFrame.height
             
             gc.initialContentOffset = currentGridContentOffset
             gc.browser = self
@@ -1606,7 +1606,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             // Hide action button on nav bar if it exists
             if navigationItem.rightBarButtonItem == actionButton {
                 gridPreviousRightNavItem = actionButton
-                navigationItem.setRightBarButtonItem(nil, animated: true)
+                navigationItem.setRightBarButton(nil, animated: true)
             }
             else {
                 gridPreviousRightNavItem = nil
@@ -1617,15 +1617,15 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             setControlsHidden(false, animated: true, permanent: true)
             
             // Animate grid in and photo scroller out
-            gc.willMoveToParentViewController(self)
-            UIView.animateWithDuration(
-                animated ? 0.3 : 0,
+            gc.willMove(toParentViewController: self)
+            UIView.animate(
+                withDuration: animated ? 0.3 : 0,
                 animations: {
                     gc.view.alpha = 1.0
                     self.pagingScrollView.alpha = 0.0
                 },
                 completion: { finished in
-                    gc.didMoveToParentViewController(self)
+                    gc.didMove(toParentViewController: self)
                 })
         }
     }
@@ -1637,15 +1637,14 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             
             // Restore action button if it was removed
             if gridPreviousRightNavItem == actionButton && actionButton != nil {
-                navigationItem.setRightBarButtonItem(gridPreviousRightNavItem, animated: true)
+                navigationItem.setRightBarButton(gridPreviousRightNavItem, animated: true)
             }
             
             // Position prior to hide animation
             let pagingFrame = frameForPagingScrollView
-            pagingScrollView.frame = CGRectOffset(
-                pagingFrame,
-                0,
-                (self.startOnGrid ? 1 : -1) * pagingFrame.size.height)
+            pagingScrollView.frame = pagingFrame.offsetBy(
+                dx: 0,
+                dy: (self.startOnGrid ? 1 : -1) * pagingFrame.size.height)
             
             // Remember and remove controller now so things can detect a nil grid controller
             gridController = nil
@@ -1659,18 +1658,18 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             self.pagingScrollView.frame = self.frameForPagingScrollView
             
             // Animate, hide grid and show paging scroll view
-            UIView.animateWithDuration(
-                0.3,
+            UIView.animate(
+                withDuration: 0.3,
                 animations: {
                     gc.view.alpha = 0.0
                     self.pagingScrollView.alpha = 1.0
                 },
                 completion: { finished in
-                    gc.willMoveToParentViewController(nil)
+                    gc.willMove(toParentViewController: nil)
                     gc.view.removeFromSuperview()
                     gc.removeFromParentViewController()
             
-                    self.setControlsHidden(false, animated: true, permanent: false) // retrigger timer
+                    self.setControlsHidden(hidden: false, animated: true, permanent: false) // retrigger timer
                 })
         }
     }
@@ -1678,8 +1677,9 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     //MARK: - Control Hiding / Showing
 
     // If permanent then we don't set timers to hide again
-    func setControlsHidden(var hidden: Bool, animated: Bool, permanent: Bool) {
+    func setControlsHidden( hidden: Bool, animated: Bool, permanent: Bool) {
         // Force visible
+        var hidden = hidden
         if 0 == numberOfPhotos || gridController != nil || alwaysShowControls {
             hidden = false
         }
@@ -1696,7 +1696,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             // Hide status bar
             if !isVCBasedStatusBarAppearance {
                 // falsen-view controller based
-                UIApplication.sharedApplication().setStatusBarHidden(
+                UIApplication.sharedApplication.setStatusBarHidden(
                     hidden, withAnimation:
                     animated ? UIStatusBarAnimation.Slide : UIStatusBarAnimation.None)
                 
@@ -1704,8 +1704,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             else {
                 // View controller based so animate away
                 statusBarShouldBeHidden = hidden
-                UIView.animateWithDuration(
-                    animationDuration,
+                UIView.animate(
+                    withDuration: animationDuration,
                     animations: {
                         self.setNeedsStatusBarAppearanceUpdate()
                     })
@@ -1716,44 +1716,44 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Pre-appear animation positions for sliding
         if areControlsHidden && !hidden && animated {
             // Toolbar
-            toolbar.frame = CGRectOffset(frameForToolbar, 0, animatonOffset)
+            toolbar.frame = frameForToolbar.offsetBy(dx: 0, dy: animatonOffset)
             
             // Captions
             for page in visiblePages {
                 if let v = page.captionView {
                     // Pass any index, all we're interested in is the Y
-                    var captionFrame = frameForCaptionView(v, index: 0)
+                    var captionFrame = frameForCaptionView(captionView: v, index: 0)
                     captionFrame.origin.x = v.frame.origin.x // Reset X
-                    v.frame = CGRectOffset(captionFrame, 0, animatonOffset)
+                    v.frame = captionFrame.offsetBy(dx: 0, dy: animatonOffset)
                 }
             }
         }
         
-        UIView.animateWithDuration(animationDuration, animations: {
+        UIView.animate(withDuration: animationDuration, animations: {
             self.navigationController?.setNavigationBarHidden(hidden, animated: true)
             
             // Toolbar
             self.toolbar.frame = self.frameForToolbar
             
             if hidden {
-                self.toolbar.frame = CGRectOffset(self.toolbar.frame, 0, animatonOffset)
-                self.view.backgroundColor = UIColor.blackColor()
+                self.toolbar.frame = self.toolbar.frame.offsetBy(dx: 0, dy: animatonOffset)
+                self.view.backgroundColor = UIColor.black
                 
-                self.pagingScrollView.backgroundColor = UIColor.blackColor()
-                self.navigationController?.view.backgroundColor = UIColor.blackColor()
+                self.pagingScrollView.backgroundColor = UIColor.black
+                self.navigationController?.view.backgroundColor = UIColor.black
                 
                 for page in self.visiblePages {
-                    page.backgroundColor = UIColor.blackColor()
+                    page.backgroundColor = UIColor.black
                 }
             }
             else {
-                self.view.backgroundColor = UIColor.whiteColor()
+                self.view.backgroundColor = UIColor.white
                 
-                self.pagingScrollView.backgroundColor = UIColor.whiteColor()
-                self.navigationController?.view.backgroundColor = UIColor.whiteColor()
+                self.pagingScrollView.backgroundColor = UIColor.white
+                self.navigationController?.view.backgroundColor = UIColor.white
                 
                 for page in self.visiblePages {
-                    page.backgroundColor = UIColor.whiteColor()
+                    page.backgroundColor = UIColor.white
                 }
             }
             
@@ -1763,11 +1763,11 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             for page in self.visiblePages {
                 if let v = page.captionView {
                     // Pass any index, all we're interested in is the Y
-                    var captionFrame = self.frameForCaptionView(v, index: 0)
+                    var captionFrame = self.frameForCaptionView(captionView: v, index: 0)
                     captionFrame.origin.x = v.frame.origin.x // Reset X
                     
                     if hidden {
-                        captionFrame = CGRectOffset(captionFrame, 0, animatonOffset)
+                        captionFrame = captionFrame.offsetBy(dx: 0, dy: animatonOffset)
                     }
                     
                     v.frame = captionFrame
@@ -1779,7 +1779,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             for page in self.visiblePages {
                 if let button = page.selectedButton {
                     let v = button
-                    var newFrame = self.frameForSelectedButton(v, atIndex: 0)
+                    var newFrame = self.frameForSelectedButton(selectedButton: v, atIndex: 0)
                     newFrame.origin.x = v.frame.origin.x
                     v.frame = newFrame
                 }
@@ -1801,11 +1801,11 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     public override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+        return .lightContent
     }
 
     public override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return .Slide
+        return .slide
     }
 
     func cancelControlHiding() {
@@ -1821,7 +1821,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if !areControlsHidden {
             cancelControlHiding()
             
-            controlVisibilityTimer = NSTimer.scheduledTimerWithTimeInterval(
+            controlVisibilityTimer = Timer.scheduledTimerWithTimeInterval(
                 delayToHideElements,
                 target: self,
                 selector: Selector("hideControls"),
@@ -1835,15 +1835,15 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
     
     func hideControls() {
-        setControlsHidden(true, animated: true, permanent: false)
+        setControlsHidden(hidden: true, animated: true, permanent: false)
     }
     
     func showControls() {
-        setControlsHidden(false, animated: true, permanent: false)
+        setControlsHidden(hidden: false, animated: true, permanent: false)
     }
     
     func toggleControls() {
-        setControlsHidden(!areControlsHidden, animated: true, permanent: false)
+        setControlsHidden(hidden: !areControlsHidden, animated: true, permanent: false)
     }
 
     //MARK: - Properties
