@@ -95,7 +95,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var delayToHideElements = TimeInterval(5.0)
     
     public var navBarTintColor = UIColor.black
-    public var navBarBarTintColor = UIColor.black
+    public var navBarBarTintColor = UIColor.white
     public var navBarTranslucent = true
     public var toolbarTintColor = UIColor.black
     public var toolbarBarTintColor = UIColor.white

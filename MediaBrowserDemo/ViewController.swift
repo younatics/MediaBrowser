@@ -126,6 +126,9 @@ extension ViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        photos = [MWPhoto]()
+        thumbs = [MWPhoto]()
+        
         var displayActionButton = true
         var displaySelectionButtons = false
         var displayNavArrows = false
