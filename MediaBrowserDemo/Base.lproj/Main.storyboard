@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="CPP-RU-GAq" detailTextLabel="nR0-tW-ozz" style="IBUITableViewCellStyleSubtitle" id="1Cm-oX-Py8">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="CPP-RU-GAq" detailTextLabel="nR0-tW-ozz" style="IBUITableViewCellStyleSubtitle" id="1Cm-oX-Py8" customClass="MediaBrowserCell" customModule="MediaBrowserDemo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Cm-oX-Py8" id="Yl8-g2-Q26">
@@ -49,7 +49,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="MediaBrowser" id="GSa-AC-ZKS">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="quY-VE-Qiu">
+                        <barButtonItem key="rightBarButtonItem" id="quY-VE-Qiu">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="L6Q-RX-plb">
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
