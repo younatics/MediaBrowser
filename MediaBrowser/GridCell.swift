@@ -82,7 +82,7 @@ public class GridCell: UICollectionViewCell {
         // Listen for photo loading notifications
         NotificationCenter.default.addObserver(
             self,
-            selector: Selector(("setProgressFromNotification:")),
+            selector: #selector(setProgressFromNotification),
             name: NSNotification.Name(rawValue: MWPHOTO_PROGRESS_NOTIFICATION),
             object: nil)
         

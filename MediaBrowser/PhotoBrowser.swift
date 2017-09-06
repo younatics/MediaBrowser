@@ -16,9 +16,6 @@ import MapleBacon
 func floorcgf(x: CGFloat) -> CGFloat {
     return CGFloat(floorf(Float(x)))
 }
-public protocol PhotoBro222wserDelegate: class {
-    
-}
 
 public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDelegate {
     private let padding = CGFloat(10.0)
@@ -276,7 +273,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             actionButton = UIBarButtonItem(
                 barButtonSystemItem: UIBarButtonSystemItem.action,
                 target: self,
-                action: #selector(actionButtonPressed))
+                action: #selector(actionButtonPressed(_:)))
         }
         
         // Update
@@ -1884,7 +1881,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     //MARK: - Actions
 
-    func actionButtonPressed(sender: AnyObject) {
+    func actionButtonPressed(_ sender: Any) {
         // Only react when image has loaded
         if let photo = photoAtIndex(index: currentPageIndex) {
             if numberOfPhotos > 0 && photo.underlyingImage != nil {
