@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--MediaBrowser-->
         <scene sceneID="maU-IB-Lg7">
             <objects>
                 <tableViewController id="mwn-WE-6Kx" customClass="ViewController" customModule="MediaBrowserDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -48,7 +48,21 @@
                             <outlet property="delegate" destination="mwn-WE-6Kx" id="eQL-Vf-ebx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="GSa-AC-ZKS"/>
+                    <navigationItem key="navigationItem" title="MediaBrowser" id="GSa-AC-ZKS">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="quY-VE-Qiu">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="L6Q-RX-plb">
+                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Push"/>
+                                    <segment title="Modal"/>
+                                </segments>
+                            </segmentedControl>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="segmentedControl" destination="L6Q-RX-plb" id="HdJ-Wf-lMc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="59C-BQ-0sR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -70,7 +84,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sse-Dq-ebI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="365.60000000000002" y="123.68815592203899"/>
+            <point key="canvasLocation" x="574" y="124"/>
         </scene>
     </scenes>
 </document>
