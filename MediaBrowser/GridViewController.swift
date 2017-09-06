@@ -11,7 +11,7 @@ import UIKit
 public class GridViewController: UICollectionViewController {
     weak var browser: PhotoBrowser?
     var selectionMode = false
-    var initialContentOffset = CGPointMake(0.0, CGFloat.greatestFiniteMagnitude)
+    var initialContentOffset = CGPoint(x: 0.0, y: CGFloat.greatestFiniteMagnitude)
     
     init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())

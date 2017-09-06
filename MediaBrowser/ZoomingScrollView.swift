@@ -51,14 +51,14 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         addSubview(loadingIndicator)
 
         // Listen progress notifications
-        NotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.defaultCenter.addObserver(
             self,
             selector: Selector("setProgressFromNotification:"),
             name: MWPHOTO_PROGRESS_NOTIFICATION,
             object: nil)
         
         // Setup
-        backgroundColor = UIColor.whiteColor
+        backgroundColor = UIColor.white
         delegate = self
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
@@ -71,7 +71,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     }
 
     deinit {
-        NotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.defaultCenter.removeObserver(self)
     }
 
     func prepareForReuse() {
@@ -345,11 +345,11 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         }
         
         if let le = loadingError {
-            le.frame = CGRectMake(
-                floorcgf(x: (bounds.size.width - le.frame.size.width) / 2.0),
-                floorcgf((bounds.size.height - le.frame.size.height) / 2.0),
-                le.frame.size.width,
-                le.frame.size.height)
+            le.frame = CGRect(
+                x: floorcgf(x: (bounds.size.width - le.frame.size.width) / 2.0),
+                y: floorcgf(x: (bounds.size.height - le.frame.size.height) / 2.0),
+                width: le.frame.size.width,
+                height: le.frame.size.height)
         }
     
         // Super
@@ -435,7 +435,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
             let newZoomScale = ((maximumZoomScale + minimumZoomScale) / 2.0)
             let xsize = bounds.size.width / newZoomScale
             let ysize = bounds.size.height / newZoomScale
-            zoom(to: CGRectMake(touchPoint.x - xsize / 2.0, touchPoint.y - ysize / 2.0, xsize, ysize), animated: true)
+            zoom(to: CGRect(x: touchPoint.x - xsize / 2.0, y: touchPoint.y - ysize / 2.0, width: xsize, height: ysize), animated: true)
         }
         
         // Delay controls

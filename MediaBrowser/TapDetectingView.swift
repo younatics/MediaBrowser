@@ -26,7 +26,7 @@ public class TapDetectingView: UIView {
         super.init(coder: aDecoder)
     }
 
-    public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first  {
             let tapCount = touch.tapCount
         
@@ -38,7 +38,7 @@ public class TapDetectingView: UIView {
             }
         }
         
-        if let nr = nextResponder {
+        if let nr = next {
             nr.touchesEnded(touches, with: event)
         }
     }

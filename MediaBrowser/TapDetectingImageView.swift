@@ -43,7 +43,7 @@ public class TapDetectingImageView: UIImageView {
             }
         }
         
-        if let nr = nextResponder {
+        if let nr = next {
             nr.touchesEnded(touches, with: event)
         }
     }
