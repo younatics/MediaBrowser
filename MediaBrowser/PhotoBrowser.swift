@@ -889,8 +889,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     if let photo = photoAtIndex(index: pageIndex - 1) {
                         if nil == photo.underlyingImage {
                             photo.loadUnderlyingImageAndNotify()
-                    
-                            //MWLog(@"Pre-loading image at index %lu", (unsigned long)pageIndex-1)
+                            print("Pre-loading image at index \(pageIndex-1)")
                         }
                     }
                 }
@@ -900,8 +899,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     if let photo = photoAtIndex(index: pageIndex + 1) {
                         if nil == photo.underlyingImage {
                             photo.loadUnderlyingImageAndNotify()
-                    
-                            //MWLog(@"Pre-loading image at index %lu", (unsigned long)pageIndex+1)
+                            print("Pre-loading image at index \(pageIndex+1)")
                         }
                     }
                 }

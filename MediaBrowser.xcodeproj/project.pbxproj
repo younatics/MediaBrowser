@@ -25,11 +25,37 @@
 		1906ABE61F5F83960052DC3A /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDB1F5F83960052DC3A /* UIImageExtension.swift */; };
 		1906ABE71F5F83960052DC3A /* ZoomingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDC1F5F83960052DC3A /* ZoomingScrollView.swift */; };
 		1906ABE91F5F9A100052DC3A /* MediaBrowser.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1906ABE81F5F9A100052DC3A /* MediaBrowser.xcassets */; };
+		1937C4461F5FE9EA00D8724E /* MediaBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1906ABB11F5F81110052DC3A /* MediaBrowser.framework */; };
+		1937C4471F5FE9EA00D8724E /* MediaBrowser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1906ABB11F5F81110052DC3A /* MediaBrowser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		19E1F62C1F5FD5F8004D3BA8 /* Atoms.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 19E1F62B1F5FD5F8004D3BA8 /* Atoms.mp4 */; };
 		19E1F62E1F5FD8EE004D3BA8 /* PhotoBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1F62D1F5FD8EE004D3BA8 /* PhotoBrowserDelegate.swift */; };
 		3FAEAE617C3B57A74C12FC3C /* Pods_MediaBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 570922FC966732103FB7D306 /* Pods_MediaBrowser.framework */; };
 		786961890EA7C05AB0704224 /* Pods_MediaBrowserDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E7711DC6E06460185D3F457 /* Pods_MediaBrowserDemo.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1937C4481F5FE9EA00D8724E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1906ABA81F5F81110052DC3A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1906ABB01F5F81110052DC3A;
+			remoteInfo = MediaBrowser;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1937C44A1F5FE9EA00D8724E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1937C4471F5FE9EA00D8724E /* MediaBrowser.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0E7711DC6E06460185D3F457 /* Pods_MediaBrowserDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediaBrowserDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1937C4461F5FE9EA00D8724E /* MediaBrowser.framework in Frameworks */,
 				786961890EA7C05AB0704224 /* Pods_MediaBrowserDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,10 +231,12 @@
 				1906ABBE1F5F812D0052DC3A /* Resources */,
 				369573559A2B17E91D9089BA /* [CP] Embed Pods Frameworks */,
 				9BD587AB7EFBDA9DDAD0ECB9 /* [CP] Copy Pods Resources */,
+				1937C44A1F5FE9EA00D8724E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1937C4491F5FE9EA00D8724E /* PBXTargetDependency */,
 			);
 			name = MediaBrowserDemo;
 			productName = MediaBrowserDemo;
@@ -387,6 +416,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		1937C4491F5FE9EA00D8724E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1906ABB01F5F81110052DC3A /* MediaBrowser */;
+			targetProxy = 1937C4481F5FE9EA00D8724E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		1906ABC61F5F812D0052DC3A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -557,9 +594,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 849923070967750DB33DBED9 /* Pods-MediaBrowserDemo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4G7K3CN2JU;
 				INFOPLIST_FILE = MediaBrowserDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seungyounyi.MediaBrowserDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -571,9 +610,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3AEDB6B991DF32A68AA1972E /* Pods-MediaBrowserDemo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4G7K3CN2JU;
 				INFOPLIST_FILE = MediaBrowserDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seungyounyi.MediaBrowserDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

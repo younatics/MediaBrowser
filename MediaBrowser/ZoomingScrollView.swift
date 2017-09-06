@@ -407,9 +407,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     //MARK: - Tap Detection
 
     private func handleSingleTap(touchPoint: CGPoint) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + Double(Int64(0.2 * Double(NSEC_PER_SEC))))  {
-            self.photoBrowser.toggleControls()
-        }
+        self.photoBrowser.perform(#selector(photoBrowser.toggleControls), with: nil, afterDelay: 0.2)
     }
 
     private func handleDoubleTap(touchPoint: CGPoint) {
