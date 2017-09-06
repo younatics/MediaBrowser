@@ -91,7 +91,7 @@ public class MWPhoto: Photo {
                     options: options,
                     resultHandler: { asset, audioMix, info in
                         if let urlAsset = asset as? AVURLAsset {
-                            completion(urlAsset.url as URL)
+                            completion(urlAsset.url)
                         }
                         else {
                             completion(nil)
@@ -185,63 +185,64 @@ public class MWPhoto: Photo {
                 }
             },
         */
-        operation = ImageManager.sharedManager.downloadImage(atUrl: url, cacheScaled: false, imageView: false, completion: { [weak self](imageInstance, error) in
+        operation = ImageManager.sharedManager.downloadImage(atUrl: url, cacheScaled: false, imageView: nil, completion: { [weak self](imageInstance, error) in
             if let strongSelf = self {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async() {
                     strongSelf.operation = nil
                     
                     if let ii = imageInstance {
                         strongSelf.underlyingImage = ii.image
                     }
                     
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async() {
                         strongSelf.imageLoadingComplete()
                     }
                 }
             }
-
+            
         })
     }
-
+    
     // Load from local file
     private func performLoadUnderlyingImageAndNotifyWithLocalFileURL(url: URL) {
-        DispatchQueue.global(DispatchQueue.GlobalQueuePriority.default, 0).async() {
-            //try {
-            if let path = url.path {
-                self.underlyingImage = UIImage(contentsOfFile: path)
-                //if nil == underlyingImage {
-                    //MWLog(@"Error loading photo from path: \(url.path)")
-                //}
+        DispatchQueue.global(qos: .default).async {
+            let path = url.path
+            self.underlyingImage = UIImage(contentsOfFile: path)
+            //if nil == underlyingImage {
+            //MWLog(@"Error loading photo from path: \(url.path)")
+            //}
             //}
             //finally {
-                DispatchQueue.main.async() {
-                    self.imageLoadingComplete()
-                }
-            //}
+            DispatchQueue.main.async() {
+                self.imageLoadingComplete()
             }
+            //}
+            
+            
         }
     }
-
+    
     // Load from asset library async
     private func performLoadUnderlyingImageAndNotifyWithAssetsLibraryURL(url: URL) {
-        dispatch_async(DispatchQueue.global(DispatchQueue.GlobalQueuePriority.default, 0)) {
+        DispatchQueue.global(qos: .default).async {
             //try {
-                let assetslibrary = ALAssetsLibrary()
-                assetslibrary.assetForURL(
-                    url as URL!,
-                    resultBlock: { asset in
-                        let rep = asset.defaultRepresentation()
-                        self.underlyingImage = UIImage(CGImage: rep.fullScreenImage().takeUnretainedValue())
-                        
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.imageLoadingComplete()
-                        }
-                    },
+            let assetslibrary = ALAssetsLibrary()
+            assetslibrary.asset(
+                for: url,
+                resultBlock: { asset in
+                    let rep = asset?.defaultRepresentation()
+                    guard let cgImage = rep?.fullScreenImage().takeUnretainedValue() else { return }
+                    self.underlyingImage = UIImage(cgImage: cgImage)
+                    
+                    DispatchQueue.main.async() {
+                        self.imageLoadingComplete()
+                    }
+            },
                     failureBlock: { error in
                         self.underlyingImage = nil
                         //MWLog(@"Photo from asset library error: %@",error)
                         
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async() {
                             self.imageLoadingComplete()
                         }
                     })

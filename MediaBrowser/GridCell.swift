@@ -63,7 +63,7 @@ public class GridCell: UICollectionViewCell {
                 path: "MWPhotoBrowserSwift.bundle/ImageSelectedSmallOff",
                 ofType: "png",
                 inBundle: Bundle(for: GridCell.self)),
-            for: .Normal)
+            for: .normal)
 
         selectedButton.setImage(UIImage.imageForResourcePath(
                 path: "MWPhotoBrowserSwift.bundle/ImageSelectedSmallOn",

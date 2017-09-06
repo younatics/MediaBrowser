@@ -337,11 +337,11 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         
         // Position indicators (centre does not seem to work!)
         if !loadingIndicator.isHidden {
-            loadingIndicator.frame = CGRectMake(
-                floorcgf((bounds.size.width - loadingIndicator.frame.size.width) / 2.0),
-                floorcgf((bounds.size.height - loadingIndicator.frame.size.height) / 2.0),
-                loadingIndicator.frame.size.width,
-                loadingIndicator.frame.size.height)
+            loadingIndicator.frame = CGRect(
+                x: floorcgf(x: (bounds.size.width - loadingIndicator.frame.size.width) / 2.0),
+                y: floorcgf(x: (bounds.size.height - loadingIndicator.frame.size.height) / 2.0),
+                width: loadingIndicator.frame.size.width,
+                height: loadingIndicator.frame.size.height)
         }
         
         if let le = loadingError {
@@ -408,10 +408,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     //MARK: - Tap Detection
 
     private func handleSingleTap(touchPoint: CGPoint) {
-        dispatch_after(
-            DispatchTime.now(dispatch_time_t(DispatchTime.now()), Int64(0.2 * Double(NSEC_PER_SEC))),
-            DispatchQueue.main)
-        {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Double(Int64(0.2 * Double(NSEC_PER_SEC))))  {
             self.photoBrowser.toggleControls()
         }
     }

@@ -65,7 +65,7 @@ public class GridViewController: UICollectionViewController {
         
         // Check if current item is visible and if not, make it so!
         if let b = browser, b.numberOfPhotos > 0 {
-            let currentPhotoIndexPath = NSIndexPath(forItem: b.currentIndex, inSection: 0)
+            let currentPhotoIndexPath = IndexPath(item: b.currentIndex, section: 0)
             let visibleIndexPaths = collectionView!.indexPathsForVisibleItems
             
             var currentVisible = false
@@ -78,7 +78,8 @@ public class GridViewController: UICollectionViewController {
             }
             
             if !currentVisible {
-                collectionView!.scrollToItemAtIndexPath(currentPhotoIndexPath, atScrollPosition: UICollectionViewScrollPosition.None, animated: false)
+                // 수정 필요 할 수 있음
+                collectionView!.scrollToItem(at: currentPhotoIndexPath, at: UICollectionViewScrollPosition.left, animated: false)
             }
         }
     }

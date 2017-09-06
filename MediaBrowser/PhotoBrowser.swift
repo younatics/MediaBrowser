@@ -152,10 +152,10 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         navigationController?.view.backgroundColor = UIColor.white
         
         // Listen for MWPhoto falsetifications
-        NotificationCenter.defaultCenter.addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: Selector("handlePhotoLoadingDidEndNotification:"),
-            name: MWPHOTO_LOADING_DID_END_NOTIFICATION,
+            name: NSNotification.Name(rawValue: MWPHOTO_LOADING_DID_END_NOTIFICATION),
             object: nil)
     }
 
@@ -988,8 +988,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 //MWLog(@"Removed page at index %lu", (unsigned long)pageIndex)
             }
         }
-        
-        visiblePages = visiblePages.subtract(recycledPages)
+        // 확인 필요!
+        visiblePages = visiblePages.subtracting(recycledPages)
         
         while recycledPages.count > 2 { // Only keep 2 recycled pages
             recycledPages.remove(recycledPages.first!)
@@ -1473,7 +1473,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
     }
 
-    func playVideo(videoURL: NSURL, atPhotoIndex index: Int) {
+    func playVideo(videoURL: URL, atPhotoIndex index: Int) {
         // Setup player
         currentVideoPlayerViewController = MPMoviePlayerViewController(contentURL: videoURL as URL!)
         
@@ -1518,12 +1518,11 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             
                 if error == .playbackError {
                     // Error occured so dismiss with a delay incase error was immediate and we need to wait to dismiss the VC
-                    dispatch_after(
-                        DispatchTime.now(dispatch_time_t(DispatchTime.now()), Int64(1.0 * Double(NSEC_PER_SEC))),
-                        dispatch_get_main_queue())
-                    {
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                    }
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + Double(1.0 * Double(NSEC_PER_SEC)), execute: {
+                        self.dismiss(animated: true, completion: nil)
+
+                    })
                     
                     return
                 }
