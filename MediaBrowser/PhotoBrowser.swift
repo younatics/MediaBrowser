@@ -201,7 +201,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     //MARK: - View Loading
 
     // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-    public override dynamic func viewDidLoad() {
+    public override func viewDidLoad() {
         // Validate grid settings
         if startOnGrid {
             enableGrid = true
@@ -216,7 +216,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
         // View
-        navigationController?.navigationBar.backgroundColor = UIColor.white
+        navigationController?.navigationBar.backgroundColor = UIColor.red
         
         view.backgroundColor = UIColor.white
         view.clipsToBounds = true
@@ -451,7 +451,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     //MARK: - Appearance
 
-    public override dynamic func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         // Super
         super.viewWillAppear(animated)
         
@@ -494,9 +494,11 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if currentPageIndex != pageIndexBeforeRotation {
             jumpToPageAtIndex(index: pageIndexBeforeRotation, animated: false)
         }
+        
+        self.view.setNeedsLayout()
     }
 
-    public override dynamic func viewDidAppear(_ animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewIsActive = true
         
@@ -512,13 +514,12 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         viewHasAppearedInitially = true
     }
 
-    public override dynamic func viewWillDisappear(_ animated: Bool) {
+    public override func viewWillDisappear(_ animated: Bool) {
         // Detect if rotation occurs while we're presenting a modal
         pageIndexBeforeRotation = currentPageIndex
         
         // Check that we're being popped for good
-        if let viewControllers = navigationController?.viewControllers, viewControllers[0] !== self
-        {
+        if let viewControllers = navigationController?.viewControllers, viewControllers[0] !== self {
             var selfFound = false
         
             for vc in viewControllers {
