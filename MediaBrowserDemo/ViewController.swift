@@ -13,7 +13,7 @@ import MediaBrowser
 class ViewController: UITableViewController {
     @IBOutlet var segmentedControl: UISegmentedControl!
     
-    var selections = NSMutableArray()
+    var selections = [Bool]()
     var photos = [MWPhoto]()
     var thumbs = [MWPhoto]()
     var assets = NSMutableArray()
@@ -148,6 +148,33 @@ extension ViewController {
         }
         
         let browser = PhotoBrowser(delegate: self)
+        browser.displayActionButton = displayActionButton
+        browser.displayNavArrows = displayNavArrows
+        browser.displaySelectionButtons = displaySelectionButtons
+        browser.alwaysShowControls = displaySelectionButtons
+        browser.zoomPhotosToFill = true
+        browser.enableGrid = enableGrid
+        browser.startOnGrid = startOnGrid
+        browser.enableSwipeToDismiss = false
+        browser.autoPlayOnAppear = autoPlayOnAppear
+        
+        if displaySelectionButtons {
+            selections.removeAll()
+            
+            for _ in 0..<photos.count {
+                selections.append(false)
+            }
+        }
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            self.navigationController?.pushViewController(browser, animated: true)
+        } else {
+            self.present(browser, animated: true, completion: nil)
+        }
+        
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        photos.removeAll()
+        thumbs.removeAll()
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
