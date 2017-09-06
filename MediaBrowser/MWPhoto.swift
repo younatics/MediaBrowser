@@ -40,6 +40,12 @@ public class MWPhoto: Photo {
         self.image = image
     }
     
+    public convenience init(image: UIImage, caption: String) {
+        self.init()
+        self.image = image
+        self.caption = caption
+    }
+
     public convenience init(url: URL, caption: String) {
         self.init()
         self.photoURL = url

@@ -8,13 +8,14 @@
 
 import UIKit
 import Photos
+import MediaBrowser
 
 class ViewController: UITableViewController {
     @IBOutlet var segmentedControl: UISegmentedControl!
     
     var selections = NSMutableArray()
-    var photos = NSMutableArray()
-    var thumbs = NSMutableArray()
+    var photos = [MWPhoto]()
+    var thumbs = [MWPhoto]()
     var assets = NSMutableArray()
 //    var ALAssetsLibrary = ALAssetsLibrary()
     
@@ -76,8 +77,44 @@ class ViewController: UITableViewController {
             }
         }
     }
+    
+    func localMediaPhoto(imageName: String, caption: String) -> MWPhoto {
+        guard let image = UIImage(named: imageName) else {
+            fatalError("Image is nil")
+        }
+        
+        let photo = MWPhoto(image: image, caption: caption)
+        return photo
+    }
 }
 
+//MARK: PhotoBrowserDelegate
+extension ViewController: PhotoBrowserDelegate {
+    func photoBrowserDidFinishModalPresentation(photoBrowser: PhotoBrowser) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func thumbPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Photo {
+        if index < photos.count {
+            return photos[index]
+        }
+        return localMediaPhoto(imageName: "MotionBookIcon", caption: "ThumbPhoto at index is wrong")
+    }
+    
+    func photoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Photo {
+        if index < thumbs.count {
+            return thumbs[index]
+        }
+        return localMediaPhoto(imageName: "MotionBookIcon", caption: "Photo at index is Wrong")
+
+    }
+    
+    func numberOfPhotosInPhotoBrowser(photoBrowser: PhotoBrowser) -> Int {
+        return photos.count
+    }
+    
+
+}
 //MARK: UITableViewDelegate, UITableviewDataSource
 extension ViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -89,7 +126,28 @@ extension ViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        <#code#>
+        var displayActionButton = true
+        var displaySelectionButtons = false
+        var displayNavArrows = false
+        var enableGrid = true
+        var startOnGrid = false
+        var autoPlayOnAppear = false
+        
+        switch indexPath.row {
+        case 0:
+            let photo = localMediaPhoto(imageName: "MotionBookIcon", caption: "MotionBookIcon")
+            photos.append(photo)
+            enableGrid = false
+            break
+        case 1:
+            var photo = localMediaPhoto(imageName: "MotionBookIntro1", caption: "MotionBook Intro 1")
+            photos.append(photo)
+
+        default:
+            break
+        }
+        
+        let browser = PhotoBrowser(delegate: self)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
