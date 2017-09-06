@@ -9,10 +9,6 @@
 import UIKit
 import Photos
 
-class MediaBrowserCell: UITableViewCell {
-    
-}
-
 class ViewController: UITableViewController {
     @IBOutlet var segmentedControl: UISegmentedControl!
     
@@ -25,11 +21,10 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.register(MediaBrowserCell.self, forCellReuseIdentifier: "Cell")
         let font = UIFont.systemFont(ofSize: 12)
         segmentedControl.setTitleTextAttributes([NSFontAttributeName: font],
                                                 for: .normal)
-
+        segmentedControl.addTarget(self, action: #selector(segmentControlChanged), for: .valueChanged)
         loadAssets()
     }
 
@@ -48,6 +43,10 @@ class ViewController: UITableViewController {
     
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .none
+    }
+    
+    func segmentControlChanged() {
+        self.tableView.reloadData()
     }
 
     func loadAssets() {
@@ -88,13 +87,17 @@ extension ViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return assets.count > 0 ? 9 : 10
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        <#code#>
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellCheck = tableView.dequeueReusableCell(withIdentifier: "Cell")
         
         guard let cell = cellCheck else { return UITableViewCell() }
         cell.accessoryType = segmentedControl.selectedSegmentIndex == 0 ? .disclosureIndicator : .none
-
+        
         switch (indexPath.row) {
         case 0:
             cell.textLabel?.text = "Single photo"
