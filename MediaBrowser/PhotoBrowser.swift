@@ -139,19 +139,16 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private func initialisation() {
         // Defaults
         if let vcBasedStatusBarAppearance = Bundle.main
-            .object(forInfoDictionaryKey: "UIViewControllerBasedStatusBarAppearance") as? Bool
-        {
+            .object(forInfoDictionaryKey: "UIViewControllerBasedStatusBarAppearance") as? Bool {
            isVCBasedStatusBarAppearance = vcBasedStatusBarAppearance
-        }
-        else {
-            isVCBasedStatusBarAppearance = true // default
+        } else {
+            isVCBasedStatusBarAppearance = true
         }
         
         
         hidesBottomBarWhenPushed = true
         automaticallyAdjustsScrollViewInsets = false
         extendedLayoutIncludesOpaqueBars = true
-        
         navigationController?.view.backgroundColor = UIColor.white
         
         // Listen for MWPhoto falsetifications
@@ -252,16 +249,14 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Toolbar Items
         if displayNavArrows {
-            let arrowPathFormat = "MWPhotoBrowserSwift.bundle/UIBarButtonItemArrow"
+            let arrowPathFormat = "UIBarButtonItemArrow"
             
             let previousButtonImage = UIImage.imageForResourcePath(
-                path: arrowPathFormat + "Left",
-                ofType: "png",
+                name: arrowPathFormat + "Left",
                 inBundle: Bundle(for: PhotoBrowser.self))
             
             let nextButtonImage = UIImage.imageForResourcePath(
-                path: arrowPathFormat + "Right",
-                ofType: "png",
+                name: arrowPathFormat + "Right",
                 inBundle: Bundle(for: PhotoBrowser.self))
             
             previousButton = UIBarButtonItem(
@@ -281,7 +276,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             actionButton = UIBarButtonItem(
                 barButtonSystemItem: UIBarButtonSystemItem.action,
                 target: self,
-                action: Selector(("actionButtonPressed:")))
+                action: #selector(actionButtonPressed))
         }
         
         // Update
@@ -370,15 +365,13 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         fixedSpace.width = 32.0 // To balance action button
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         var items = [UIBarButtonItem]()
-
+        
         // Left button - Grid
         if enableGrid {
             hasItems = true
             
             items.append(UIBarButtonItem(
-                image: UIImage.imageForResourcePath(path: "MWPhotoBrowserSwift.bundle/UIBarButtonItemGrid",
-                    ofType: "png",
-                    inBundle: Bundle(for: PhotoBrowser.self)),
+                image: UIImage.imageForResourcePath(name: "UIBarButtonItemGrid", inBundle: Bundle(for: PhotoBrowser.self)),
                 style: .plain,
                 target: self,
                 action: #selector(PhotoBrowser.showGridAnimated)))
@@ -1025,16 +1018,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // Add play button if needed
                 if page.displayingVideo() {
                     let playButton = UIButton(type: .custom)
-                    playButton.setImage(UIImage.imageForResourcePath(
-                        path: "MWPhotoBrowserSwift.bundle/PlayButtonOverlayLarge",
-                        ofType: "png",
-                        inBundle: Bundle(for: PhotoBrowser.self)), for: .normal)
-                    
-                    playButton.setImage(UIImage.imageForResourcePath(
-                        path: "MWPhotoBrowserSwift.bundle/PlayButtonOverlayLargeTap",
-                        ofType: "png",
-                        inBundle: Bundle(for: PhotoBrowser.self)), for: .highlighted)
-                    
+                    playButton.setImage(UIImage(named: "PlayButtonOverlayLarge", in: Bundle(for: PhotoBrowser.self), compatibleWith: nil), for: .normal)
+                    playButton.setImage(UIImage(named: "PlayButtonOverlayLargeTap", in: Bundle(for: PhotoBrowser.self), compatibleWith: nil), for: .highlighted)
                     playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
                     playButton.sizeToFit()
                     playButton.frame = frameForPlayButton(playButton: playButton, atIndex: index)
@@ -1045,21 +1030,13 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // Add selected button
                 if self.displaySelectionButtons {
                     let selectedButton = UIButton(type: .custom)
-                    selectedButton.setImage(UIImage.imageForResourcePath(
-                        path: "MWPhotoBrowserSwift.bundle/ImageSelectedOff",
-                        ofType: "png",
-                        inBundle: Bundle(for: PhotoBrowser.self)),
-                        for: .normal)
-                    
+                    selectedButton.setImage(UIImage(named: "ImageSelectedOff", in: Bundle(for: PhotoBrowser.self), compatibleWith: nil), for: .normal)
                     let selectedOnImage: UIImage?
                     if customImageSelectedIconName.characters.count > 0 {
                         selectedOnImage = UIImage(named: customImageSelectedIconName)
                     }
                     else {
-                        selectedOnImage = UIImage.imageForResourcePath(
-                            path: "MWPhotoBrowserSwift.bundle/ImageSelectedOn",
-                            ofType: "png",
-                            inBundle: Bundle(for: PhotoBrowser.self))
+                        selectedOnImage = UIImage(named: "ImageSelectedOn", in: Bundle(for: PhotoBrowser.self), compatibleWith: nil)
                     }
                     
                     selectedButton.setImage(selectedOnImage, for: .selected)

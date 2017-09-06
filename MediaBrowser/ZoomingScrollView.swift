@@ -186,8 +186,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
                 if nil == loadingError {
                     loadingError = UIImageView()
                     loadingError!.image = UIImage.imageForResourcePath(
-                        path: "MWPhotoBrowserSwift.bundle/ImageError",
-                        ofType: "png",
+                        name: "ImageError",
                         inBundle: Bundle(for: ZoomingScrollView.self))
                     
                     loadingError!.isUserInteractionEnabled = false

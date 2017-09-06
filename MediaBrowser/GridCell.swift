@@ -39,8 +39,7 @@ public class GridCell: UICollectionViewCell {
         // Video Image
         videoIndicator.isHidden = false
         let videoIndicatorImage = UIImage.imageForResourcePath(
-            path: "MWPhotoBrowserSwift.bundle/VideoOverlay",
-            ofType: "png",
+            name: "VideoOverlay",
             inBundle: Bundle(for: GridCell.self))!
             
         videoIndicator.frame = CGRect(
@@ -60,14 +59,12 @@ public class GridCell: UICollectionViewCell {
 
         selectedButton.setImage(
             UIImage.imageForResourcePath(
-                path: "MWPhotoBrowserSwift.bundle/ImageSelectedSmallOff",
-                ofType: "png",
+                name: "ImageSelectedSmallOff",
                 inBundle: Bundle(for: GridCell.self)),
             for: .normal)
 
         selectedButton.setImage(UIImage.imageForResourcePath(
-                path: "MWPhotoBrowserSwift.bundle/ImageSelectedSmallOn",
-                ofType: "png",
+                name: "ImageSelectedSmallOn",
                 inBundle: Bundle(for: GridCell.self)),
             for: .selected)
 
@@ -251,8 +248,7 @@ public class GridCell: UICollectionViewCell {
             if nil == loadingError {
                 let error = UIImageView()
                 error.image = UIImage.imageForResourcePath(
-                    path: "MWPhotoBrowserSwift.bundle/ImageError",
-                    ofType: "png",
+                    name: "ImageError",
                     inBundle: Bundle(for: GridCell.self))
         
                 error.isUserInteractionEnabled = false
