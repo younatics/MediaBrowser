@@ -86,22 +86,22 @@ public class GridViewController: UICollectionViewController {
     //MARK: - Layout
 
     private var columns: CGFloat {
-        return floorcgf(view.bounds.width / 93.0)
+        return floorcgf(x: view.bounds.width / 93.0)
     }
 
     private var margin = CGFloat(5.0)
     private var gutter = CGFloat(5.0)
     
-    public override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: nil) { _ in
             if let cv = self.collectionView {
                 cv.reloadData()
             }
         }
-        
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-    }
 
+        super.viewWillTransition(to: size, with: coordinator)
+    }
     //MARK: - Collection View
 
     public override func collectionView(_ view: UICollectionView, numberOfItemsInSection section: Int) -> NSInteger {
@@ -111,8 +111,8 @@ public class GridViewController: UICollectionViewController {
         
         return 0
     }
-
-    public override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    
+    public override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridCell", for: indexPath as IndexPath) as! GridCell
         
         if let b = browser,
@@ -122,7 +122,7 @@ public class GridViewController: UICollectionViewController {
             cell.gridController = self
             cell.selectionMode = selectionMode
             cell.index = indexPath.row
-            cell.selected = b.photoIsSelectedAtIndex(index: indexPath.row)
+            cell.isSelected = b.photoIsSelectedAtIndex(index: indexPath.row)
         
             if let _ = b.imageForPhoto(photo: photo) {
                 cell.displayImage()
@@ -134,15 +134,15 @@ public class GridViewController: UICollectionViewController {
         
         return cell
     }
-
-    public override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    
+    public override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let b = browser {
             b.currentPhotoIndex = indexPath.row
             b.hideGrid()
         }
     }
 
-    public override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    public override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let gridCell = cell as? GridCell {
             if let gcp = gridCell.photo {
                 gcp.cancelAnyLoading()

@@ -326,11 +326,11 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 
                 // Set appearance
                 if let done = doneButton {
-                    done.setBackgroundImage(nil, for: .Normal, barMetrics: .default)
-                    done.setBackgroundImage(nil, for: .Normal, barMetrics: .compact)
+                    done.setBackgroundImage(nil, for: .normal, barMetrics: .default)
+                    done.setBackgroundImage(nil, for: .normal, barMetrics: .compact)
                     done.setBackgroundImage(nil, for: .highlighted, barMetrics: .default)
                     done.setBackgroundImage(nil, for: .highlighted, barMetrics: .compact)
-                    done.setTitleTextAttributes([String : AnyObject](), for: .Normal)
+                    done.setTitleTextAttributes([String : AnyObject](), for: .normal)
                     done.setTitleTextAttributes([String : AnyObject](), for: .highlighted)
                     
                     self.navigationItem.rightBarButtonItem = done
@@ -348,11 +348,11 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     let newBackButton = UIBarButtonItem(title: backButtonTitle, style: .plain, target: nil, action: nil)
                     
                     // Appearance
-                    newBackButton.setBackButtonBackgroundImage(nil, for: .Normal, barMetrics: .default)
-                    newBackButton.setBackButtonBackgroundImage(nil, for: .Normal, barMetrics: .compact)
+                    newBackButton.setBackButtonBackgroundImage(nil, for: .normal, barMetrics: .default)
+                    newBackButton.setBackButtonBackgroundImage(nil, for: .normal, barMetrics: .compact)
                     newBackButton.setBackButtonBackgroundImage(nil, for: .highlighted, barMetrics: .default)
                     newBackButton.setBackButtonBackgroundImage(nil, for: .highlighted, barMetrics: .compact)
-                    newBackButton.setTitleTextAttributes([String : AnyObject](), for: .Normal)
+                    newBackButton.setTitleTextAttributes([String : AnyObject](), for: .normal)
                     newBackButton.setTitleTextAttributes([String : AnyObject](), for: .highlighted)
                     
                     previousViewControllerBackButton = previousViewController.navigationItem.backBarButtonItem // remember previous
@@ -564,15 +564,14 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             fatalError("PhotoBrowser Instance Reuse")
         }
     }
-
-    public override func didMovetoParentViewControllerToParentViewController(_ parent: UIViewController?) {
+    public override func didMove(toParentViewController parent: UIViewController?) {
         if nil == parent {
             hasBelongedToViewController = true
         }
+
     }
 
     //MARK: - Nav Bar Appearance
-
     func setNavBarAppearance(animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     
@@ -944,7 +943,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Ignore padding as paging bounces encroach on that
         // and lead to false page loads
         let visibleBounds = pagingScrollView.bounds
-        var iFirstIndex = Int(floorf(Float((visibleBounds.minX + padding * 2.0) / visibleBounds.widthCGRectGetWidth(visibleBounds))))
+        var iFirstIndex = Int(floorf(Float((visibleBounds.minX + padding * 2.0) / visibleBounds.width)))
         var iLastIndex  = Int(floorf(Float((visibleBounds.maxX - padding * 2.0 - 1.0) / visibleBounds.width)))
         
         if iFirstIndex < 0 {
@@ -1026,12 +1025,12 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     playButton.setImage(UIImage.imageForResourcePath(
                         path: "MWPhotoBrowserSwift.bundle/PlayButtonOverlayLarge",
                         ofType: "png",
-                        inBundle: Bundle(forClass: PhotoBrowser.self)), for: .Normal)
+                        inBundle: Bundle(for: PhotoBrowser.self)), for: .normal)
                     
                     playButton.setImage(UIImage.imageForResourcePath(
                         path: "MWPhotoBrowserSwift.bundle/PlayButtonOverlayLargeTap",
                         ofType: "png",
-                        inBundle: Bundle(forClass: PhotoBrowser.self)), for: .Highlighted)
+                        inBundle: Bundle(for: PhotoBrowser.self)), for: .highlighted)
                     
                     playButton.addTarget(self, action: Selector("playButtonTapped:"), for: .touchUpInside)
                     playButton.sizeToFit()
@@ -1046,8 +1045,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     selectedButton.setImage(UIImage.imageForResourcePath(
                         path: "MWPhotoBrowserSwift.bundle/ImageSelectedOff",
                         ofType: "png",
-                        inBundle: Bundle(forClass: PhotoBrowser.self)),
-                        for: .Normal)
+                        inBundle: Bundle(for: PhotoBrowser.self)),
+                        for: .normal)
                     
                     let selectedOnImage: UIImage?
                     if customImageSelectedIconName.characters.count > 0 {
@@ -1057,7 +1056,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                         selectedOnImage = UIImage.imageForResourcePath(
                             path: "MWPhotoBrowserSwift.bundle/ImageSelectedOn",
                             ofType: "png",
-                            inBundle: Bundle(forClass: PhotoBrowser.self))
+                            inBundle: Bundle(for: PhotoBrowser.self))
                     }
                     
                     selectedButton.setImage(selectedOnImage, for: .selected)
@@ -1957,7 +1956,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     var progressHUD: MBProgressHUD {
         if nil == mwProgressHUD {
             mwProgressHUD = MBProgressHUD(view: self.view)
-            mwProgressHUD!.minSize = CGSizeMake(120, 120)
+            mwProgressHUD!.minSize = CGSize(width: 120, height: 120)
             mwProgressHUD!.minShowTime = 1.0
             
             view.addSubview(mwProgressHUD!)
@@ -1967,7 +1966,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     private func showProgressHUDWithMessage(message: String) {
         progressHUD.labelText = message
-        progressHUD.mode = MBProgressHUDMode.Indeterminate
+        progressHUD.mode = MBProgressHUDMode.indeterminate
         progressHUD.show(true)
         
         navigationController?.navigationBar.isUserInteractionEnabled = false
@@ -1981,12 +1980,12 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     private func showProgressHUDCompleteMessage(message: String?) {
         if let msg = message {
-            if progressHUD.hidden {
+            if progressHUD.isHidden {
                 progressHUD.show(true)
             }
     
             progressHUD.labelText = msg
-            progressHUD.mode = MBProgressHUDMode.CustomView
+            progressHUD.mode = MBProgressHUDMode.customView
             progressHUD.hide(true, afterDelay: 1.5)
         }
         else {

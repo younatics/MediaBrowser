@@ -19,7 +19,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     private weak var photoBrowser: PhotoBrowser!
 	private var tapView = TapDetectingView(frame: .zero) // for background taps
 	private var photoImageView = TapDetectingImageView(frame: .zero)
-	private var loadingIndicator = DACircularProgressView(frame: CGRectMake(140.0, 30.0, 40.0, 40.0))
+    private var loadingIndicator = DACircularProgressView(frame: CGRect(x: 140, y: 30, width: 40, height: 40))
     private var loadingError: UIImageView?
     
     public init(photoBrowser: PhotoBrowser) {
@@ -42,11 +42,11 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         addSubview(photoImageView)
         
         // Loading indicator
-        loadingIndicator.userInteractionEnabled = false
+        loadingIndicator.isUserInteractionEnabled = false
         loadingIndicator.thicknessRatio = 0.1
         loadingIndicator.roundedCorners = 0
         loadingIndicator.autoresizingMask =
-            [.FlexibleLeftMargin, .FlexibleTopMargin, .FlexibleBottomMargin, .FlexibleRightMargin]
+            [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin, .flexibleRightMargin]
         
         addSubview(loadingIndicator)
 
@@ -231,7 +231,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     }
 
     private func hideLoadingIndicator() {
-        loadingIndicator.hidden = true
+        loadingIndicator.isHidden = true
     }
 
     private func showLoadingIndicator() {
@@ -239,7 +239,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         minimumZoomScale = 0.1
         maximumZoomScale = 0.1
         loadingIndicator.progress = 0.0
-        loadingIndicator.hidden = false
+        loadingIndicator.isHidden = false
         
         hideImageFailure()
     }
@@ -280,7 +280,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         }
         
         // Reset position
-        photoImageView.frame = CGRectMake(0, 0, photoImageView.frame.size.width, photoImageView.frame.size.height)
+        photoImageView.frame = CGRect(x: 0, y: 0, width: photoImageView.frame.size.width, height: photoImageView.frame.size.height)
         
         // Sizes
         let boundsSize = self.bounds.size
@@ -336,7 +336,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         tapView.frame = bounds
         
         // Position indicators (centre does not seem to work!)
-        if !loadingIndicator.hidden {
+        if !loadingIndicator.isHidden {
             loadingIndicator.frame = CGRectMake(
                 floorcgf((bounds.size.width - loadingIndicator.frame.size.width) / 2.0),
                 floorcgf((bounds.size.height - loadingIndicator.frame.size.height) / 2.0),

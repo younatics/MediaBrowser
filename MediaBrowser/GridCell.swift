@@ -18,7 +18,7 @@ public class GridCell: UICollectionViewCell {
     private let imageView = UIImageView()
     private let videoIndicator = UIImageView()
     private var loadingError: UIImageView?
-	private let loadingIndicator = DACircularProgressView(frame: CGRectMake(0, 0, 40.0, 40.0))
+	private let loadingIndicator = DACircularProgressView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
     private let selectedButton = UIButton(type: .custom)
     
     override init(frame: CGRect) {
@@ -41,12 +41,13 @@ public class GridCell: UICollectionViewCell {
         let videoIndicatorImage = UIImage.imageForResourcePath(
             path: "MWPhotoBrowserSwift.bundle/VideoOverlay",
             ofType: "png",
-            inBundle: Bundle(forClass: GridCell.self))!
+            inBundle: Bundle(for: GridCell.self))!
             
-        videoIndicator.frame = CGRectMake(
-            self.bounds.size.width - videoIndicatorImage.size.width - videoIndicatorPadding,
-            self.bounds.size.height - videoIndicatorImage.size.height - videoIndicatorPadding,
-            videoIndicatorImage.size.width, videoIndicatorImage.size.height)
+        videoIndicator.frame = CGRect(
+            x: self.bounds.size.width - videoIndicatorImage.size.width - videoIndicatorPadding,
+            y: self.bounds.size.height - videoIndicatorImage.size.height - videoIndicatorPadding,
+            width: videoIndicatorImage.size.width,
+            height: videoIndicatorImage.size.height)
         
         videoIndicator.image = videoIndicatorImage
         videoIndicator.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -61,13 +62,13 @@ public class GridCell: UICollectionViewCell {
             UIImage.imageForResourcePath(
                 path: "MWPhotoBrowserSwift.bundle/ImageSelectedSmallOff",
                 ofType: "png",
-                inBundle: Bundle(forClass: GridCell.self)),
+                inBundle: Bundle(for: GridCell.self)),
             for: .Normal)
 
         selectedButton.setImage(UIImage.imageForResourcePath(
                 path: "MWPhotoBrowserSwift.bundle/ImageSelectedSmallOn",
                 ofType: "png",
-                inBundle: Bundle(forClass: GridCell.self)),
+                inBundle: Bundle(for: GridCell.self)),
             for: .selected)
 
         selectedButton.addTarget(self, action: #selector(GridCell.selectionButtonPressed), for: .touchDown)
@@ -76,7 +77,7 @@ public class GridCell: UICollectionViewCell {
         addSubview(selectedButton)
     
         // Loading indicator
-        loadingIndicator.userInteractionEnabled = false
+        loadingIndicator.isUserInteractionEnabled = false
         loadingIndicator.thicknessRatio = 0.1
         loadingIndicator.roundedCorners = 0
         addSubview(loadingIndicator)
@@ -88,7 +89,7 @@ public class GridCell: UICollectionViewCell {
             name: NSNotification.Name(rawValue: MWPHOTO_PROGRESS_NOTIFICATION),
             object: nil)
         
-        NotificationCenter.defaultCenter.addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: Selector("handlePhotoLoadingDidEndNotification:"),
             name: NSNotification.Name(rawValue: MWPHOTO_LOADING_DID_END_NOTIFICATION),

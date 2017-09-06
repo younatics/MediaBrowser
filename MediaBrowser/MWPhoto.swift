@@ -23,7 +23,7 @@ public class MWPhoto: Photo {
 
     private let uuid = NSUUID().uuidString
     private var image: UIImage?
-    private var photoURL: NSURL?
+    private var photoURL: URL?
     private var asset: PHAsset?
     private var assetTargetSize = CGSize.zero
     
@@ -40,13 +40,13 @@ public class MWPhoto: Photo {
         self.image = image
     }
     
-    public convenience init(url: NSURL, caption: String) {
+    public convenience init(url: URL, caption: String) {
         self.init()
         self.photoURL = url
         self.caption = caption
     }
 
-    public convenience init(url: NSURL) {
+    public convenience init(url: URL) {
         self.init()
         self.photoURL = url
     }
@@ -59,7 +59,7 @@ public class MWPhoto: Photo {
         isVideo = asset.mediaType == PHAssetMediaType.video
     }
 
-    public convenience init(videoURL: NSURL) {
+    public convenience init(videoURL: URL) {
         self.init()
     
         self.videoURL = videoURL
@@ -69,14 +69,14 @@ public class MWPhoto: Photo {
 
     //MARK: - Video
 
-    private var videoURL: NSURL?
+    private var videoURL: URL?
 
-    public func setVideoURL(url: NSURL?) {
+    public func setVideoURL(url: URL?) {
         videoURL = url
         isVideo = true
     }
 
-    public func getVideoURL(completion: @escaping (NSURL?) -> ()) {
+    public func getVideoURL(completion: @escaping (URL?) -> ()) {
         if let vurl = videoURL {
             completion(vurl)
         }
@@ -91,7 +91,7 @@ public class MWPhoto: Photo {
                     options: options,
                     resultHandler: { asset, audioMix, info in
                         if let urlAsset = asset as? AVURLAsset {
-                            completion(urlAsset.URL as NSURL)
+                            completion(urlAsset.url as URL)
                         }
                         else {
                             completion(nil)
@@ -106,7 +106,7 @@ public class MWPhoto: Photo {
     //MARK: - Photo Protocol Methods
 
     public func loadUnderlyingImageAndNotify() {
-        assert(Thread.currentThread.isMainThread, "This method must be called on the main thread.")
+        assert(Thread.current.isMainThread, "This method must be called on the main thread.")
         
         if loadingInProgress {
             return
@@ -145,7 +145,7 @@ public class MWPhoto: Photo {
                 performLoadUnderlyingImageAndNotifyWithAssetsLibraryURL(url: purl)
             }
             else
-            if purl.isFileReferenceURL() {
+            if purl.isFileURL {
                 // Load from local file async
                 performLoadUnderlyingImageAndNotifyWithLocalFileURL(url: purl)
             }
@@ -170,7 +170,7 @@ public class MWPhoto: Photo {
     }
 
     // Load from local file
-    private func performLoadUnderlyingImageAndNotifyWithWebURL(url: NSURL) {
+    private func performLoadUnderlyingImageAndNotifyWithWebURL(url: URL) {
         cancelDownload()
         
         /*
@@ -185,9 +185,7 @@ public class MWPhoto: Photo {
                 }
             },
         */
-        
-        operation = ImageManager.sharedManager.downloadImageAtURL(url, cacheScaled: false, imageView: nil)
-        { [weak self] imageInstance, error in
+        operation = ImageManager.sharedManager.downloadImage(atUrl: url, cacheScaled: false, imageView: false, completion: { [weak self](imageInstance, error) in
             if let strongSelf = self {
                 dispatch_async(dispatch_get_main_queue()) {
                     strongSelf.operation = nil
@@ -195,17 +193,18 @@ public class MWPhoto: Photo {
                     if let ii = imageInstance {
                         strongSelf.underlyingImage = ii.image
                     }
-
+                    
                     dispatch_async(dispatch_get_main_queue()) {
                         strongSelf.imageLoadingComplete()
                     }
                 }
             }
-        }
+
+        })
     }
 
     // Load from local file
-    private func performLoadUnderlyingImageAndNotifyWithLocalFileURL(url: NSURL) {
+    private func performLoadUnderlyingImageAndNotifyWithLocalFileURL(url: URL) {
         DispatchQueue.global(DispatchQueue.GlobalQueuePriority.default, 0).async() {
             //try {
             if let path = url.path {
@@ -224,7 +223,7 @@ public class MWPhoto: Photo {
     }
 
     // Load from asset library async
-    private func performLoadUnderlyingImageAndNotifyWithAssetsLibraryURL(url: NSURL) {
+    private func performLoadUnderlyingImageAndNotifyWithAssetsLibraryURL(url: URL) {
         dispatch_async(DispatchQueue.global(DispatchQueue.GlobalQueuePriority.default, 0)) {
             //try {
                 let assetslibrary = ALAssetsLibrary()
@@ -304,8 +303,8 @@ public class MWPhoto: Photo {
     }
 
     private func postCompleteNotification() {
-        NotificationCenter.default.postNotificationName(
-            NSNotification.Name(rawValue: MWPHOTO_LOADING_DID_END_NOTIFICATION),
+        NotificationCenter.default.post(
+            name: NSNotification.Name(rawValue: MWPHOTO_LOADING_DID_END_NOTIFICATION),
             object: self)
     }
 
