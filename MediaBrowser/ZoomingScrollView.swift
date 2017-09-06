@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DACircularProgress
+//import DACircularProgress
 
 public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingImageViewDelegate, TapDetectingViewDelegate {
     public var index = 0

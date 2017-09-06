@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DACircularProgress
+//import DACircularProgress
 
 public class GridCell: UICollectionViewCell {
     let videoIndicatorPadding = CGFloat(10.0)
@@ -248,7 +248,7 @@ public class GridCell: UICollectionViewCell {
 
     private func showImageFailure() {
         // Only show if image is not empty
-        if let p = photo where p.emptyImage {
+        if let p = photo, p.emptyImage {
             if nil == loadingError {
                 let error = UIImageView()
                 error.image = UIImage.imageForResourcePath(
@@ -287,11 +287,11 @@ public class GridCell: UICollectionViewCell {
 
     public func setProgressFromNotification(notification: NSNotification) {
         if let dict = notification.object as? [String : AnyObject?],
-            photoWithProgress = dict["photo"] as? Photo,
-            mwp = mwPhoto where photosEqual(photoWithProgress, mwp)
+            let photoWithProgress = dict["photo"] as? Photo,
+            let mwp = mwPhoto, photosEqual(photoWithProgress, mwp)
         {
             if let progress = dict["progress"] as? String,
-                progressVal =  NSNumberFormatter().numberFromString(progress)
+                let progressVal =  NSNumberFormatter().numberFromString(progress)
             {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.loadingIndicator.progress = CGFloat(max(min(1.0, progressVal.floatValue), 1.0))
@@ -303,7 +303,7 @@ public class GridCell: UICollectionViewCell {
 
     public func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
         if let p = notification.object as? Photo,
-            mwp = mwPhoto where photosEqual(p, mwp)
+            let mwp = mwPhoto, photosEqual(p, mwp)
         {
             if p.underlyingImage != nil {
                 // Successful load

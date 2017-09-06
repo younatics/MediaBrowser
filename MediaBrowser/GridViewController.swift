@@ -64,7 +64,7 @@ public class GridViewController: UICollectionViewController {
         }
         
         // Check if current item is visible and if not, make it so!
-        if let b = browser where b.numberOfPhotos > 0 {
+        if let b = browser, b.numberOfPhotos > 0 {
             let currentPhotoIndexPath = NSIndexPath(forItem: b.currentIndex, inSection: 0)
             let visibleIndexPaths = collectionView!.indexPathsForVisibleItems()
             
@@ -116,7 +116,7 @@ public class GridViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("GridCell", forIndexPath: indexPath) as! GridCell
         
         if let b = browser,
-            photo = b.thumbPhotoAtIndex(indexPath.row)
+            let photo = b.thumbPhotoAtIndex(indexPath.row)
         {
             cell.photo = photo
             cell.gridController = self

@@ -10,7 +10,7 @@
 import Foundation
 
 public extension UIImage {
-    class func imageForResourcePath(path: String, ofType: String, inBundle: NSBundle) -> UIImage? {
+    class func imageForResourcePath(path: String, ofType: String, inBundle: Bundle) -> UIImage? {
         if let p = inBundle.pathForResource(path, ofType: ofType) {
             return UIImage(contentsOfFile: p)
         }
@@ -19,9 +19,9 @@ public extension UIImage {
     }
 
     class func clearImageWithSize(size: CGSize) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.mainScreen().scale)
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.mainScreen.scale)
         let blank = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return blank
+        return blank!
     }
 }

@@ -10,7 +10,7 @@
 import UIKit
 import AssetsLibrary
 import Photos
-import MapleBacon
+//import MapleBacon
 import Photos
 
 var PHInvalidImageRequestID = PHImageRequestID(0)

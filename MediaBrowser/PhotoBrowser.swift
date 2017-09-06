@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import MBProgressHUD
+//import MBProgressHUD
 import MediaPlayer
 import QuartzCore
-import MBProgressHUD
-import MapleBacon
+//import MBProgressHUD
+//import MapleBacon
 
 func floorcgf(x: CGFloat) -> CGFloat {
     return CGFloat(floorf(Float(x)))
@@ -338,7 +338,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             else {
                 // We're not first so show back button
                 if let navi = navigationController,
-                    previousViewController = navi.viewControllers[navi.viewControllers.count - 2] as? UINavigationController
+                    let previousViewController = navi.viewControllers[navi.viewControllers.count - 2] as? UINavigationController
                 {
                     let backButtonTitle = previousViewController.navigationItem.backBarButtonItem != nil ?
                         previousViewController.navigationItem.backBarButtonItem!.title :
@@ -443,7 +443,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         else {
             // We're in a navigation controller so get previous one!
-            if let navi = navigationController where navi.viewControllers.count > 1 {
+            if let navi = navigationController, navi.viewControllers.count > 1 {
                 presenting = navi.viewControllers[navi.viewControllers.count - 2]
             }
         }
@@ -523,8 +523,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         pageIndexBeforeRotation = currentPageIndex
         
         // Check that we're being popped for good
-        if let viewControllers = navigationController?.viewControllers
-            where viewControllers[0] !== self
+        if let viewControllers = navigationController?.viewControllers, viewControllers[0] !== self
         {
             var selfFound = false
         
@@ -603,7 +602,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     func restorePreviousNavBarAppearance(animated: Bool) {
-        if let navi = navigationController where didSavePreviousStateOfNavBar {
+        if let navi = navigationController, didSavePreviousStateOfNavBar {
             navi.setNavigationBarHidden(previousNavBarHidden, animated: animated)
             let navBar = navi.navigationBar
             navBar.tintColor = previousNavBarTintColor
@@ -723,7 +722,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         rotating = false
         // Ensure nav bar isn't re-displayed
-        if let navi = navigationController where areControlsHidden {
+        if let navi = navigationController, areControlsHidden {
             navi.navigationBarHidden = false
             navi.navigationBar.alpha = 0
         }
@@ -839,7 +838,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if let d = delegate {
             captionView = d.captionViewForPhotoAtIndex(index, photoBrowser: self)
             
-            if let p = photoAtIndex(index) where nil == captionView {
+            if let p = photoAtIndex(index), nil == captionView {
                 if p.caption.characters.count > 0 {
                     captionView = CaptionView(photo: p)
                 }
@@ -1581,7 +1580,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         gridController = GridViewController()
         
         if let gc = gridController,
-            navBar = navigationController?.navigationBar
+            let navBar = navigationController?.navigationBar
         {
             let bounds = view.bounds
             let naviHeight = navBar.frame.height + UIApplication.sharedApplication().statusBarFrame.height
