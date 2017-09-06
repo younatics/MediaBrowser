@@ -135,8 +135,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     private func initialisation() {
         // Defaults
-        if let vcBasedStatusBarAppearance = Bundle.mainBundle()
-            .objectForInfoDictionaryKey("UIViewControllerBasedStatusBarAppearance") as? Bool
+        if let vcBasedStatusBarAppearance = Bundle.main
+            .object(forInfoDictionaryKey: "UIViewControllerBasedStatusBarAppearance") as? Bool
         {
            isVCBasedStatusBarAppearance = vcBasedStatusBarAppearance
         }
@@ -152,7 +152,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         navigationController?.view.backgroundColor = UIColor.white
         
         // Listen for MWPhoto falsetifications
-        NotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.defaultCenter.addObserver(
             self,
             selector: Selector("handlePhotoLoadingDidEndNotification:"),
             name: MWPHOTO_LOADING_DID_END_NOTIFICATION,
@@ -254,12 +254,12 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             let previousButtonImage = UIImage.imageForResourcePath(
                 path: arrowPathFormat + "Left",
                 ofType: "png",
-                inBundle: Bundle(forClass: PhotoBrowser.self))
+                inBundle: Bundle(for: PhotoBrowser.self))
             
             let nextButtonImage = UIImage.imageForResourcePath(
                 path: arrowPathFormat + "Right",
                 ofType: "png",
-                inBundle: Bundle(forClass: PhotoBrowser.self))
+                inBundle: Bundle(for: PhotoBrowser.self))
             
             previousButton = UIBarButtonItem(
                 image: previousButtonImage,
@@ -295,14 +295,15 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         super.viewDidLoad()
     }
     
-    public override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: nil) { _ in
             self.toolbar.frame = self.frameForToolbar
         }
         
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-    }
+        super.viewWillTransition(to: size, with: coordinator)
 
+    }
+    
     func performLayout() {
         // Setup
         performingLayout = true

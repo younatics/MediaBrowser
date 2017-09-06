@@ -51,7 +51,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         addSubview(loadingIndicator)
 
         // Listen progress notifications
-        NotificationCenter.defaultCenter.addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: Selector("setProgressFromNotification:"),
             name: NSNotification.Name(rawValue: MWPHOTO_PROGRESS_NOTIFICATION),

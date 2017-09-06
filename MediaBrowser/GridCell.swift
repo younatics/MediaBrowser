@@ -286,7 +286,7 @@ public class GridCell: UICollectionViewCell {
     public func setProgressFromNotification(notification: NSNotification) {
         if let dict = notification.object as? [String : AnyObject?],
             let photoWithProgress = dict["photo"] as? Photo,
-            let mwp = mwPhoto, photosEqual(photoWithProgress, mwp)
+            let mwp = mwPhoto, photosEqual(p1: photoWithProgress, mwp)
         {
             if let progress = dict["progress"] as? String,
                 let progressVal =  NumberFormatter().number(from: progress)
@@ -301,7 +301,7 @@ public class GridCell: UICollectionViewCell {
 
     public func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
         if let p = notification.object as? Photo,
-            let mwp = mwPhoto, photosEqual(p, mwp)
+            let mwp = mwPhoto, photosEqual(p1: p, mwp)
         {
             if p.underlyingImage != nil {
                 // Successful load

@@ -269,7 +269,7 @@ public class MWPhoto: Photo {
                 "photo" : self
             ] as [String : Any]
             
-            NotificationCenter.default.postNotificationName(NSNotification.Name(rawValue: MWPHOTO_PROGRESS_NOTIFICATION), object: dict)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: MWPHOTO_PROGRESS_NOTIFICATION), object: dict)
         }
         
         assetRequestID = imageManager.requestImage(
@@ -304,7 +304,7 @@ public class MWPhoto: Photo {
     }
 
     private func postCompleteNotification() {
-        NotificationCenter.defaultCenter.postNotificationName(
+        NotificationCenter.default.postNotificationName(
             NSNotification.Name(rawValue: MWPHOTO_LOADING_DID_END_NOTIFICATION),
             object: self)
     }
