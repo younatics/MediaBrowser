@@ -13,6 +13,17 @@
 		1906ABC81F5F812D0052DC3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1906ABC61F5F812D0052DC3A /* Main.storyboard */; };
 		1906ABCA1F5F812D0052DC3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1906ABC91F5F812D0052DC3A /* Assets.xcassets */; };
 		1906ABCD1F5F812D0052DC3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1906ABCB1F5F812D0052DC3A /* LaunchScreen.storyboard */; };
+		1906ABDD1F5F83960052DC3A /* CaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD21F5F83960052DC3A /* CaptionView.swift */; };
+		1906ABDE1F5F83960052DC3A /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD31F5F83960052DC3A /* GridCell.swift */; };
+		1906ABDF1F5F83960052DC3A /* GridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD41F5F83960052DC3A /* GridViewController.swift */; };
+		1906ABE01F5F83960052DC3A /* MWLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD51F5F83960052DC3A /* MWLog.swift */; };
+		1906ABE11F5F83960052DC3A /* MWPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD61F5F83960052DC3A /* MWPhoto.swift */; };
+		1906ABE21F5F83960052DC3A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD71F5F83960052DC3A /* Photo.swift */; };
+		1906ABE31F5F83960052DC3A /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD81F5F83960052DC3A /* PhotoBrowser.swift */; };
+		1906ABE41F5F83960052DC3A /* TapDetectingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD91F5F83960052DC3A /* TapDetectingImageView.swift */; };
+		1906ABE51F5F83960052DC3A /* TapDetectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDA1F5F83960052DC3A /* TapDetectingView.swift */; };
+		1906ABE61F5F83960052DC3A /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDB1F5F83960052DC3A /* UIImageExtension.swift */; };
+		1906ABE71F5F83960052DC3A /* ZoomingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDC1F5F83960052DC3A /* ZoomingScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +37,17 @@
 		1906ABC91F5F812D0052DC3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1906ABCC1F5F812D0052DC3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1906ABCE1F5F812D0052DC3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1906ABD21F5F83960052DC3A /* CaptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptionView.swift; sourceTree = "<group>"; };
+		1906ABD31F5F83960052DC3A /* GridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
+		1906ABD41F5F83960052DC3A /* GridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridViewController.swift; sourceTree = "<group>"; };
+		1906ABD51F5F83960052DC3A /* MWLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MWLog.swift; sourceTree = "<group>"; };
+		1906ABD61F5F83960052DC3A /* MWPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MWPhoto.swift; sourceTree = "<group>"; };
+		1906ABD71F5F83960052DC3A /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		1906ABD81F5F83960052DC3A /* PhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowser.swift; sourceTree = "<group>"; };
+		1906ABD91F5F83960052DC3A /* TapDetectingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapDetectingImageView.swift; sourceTree = "<group>"; };
+		1906ABDA1F5F83960052DC3A /* TapDetectingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapDetectingView.swift; sourceTree = "<group>"; };
+		1906ABDB1F5F83960052DC3A /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		1906ABDC1F5F83960052DC3A /* ZoomingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomingScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +89,17 @@
 		1906ABB31F5F81120052DC3A /* MediaBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				1906ABD21F5F83960052DC3A /* CaptionView.swift */,
+				1906ABD31F5F83960052DC3A /* GridCell.swift */,
+				1906ABD41F5F83960052DC3A /* GridViewController.swift */,
+				1906ABD51F5F83960052DC3A /* MWLog.swift */,
+				1906ABD61F5F83960052DC3A /* MWPhoto.swift */,
+				1906ABD71F5F83960052DC3A /* Photo.swift */,
+				1906ABD81F5F83960052DC3A /* PhotoBrowser.swift */,
+				1906ABD91F5F83960052DC3A /* TapDetectingImageView.swift */,
+				1906ABDA1F5F83960052DC3A /* TapDetectingView.swift */,
+				1906ABDB1F5F83960052DC3A /* UIImageExtension.swift */,
+				1906ABDC1F5F83960052DC3A /* ZoomingScrollView.swift */,
 				1906ABB41F5F81120052DC3A /* MediaBrowser.h */,
 				1906ABB51F5F81120052DC3A /* Info.plist */,
 			);
@@ -148,6 +181,7 @@
 					1906ABB01F5F81110052DC3A = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 4G7K3CN2JU;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					1906ABBF1F5F812D0052DC3A = {
@@ -201,6 +235,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1906ABE71F5F83960052DC3A /* ZoomingScrollView.swift in Sources */,
+				1906ABE41F5F83960052DC3A /* TapDetectingImageView.swift in Sources */,
+				1906ABE21F5F83960052DC3A /* Photo.swift in Sources */,
+				1906ABE51F5F83960052DC3A /* TapDetectingView.swift in Sources */,
+				1906ABE61F5F83960052DC3A /* UIImageExtension.swift in Sources */,
+				1906ABE11F5F83960052DC3A /* MWPhoto.swift in Sources */,
+				1906ABE01F5F83960052DC3A /* MWLog.swift in Sources */,
+				1906ABE31F5F83960052DC3A /* PhotoBrowser.swift in Sources */,
+				1906ABDD1F5F83960052DC3A /* CaptionView.swift in Sources */,
+				1906ABDE1F5F83960052DC3A /* GridCell.swift in Sources */,
+				1906ABDF1F5F83960052DC3A /* GridViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +384,7 @@
 		1906ABBA1F5F81120052DC3A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4G7K3CN2JU;
@@ -351,6 +397,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seungyounyi.MediaBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -358,6 +405,7 @@
 		1906ABBB1F5F81120052DC3A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4G7K3CN2JU;
