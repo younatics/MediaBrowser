@@ -95,15 +95,15 @@ extension ViewController: PhotoBrowserDelegate {
     }
     
     func thumbPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Photo {
-        if index < photos.count {
-            return photos[index]
+        if index < thumbs.count {
+            return thumbs[index]
         }
         return localMediaPhoto(imageName: "MotionBookIcon", caption: "ThumbPhoto at index is wrong")
     }
     
     func photoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Photo {
-        if index < thumbs.count {
-            return thumbs[index]
+        if index < photos.count {
+            return photos[index]
         }
         return localMediaPhoto(imageName: "MotionBookIcon", caption: "Photo at index is Wrong")
 
@@ -173,8 +173,6 @@ extension ViewController {
         }
         
         self.tableView.deselectRow(at: indexPath, animated: true)
-        photos.removeAll()
-        thumbs.removeAll()
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
