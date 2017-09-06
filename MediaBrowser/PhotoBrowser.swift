@@ -1890,34 +1890,39 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 if let d = delegate {
                     d.actionButtonPressedForPhotoAtIndex(index: currentPageIndex, photoBrowser: self)
                 }
-                /*
+
                 // Show activity view controller
-                var items = NSMutableArray(object: photo.underlyingImage)
-                if photo.caption != nil {
-                    items.append(photo.caption!)
+                var items: [Any] = [Any]()
+                if let image = photo.underlyingImage {
+                    items.append(image)
+                }
+                if photo.caption != "" {
+                    items.append(photo.caption)
                 }
                 activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
                 
                 // Show loading spinner after a couple of seconds
-                double delayInSeconds = 2.0
-                dispatch_timet popTime = dispatchtime(DISPATCH_TIME_NOW, Int64(delayInSeconds * NSEC_PER_SEC))
-                dispatch_after(popTime, dispatch_get_main_queue()) {
-                    if self.activityViewController {
-                        showProgressHUDWithMessage(nil)
+                let delayInSeconds: Double = 2.0
+                DispatchQueue.main.asyncAfter(deadline: .now() + Double(delayInSeconds * Double(NSEC_PER_SEC)), execute: {
+                    if let _ = self.activityViewController {
+                        self.showProgressHUDWithMessage(message: nil)
                     }
-                }
+                })
 
                 // Show
-                activityViewController.setCompletionHandler({ [weak self] activityType, completed in
-                    self!.activityViewController = nil
-                    self!.hideControlsAfterDelay()
-                    self!.hideProgressHUD(true)
-                })
-            
-                self.activityViewController.popoverPresentationController.barButtonItem = actionButton
-            
-                presentViewController(activityViewController, animated: true, completion: nil)
-                */
+                if let vc = self.activityViewController {
+                    vc.completionWithItemsHandler = { [weak self] (activityType, completed, returnedItems, activityError) in
+                        guard let wself = self else { return }
+
+                        wself.activityViewController = nil
+                        wself.hideControlsAfterDelay()
+                        wself.hideProgressHUD(animated: true)
+                    }
+
+                    vc.popoverPresentationController?.barButtonItem = actionButton
+
+                    self.present(vc, animated: true, completion: nil)
+                }
                 
                 // Keep controls hidden
                 setControlsHidden(hidden: false, animated: true, permanent: true)
@@ -1940,7 +1945,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return mwProgressHUD!
     }
 
-    private func showProgressHUDWithMessage(message: String) {
+    private func showProgressHUDWithMessage(message: String!) {
         progressHUD.labelText = message
         progressHUD.mode = MBProgressHUDMode.indeterminate
         progressHUD.show(true)
