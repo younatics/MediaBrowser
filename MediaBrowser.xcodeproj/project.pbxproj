@@ -24,6 +24,7 @@
 		1906ABE51F5F83960052DC3A /* TapDetectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDA1F5F83960052DC3A /* TapDetectingView.swift */; };
 		1906ABE61F5F83960052DC3A /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDB1F5F83960052DC3A /* UIImageExtension.swift */; };
 		1906ABE71F5F83960052DC3A /* ZoomingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDC1F5F83960052DC3A /* ZoomingScrollView.swift */; };
+		1906ABE91F5F9A100052DC3A /* MediaBrowser.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1906ABE81F5F9A100052DC3A /* MediaBrowser.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		1906ABDA1F5F83960052DC3A /* TapDetectingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapDetectingView.swift; sourceTree = "<group>"; };
 		1906ABDB1F5F83960052DC3A /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		1906ABDC1F5F83960052DC3A /* ZoomingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomingScrollView.swift; sourceTree = "<group>"; };
+		1906ABE81F5F9A100052DC3A /* MediaBrowser.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MediaBrowser.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				1906ABDC1F5F83960052DC3A /* ZoomingScrollView.swift */,
 				1906ABB41F5F81120052DC3A /* MediaBrowser.h */,
 				1906ABB51F5F81120052DC3A /* Info.plist */,
+				1906ABE81F5F9A100052DC3A /* MediaBrowser.xcassets */,
 			);
 			path = MediaBrowser;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1906ABE91F5F9A100052DC3A /* MediaBrowser.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
