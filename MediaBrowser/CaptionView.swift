@@ -15,7 +15,7 @@ public class CaptionView: UIToolbar {
     public let labelPadding = CGFloat(10.0)
 
     init(photo: Photo?) {
-        super.init(frame: CGRectMake(0, 0, 320.0, 44.0)) // Random initial frame
+        super.init(frame: CGRect(x: 0, y: 0, width: 320.0, height: 44.0)) // Random initial frame
         self.photo = photo
         
         setupCaption()
