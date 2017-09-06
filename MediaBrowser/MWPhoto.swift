@@ -75,10 +75,18 @@ public class MWPhoto: Photo {
 
     //MARK: - Video
 
-    private var videoURL: URL?
+    private var _videoURL: URL?
+    public var videoURL: URL? {
+        set {
+            setVideoURL(url: newValue)
+        }
+        get {
+            return self._videoURL
+        }
+    }
 
     public func setVideoURL(url: URL?) {
-        videoURL = url
+        self._videoURL = url
         isVideo = true
     }
 

@@ -145,7 +145,25 @@ extension ViewController {
         case 1:
             var photo = localMediaPhoto(imageName: "MotionBookIntro1", caption: "MotionBook Intro 1")
             photos.append(photo)
+            
+            photo = localMediaPhoto(imageName: "MotionBookIntro2", caption: "MotionBook Intro 2")
+            photos.append(photo)
+            
+            photo = localMediaPhoto(imageName: "Atoms_thumb", caption: "Atom")
+            photo.videoURL = URL(fileURLWithPath: Bundle.main.path(forResource: "Atoms", ofType: "mp4")!)
+            photos.append(photo)
 
+            photo = localMediaPhoto(imageName: "MotionBookIntro3", caption: "MotionBook Intro 3")
+            photos.append(photo)
+
+            photo = localMediaPhoto(imageName: "MotionBookIntro4", caption: "MotionBook Intro 4")
+            photos.append(photo)
+            
+            photo = localMediaPhoto(imageName: "MotionBookIntro5", caption: "MotionBook Intro 5")
+            photos.append(photo)
+
+            enableGrid = false
+            break
         default:
             break
         }
