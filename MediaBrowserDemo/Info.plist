@@ -36,6 +36,8 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>MediaBrowser Demo</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

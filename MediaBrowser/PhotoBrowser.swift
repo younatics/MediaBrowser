@@ -98,7 +98,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var navigationBarBackgroundColor = UIColor.white
     public var navigationBarTintColor = UIColor.black.withAlphaComponent(0.5)
     public var navigationBarTranslucent = true
-    
+    public var statusBarStyle = UIStatusBarStyle.lightContent
     public var toolbarTextColor = UIColor.white
     public var toolbarBarTintColor = UIColor.black.withAlphaComponent(0.5)
     public var toolbarBackgroundColor = UIColor.white
@@ -131,7 +131,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         super.init(coder: coder)
         initialisation()
     }
-
+    
     private func initialisation() {
         // Defaults
         if let vcBasedStatusBarAppearance = Bundle.main.object(forInfoDictionaryKey: "UIViewControllerBasedStatusBarAppearance") as? Bool {
@@ -452,7 +452,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Set style
         if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
             previousStatusBarStyle = UIApplication.shared.statusBarStyle
-            UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: animated)
+            UIApplication.shared.setStatusBarStyle(statusBarStyle, animated: animated)
         }
         
         // Navigation bar appearance
@@ -1752,10 +1752,6 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
         return presentingViewControllerPrefersStatusBarHidden
-    }
-    
-    public override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
     
     public override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
