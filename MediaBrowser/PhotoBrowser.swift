@@ -94,8 +94,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var hideControlsOnStartup = false
     public var delayToHideElements = TimeInterval(5.0)
     
-    public var navBarTintColor = UIColor.black
-    public var navBarBarTintColor = UIColor.white
+    public var navBarTintColor = UIColor.white
+    public var navBarBarTintColor = UIColor.black.withAlphaComponent(0.5)
     public var navBarTranslucent = true
     public var toolbarTintColor = UIColor.black
     public var toolbarBarTintColor = UIColor.white
@@ -223,6 +223,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Setup paging scrolling view
         let pagingScrollViewFrame = frameForPagingScrollView
+        print(pagingScrollViewFrame)
+        
         pagingScrollView = UIScrollView(frame: pagingScrollViewFrame)
         pagingScrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         pagingScrollView.isPagingEnabled = true

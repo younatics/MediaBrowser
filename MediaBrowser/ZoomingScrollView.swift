@@ -33,12 +33,13 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         tapView = TapDetectingView(frame: bounds)
         tapView.tapDelegate = self
         tapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        tapView.backgroundColor = UIColor.white
+        tapView.backgroundColor = UIColor.black
         addSubview(tapView)
         
         // Image view
         photoImageView.tapDelegate = self
-        photoImageView.contentMode = UIViewContentMode.center
+        photoImageView.contentMode = .center
+        photoImageView.backgroundColor = UIColor.black
         addSubview(photoImageView)
         
         // Loading indicator
@@ -58,7 +59,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
             object: nil)
         
         // Setup
-        backgroundColor = UIColor.white
+        backgroundColor = UIColor.black
         delegate = self
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
@@ -71,6 +72,10 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     }
 
     deinit {
+        if mwPhoto != nil {
+            mwPhoto!.cancelAnyLoading()
+        }
+
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -234,9 +239,9 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     }
 
     private func showLoadingIndicator() {
-        zoomScale = 0.1
-        minimumZoomScale = 0.1
-        maximumZoomScale = 0.1
+        zoomScale = 0.0
+        minimumZoomScale = 0.0
+        maximumZoomScale = 0.0
         loadingIndicator.progress = 0.0
         loadingIndicator.isHidden = false
         

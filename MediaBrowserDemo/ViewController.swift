@@ -163,6 +163,7 @@ extension ViewController {
             photos.append(photo)
 
             enableGrid = false
+            
             break
         default:
             break
@@ -178,6 +179,7 @@ extension ViewController {
         browser.startOnGrid = startOnGrid
         browser.enableSwipeToDismiss = false
         browser.autoPlayOnAppear = autoPlayOnAppear
+        
         
         if displaySelectionButtons {
             selections.removeAll()
