@@ -583,7 +583,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             navi.setNavigationBarHidden(previousNavBarHidden, animated: animated)
             
             let navBar = navi.navigationBar
-            navBar.titleTextAttributes = [NSForegroundColorAttributeName:previousNavigationBarTextColor]
+            navBar.titleTextAttributes = [NSForegroundColorAttributeName:previousNavigationBarTextColor ?? UIColor.black]
             navBar.tintColor = previousNavigationBarTextColor
             navBar.isTranslucent = previousNavBarTranslucent
             navBar.barTintColor = previousNavigationBarTintColor
@@ -1651,17 +1651,14 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // falsen-view controller based
                 UIApplication.shared.setStatusBarHidden(
                     hidden, with:
-                    animated ? UIStatusBarAnimation.slide : UIStatusBarAnimation.none)
+                    animated ? UIStatusBarAnimation.fade : UIStatusBarAnimation.none)
                 
             }
             else {
                 // View controller based so animate away
-                statusBarShouldBeHidden = hidden
-                UIView.animate(
-                    withDuration: animationDuration,
-                    animations: {
-                        self.setNeedsStatusBarAppearanceUpdate()
-                    })
+                UIApplication.shared.setStatusBarHidden(
+                    hidden, with:
+                    animated ? UIStatusBarAnimation.fade : UIStatusBarAnimation.none)
             }
         }
         
