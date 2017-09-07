@@ -98,7 +98,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var navigationBarBackgroundColor = UIColor.white
     public var navigationBarTintColor = UIColor.black.withAlphaComponent(0.5)
     public var navigationBarTranslucent = true
-    public var toolbarTintColor = UIColor.white
+    
+    public var toolbarTextColor = UIColor.white
     public var toolbarBarTintColor = UIColor.black.withAlphaComponent(0.5)
     public var toolbarBackgroundColor = UIColor.white
     
@@ -231,7 +232,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Toolbar
         toolbar = UIToolbar(frame: frameForToolbar)
-        toolbar.tintColor = toolbarTintColor
+        toolbar.tintColor = toolbarTextColor
         toolbar.barTintColor = toolbarBarTintColor
         toolbar.backgroundColor = toolbarBackgroundColor
         toolbar.alpha = 0.8
@@ -317,8 +318,6 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 if let done = doneButton {
                     done.setBackgroundImage(nil, for: .normal, barMetrics: .default)
                     done.setBackgroundImage(nil, for: .highlighted, barMetrics: .compact)
-//                    done.setTitleTextAttributes([String : AnyObject](), for: .normal)
-//                    done.setTitleTextAttributes([String : AnyObject](), for: .highlighted)
                     
                     self.navigationItem.rightBarButtonItem = done
                 }
