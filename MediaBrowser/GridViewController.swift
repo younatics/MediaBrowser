@@ -79,7 +79,6 @@ public class GridViewController: UICollectionViewController, UICollectionViewDel
             }
             
             if !currentVisible {
-                // 수정 필요 할 수 있음
                 collectionView!.scrollToItem(at: currentPhotoIndexPath, at: UICollectionViewScrollPosition.left, animated: false)
             }
         }
