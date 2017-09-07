@@ -18,7 +18,12 @@ class ViewController: UITableViewController {
     var thumbs = [MWPhoto]()
     var assets = NSMutableArray()
 //    var ALAssetsLibrary = ALAssetsLibrary()
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.tintColor = UIColor.black
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         

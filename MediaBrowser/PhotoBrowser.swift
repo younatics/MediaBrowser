@@ -51,15 +51,23 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var gridPreviousRightNavItem: UIBarButtonItem?
     
     // Appearance
-    public var previousNavBarHidden = false
-    public var previousNavBarTranslucent = false
-    public var previousNavBarStyle = UIBarStyle.default
-    public var previousStatusBarStyle = UIStatusBarStyle.default
-    public var previousNavBarTintColor: UIColor?
-    public var previousNavBarBarTintColor: UIColor?
-    public var previousViewControllerBackButton: UIBarButtonItem?
-    public var previousNavigationBarBackgroundImageDefault: UIImage?
-    public var previousNavigationBarBackgroundImageLandscapePhone: UIImage?
+    private var previousNavBarHidden = false
+    private var previousNavBarTranslucent = false
+    private var previousNavBarStyle = UIBarStyle.default
+    private var previousStatusBarStyle = UIStatusBarStyle.lightContent
+    private var previousNavigationBarTextColor: UIColor?
+    private var previousNavigationBarTintColor: UIColor?
+    private var previousViewControllerBackButton: UIBarButtonItem?
+    
+    public var navigationBarTranslucent = true
+    public var navigationBarTextColor = UIColor.white
+    public var navigationBarBackgroundColor = UIColor.white
+    public var navigationBarTintColor = UIColor.black.withAlphaComponent(0.5)
+    public var statusBarStyle = UIStatusBarStyle.lightContent
+    public var toolbarTextColor = UIColor.white
+    public var toolbarBarTintColor = UIColor.black.withAlphaComponent(0.5)
+    public var toolbarBackgroundColor = UIColor.white
+
     
     // Video
     var currentVideoPlayerViewController: MPMoviePlayerViewController?
@@ -94,14 +102,6 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var hideControlsOnStartup = false
     public var delayToHideElements = TimeInterval(5.0)
     
-    public var navigationBarTextColor = UIColor.white
-    public var navigationBarBackgroundColor = UIColor.white
-    public var navigationBarTintColor = UIColor.black.withAlphaComponent(0.5)
-    public var navigationBarTranslucent = true
-    public var statusBarStyle = UIStatusBarStyle.lightContent
-    public var toolbarTextColor = UIColor.white
-    public var toolbarBarTintColor = UIColor.black.withAlphaComponent(0.5)
-    public var toolbarBackgroundColor = UIColor.white
     
     public var captionAlpha = CGFloat(0.5)
     public var toolbarAlpha = CGFloat(0.8)
@@ -215,7 +215,6 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
         // View
-        view.backgroundColor = UIColor.white
         view.clipsToBounds = true
         
         // Setup paging scrolling view
@@ -449,15 +448,16 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 leaveStatusBarAlone = true
             }
         }
-        // Set style
-        if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
-            previousStatusBarStyle = UIApplication.shared.statusBarStyle
-            UIApplication.shared.setStatusBarStyle(statusBarStyle, animated: animated)
-        }
         
         // Navigation bar appearance
         if !viewIsActive && navigationController?.viewControllers[0] as? PhotoBrowser !== self {
             storePreviousNavBarAppearance()
+        }
+        
+        // Set style
+        if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
+            previousStatusBarStyle = UIApplication.shared.statusBarStyle
+            UIApplication.shared.setStatusBarStyle(statusBarStyle, animated: animated)
         }
         
         setNavBarAppearance(animated: animated)
@@ -570,26 +570,24 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         didSavePreviousStateOfNavBar = true
         
         if let navi = navigationController {
-            previousNavBarBarTintColor = navi.navigationBar.barTintColor
+            previousNavigationBarTintColor = navi.navigationBar.barTintColor
             previousNavBarTranslucent = navi.navigationBar.isTranslucent
-            previousNavBarTintColor = navi.navigationBar.tintColor
+            previousNavigationBarTextColor = navi.navigationBar.tintColor
             previousNavBarHidden = navi.isNavigationBarHidden
             previousNavBarStyle = navi.navigationBar.barStyle
-            previousNavigationBarBackgroundImageDefault = navi.navigationBar.backgroundImage(for: .default)
-            previousNavigationBarBackgroundImageLandscapePhone = navi.navigationBar.backgroundImage(for: .compact)
         }
     }
 
     func restorePreviousNavBarAppearance(animated: Bool) {
         if let navi = navigationController, didSavePreviousStateOfNavBar {
             navi.setNavigationBarHidden(previousNavBarHidden, animated: animated)
+            
             let navBar = navi.navigationBar
-            navBar.tintColor = previousNavBarTintColor
+            navBar.titleTextAttributes = [NSForegroundColorAttributeName:previousNavigationBarTextColor]
+            navBar.tintColor = previousNavigationBarTextColor
             navBar.isTranslucent = previousNavBarTranslucent
-            navBar.barTintColor = previousNavBarBarTintColor
+            navBar.barTintColor = previousNavigationBarTintColor
             navBar.barStyle = previousNavBarStyle
-            navBar.setBackgroundImage(previousNavigationBarBackgroundImageDefault, for: UIBarMetrics.default)
-            navBar.setBackgroundImage(previousNavigationBarBackgroundImageLandscapePhone, for: UIBarMetrics.compact)
 
             // Restore back button if we need to
             if previousViewControllerBackButton != nil {
