@@ -110,7 +110,6 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var customImageSelectedSmallIconName = ""
     
     //MARK: - Init
-    
     public override init(nibName: String?, bundle nibBundle: Bundle?) {
         super.init(nibName: nibName, bundle: nibBundle)
         initialisation()
@@ -119,13 +118,11 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public convenience init(delegate: PhotoBrowserDelegate) {
         self.init()
         self.delegate = delegate
-        initialisation()
     }
 
     public convenience init(photos: [Photo]) {
         self.init()
         fixedPhotosArray = photos
-        initialisation()
     }
 
     public required init?(coder: NSCoder) {
@@ -145,8 +142,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         hidesBottomBarWhenPushed = true
         automaticallyAdjustsScrollViewInsets = false
-        extendedLayoutIncludesOpaqueBars = true
-        navigationController?.view.backgroundColor = UIColor.white
+//        extendedLayoutIncludesOpaqueBars = true
+//        navigationController?.view.backgroundColor = UIColor.white
         
         // Listen for MWPhoto falsetifications
         NotificationCenter.default.addObserver(
@@ -207,9 +204,10 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             enableGrid = true
         }
         
-        //if enableGrid {
-        //    enableGrid = [delegate respondsToSelector:Selector("photoBrowser:thumbPhotoAtIndex:)]
-        //}
+//        if enableGrid {
+//            enableGrid = delegate.
+//            enableGrid = [delegate respondsToSelector:Selector("photoBrowser:thumbPhotoAtIndex:)]
+//        }
         
         if !enableGrid {
             startOnGrid = false
@@ -223,15 +221,13 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Setup paging scrolling view
         let pagingScrollViewFrame = frameForPagingScrollView
-        print(pagingScrollViewFrame)
-        
         pagingScrollView = UIScrollView(frame: pagingScrollViewFrame)
         pagingScrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         pagingScrollView.isPagingEnabled = true
         pagingScrollView.delegate = self
         pagingScrollView.showsHorizontalScrollIndicator = false
         pagingScrollView.showsVerticalScrollIndicator = false
-        pagingScrollView.backgroundColor = UIColor.white
+        pagingScrollView.backgroundColor = UIColor.black
         pagingScrollView.contentSize = contentSizeForPagingScrollView()
         view.addSubview(pagingScrollView)
         
@@ -892,7 +888,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     if let photo = photoAtIndex(index: pageIndex - 1) {
                         if nil == photo.underlyingImage {
                             photo.loadUnderlyingImageAndNotify()
-                            print("Pre-loading image at index \(pageIndex-1)")
+//                            print("Pre-loading image at index \(pageIndex-1)")
                         }
                     }
                 }
@@ -902,7 +898,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     if let photo = photoAtIndex(index: pageIndex + 1) {
                         if nil == photo.underlyingImage {
                             photo.loadUnderlyingImageAndNotify()
-                            print("Pre-loading image at index \(pageIndex+1)")
+//                            print("Pre-loading image at index \(pageIndex+1)")
                         }
                     }
                 }

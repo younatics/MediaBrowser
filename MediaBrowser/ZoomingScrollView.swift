@@ -161,9 +161,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
                 photoImageView.isHidden = false
                 
                 // Setup photo frame
-                var photoImageViewFrame = CGRect.zero
-                photoImageViewFrame.origin = CGPoint.zero
-                photoImageViewFrame.size = img.size
+                let photoImageViewFrame = CGRect(origin: CGPoint.zero, size: img.size)
                 photoImageView.frame = photoImageViewFrame
                 contentSize = photoImageViewFrame.size
 
@@ -252,10 +250,10 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
 
     private func initialZoomScaleWithMinScale() -> CGFloat {
         var zoomScale = minimumZoomScale
-        if let pb = photoBrowser, pb.zoomPhotosToFill {
+        if let pb = photoBrowser,let image = photoImageView.image, pb.zoomPhotosToFill {
             // Zoom image to fill if the aspect ratios are fairly similar
             let boundsSize = self.bounds.size
-            let imageSize = photoImageView.image != nil ? photoImageView.image!.size : CGSize(width: 0.0, height: 0.0)
+            let imageSize = image.size
             let boundsAR = boundsSize.width / boundsSize.height
             let imageAR = imageSize.width / imageSize.height
             let xScale = boundsSize.width / imageSize.width    // the scale needed to perfectly fit the image width-wise
@@ -278,25 +276,22 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         minimumZoomScale = 1.0
         zoomScale = 1.0
         
-        // Bail if no image
-        if photoImageView.image == nil {
-            return
-        }
+        guard let image = photoImageView.image else { return }
         
         // Reset position
         photoImageView.frame = CGRect(x: 0, y: 0, width: photoImageView.frame.size.width, height: photoImageView.frame.size.height)
         
         // Sizes
         let boundsSize = self.bounds.size
-        let imageSize = photoImageView.image!.size
+        let imageSize = image.size
         
         // Calculate Min
         let xScale = boundsSize.width / imageSize.width    // the scale needed to perfectly fit the image width-wise
         let yScale = boundsSize.height / imageSize.height  // the scale needed to perfectly fit the image height-wise
-        var minScale = min(xScale, yScale)                 // use minimum of these to allow the image to become fully visible
+        var minScale:CGFloat = min(xScale, yScale)                 // use minimum of these to allow the image to become fully visible
         
         // Calculate Max
-        var maxScale = 3.0
+        var maxScale: CGFloat = 3.0
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             // Let them go a bit bigger on a bigger screen!
             maxScale = 4.0
@@ -308,8 +303,8 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         }
         
         // Set min/max zoom
-        maximumZoomScale = CGFloat(maxScale)
-        minimumZoomScale = CGFloat(minScale)
+        maximumZoomScale = maxScale
+        minimumZoomScale = minScale
         
         // Initial zoom
         zoomScale = initialZoomScaleWithMinScale()
@@ -386,15 +381,14 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     }
     
     //MARK: - UIScrollViewDelegate
-
-    public func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return photoImageView
     }
-
+    
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         photoBrowser.cancelControlHiding()
     }
-
+    
     public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
         isScrollEnabled = true // reset
         photoBrowser.cancelControlHiding()
@@ -410,7 +404,6 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     }
 
     //MARK: - Tap Detection
-
     private func handleSingleTap(touchPoint: CGPoint) {
         self.photoBrowser.perform(#selector(photoBrowser.toggleControls), with: nil, afterDelay: 0.2)
     }
