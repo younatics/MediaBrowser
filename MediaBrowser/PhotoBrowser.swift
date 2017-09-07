@@ -94,11 +94,12 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var hideControlsOnStartup = false
     public var delayToHideElements = TimeInterval(5.0)
     
-    public var navBarTintColor = UIColor.white
-    public var navBarBarTintColor = UIColor.black.withAlphaComponent(0.5)
-    public var navBarTranslucent = true
-    public var toolbarTintColor = UIColor.black
-    public var toolbarBarTintColor = UIColor.white
+    public var navigationBarTextColor = UIColor.white
+    public var navigationBarBackgroundColor = UIColor.white
+    public var navigationBarTintColor = UIColor.black.withAlphaComponent(0.5)
+    public var navigationBarTranslucent = true
+    public var toolbarTintColor = UIColor.white
+    public var toolbarBarTintColor = UIColor.black.withAlphaComponent(0.5)
     public var toolbarBackgroundColor = UIColor.white
     
     public var captionAlpha = CGFloat(0.5)
@@ -132,8 +133,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     private func initialisation() {
         // Defaults
-        if let vcBasedStatusBarAppearance = Bundle.main
-            .object(forInfoDictionaryKey: "UIViewControllerBasedStatusBarAppearance") as? Bool {
+        if let vcBasedStatusBarAppearance = Bundle.main.object(forInfoDictionaryKey: "UIViewControllerBasedStatusBarAppearance") as? Bool {
            isVCBasedStatusBarAppearance = vcBasedStatusBarAppearance
         } else {
             isVCBasedStatusBarAppearance = true
@@ -214,8 +214,6 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
         // View
-        navigationController?.navigationBar.backgroundColor = UIColor.red
-        
         view.backgroundColor = UIColor.white
         view.clipsToBounds = true
         
@@ -308,9 +306,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Navigation buttons
         if let navi = navigationController {
-            if navi.viewControllers.count > 0 &&
-               navi.viewControllers[0] == self
-            {
+            if navi.viewControllers.count > 0 && navi.viewControllers[0] == self {
                 // We're first on stack so show done button
                 doneButton = UIBarButtonItem(
                     barButtonSystemItem: UIBarButtonSystemItem.done,
@@ -320,20 +316,15 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // Set appearance
                 if let done = doneButton {
                     done.setBackgroundImage(nil, for: .normal, barMetrics: .default)
-                    done.setBackgroundImage(nil, for: .normal, barMetrics: .compact)
-                    done.setBackgroundImage(nil, for: .highlighted, barMetrics: .default)
                     done.setBackgroundImage(nil, for: .highlighted, barMetrics: .compact)
-                    done.setTitleTextAttributes([String : AnyObject](), for: .normal)
-                    done.setTitleTextAttributes([String : AnyObject](), for: .highlighted)
+//                    done.setTitleTextAttributes([String : AnyObject](), for: .normal)
+//                    done.setTitleTextAttributes([String : AnyObject](), for: .highlighted)
                     
                     self.navigationItem.rightBarButtonItem = done
                 }
-            }
-            else {
+            } else {
                 // We're not first so show back button
-                if let navi = navigationController,
-                    let previousViewController = navi.viewControllers[navi.viewControllers.count - 2] as? UINavigationController
-                {
+                if let navi = navigationController, let previousViewController = navi.viewControllers[navi.viewControllers.count - 2] as? UINavigationController {
                     let backButtonTitle = previousViewController.navigationItem.backBarButtonItem != nil ?
                         previousViewController.navigationItem.backBarButtonItem!.title :
                         previousViewController.title
@@ -342,11 +333,9 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     
                     // Appearance
                     newBackButton.setBackButtonBackgroundImage(nil, for: .normal, barMetrics: .default)
-                    newBackButton.setBackButtonBackgroundImage(nil, for: .normal, barMetrics: .compact)
-                    newBackButton.setBackButtonBackgroundImage(nil, for: .highlighted, barMetrics: .default)
                     newBackButton.setBackButtonBackgroundImage(nil, for: .highlighted, barMetrics: .compact)
-                    newBackButton.setTitleTextAttributes([String : AnyObject](), for: .normal)
-                    newBackButton.setTitleTextAttributes([String : AnyObject](), for: .highlighted)
+//                    newBackButton.setTitleTextAttributes([String : AnyObject](), for: .normal)
+//                    newBackButton.setTitleTextAttributes([String : AnyObject](), for: .highlighted)
                     
                     previousViewControllerBackButton = previousViewController.navigationItem.backBarButtonItem // remember previous
                     previousViewController.navigationItem.backBarButtonItem = newBackButton
@@ -568,14 +557,13 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         navigationController?.setNavigationBarHidden(false, animated: animated)
     
         if let navBar = navigationController?.navigationBar {
-            navBar.backgroundColor = navBarBarTintColor
-            navBar.tintColor = navBarTintColor
-            navBar.barTintColor = navBarBarTintColor
+            navBar.titleTextAttributes = [NSForegroundColorAttributeName:navigationBarTextColor]
+            navBar.backgroundColor = navigationBarBackgroundColor
+            navBar.tintColor = navigationBarTextColor
+            navBar.barTintColor = navigationBarTintColor
             navBar.shadowImage = nil
-            navBar.isTranslucent = navBarTranslucent
+            navBar.isTranslucent = navigationBarTranslucent
             navBar.barStyle = .default
-            navBar.setBackgroundImage(nil, for: .default)
-            navBar.setBackgroundImage(nil, for: .compact)
         }
     }
 
@@ -1550,9 +1538,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Init grid controller
         gridController = GridViewController()
         
-        if let gc = gridController,
-            let navBar = navigationController?.navigationBar
-        {
+        if let gc = gridController, let navBar = navigationController?.navigationBar {
             let bounds = view.bounds
             let naviHeight = navBar.frame.height + UIApplication.shared.statusBarFrame.height
             
