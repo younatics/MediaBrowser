@@ -246,7 +246,9 @@ extension ViewController {
         if segmentedControl.selectedSegmentIndex == 0 {
             self.navigationController?.pushViewController(browser, animated: true)
         } else {
-            self.present(browser, animated: true, completion: nil)
+            let nc = UINavigationController.init(rootViewController: browser)
+            nc.modalTransitionStyle = .crossDissolve
+            self.present(nc, animated: true, completion: nil)
         }
         
         self.tableView.deselectRow(at: indexPath, animated: true)
