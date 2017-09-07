@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class GridViewController: UICollectionViewController {
+public class GridViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     weak var browser: PhotoBrowser?
     var selectionMode = false
     var initialContentOffset = CGPoint(x: 0.0, y: CGFloat.greatestFiniteMagnitude)
@@ -29,7 +29,7 @@ public class GridViewController: UICollectionViewController {
         if let cv = collectionView {
             cv.register(GridCell.self, forCellWithReuseIdentifier: "GridCell")
             cv.alwaysBounceVertical = true
-            cv.backgroundColor = UIColor.white
+            cv.backgroundColor = UIColor.black
         }
     }
 
@@ -50,6 +50,7 @@ public class GridViewController: UICollectionViewController {
 
     public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        
     }
 
     public override func viewDidLayoutSubviews() {
@@ -150,22 +151,22 @@ public class GridViewController: UICollectionViewController {
             }
         }
     }
-
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let value = CGFloat(floorf(Float((view.bounds.size.width - (columns - 1.0) * gutter - 2.0 * margin) / columns)))
         
         return CGSize(width: value, height: value)
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return gutter
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return gutter
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let margin = self.margin
         return UIEdgeInsetsMake(margin, margin, margin, margin)
     }

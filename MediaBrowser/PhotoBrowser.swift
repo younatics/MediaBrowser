@@ -205,8 +205,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
 //        if enableGrid {
-//            enableGrid = delegate.
-//            enableGrid = [delegate respondsToSelector:Selector("photoBrowser:thumbPhotoAtIndex:)]
+//            enableGrid = delegate?.thumbPhotoAtIndex(index: <#T##Int#>, photoBrowser: <#T##PhotoBrowser#>)
+////            enableGrid = [delegate respondsToSelector:Selector("photoBrowser:thumbPhotoAtIndex:)]
 //        }
         
         if !enableGrid {
