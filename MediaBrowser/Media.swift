@@ -338,10 +338,6 @@ public class Media: NSObject {
     }
     
     public func equals(photo: Media) -> Bool {
-        if let p = photo as? Media {
-            return uuid == p.uuid
-        }
-        
-        return false
+        return uuid == photo.uuid
     }
 }

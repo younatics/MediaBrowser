@@ -55,18 +55,18 @@ class ViewController: UITableViewController {
 
 //MARK: PhotoBrowserDelegate
 extension ViewController: PhotoBrowserDelegate {
-    func photoBrowserDidFinishModalPresentation(photoBrowser: PhotoBrowser) {
+    func photoBrowserDidFinishModalPresentation(MediaBrowser: MediaBrowser) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func thumbPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Media {
+    func thumbPhotoAtIndex(index: Int, MediaBrowser: MediaBrowser) -> Media {
         if index < thumbs.count {
             return thumbs[index]
         }
         return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "ThumbPhoto at index is wrong")
     }
     
-    func photoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Media {
+    func photoAtIndex(index: Int, MediaBrowser: MediaBrowser) -> Media {
         if index < photos.count {
             return photos[index]
         }
@@ -74,23 +74,23 @@ extension ViewController: PhotoBrowserDelegate {
 
     }
     
-    func numberOfPhotosInPhotoBrowser(photoBrowser: PhotoBrowser) -> Int {
+    func numberOfPhotosInPhotoBrowser(MediaBrowser: MediaBrowser) -> Int {
         return photos.count
     }
     
-    func isPhotoSelectedAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Bool {
+    func isPhotoSelectedAtIndex(index: Int, MediaBrowser: MediaBrowser) -> Bool {
         return selections[index]
     }
     
-    func didDisplayPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) {
+    func didDisplayPhotoAtIndex(index: Int, MediaBrowser: MediaBrowser) {
         print("Did start viewing photo at index \(index)")
     }
     
-    func selectedChanged(selected: Bool, index: Int, photoBrowser: PhotoBrowser) {
+    func selectedChanged(selected: Bool, index: Int, MediaBrowser: MediaBrowser) {
         selections[index] = selected
     }
     
-//    func titleForPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> String {
+//    func titleForPhotoAtIndex(index: Int, MediaBrowser: MediaBrowser) -> String {
 //    }
     
 
@@ -169,7 +169,7 @@ extension ViewController {
             break
         }
         
-        let browser = PhotoBrowser(delegate: self)
+        let browser = MediaBrowser(delegate: self)
         browser.displayActionButton = displayActionButton
         browser.displayNavArrows = displayNavArrows
         browser.displaySelectionButtons = displaySelectionButtons

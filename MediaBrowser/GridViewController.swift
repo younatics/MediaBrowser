@@ -9,7 +9,7 @@
 import UIKit
 
 public class GridViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    weak var browser: PhotoBrowser?
+    weak var browser: MediaBrowser?
     var selectionMode = false
     var initialContentOffset = CGPoint(x: 0.0, y: CGFloat.greatestFiniteMagnitude)
     

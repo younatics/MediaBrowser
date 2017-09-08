@@ -16,18 +16,18 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     public weak var selectedButton: UIButton?
     public weak var playButton: UIButton?
 
-    private weak var photoBrowser: PhotoBrowser!
+    private weak var MediaBrowser: MediaBrowser!
 	private var tapView = TapDetectingView(frame: .zero) // for background taps
 	private var photoImageView = TapDetectingImageView(frame: .zero)
     private var loadingIndicator = DACircularProgressView(frame: CGRect(x: 140, y: 30, width: 40, height: 40))
     private var loadingError: UIImageView?
     
-    public init(photoBrowser: PhotoBrowser) {
+    public init(MediaBrowser: MediaBrowser) {
         super.init(frame: .zero)
         
         // Setup
         index = Int.max
-        self.photoBrowser = photoBrowser
+        self.MediaBrowser = MediaBrowser
         
         // Tap view for background
         tapView = TapDetectingView(frame: bounds)
@@ -128,7 +128,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
                 Media!.cancelAnyLoading()
             }
             Media = p
-            if photoBrowser.imageForPhoto(photo: Media) != nil {
+            if MediaBrowser.imageForPhoto(photo: Media) != nil {
                 self.displayImage()
             }
             else {
@@ -152,7 +152,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
             contentSize = CGSize.zero
             
             // Get image from browser as it handles ordering of fetching
-            if let img = photoBrowser.imageForPhoto(photo: photo) {
+            if let img = MediaBrowser.imageForPhoto(photo: photo) {
                 // Hide indicator
                 hideLoadingIndicator()
                 
@@ -250,7 +250,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
 
     private func initialZoomScaleWithMinScale() -> CGFloat {
         var zoomScale = minimumZoomScale
-        if let pb = photoBrowser,let image = photoImageView.image, pb.zoomPhotosToFill {
+        if let pb = MediaBrowser,let image = photoImageView.image, pb.zoomPhotosToFill {
             // Zoom image to fill if the aspect ratios are fairly similar
             let boundsSize = self.bounds.size
             let imageSize = image.size
@@ -386,16 +386,16 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     }
     
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        photoBrowser.cancelControlHiding()
+        MediaBrowser.cancelControlHiding()
     }
     
     public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
         isScrollEnabled = true // reset
-        photoBrowser.cancelControlHiding()
+        MediaBrowser.cancelControlHiding()
     }
 
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        photoBrowser.hideControlsAfterDelay()
+        MediaBrowser.hideControlsAfterDelay()
     }
 
     public func scrollViewDidZoom(_ scrollView: UIScrollView) {
@@ -405,7 +405,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
 
     //MARK: - Tap Detection
     private func handleSingleTap(touchPoint: CGPoint) {
-        self.photoBrowser.perform(#selector(photoBrowser.toggleControls), with: nil, afterDelay: 0.2)
+        self.MediaBrowser.perform(#selector(MediaBrowser.toggleControls), with: nil, afterDelay: 0.2)
     }
 
     private func handleDoubleTap(touchPoint: CGPoint) {
@@ -415,7 +415,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         }
         
         // Cancel any single tap handling
-        NSObject.cancelPreviousPerformRequests(withTarget: photoBrowser)
+        NSObject.cancelPreviousPerformRequests(withTarget: MediaBrowser)
         
         // Zoom
         if zoomScale != minimumZoomScale && zoomScale != initialZoomScaleWithMinScale() {
@@ -431,7 +431,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         }
         
         // Delay controls
-        photoBrowser.hideControlsAfterDelay()
+        MediaBrowser.hideControlsAfterDelay()
     }
 
     // Image View

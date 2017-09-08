@@ -1,5 +1,5 @@
 //
-//  PhotoBrowser.swift
+//  MediaBrowser.swift
 //  MediaBrowser
 //
 //  Created by Seungyoun Yi on 2017. 9. 6..
@@ -17,7 +17,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
     return CGFloat(floorf(Float(x)))
 }
 
-public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDelegate {
+public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDelegate {
     private let padding = CGFloat(10.0)
 
     // Data
@@ -207,8 +207,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
 //        if enableGrid {
-//            enableGrid = delegate?.thumbPhotoAtIndex(index: <#T##Int#>, photoBrowser: <#T##PhotoBrowser#>)
-////            enableGrid = [delegate respondsToSelector:Selector("photoBrowser:thumbPhotoAtIndex:)]
+//            enableGrid = delegate?.thumbPhotoAtIndex(index: <#T##Int#>, MediaBrowser: <#T##MediaBrowser#>)
+////            enableGrid = [delegate respondsToSelector:Selector("MediaBrowser:thumbPhotoAtIndex:)]
 //        }
         
         if !enableGrid {
@@ -247,23 +247,23 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             
             let previousButtonImage = UIImage.imageForResourcePath(
                 name: arrowPathFormat + "Left",
-                inBundle: Bundle(for: PhotoBrowser.self))
+                inBundle: Bundle(for: MediaBrowser.self))
             
             let nextButtonImage = UIImage.imageForResourcePath(
                 name: arrowPathFormat + "Right",
-                inBundle: Bundle(for: PhotoBrowser.self))
+                inBundle: Bundle(for: MediaBrowser.self))
             
             previousButton = UIBarButtonItem(
                 image: previousButtonImage,
                 style: UIBarButtonItemStyle.plain,
                 target: self,
-                action: #selector(PhotoBrowser.gotoPreviousPage))
+                action: #selector(MediaBrowser.gotoPreviousPage))
             
             nextButton = UIBarButtonItem(
                 image: nextButtonImage,
                 style: UIBarButtonItemStyle.plain,
                 target: self,
-                action: #selector(PhotoBrowser.gotoNextPage))
+                action: #selector(MediaBrowser.gotoNextPage))
         }
         
         if displayActionButton {
@@ -354,10 +354,10 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             hasItems = true
             
             items.append(UIBarButtonItem(
-                image: UIImage.imageForResourcePath(name: "UIBarButtonItemGrid", inBundle: Bundle(for: PhotoBrowser.self)),
+                image: UIImage.imageForResourcePath(name: "UIBarButtonItemGrid", inBundle: Bundle(for: MediaBrowser.self)),
                 style: .plain,
                 target: self,
-                action: #selector(PhotoBrowser.showGridAnimated)))
+                action: #selector(MediaBrowser.showGridAnimated)))
         }
         else {
             items.append(fixedSpace)
@@ -451,7 +451,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
         // Navigation bar appearance
-        if !viewIsActive && navigationController?.viewControllers[0] as? PhotoBrowser !== self {
+        if !viewIsActive && navigationController?.viewControllers[0] as? MediaBrowser !== self {
             storePreviousNavBarAppearance()
         }
         
@@ -542,7 +542,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     public override func willMove(toParentViewController parent: UIViewController?) {
         if parent != nil && hasBelongedToViewController {
-            fatalError("PhotoBrowser Instance Reuse")
+            fatalError("MediaBrowser Instance Reuse")
         }
     }
     public override func didMove(toParentViewController parent: UIViewController?) {
@@ -749,7 +749,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     var numberOfPhotos: Int {
         if photoCount == -1 {
             if let d = delegate {
-                photoCount = d.numberOfPhotosInPhotoBrowser(photoBrowser: self)
+                photoCount = d.numberOfPhotosInPhotoBrowser(MediaBrowser: self)
             }
             
             if let fpa = fixedPhotosArray {
@@ -770,7 +770,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if index < photos.count {
             if photos[index] == nil {
                 if let d = delegate {
-                    photo = d.photoAtIndex(index: index, photoBrowser: self)
+                    photo = d.photoAtIndex(index: index, MediaBrowser: self)
                     
                     if nil == photo && fixedPhotosArray != nil && index < fixedPhotosArray!.count {
                         photo = fixedPhotosArray![index]
@@ -795,7 +795,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if index < thumbPhotos.count {
             if nil == thumbPhotos[index] {
                 if let d = delegate {
-                    photo = d.thumbPhotoAtIndex(index: index, photoBrowser: self)
+                    photo = d.thumbPhotoAtIndex(index: index, MediaBrowser: self)
                 
                     if let p = photo {
                         thumbPhotos[index] = p
@@ -814,7 +814,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var captionView: CaptionView?
         
         if let d = delegate {
-            captionView = d.captionViewForPhotoAtIndex(index: index, photoBrowser: self)
+            captionView = d.captionViewForPhotoAtIndex(index: index, MediaBrowser: self)
             
             if let p = photoAtIndex(index: index), nil == captionView {
                 if p.caption.characters.count > 0 {
@@ -834,7 +834,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var value = false
         if displaySelectionButtons {
             if let d = delegate {
-                value = d.isPhotoSelectedAtIndex(index: index, photoBrowser: self)
+                value = d.isPhotoSelectedAtIndex(index: index, MediaBrowser: self)
             }
         }
         
@@ -844,7 +844,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func setPhotoSelected(selected: Bool, atIndex index: Int) {
         if displaySelectionButtons {
             if let d = delegate {
-                d.selectedChanged(selected: selected, index: index, photoBrowser: self)
+                d.selectedChanged(selected: selected, index: index, MediaBrowser: self)
             }
         }
     }
@@ -977,7 +977,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // Add new page
                 var p = dequeueRecycledPage
                 if nil == p {
-                    p = ZoomingScrollView(photoBrowser: self)
+                    p = ZoomingScrollView(MediaBrowser: self)
                 }
                 
                 let page = p!
@@ -998,8 +998,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // Add play button if needed
                 if page.displayingVideo() {
                     let playButton = UIButton(type: .custom)
-                    playButton.setImage(UIImage(named: "PlayButtonOverlayLarge", in: Bundle(for: PhotoBrowser.self), compatibleWith: nil), for: .normal)
-                    playButton.setImage(UIImage(named: "PlayButtonOverlayLargeTap", in: Bundle(for: PhotoBrowser.self), compatibleWith: nil), for: .highlighted)
+                    playButton.setImage(UIImage(named: "PlayButtonOverlayLarge", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .normal)
+                    playButton.setImage(UIImage(named: "PlayButtonOverlayLargeTap", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .highlighted)
                     playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
                     playButton.sizeToFit()
                     playButton.frame = frameForPlayButton(playButton: playButton, atIndex: index)
@@ -1010,12 +1010,12 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // Add selected button
                 if self.displaySelectionButtons {
                     let selectedButton = UIButton(type: .custom)
-                    selectedButton.setImage(UIImage(named: "ImageSelectedSmallOff", in: Bundle(for: PhotoBrowser.self), compatibleWith: nil), for: .normal)
+                    selectedButton.setImage(UIImage(named: "ImageSelectedSmallOff", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .normal)
                     let selectedOnImage: UIImage?
                     if customImageSelectedIconName.characters.count > 0 {
                         selectedOnImage = UIImage(named: customImageSelectedIconName)
                     } else {
-                        selectedOnImage = UIImage(named: "ImageSelectedSmallOn", in: Bundle(for: PhotoBrowser.self), compatibleWith: nil)
+                        selectedOnImage = UIImage(named: "ImageSelectedSmallOn", in: Bundle(for: MediaBrowser.self), compatibleWith: nil)
                     }
                     
                     selectedButton.setImage(selectedOnImage, for: .selected)
@@ -1145,7 +1145,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Notify delegate
         if index != previousPageIndex {
             if let d = delegate {
-                d.didDisplayPhotoAtIndex(index: index, photoBrowser: self)
+                d.didDisplayPhotoAtIndex(index: index, MediaBrowser: self)
             }
             previousPageIndex = index
         }
@@ -1307,7 +1307,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         else
         if photos > 1 {
             if let d = delegate {
-                title = d.titleForPhotoAtIndex(index: currentPageIndex, photoBrowser: self)
+                title = d.titleForPhotoAtIndex(index: currentPageIndex, MediaBrowser: self)
             }
             
             if nil == title {
@@ -1771,7 +1771,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             controlVisibilityTimer = Timer.scheduledTimer(
                 timeInterval: delayToHideElements,
                 target: self,
-                selector: #selector(PhotoBrowser.hideControls),
+                selector: #selector(MediaBrowser.hideControls),
                 userInfo: nil,
                 repeats: false)
         }
@@ -1846,7 +1846,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             // Dismiss view controller
             // Call delegate method and let them dismiss us
             if let d = delegate {
-                d.photoBrowserDidFinishModalPresentation(photoBrowser: self)
+                d.photoBrowserDidFinishModalPresentation(MediaBrowser: self)
             }
             // dismissViewControllerAnimated:true completion:nil]
         }
@@ -1861,7 +1861,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // If they have defined a delegate method then just message them
                 // Let delegate handle things
                 if let d = delegate {
-                    d.actionButtonPressedForPhotoAtIndex(index: currentPageIndex, photoBrowser: self)
+                    d.actionButtonPressedForPhotoAtIndex(index: currentPageIndex, MediaBrowser: self)
                 }
 
                 // Show activity view controller
