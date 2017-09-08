@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DACircularProgress
+import UICircularProgressRing
 
 public class MediaGridCell: UICollectionViewCell {
     let videoIndicatorPadding = CGFloat(10.0)
@@ -18,9 +18,10 @@ public class MediaGridCell: UICollectionViewCell {
     private let imageView = UIImageView()
     private let videoIndicator = UIImageView()
     private var loadingError: UIImageView?
-	private let loadingIndicator = DACircularProgressView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
     private let selectedButton = UIButton(type: .custom)
     
+    public let loadingIndicator = UICircularProgressRingView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -75,8 +76,6 @@ public class MediaGridCell: UICollectionViewCell {
     
         // Loading indicator
         loadingIndicator.isUserInteractionEnabled = false
-        loadingIndicator.thicknessRatio = 0.1
-        loadingIndicator.roundedCorners = 0
         addSubview(loadingIndicator)
         
         // Listen for photo loading notifications
@@ -146,7 +145,7 @@ public class MediaGridCell: UICollectionViewCell {
         photo = nil
         mwGridController = nil
         imageView.image = nil
-        loadingIndicator.progress = 0
+        loadingIndicator.setProgress(value: 0.0, animationDuration: 1)
         selectedButton.isHidden = true
         hideImageFailure()
         
@@ -236,7 +235,7 @@ public class MediaGridCell: UICollectionViewCell {
     }
 
     private func showLoadingIndicator() {
-        loadingIndicator.progress = 0
+        loadingIndicator.setProgress(value: 0.0, animationDuration: 1)
         loadingIndicator.isHidden = false
         
         hideImageFailure()
@@ -279,19 +278,12 @@ public class MediaGridCell: UICollectionViewCell {
     }
 
     //MARK: - Notifications
-
     public func setProgressFromNotification(notification: NSNotification) {
-        if let dict = notification.object as? [String : AnyObject?],
-            let photoWithProgress = dict["photo"] as? Media,
-            let mwp = Media, photosEqual(p1: photoWithProgress, mwp)
-        {
-            if let progress = dict["progress"] as? String,
-                let progressVal =  NumberFormatter().number(from: progress)
-            {
-                DispatchQueue.main.async() {
-                    self.loadingIndicator.progress = CGFloat(max(min(1.0, progressVal.floatValue), 1.0))
-                    return
-                }
+        DispatchQueue.main.async() {
+            let dict = notification.object as! [String : AnyObject]
+            
+            if let photoWithProgress = dict["photo"] as? Media, let progress = dict["progress"] as? CGFloat, let p = self.photo, photoWithProgress.equals(photo: p) {
+                self.loadingIndicator.setProgress(value: progress * 100, animationDuration: 0.1)
             }
         }
     }

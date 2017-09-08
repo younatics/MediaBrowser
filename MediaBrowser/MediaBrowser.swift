@@ -1554,6 +1554,13 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             let bounds = view.bounds
             let naviHeight = navBar.frame.height + UIApplication.shared.statusBarFrame.height
             
+            gc.loadingIndicatorInnerRingColor = loadingIndicatorInnerRingColor
+            gc.loadingIndicatorOuterRingColor = loadingIndicatorOuterRingColor
+            gc.loadingIndicatorInnerRingWidth = loadingIndicatorInnerRingWidth
+            gc.loadingIndicatorOuterRingWidth = loadingIndicatorOuterRingWidth
+            gc.loadingIndicatorFont = loadingIndicatorFont
+            gc.loadingIndicatorFontColor = loadingIndicatorFontColor
+            gc.loadingIndicatorShouldShowValueText = loadingIndicatorShouldShowValueText
             gc.initialContentOffset = currentGridContentOffset
             gc.browser = self
             gc.selectionMode = displaySelectionButtons
