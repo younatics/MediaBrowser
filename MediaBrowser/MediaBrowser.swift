@@ -52,17 +52,17 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var previousNavigationBarHidden = false
     private var previousNavigationBarTranslucent = false
     private var previousNavigationBarStyle = UIBarStyle.default
-    private var previousStatusBarStyle = UIStatusBarStyle.lightContent
     private var previousNavigationBarTextColor: UIColor?
     private var previousNavigationBarBackgroundColor: UIColor?
     private var previousNavigationBarTintColor: UIColor?
     private var previousViewControllerBackButton: UIBarButtonItem?
+    private var previousStatusBarStyle: UIStatusBarStyle = .lightContent
     
     public var navigationBarTranslucent = true
     public var navigationBarTextColor = UIColor.white
     public var navigationBarBackgroundColor = UIColor.black
     public var navigationBarTintColor = UIColor.black.withAlphaComponent(0.5)
-    public var statusBarStyle = UIStatusBarStyle.lightContent
+    public var statusBarStyle: UIStatusBarStyle = .lightContent
     
     public var toolbarTextColor = UIColor.white
     public var toolbarBarTintColor = UIColor.black.withAlphaComponent(0.5)
@@ -469,7 +469,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             previousStatusBarStyle = UIApplication.shared.statusBarStyle
             UIApplication.shared.setStatusBarStyle(statusBarStyle, animated: animated)
         }
-        
+
         setNavBarAppearance(animated: animated)
         
         // Update UI
@@ -544,7 +544,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
             UIApplication.shared.setStatusBarStyle(previousStatusBarStyle, animated: animated)
         }
-        
+
         // Super
         super.viewWillDisappear(animated)
     }
@@ -572,7 +572,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             navBar.barTintColor = navigationBarTintColor
             navBar.shadowImage = nil
             navBar.isTranslucent = navigationBarTranslucent
-            navBar.barStyle = .default
+            navBar.barStyle = .black
         }
     }
 
@@ -1678,9 +1678,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 
             } else {
                 // View controller based so animate away
-                UIApplication.shared.setStatusBarHidden(
-                    hidden, with:
-                    animated ? UIStatusBarAnimation.fade : UIStatusBarAnimation.none)
+                statusBarShouldBeHidden = hidden
+                UIApplication.shared.setStatusBarHidden(hidden, with: animated ? UIStatusBarAnimation.slide : UIStatusBarAnimation.none)
             }
         }
         
@@ -1744,6 +1743,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             hideControlsAfterDelay()
         }
     }
+
     public override var prefersStatusBarHidden: Bool {
         if !leaveStatusBarAlone {
             return statusBarShouldBeHidden
