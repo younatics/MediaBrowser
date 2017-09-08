@@ -10,7 +10,7 @@ import UIKit
 import MBProgressHUD
 import MediaPlayer
 import QuartzCore
-import MapleBacon
+import SDWebImage
 
 func floorcgf(x: CGFloat) -> CGFloat {
     return CGFloat(floorf(Float(x)))
@@ -159,7 +159,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         pagingScrollView.delegate = nil
         NotificationCenter.default.removeObserver(self)
         releaseAllUnderlyingPhotos(preserveCurrent: false)
-        MapleBaconStorage.sharedStorage.clearMemoryStorage() // clear memory
+        SDImageCache.shared().clearMemory() // clear memory
     }
 
     private func releaseAllUnderlyingPhotos(preserveCurrent: Bool) {

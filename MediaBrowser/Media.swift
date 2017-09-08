@@ -10,8 +10,7 @@
 import UIKit
 import AssetsLibrary
 import Photos
-import MapleBacon
-import Photos
+import SDWebImage
 
 let MEDIA_LOADING_DID_END_NOTIFICATION  = "MEDIA_LOADING_DID_END_NOTIFICATION"
 let MEDIA_PROGRESS_NOTIFICATION  = "MEDIA_PROGRESS_NOTIFICATION"
@@ -31,7 +30,7 @@ public class Media: NSObject {
     private var assetTargetSize = CGSize.zero
     
     private var loadingInProgress = false
-    private var operation: ImageDownloadOperation?
+    private var operationToken: SDWebImageDownloadToken?
     private var assetRequestID = PHInvalidImageRequestID
     
     //MARK: - Init
@@ -181,7 +180,7 @@ public class Media: NSObject {
     }
     
     func cancelDownload() {
-        operation?.cancel()
+        SDWebImageDownloader.shared().cancel(self.operationToken)
     }
 
     // Load from local file
@@ -200,22 +199,19 @@ public class Media: NSObject {
                 }
             },
         */
-        operation = ImageManager.sharedManager.downloadImage(atUrl: url, cacheScaled: false, imageView: nil, completion: { [weak self](imageInstance, error) in
-            if let strongSelf = self {
+        operationToken = SDWebImageDownloader.shared().downloadImage(with: url, options: [], progress: nil) { [weak self] (image, _, error, finish) in
+            guard let wself = self else { return }
+
+            DispatchQueue.main.async {
+                if let _image = image {
+                    wself.underlyingImage = _image
+                }
+
                 DispatchQueue.main.async() {
-                    strongSelf.operation = nil
-                    
-                    if let ii = imageInstance {
-                        strongSelf.underlyingImage = ii.image
-                    }
-                    
-                    DispatchQueue.main.async() {
-                        strongSelf.imageLoadingComplete()
-                    }
+                    wself.imageLoadingComplete()
                 }
             }
-            
-        })
+        }
     }
     
     // Load from local file
@@ -322,8 +318,8 @@ public class Media: NSObject {
     }
 
     public func cancelAnyLoading() {
-        if let op = operation {
-            op.cancel()
+        if let token = self.operationToken {
+            SDWebImageDownloader.shared().cancel(token)
             loadingInProgress = false
         }
         else
