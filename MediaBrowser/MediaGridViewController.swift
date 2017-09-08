@@ -9,15 +9,6 @@
 import UIKit
 
 public class MediaGridViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    public var loadingIndicatorInnerRingColor = UIColor.white
-    public var loadingIndicatorOuterRingColor = UIColor.gray
-    public var loadingIndicatorInnerRingWidth:CGFloat = 1.0
-    public var loadingIndicatorOuterRingWidth:CGFloat = 1.0
-    public var loadingIndicatorFont = UIFont.systemFont(ofSize: 10)
-    public var loadingIndicatorFontColor = UIColor.white
-    public var loadingIndicatorShouldShowValueText = true
-
-    
     weak var browser: MediaBrowser?
     var selectionMode = false
     var initialContentOffset = CGPoint(x: 0.0, y: CGFloat.greatestFiniteMagnitude)
@@ -124,13 +115,6 @@ public class MediaGridViewController: UICollectionViewController, UICollectionVi
     
     public override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaGridCell", for: indexPath as IndexPath) as! MediaGridCell
-        cell.loadingIndicator.innerRingColor = loadingIndicatorInnerRingColor
-        cell.loadingIndicator.outerRingColor = loadingIndicatorOuterRingColor
-        cell.loadingIndicator.innerRingWidth = loadingIndicatorInnerRingWidth
-        cell.loadingIndicator.outerRingWidth = loadingIndicatorOuterRingWidth
-        cell.loadingIndicator.font = loadingIndicatorFont
-        cell.loadingIndicator.fontColor = loadingIndicatorFontColor
-        cell.loadingIndicator.shouldShowValueText = loadingIndicatorShouldShowValueText
         if let b = browser, let photo = b.thumbPhotoAtIndex(index: indexPath.row) {
             cell.photo = photo
             cell.gridController = self

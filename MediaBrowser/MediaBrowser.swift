@@ -113,10 +113,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var loadingIndicatorFontColor = UIColor.white
     public var loadingIndicatorShouldShowValueText = true
     
-    // Customise image selection icons as they are the only icons with a colour tint
-    // Icon should be located in the app's main bundle
-    public var customImageSelectedIconName = ""
-    public var customImageSelectedSmallIconName = ""
+    public var mediaSelectedOnIcon: UIImage?
+    public var mediaSelectedOffIcon: UIImage?
+    
+    public var mediaSelectedGridOnIcon: UIImage?
+    public var mediaSelectedGridOffIcon: UIImage?
     
     //MARK: - Init
     public override init(nibName: String?, bundle nibBundle: Bundle?) {
@@ -1024,15 +1025,18 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // Add selected button
                 if self.displaySelectionButtons {
                     let selectedButton = UIButton(type: .custom)
-                    selectedButton.setImage(UIImage(named: "ImageSelectedSmallOff", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .normal)
-                    let selectedOnImage: UIImage?
-                    if customImageSelectedIconName.characters.count > 0 {
-                        selectedOnImage = UIImage(named: customImageSelectedIconName)
+                    if let selectedOffImage = mediaSelectedOffIcon {
+                        selectedButton.setImage(selectedOffImage, for: .normal)
                     } else {
-                        selectedOnImage = UIImage(named: "ImageSelectedSmallOn", in: Bundle(for: MediaBrowser.self), compatibleWith: nil)
+                        selectedButton.setImage(UIImage(named: "ImageSelectedSmallOff", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .normal)
                     }
                     
-                    selectedButton.setImage(selectedOnImage, for: .selected)
+                    if let selectedOnImage = mediaSelectedOnIcon {
+                        selectedButton.setImage(selectedOnImage, for: .selected)
+                    } else {
+                        selectedButton.setImage(UIImage(named: "ImageSelectedSmallOn", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .selected)
+                    }
+
                     selectedButton.sizeToFit()
                     selectedButton.adjustsImageWhenHighlighted = false
                     selectedButton.addTarget(self, action: #selector(selectedButtonTapped), for: .touchUpInside)
@@ -1553,13 +1557,6 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             let bounds = view.bounds
             let naviHeight = navBar.frame.height + UIApplication.shared.statusBarFrame.height
             
-            gc.loadingIndicatorInnerRingColor = loadingIndicatorInnerRingColor
-            gc.loadingIndicatorOuterRingColor = loadingIndicatorOuterRingColor
-            gc.loadingIndicatorInnerRingWidth = loadingIndicatorInnerRingWidth
-            gc.loadingIndicatorOuterRingWidth = loadingIndicatorOuterRingWidth
-            gc.loadingIndicatorFont = loadingIndicatorFont
-            gc.loadingIndicatorFontColor = loadingIndicatorFontColor
-            gc.loadingIndicatorShouldShowValueText = loadingIndicatorShouldShowValueText
             gc.initialContentOffset = currentGridContentOffset
             gc.browser = self
             gc.selectionMode = displaySelectionButtons

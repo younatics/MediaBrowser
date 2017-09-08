@@ -109,9 +109,26 @@ public class MediaGridCell: UICollectionViewCell {
             if let gc = gridCtl {
                 // Set custom selection image if required
                 if let browser = gc.browser {
-                    if browser.customImageSelectedSmallIconName.characters.count > 0 {
-                        selectedButton.setImage(UIImage(named: browser.customImageSelectedSmallIconName), for: .selected)
+                    if let selectedOffImage = browser.mediaSelectedGridOffIcon {
+                        selectedButton.setImage(selectedOffImage, for: .normal)
+                    } else {
+                        selectedButton.setImage(UIImage(named: "ImageSelectedSmallOff", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .normal)
                     }
+                    
+                    if let selectedOnImage = browser.mediaSelectedGridOnIcon {
+                        selectedButton.setImage(selectedOnImage, for: .selected)
+                    } else {
+                        selectedButton.setImage(UIImage(named: "ImageSelectedSmallOn", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .selected)
+                    }
+                                        
+                    loadingIndicator.innerRingColor = browser.loadingIndicatorInnerRingColor
+                    loadingIndicator.outerRingColor = browser.loadingIndicatorOuterRingColor
+                    loadingIndicator.innerRingWidth = browser.loadingIndicatorInnerRingWidth
+                    loadingIndicator.outerRingWidth = browser.loadingIndicatorOuterRingWidth
+                    loadingIndicator.font = browser.loadingIndicatorFont
+                    loadingIndicator.fontColor = browser.loadingIndicatorFontColor
+                    loadingIndicator.shouldShowValueText = browser.loadingIndicatorShouldShowValueText
+
                 }
             }
         }
