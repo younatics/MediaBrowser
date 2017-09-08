@@ -1,5 +1,5 @@
 //
-//  UIImagePhotoBrowserExtension.swift
+//  UIImageExtension.swift
 //  MediaBrowser
 //
 //  Created by Seungyoun Yi on 2017. 9. 6..

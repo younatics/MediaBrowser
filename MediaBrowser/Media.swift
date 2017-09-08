@@ -13,8 +13,8 @@ import Photos
 import MapleBacon
 import Photos
 
-let MWPHOTO_LOADING_DID_END_NOTIFICATION  = "MWPHOTO_LOADING_DID_END_NOTIFICATION"
-let MWPHOTO_PROGRESS_NOTIFICATION  = "MWPHOTO_PROGRESS_NOTIFICATION"
+let MEDIA_LOADING_DID_END_NOTIFICATION  = "MEDIA_LOADING_DID_END_NOTIFICATION"
+let MEDIA_PROGRESS_NOTIFICATION  = "MEDIA_PROGRESS_NOTIFICATION"
 
 var PHInvalidImageRequestID = PHImageRequestID(0)
 
@@ -120,7 +120,6 @@ public class Media: NSObject {
     }
 
     //MARK: - Photo Protocol Methods
-
     public func loadUnderlyingImageAndNotify() {
         assert(Thread.current.isMainThread, "This method must be called on the main thread.")
         
@@ -225,7 +224,6 @@ public class Media: NSObject {
             let path = url.path
             self.underlyingImage = UIImage(contentsOfFile: path)
             //if nil == underlyingImage {
-            //MWLog(@"Error loading photo from path: \(url.path)")
             //}
             //}
             //finally {
@@ -256,7 +254,6 @@ public class Media: NSObject {
             },
                     failureBlock: { error in
                         self.underlyingImage = nil
-                        //MWLog(@"Photo from asset library error: %@",error)
                         
                         DispatchQueue.main.async() {
                             self.imageLoadingComplete()
@@ -264,7 +261,6 @@ public class Media: NSObject {
                     })
             //}
             //catch (NSException e) {
-            //    MWLog(@"Photo from asset library error: \(e)")
             //    self.performSelectorOnMainThread(Selector("imageLoadingComplete"), withObject: nil, waitUntilDone: false)
             //}
         }
@@ -285,7 +281,7 @@ public class Media: NSObject {
                 "photo" : self
             ] as [String : Any]
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: MWPHOTO_PROGRESS_NOTIFICATION), object: dict)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: MEDIA_PROGRESS_NOTIFICATION), object: dict)
         }
         
         assetRequestID = imageManager.requestImage(
@@ -321,7 +317,7 @@ public class Media: NSObject {
 
     private func postCompleteNotification() {
         NotificationCenter.default.post(
-            name: NSNotification.Name(rawValue: MWPHOTO_LOADING_DID_END_NOTIFICATION),
+            name: NSNotification.Name(rawValue: MEDIA_LOADING_DID_END_NOTIFICATION),
             object: self)
     }
 

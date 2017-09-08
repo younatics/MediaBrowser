@@ -55,7 +55,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(setProgressFromNotification),
-            name: NSNotification.Name(rawValue: MWPHOTO_PROGRESS_NOTIFICATION),
+            name: NSNotification.Name(rawValue: MEDIA_PROGRESS_NOTIFICATION),
             object: nil)
         
         // Setup
@@ -223,8 +223,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
             let dict = notification.object as! [String : AnyObject]
             
             if let photoWithProgress = dict["photo"] as? Media,
-                let p = self.photo, photoWithProgress.equals(photo: p)
-            {
+                let p = self.photo, photoWithProgress.equals(photo: p) {
                 if let progress = dict["progress"] as? Float {
                     self.loadingIndicator.progress = CGFloat(max(min(1.0, progress), 0.0))
                 }

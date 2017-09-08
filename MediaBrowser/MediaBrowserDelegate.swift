@@ -1,5 +1,5 @@
 //
-//  PhotoBrowserDelegate.swift
+//  MediaBrowserDelegate.swift
 //  MediaBrowser
 //
 //  Created by Seungyoun Yi on 2017. 9. 6..
@@ -9,49 +9,37 @@
 import UIKit
 
 public protocol MediaBrowserDelegate: class {
-    func numberOfPhotosInPhotoBrowser(mediaBrowser: MediaBrowser) -> Int
+    func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int
     
-    func photoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Media
+    func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media
     
-    func thumbPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Media
+    func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media
     
-    func captionViewForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> MediaCaptionView?
+    func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView?
     
-    func titleForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> String
+    func title(for mediaBrowser: MediaBrowser, at index: Int) -> String
     
-    func didDisplayPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser)
+    func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser)
     
-    func actionButtonPressedForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser)
+    func actionButtonPressed(at photoIndex: Int, in mediaBrowser: MediaBrowser)
     
-    func isPhotoSelectedAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Bool
+    func isMediaSelected(at index: Int, in mediaBrowser: MediaBrowser) -> Bool
     
-    func selectedChanged(selected: Bool, index: Int, mediaBrowser: MediaBrowser)
+    func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser)
     
-    func photoBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser)
+    func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser)
 }
 
 public extension MediaBrowserDelegate {
-    func captionViewForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> MediaCaptionView? {
-        return nil
-    }
+    func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView? { return nil }
     
-    func didDisplayPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) {
-        
-    }
+    func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser) { }
     
-    func actionButtonPressedForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) {
-        
-    }
+    func actionButtonPressed(at photoIndex: Int, in mediaBrowser: MediaBrowser) { }
     
-    func isPhotoSelectedAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Bool {
-        return false
-    }
+    func isMediaSelected(at index: Int, in mediaBrowser: MediaBrowser) -> Bool { return false }
     
-    func selectedChanged(selected: Bool, index: Int, mediaBrowser: MediaBrowser) {
-        
-    }
+    func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser) { }
     
-    func titleForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> String {
-        return ""
-    }
+    func title(for mediaBrowser: MediaBrowser, at index: Int) -> String { return "" }
 }
