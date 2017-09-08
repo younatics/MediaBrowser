@@ -169,7 +169,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var copy = medias
         for p in copy {
             if let ph = p {
-                if let paci = photoAtIndex(index: currentIndex) {
+                if let paci = mediaAtIndex(index: currentIndex) {
                     if preserveCurrent && ph.equals(photo: paci) {
                         continue // skip current
                     }
@@ -491,7 +491,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Autoplay if first is video
         if !viewHasAppearedInitially && autoPlayOnAppear {
-            if let photo = photoAtIndex(index: currentPageIndex) {
+            if let photo = mediaAtIndex(index: currentPageIndex) {
                 if photo.isVideo {
                     playVideoAtIndex(index: currentPageIndex)
                 }
@@ -764,7 +764,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return mediaCount
     }
 
-    func photoAtIndex(index: Int) -> Media? {
+    func mediaAtIndex(index: Int) -> Media? {
         var photo: Media? = nil
         
         if index < medias.count {
@@ -816,7 +816,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if let d = delegate {
             captionView = d.captionViewForPhotoAtIndex(index: index, mediaBrowser: self)
             
-            if let p = photoAtIndex(index: index), nil == captionView {
+            if let p = mediaAtIndex(index: index), nil == captionView {
                 if p.caption.characters.count > 0 {
                     captionView = MediaCaptionView(media: p)
                 }
@@ -871,7 +871,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             if currentPageIndex == pageIndex {
                 if pageIndex > 0 {
                     // Preload index - 1
-                    if let photo = photoAtIndex(index: pageIndex - 1) {
+                    if let photo = mediaAtIndex(index: pageIndex - 1) {
                         if nil == photo.underlyingImage {
                             photo.loadUnderlyingImageAndNotify()
 //                            print("Pre-loading image at index \(pageIndex-1)")
@@ -881,7 +881,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 
                 if pageIndex < numberOfMedias - 1 {
                     // Preload index + 1
-                    if let photo = photoAtIndex(index: pageIndex + 1) {
+                    if let photo = mediaAtIndex(index: pageIndex + 1) {
                         if nil == photo.underlyingImage {
                             photo.loadUnderlyingImageAndNotify()
 //                            print("Pre-loading image at index \(pageIndex+1)")
@@ -1076,7 +1076,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func configurePage(page: MediaZoomingScrollView, forIndex index: Int) {
         page.frame = frameForPageAtIndex(index: index)
         page.index = index
-        page.photo = photoAtIndex(index: index)
+        page.photo = mediaAtIndex(index: index)
         page.backgroundColor = areControlsHidden ? UIColor.black : UIColor.white
     }
 
@@ -1133,7 +1133,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Load adjacent images if needed and the photo is already
         // loaded. Also called after photo has been loaded in background
-        let currentPhoto = photoAtIndex(index: index)
+        let currentPhoto = mediaAtIndex(index: index)
         
         if let cp = currentPhoto {
             if cp.underlyingImage != nil {
@@ -1286,7 +1286,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     func updateNavigation() {
         // Title
-        let photos = numberOfMedias
+        let medias = numberOfMedias
         if let gc = gridController {
             if gc.selectionMode {
                 self.title = NSLocalizedString("Select Photos", comment: "")
@@ -1294,18 +1294,18 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             else {
                 let photosText: String
                 
-                if 1 == photos {
+                if 1 == medias {
                     photosText = NSLocalizedString("photo", comment: "Used in the context: '1 photo'")
                 }
                 else {
                     photosText = NSLocalizedString("photos", comment: "Used in the context: '3 photos'")
                 }
                 
-                title = "\(photos) \(photosText)"
+                title = "\(medias) \(photosText)"
             }
         }
         else
-        if photos > 1 {
+        if medias > 1 {
             if let d = delegate {
                 title = d.titleForPhotoAtIndex(index: currentPageIndex, mediaBrowser: self)
             }
@@ -1325,12 +1325,12 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
         if let next = nextButton {
-            next.isEnabled = (currentPageIndex < photos - 1)
+            next.isEnabled = (currentPageIndex < medias - 1)
         }
         
         // Disable action button if there is false image or it's a video
         if let ab = actionButton {
-            let photo = photoAtIndex(index: currentPageIndex)
+            let photo = mediaAtIndex(index: currentPageIndex)
 
             if photo != nil && (photo!.underlyingImage == nil || photo!.isVideo) {
                 ab.isEnabled = false
@@ -1410,7 +1410,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     //MARK: - Video
 
     func playVideoAtIndex(index: Int) {
-        let photo = photoAtIndex(index: index)
+        let photo = mediaAtIndex(index: index)
         
         // Valid for playing
         currentVideoIndex = index
@@ -1856,7 +1856,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     func actionButtonPressed(_ sender: Any) {
         // Only react when image has loaded
-        if let photo = photoAtIndex(index: currentPageIndex) {
+        if let photo = mediaAtIndex(index: currentPageIndex) {
             if numberOfMedias > 0 && photo.underlyingImage != nil {
                 // If they have defined a delegate method then just message them
                 // Let delegate handle things
@@ -1904,18 +1904,17 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     //MARK: - Action Progress
-
-    var mwProgressHUD: MBProgressHUD?
+    var mediaProgressView: MBProgressHUD?
 
     var progressHUD: MBProgressHUD {
-        if nil == mwProgressHUD {
-            mwProgressHUD = MBProgressHUD(view: self.view)
-            mwProgressHUD!.minSize = CGSize(width: 120, height: 120)
-            mwProgressHUD!.minShowTime = 1.0
+        if nil == mediaProgressView {
+            mediaProgressView = MBProgressHUD(view: self.view)
+            mediaProgressView!.minSize = CGSize(width: 120, height: 120)
+            mediaProgressView!.minShowTime = 1.0
             
-            view.addSubview(mwProgressHUD!)
+            view.addSubview(mediaProgressView!)
         }
-        return mwProgressHUD!
+        return mediaProgressView!
     }
 
     private func showProgressHUDWithMessage(message: String!) {
