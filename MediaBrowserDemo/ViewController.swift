@@ -152,6 +152,16 @@ extension ViewController {
             displayNavArrows = true
             
             break
+        case 3, 4:
+            photos = DemoData.photoSelection()
+            thumbs = DemoData.photoSelection()
+            
+            displayActionButton = false
+            displaySelectionButtons = true
+            startOnGrid = indexPath.row == 4
+            enableGrid = false
+
+            break
 
         default:
             break

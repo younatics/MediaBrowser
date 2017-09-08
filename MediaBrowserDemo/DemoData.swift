@@ -82,6 +82,34 @@ class DemoData {
         return photos
     }
     
+    class func photoSelection() -> [MWPhoto] {
+        var photos = [MWPhoto]()
+        
+        var photo = localMediaPhoto(imageName: "demo1", caption: "Demo Image 1 from Pixabay")
+        photos.append(photo)
+        
+        photo = localMediaPhoto(imageName: "demo2", caption: "Demo Image 2 from Pixabay")
+        photos.append(photo)
+        
+        photo = localMediaPhoto(imageName: "demo3", caption: "Demo Image 3 from Pixabay")
+        photos.append(photo)
+        
+        photo = localMediaPhoto(imageName: "demo4", caption: "Demo Image 4 from Pixabay")
+        photos.append(photo)
+        
+        photo = localMediaPhoto(imageName: "demo5", caption: "Demo Image 5 from Pixabay")
+        photos.append(photo)
+        
+        photo = localMediaPhoto(imageName: "demo6", caption: "Demo Image 6 from Pixabay")
+        photos.append(photo)
+        
+        photo = localMediaPhoto(imageName: "demo7", caption: "Demo Image 7 from Pixabay")
+        photos.append(photo)
+        
+        return photos
+
+    }
+    
     
     
     class func localMediaPhoto(imageName: String, caption: String) -> MWPhoto {
