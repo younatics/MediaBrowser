@@ -21,7 +21,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     // Data
     private var mediaCount = -1
-    private var medias = [Media?]()
+    private var mediaArray = [Media?]()
     private var thumbMedias = [Media?]()
 	private var fixedMediasArray: [Media]? // Provided via init
 	
@@ -163,7 +163,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private func releaseAllUnderlyingPhotos(preserveCurrent: Bool) {
         // Create a copy in case this array is modified while we are looping through
         // Release photos
-        var copy = medias
+        var copy = mediaArray
         for p in copy {
             if let ph = p {
                 if let paci = mediaAtIndex(index: currentIndex) {
@@ -716,11 +716,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Get data
         let photosNum = numberOfMedias
         releaseAllUnderlyingPhotos(preserveCurrent: true)
-        medias.removeAll()
+        mediaArray.removeAll()
         thumbMedias.removeAll()
         
         for _ in 0...(photosNum - 1) {
-            medias.append(nil)
+            mediaArray.append(nil)
             thumbMedias.append(nil)
         }
 
@@ -764,8 +764,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func mediaAtIndex(index: Int) -> Media? {
         var photo: Media? = nil
         
-        if index < medias.count {
-            if medias[index] == nil {
+        if index < mediaArray.count {
+            if mediaArray[index] == nil {
                 if let d = delegate {
                     photo = d.media(for: self, at: index)
                     
@@ -774,12 +774,12 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     }
                     
                     if photo != nil {
-                        medias[index] = photo
+                        mediaArray[index] = photo
                     }
                 }
             }
             else {
-                photo = medias[index]
+                photo = mediaArray[index]
             }
         }
         
@@ -1103,9 +1103,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             // Release anything < index - 1
             if index - 2 >= 0 {
                 for i in 0...(index - 2) {
-                    if let media = medias[i] {
+                    if let media = mediaArray[i] {
                         media.unloadUnderlyingImage()
-                        medias[i] = nil
+                        mediaArray[i] = nil
                         
                         //MWLog.log("Released underlying image at index \(i)")
                     }
@@ -1115,11 +1115,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         if index < numberOfMedias - 1 {
             // Release anything > index + 1
-            if index + 2 <= medias.count - 1 {
-                for i in (index + 2)...(medias.count - 1) {
-                    if let media = medias[i] {
+            if index + 2 <= mediaArray.count - 1 {
+                for i in (index + 2)...(mediaArray.count - 1) {
+                    if let media = mediaArray[i] {
                         media.unloadUnderlyingImage()
-                        medias[i] = nil
+                        mediaArray[i] = nil
                     
                         //MWLog.log("Released underlying image at index \(i)")
                     }

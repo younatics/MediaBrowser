@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DACircularProgress
+import UICircularProgressRing
 
 public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingImageViewDelegate, TapDetectingViewDelegate {
     public var index = 0
@@ -19,7 +19,8 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
     private weak var mediaBrowser: MediaBrowser!
 	private var tapView = MediaTapDetectingView(frame: .zero) // for background taps
 	private var photoImageView = MediaTapDetectingImageView(frame: .zero)
-    private var loadingIndicator = DACircularProgressView(frame: CGRect(x: 140, y: 30, width: 40, height: 40))
+//    private var loadingIndicator = DACircularProgressView(frame: CGRect(x: 140, y: 30, width: 40, height: 40))
+    private var loadingIndicator = UICircularProgressRingView(frame: CGRect(x: 140, y: 30, width: 40, height: 40))
     private var loadingError: UIImageView?
     
     public init(mediaBrowser: MediaBrowser) {
@@ -44,8 +45,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
         
         // Loading indicator
         loadingIndicator.isUserInteractionEnabled = false
-        loadingIndicator.thicknessRatio = 0.1
-        loadingIndicator.roundedCorners = 0
+        loadingIndicator.innerRingColor = UIColor.blue
         loadingIndicator.autoresizingMask =
             [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin, .flexibleRightMargin]
         
@@ -221,15 +221,12 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
         DispatchQueue.main.async() {
             let dict = notification.object as! [String : AnyObject]
             
-            if let photoWithProgress = dict["photo"] as? Media,
-                let p = self.photo, photoWithProgress.equals(photo: p) {
-                if let progress = dict["progress"] as? Float {
-                    self.loadingIndicator.progress = CGFloat(max(min(1.0, progress), 0.0))
-                }
+            if let photoWithProgress = dict["photo"] as? Media, let progress = dict["progress"] as? CGFloat, let p = self.photo, photoWithProgress.equals(photo: p) {
+                self.loadingIndicator.setProgress(value: progress, animationDuration: 0.5)
             }
         }
     }
-
+    
     private func hideLoadingIndicator() {
         loadingIndicator.isHidden = true
     }
@@ -238,7 +235,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
         zoomScale = 0.0
         minimumZoomScale = 0.0
         maximumZoomScale = 0.0
-        loadingIndicator.progress = 0.0
+        loadingIndicator.setProgress(value: 0.0, animationDuration: 1)
         loadingIndicator.isHidden = false
         
         hideImageFailure()

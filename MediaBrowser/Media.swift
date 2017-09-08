@@ -199,14 +199,22 @@ public class Media: NSObject {
                 }
             },
         */
-        operation = SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil) { [weak self] (image, _, error, cacheType, finish, imageUrl) in
+        operation = SDWebImageManager.shared().loadImage(with: url, options: [], progress: { (receivedSize, expectedSize, targetURL) in
+            let dict = [
+            "progress" : CGFloat(receivedSize)/CGFloat(expectedSize),
+            "photo" : self
+            ] as [String : Any]
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: MEDIA_PROGRESS_NOTIFICATION), object: dict)
+            
+        }) { [weak self] (image, _, error, cacheType, finish, imageUrl) in
             guard let wself = self else { return }
-
+            
             DispatchQueue.main.async {
                 if let _image = image {
                     wself.underlyingImage = _image
                 }
-
+                
                 DispatchQueue.main.async() {
                     wself.imageLoadingComplete()
                 }
