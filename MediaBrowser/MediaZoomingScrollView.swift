@@ -1,5 +1,5 @@
 //
-//  ZoomingScrollView.swift
+//  MediaZoomingScrollView.swift
 //  MediaBrowser
 //
 //  Created by Seungyoun Yi on 2017. 9. 6..
@@ -9,7 +9,7 @@
 import UIKit
 import DACircularProgress
 
-public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingImageViewDelegate, TapDetectingViewDelegate {
+public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingImageViewDelegate, TapDetectingViewDelegate {
     public var index = 0
     public var media: Media?
     public weak var captionView: MediaCaptionView?
@@ -17,8 +17,8 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     public weak var playButton: UIButton?
 
     private weak var mediaBrowser: MediaBrowser!
-	private var tapView = TapDetectingView(frame: .zero) // for background taps
-	private var photoImageView = TapDetectingImageView(frame: .zero)
+	private var tapView = MediaTapDetectingView(frame: .zero) // for background taps
+	private var photoImageView = MediaTapDetectingImageView(frame: .zero)
     private var loadingIndicator = DACircularProgressView(frame: CGRect(x: 140, y: 30, width: 40, height: 40))
     private var loadingError: UIImageView?
     
@@ -30,7 +30,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         self.mediaBrowser = mediaBrowser
         
         // Tap view for background
-        tapView = TapDetectingView(frame: bounds)
+        tapView = MediaTapDetectingView(frame: bounds)
         tapView.tapDelegate = self
         tapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tapView.backgroundColor = UIColor.black
@@ -190,7 +190,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
                     loadingError = UIImageView()
                     loadingError!.image = UIImage.imageForResourcePath(
                         name: "ImageError",
-                        inBundle: Bundle(for: ZoomingScrollView.self))
+                        inBundle: Bundle(for: MediaZoomingScrollView.self))
                     
                     loadingError!.isUserInteractionEnabled = false
                     loadingError!.autoresizingMask =

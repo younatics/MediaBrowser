@@ -1,5 +1,5 @@
 //
-//  GridCell.swift
+//  MediaGridCell.swift
 //  MediaBrowser
 //
 //  Created by Seungyoun Yi on 2017. 9. 6..
@@ -9,7 +9,7 @@
 import UIKit
 import DACircularProgress
 
-public class GridCell: UICollectionViewCell {
+public class MediaGridCell: UICollectionViewCell {
     let videoIndicatorPadding = CGFloat(10.0)
     
     var index = 0
@@ -40,7 +40,7 @@ public class GridCell: UICollectionViewCell {
         videoIndicator.isHidden = false
         let videoIndicatorImage = UIImage.imageForResourcePath(
             name: "VideoOverlay",
-            inBundle: Bundle(for: GridCell.self))!
+            inBundle: Bundle(for: MediaGridCell.self))!
             
         videoIndicator.frame = CGRect(
             x: self.bounds.size.width - videoIndicatorImage.size.width - videoIndicatorPadding,
@@ -60,15 +60,15 @@ public class GridCell: UICollectionViewCell {
         selectedButton.setImage(
             UIImage.imageForResourcePath(
                 name: "ImageSelectedSmallOff",
-                inBundle: Bundle(for: GridCell.self)),
+                inBundle: Bundle(for: MediaGridCell.self)),
             for: .normal)
 
         selectedButton.setImage(UIImage.imageForResourcePath(
                 name: "ImageSelectedSmallOn",
-                inBundle: Bundle(for: GridCell.self)),
+                inBundle: Bundle(for: MediaGridCell.self)),
             for: .selected)
 
-        selectedButton.addTarget(self, action: #selector(GridCell.selectionButtonPressed), for: .touchDown)
+        selectedButton.addTarget(self, action: #selector(MediaGridCell.selectionButtonPressed), for: .touchDown)
         selectedButton.isHidden = true
         selectedButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         addSubview(selectedButton)
@@ -101,9 +101,9 @@ public class GridCell: UICollectionViewCell {
         NotificationCenter.default.removeObserver(self)
     }
 
-    private weak var mwGridController: GridViewController?
+    private weak var mwGridController: MediaGridViewController?
 
-    var gridController: GridViewController? {
+    var gridController: MediaGridViewController? {
         set(gridCtl) {
             mwGridController = gridCtl
         
@@ -249,7 +249,7 @@ public class GridCell: UICollectionViewCell {
                 let error = UIImageView()
                 error.image = UIImage.imageForResourcePath(
                     name: "ImageError",
-                    inBundle: Bundle(for: GridCell.self))
+                    inBundle: Bundle(for: MediaGridCell.self))
         
                 error.isUserInteractionEnabled = false
                 error.sizeToFit()

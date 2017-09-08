@@ -1,5 +1,5 @@
 //
-//  GridViewController.swift
+//  MediaGridViewController.swift
 //  MediaBrowser
 //
 //  Created by Seungyoun Yi on 2017. 9. 6..
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class GridViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+public class MediaGridViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     weak var browser: MediaBrowser?
     var selectionMode = false
     var initialContentOffset = CGPoint(x: 0.0, y: CGFloat.greatestFiniteMagnitude)
@@ -27,7 +27,7 @@ public class GridViewController: UICollectionViewController, UICollectionViewDel
         super.viewDidLoad()
         
         if let cv = collectionView {
-            cv.register(GridCell.self, forCellWithReuseIdentifier: "GridCell")
+            cv.register(MediaGridCell.self, forCellWithReuseIdentifier: "MediaGridCell")
             cv.alwaysBounceVertical = true
             cv.backgroundColor = UIColor.black
         }
@@ -37,7 +37,7 @@ public class GridViewController: UICollectionViewController, UICollectionViewDel
         // Cancel outstanding loading
         if let cv = collectionView {
             for cell in cv.visibleCells {
-                let c = cell as! GridCell
+                let c = cell as! MediaGridCell
                 
                 if let p = c.photo {
                     p.cancelAnyLoading()
@@ -114,7 +114,7 @@ public class GridViewController: UICollectionViewController, UICollectionViewDel
     }
     
     public override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridCell", for: indexPath as IndexPath) as! GridCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaGridCell", for: indexPath as IndexPath) as! MediaGridCell
         
         if let b = browser,
             let photo = b.thumbPhotoAtIndex(index: indexPath.row)
@@ -144,7 +144,7 @@ public class GridViewController: UICollectionViewController, UICollectionViewDel
     }
 
     public override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let gridCell = cell as? GridCell {
+        if let gridCell = cell as? MediaGridCell {
             if let gcp = gridCell.photo {
                 gcp.cancelAnyLoading()
             }

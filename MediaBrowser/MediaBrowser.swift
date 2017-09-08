@@ -30,8 +30,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 	private var pagingScrollView = UIScrollView()
 	
 	// Paging & layout
-	private var visiblePages = Set<ZoomingScrollView>()
-    private var recycledPages = Set<ZoomingScrollView>()
+	private var visiblePages = Set<MediaZoomingScrollView>()
+    private var recycledPages = Set<MediaZoomingScrollView>()
 	private var currentPageIndex = 0
     private var previousPageIndex = Int.max
     private var previousLayoutBounds = CGRect.zero
@@ -46,7 +46,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var doneButton: UIBarButtonItem?
     
     // Grid
-    private var gridController: GridViewController?
+    private var gridController: MediaGridViewController?
     private var gridPreviousLeftNavItem: UIBarButtonItem?
     private var gridPreviousRightNavItem: UIBarButtonItem?
     
@@ -977,7 +977,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // Add new page
                 var p = dequeueRecycledPage
                 if nil == p {
-                    p = ZoomingScrollView(mediaBrowser: self)
+                    p = MediaZoomingScrollView(mediaBrowser: self)
                 }
                 
                 let page = p!
@@ -1051,8 +1051,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return false
     }
 
-    func pageDisplayedAtIndex(index: Int) -> ZoomingScrollView? {
-        var thePage: ZoomingScrollView?
+    func pageDisplayedAtIndex(index: Int) -> MediaZoomingScrollView? {
+        var thePage: MediaZoomingScrollView?
         for page in visiblePages {
             if page.index == index {
                 thePage = page
@@ -1062,8 +1062,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return thePage
     }
 
-    func pageDisplayingPhoto(photo: Media) -> ZoomingScrollView? {
-        var thePage: ZoomingScrollView?
+    func pageDisplayingPhoto(photo: Media) -> MediaZoomingScrollView? {
+        var thePage: MediaZoomingScrollView?
         for page in visiblePages {
             if page.photo != nil && page.photo!.equals(photo: photo) {
                 thePage = page
@@ -1073,14 +1073,14 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return thePage
     }
 
-    func configurePage(page: ZoomingScrollView, forIndex index: Int) {
+    func configurePage(page: MediaZoomingScrollView, forIndex index: Int) {
         page.frame = frameForPageAtIndex(index: index)
         page.index = index
         page.photo = photoAtIndex(index: index)
         page.backgroundColor = areControlsHidden ? UIColor.black : UIColor.white
     }
 
-    var dequeueRecycledPage: ZoomingScrollView? {
+    var dequeueRecycledPage: MediaZoomingScrollView? {
         let page = recycledPages.first
         if let p = page {
             recycledPages.remove(p)
@@ -1533,7 +1533,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
         // Init grid controller
-        gridController = GridViewController()
+        gridController = MediaGridViewController()
         
         if let gc = gridController, let navBar = navigationController?.navigationBar {
             let bounds = view.bounds

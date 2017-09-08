@@ -1,5 +1,5 @@
 //
-//  TapDetectingImageView.swift
+//  MediaTapDetectingImageView.swift
 //  MediaBrowser
 //
 //  Created by Seungyoun Yi on 2017. 9. 6..
@@ -9,7 +9,7 @@
 
 import Foundation
 
-public class TapDetectingImageView: UIImageView {
+public class MediaTapDetectingImageView: UIImageView {
     public weak var tapDelegate: TapDetectingImageViewDelegate?
 
     public override init(frame: CGRect) {
