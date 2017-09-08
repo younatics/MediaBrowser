@@ -810,15 +810,15 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return photo
     }
 
-    func captionViewForPhotoAtIndex(index: Int) -> CaptionView? {
-        var captionView: CaptionView?
+    func captionViewForPhotoAtIndex(index: Int) -> MediaCaptionView? {
+        var captionView: MediaCaptionView?
         
         if let d = delegate {
             captionView = d.captionViewForPhotoAtIndex(index: index, mediaBrowser: self)
             
             if let p = photoAtIndex(index: index), nil == captionView {
                 if p.caption.characters.count > 0 {
-                    captionView = CaptionView(media: p)
+                    captionView = MediaCaptionView(media: p)
                 }
             }
         }
@@ -1197,7 +1197,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return CGRect(x: 0.0, y: view.bounds.size.height - height, width: view.bounds.size.width, height: height).integral
     }
 
-    func frameForCaptionView(captionView: CaptionView?, index: Int) -> CGRect {
+    func frameForCaptionView(captionView: MediaCaptionView?, index: Int) -> CGRect {
         if let cw = captionView {
             let pageFrame = frameForPageAtIndex(index: index)
             let captionSize = cw.sizeThatFits(CGSize(width: pageFrame.size.width, height: 0.0))

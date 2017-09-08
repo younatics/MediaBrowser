@@ -9,7 +9,7 @@
 
 import UIKit
 
-public class CaptionView: UIToolbar {
+public class MediaCaptionView: UIToolbar {
     private var media: Media?
     private var label = UILabel()
     public let labelPadding = CGFloat(10.0)

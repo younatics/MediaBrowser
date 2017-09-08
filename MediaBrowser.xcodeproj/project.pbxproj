@@ -12,16 +12,16 @@
 		1906ABC51F5F812D0052DC3A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABC41F5F812D0052DC3A /* ViewController.swift */; };
 		1906ABC81F5F812D0052DC3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1906ABC61F5F812D0052DC3A /* Main.storyboard */; };
 		1906ABCD1F5F812D0052DC3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1906ABCB1F5F812D0052DC3A /* LaunchScreen.storyboard */; };
-		1906ABDD1F5F83960052DC3A /* CaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD21F5F83960052DC3A /* CaptionView.swift */; };
-		1906ABDE1F5F83960052DC3A /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD31F5F83960052DC3A /* GridCell.swift */; };
-		1906ABDF1F5F83960052DC3A /* GridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD41F5F83960052DC3A /* GridViewController.swift */; };
+		1906ABDD1F5F83960052DC3A /* MediaCaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD21F5F83960052DC3A /* MediaCaptionView.swift */; };
+		1906ABDE1F5F83960052DC3A /* MediaGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD31F5F83960052DC3A /* MediaGridCell.swift */; };
+		1906ABDF1F5F83960052DC3A /* MediaGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD41F5F83960052DC3A /* MediaGridViewController.swift */; };
 		1906ABE01F5F83960052DC3A /* MWLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD51F5F83960052DC3A /* MWLog.swift */; };
 		1906ABE11F5F83960052DC3A /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD61F5F83960052DC3A /* Media.swift */; };
 		1906ABE31F5F83960052DC3A /* MediaBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD81F5F83960052DC3A /* MediaBrowser.swift */; };
-		1906ABE41F5F83960052DC3A /* TapDetectingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD91F5F83960052DC3A /* TapDetectingImageView.swift */; };
-		1906ABE51F5F83960052DC3A /* TapDetectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDA1F5F83960052DC3A /* TapDetectingView.swift */; };
+		1906ABE41F5F83960052DC3A /* MediaTapDetectingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD91F5F83960052DC3A /* MediaTapDetectingImageView.swift */; };
+		1906ABE51F5F83960052DC3A /* MediaTapDetectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDA1F5F83960052DC3A /* MediaTapDetectingView.swift */; };
 		1906ABE61F5F83960052DC3A /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDB1F5F83960052DC3A /* UIImageExtension.swift */; };
-		1906ABE71F5F83960052DC3A /* ZoomingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDC1F5F83960052DC3A /* ZoomingScrollView.swift */; };
+		1906ABE71F5F83960052DC3A /* MediaZoomingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDC1F5F83960052DC3A /* MediaZoomingScrollView.swift */; };
 		1906ABE91F5F9A100052DC3A /* MediaBrowser.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1906ABE81F5F9A100052DC3A /* MediaBrowser.xcassets */; };
 		1937C4461F5FE9EA00D8724E /* MediaBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1906ABB11F5F81110052DC3A /* MediaBrowser.framework */; };
 		1937C4471F5FE9EA00D8724E /* MediaBrowser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1906ABB11F5F81110052DC3A /* MediaBrowser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -68,16 +68,16 @@
 		1906ABC71F5F812D0052DC3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1906ABCC1F5F812D0052DC3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1906ABCE1F5F812D0052DC3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1906ABD21F5F83960052DC3A /* CaptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptionView.swift; sourceTree = "<group>"; };
-		1906ABD31F5F83960052DC3A /* GridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
-		1906ABD41F5F83960052DC3A /* GridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridViewController.swift; sourceTree = "<group>"; };
+		1906ABD21F5F83960052DC3A /* MediaCaptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaCaptionView.swift; sourceTree = "<group>"; };
+		1906ABD31F5F83960052DC3A /* MediaGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaGridCell.swift; sourceTree = "<group>"; };
+		1906ABD41F5F83960052DC3A /* MediaGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaGridViewController.swift; sourceTree = "<group>"; };
 		1906ABD51F5F83960052DC3A /* MWLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MWLog.swift; sourceTree = "<group>"; };
 		1906ABD61F5F83960052DC3A /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		1906ABD81F5F83960052DC3A /* MediaBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaBrowser.swift; sourceTree = "<group>"; };
-		1906ABD91F5F83960052DC3A /* TapDetectingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapDetectingImageView.swift; sourceTree = "<group>"; };
-		1906ABDA1F5F83960052DC3A /* TapDetectingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapDetectingView.swift; sourceTree = "<group>"; };
+		1906ABD91F5F83960052DC3A /* MediaTapDetectingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTapDetectingImageView.swift; sourceTree = "<group>"; };
+		1906ABDA1F5F83960052DC3A /* MediaTapDetectingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTapDetectingView.swift; sourceTree = "<group>"; };
 		1906ABDB1F5F83960052DC3A /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
-		1906ABDC1F5F83960052DC3A /* ZoomingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomingScrollView.swift; sourceTree = "<group>"; };
+		1906ABDC1F5F83960052DC3A /* MediaZoomingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaZoomingScrollView.swift; sourceTree = "<group>"; };
 		1906ABE81F5F9A100052DC3A /* MediaBrowser.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MediaBrowser.xcassets; sourceTree = "<group>"; };
 		1937C44B1F610CBF00D8724E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1937C44D1F62243F00D8724E /* DemoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoData.swift; sourceTree = "<group>"; };
@@ -145,17 +145,17 @@
 		1906ABB31F5F81120052DC3A /* MediaBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				1906ABD21F5F83960052DC3A /* CaptionView.swift */,
-				1906ABD31F5F83960052DC3A /* GridCell.swift */,
-				1906ABD41F5F83960052DC3A /* GridViewController.swift */,
+				1906ABD21F5F83960052DC3A /* MediaCaptionView.swift */,
+				1906ABD31F5F83960052DC3A /* MediaGridCell.swift */,
+				1906ABD41F5F83960052DC3A /* MediaGridViewController.swift */,
 				1906ABD51F5F83960052DC3A /* MWLog.swift */,
 				1906ABD61F5F83960052DC3A /* Media.swift */,
 				1906ABD81F5F83960052DC3A /* MediaBrowser.swift */,
 				19E1F62D1F5FD8EE004D3BA8 /* MediaBrowserDelegate.swift */,
-				1906ABD91F5F83960052DC3A /* TapDetectingImageView.swift */,
-				1906ABDA1F5F83960052DC3A /* TapDetectingView.swift */,
+				1906ABD91F5F83960052DC3A /* MediaTapDetectingImageView.swift */,
+				1906ABDA1F5F83960052DC3A /* MediaTapDetectingView.swift */,
 				1906ABDB1F5F83960052DC3A /* UIImageExtension.swift */,
-				1906ABDC1F5F83960052DC3A /* ZoomingScrollView.swift */,
+				1906ABDC1F5F83960052DC3A /* MediaZoomingScrollView.swift */,
 				1906ABB41F5F81120052DC3A /* MediaBrowser.h */,
 				1906ABB51F5F81120052DC3A /* Info.plist */,
 				1906ABE81F5F9A100052DC3A /* MediaBrowser.xcassets */,
@@ -390,17 +390,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1906ABE71F5F83960052DC3A /* ZoomingScrollView.swift in Sources */,
-				1906ABE41F5F83960052DC3A /* TapDetectingImageView.swift in Sources */,
+				1906ABE71F5F83960052DC3A /* MediaZoomingScrollView.swift in Sources */,
+				1906ABE41F5F83960052DC3A /* MediaTapDetectingImageView.swift in Sources */,
 				19E1F62E1F5FD8EE004D3BA8 /* MediaBrowserDelegate.swift in Sources */,
-				1906ABE51F5F83960052DC3A /* TapDetectingView.swift in Sources */,
+				1906ABE51F5F83960052DC3A /* MediaTapDetectingView.swift in Sources */,
 				1906ABE61F5F83960052DC3A /* UIImageExtension.swift in Sources */,
 				1906ABE11F5F83960052DC3A /* Media.swift in Sources */,
 				1906ABE01F5F83960052DC3A /* MWLog.swift in Sources */,
 				1906ABE31F5F83960052DC3A /* MediaBrowser.swift in Sources */,
-				1906ABDD1F5F83960052DC3A /* CaptionView.swift in Sources */,
-				1906ABDE1F5F83960052DC3A /* GridCell.swift in Sources */,
-				1906ABDF1F5F83960052DC3A /* GridViewController.swift in Sources */,
+				1906ABDD1F5F83960052DC3A /* MediaCaptionView.swift in Sources */,
+				1906ABDE1F5F83960052DC3A /* MediaGridCell.swift in Sources */,
+				1906ABDF1F5F83960052DC3A /* MediaGridViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

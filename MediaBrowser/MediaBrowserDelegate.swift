@@ -15,7 +15,7 @@ public protocol MediaBrowserDelegate: class {
     
     func thumbPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Media
     
-    func captionViewForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> CaptionView?
+    func captionViewForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> MediaCaptionView?
     
     func titleForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> String
     
@@ -31,7 +31,7 @@ public protocol MediaBrowserDelegate: class {
 }
 
 public extension MediaBrowserDelegate {
-    func captionViewForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> CaptionView? {
+    func captionViewForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> MediaCaptionView? {
         return nil
     }
     

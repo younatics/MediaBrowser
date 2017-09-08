@@ -12,7 +12,7 @@ import DACircularProgress
 public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingImageViewDelegate, TapDetectingViewDelegate {
     public var index = 0
     public var media: Media?
-    public weak var captionView: CaptionView?
+    public weak var captionView: MediaCaptionView?
     public weak var selectedButton: UIButton?
     public weak var playButton: UIButton?
 
