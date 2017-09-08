@@ -91,7 +91,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     
     var activityViewController: UIActivityViewController?
     
-    public var delegate: PhotoBrowserDelegate?
+    public var delegate: MediaBrowserDelegate?
     public var zoomPhotosToFill = true
     public var displayNavArrows = false
     public var displaySelectionButtons = false
@@ -118,7 +118,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         initialisation()
     }
     
-    public convenience init(delegate: PhotoBrowserDelegate) {
+    public convenience init(delegate: MediaBrowserDelegate) {
         self.init()
         self.delegate = delegate
     }
@@ -818,7 +818,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             
             if let p = photoAtIndex(index: index), nil == captionView {
                 if p.caption.characters.count > 0 {
-                    captionView = CaptionView(photo: p)
+                    captionView = CaptionView(media: p)
                 }
             }
         }

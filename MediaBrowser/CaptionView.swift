@@ -10,13 +10,13 @@
 import UIKit
 
 public class CaptionView: UIToolbar {
-    private var photo: Media?
+    private var media: Media?
     private var label = UILabel()
     public let labelPadding = CGFloat(10.0)
 
-    init(photo: Media?) {
+    init(media: Media?) {
         super.init(frame: CGRect(x: 0, y: 0, width: 320.0, height: 44.0)) // Random initial frame
-        self.photo = photo
+        self.media = media
         
         setupCaption()
     }
@@ -75,7 +75,7 @@ public class CaptionView: UIToolbar {
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 17.0)
         
-        if let p = photo {
+        if let p = media {
             label.text = p.caption
         }
         

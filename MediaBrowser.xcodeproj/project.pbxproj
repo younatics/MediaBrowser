@@ -17,7 +17,7 @@
 		1906ABDF1F5F83960052DC3A /* GridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD41F5F83960052DC3A /* GridViewController.swift */; };
 		1906ABE01F5F83960052DC3A /* MWLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD51F5F83960052DC3A /* MWLog.swift */; };
 		1906ABE11F5F83960052DC3A /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD61F5F83960052DC3A /* Media.swift */; };
-		1906ABE31F5F83960052DC3A /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD81F5F83960052DC3A /* PhotoBrowser.swift */; };
+		1906ABE31F5F83960052DC3A /* MediaBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD81F5F83960052DC3A /* MediaBrowser.swift */; };
 		1906ABE41F5F83960052DC3A /* TapDetectingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD91F5F83960052DC3A /* TapDetectingImageView.swift */; };
 		1906ABE51F5F83960052DC3A /* TapDetectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDA1F5F83960052DC3A /* TapDetectingView.swift */; };
 		1906ABE61F5F83960052DC3A /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDB1F5F83960052DC3A /* UIImageExtension.swift */; };
@@ -28,7 +28,7 @@
 		1937C44C1F610CBF00D8724E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1937C44B1F610CBF00D8724E /* Assets.xcassets */; };
 		1937C44E1F62243F00D8724E /* DemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1937C44D1F62243F00D8724E /* DemoData.swift */; };
 		19E1F62C1F5FD5F8004D3BA8 /* Atoms.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 19E1F62B1F5FD5F8004D3BA8 /* Atoms.mp4 */; };
-		19E1F62E1F5FD8EE004D3BA8 /* PhotoBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1F62D1F5FD8EE004D3BA8 /* PhotoBrowserDelegate.swift */; };
+		19E1F62E1F5FD8EE004D3BA8 /* MediaBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1F62D1F5FD8EE004D3BA8 /* MediaBrowserDelegate.swift */; };
 		3FAEAE617C3B57A74C12FC3C /* Pods_MediaBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 570922FC966732103FB7D306 /* Pods_MediaBrowser.framework */; };
 		786961890EA7C05AB0704224 /* Pods_MediaBrowserDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E7711DC6E06460185D3F457 /* Pods_MediaBrowserDemo.framework */; };
 /* End PBXBuildFile section */
@@ -73,7 +73,7 @@
 		1906ABD41F5F83960052DC3A /* GridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridViewController.swift; sourceTree = "<group>"; };
 		1906ABD51F5F83960052DC3A /* MWLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MWLog.swift; sourceTree = "<group>"; };
 		1906ABD61F5F83960052DC3A /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
-		1906ABD81F5F83960052DC3A /* PhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowser.swift; sourceTree = "<group>"; };
+		1906ABD81F5F83960052DC3A /* MediaBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaBrowser.swift; sourceTree = "<group>"; };
 		1906ABD91F5F83960052DC3A /* TapDetectingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapDetectingImageView.swift; sourceTree = "<group>"; };
 		1906ABDA1F5F83960052DC3A /* TapDetectingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapDetectingView.swift; sourceTree = "<group>"; };
 		1906ABDB1F5F83960052DC3A /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 		1937C44B1F610CBF00D8724E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1937C44D1F62243F00D8724E /* DemoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoData.swift; sourceTree = "<group>"; };
 		19E1F62B1F5FD5F8004D3BA8 /* Atoms.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Atoms.mp4; sourceTree = "<group>"; };
-		19E1F62D1F5FD8EE004D3BA8 /* PhotoBrowserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserDelegate.swift; sourceTree = "<group>"; };
+		19E1F62D1F5FD8EE004D3BA8 /* MediaBrowserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaBrowserDelegate.swift; sourceTree = "<group>"; };
 		3AEDB6B991DF32A68AA1972E /* Pods-MediaBrowserDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaBrowserDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-MediaBrowserDemo/Pods-MediaBrowserDemo.release.xcconfig"; sourceTree = "<group>"; };
 		56EF6B3B274F5728F0712339 /* Pods-MediaBrowser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaBrowser.release.xcconfig"; path = "Pods/Target Support Files/Pods-MediaBrowser/Pods-MediaBrowser.release.xcconfig"; sourceTree = "<group>"; };
 		570922FC966732103FB7D306 /* Pods_MediaBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediaBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,8 +150,8 @@
 				1906ABD41F5F83960052DC3A /* GridViewController.swift */,
 				1906ABD51F5F83960052DC3A /* MWLog.swift */,
 				1906ABD61F5F83960052DC3A /* Media.swift */,
-				1906ABD81F5F83960052DC3A /* PhotoBrowser.swift */,
-				19E1F62D1F5FD8EE004D3BA8 /* PhotoBrowserDelegate.swift */,
+				1906ABD81F5F83960052DC3A /* MediaBrowser.swift */,
+				19E1F62D1F5FD8EE004D3BA8 /* MediaBrowserDelegate.swift */,
 				1906ABD91F5F83960052DC3A /* TapDetectingImageView.swift */,
 				1906ABDA1F5F83960052DC3A /* TapDetectingView.swift */,
 				1906ABDB1F5F83960052DC3A /* UIImageExtension.swift */,
@@ -392,12 +392,12 @@
 			files = (
 				1906ABE71F5F83960052DC3A /* ZoomingScrollView.swift in Sources */,
 				1906ABE41F5F83960052DC3A /* TapDetectingImageView.swift in Sources */,
-				19E1F62E1F5FD8EE004D3BA8 /* PhotoBrowserDelegate.swift in Sources */,
+				19E1F62E1F5FD8EE004D3BA8 /* MediaBrowserDelegate.swift in Sources */,
 				1906ABE51F5F83960052DC3A /* TapDetectingView.swift in Sources */,
 				1906ABE61F5F83960052DC3A /* UIImageExtension.swift in Sources */,
 				1906ABE11F5F83960052DC3A /* Media.swift in Sources */,
 				1906ABE01F5F83960052DC3A /* MWLog.swift in Sources */,
-				1906ABE31F5F83960052DC3A /* PhotoBrowser.swift in Sources */,
+				1906ABE31F5F83960052DC3A /* MediaBrowser.swift in Sources */,
 				1906ABDD1F5F83960052DC3A /* CaptionView.swift in Sources */,
 				1906ABDE1F5F83960052DC3A /* GridCell.swift in Sources */,
 				1906ABDF1F5F83960052DC3A /* GridViewController.swift in Sources */,

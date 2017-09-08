@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol PhotoBrowserDelegate: class {
+public protocol MediaBrowserDelegate: class {
     func numberOfPhotosInPhotoBrowser(mediaBrowser: MediaBrowser) -> Int
     
     func photoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Media
@@ -30,7 +30,7 @@ public protocol PhotoBrowserDelegate: class {
     func photoBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser)
 }
 
-public extension PhotoBrowserDelegate {
+public extension MediaBrowserDelegate {
     func captionViewForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> CaptionView? {
         return nil
     }
