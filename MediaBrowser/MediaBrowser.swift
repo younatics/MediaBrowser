@@ -50,11 +50,12 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var gridPreviousRightNavItem: UIBarButtonItem?
     
     // Appearance
-    private var previousNavBarHidden = false
-    private var previousNavBarTranslucent = false
-    private var previousNavBarStyle = UIBarStyle.default
+    private var previousNavigationBarHidden = false
+    private var previousNavigationBarTranslucent = false
+    private var previousNavigationBarStyle = UIBarStyle.default
     private var previousStatusBarStyle = UIStatusBarStyle.lightContent
     private var previousNavigationBarTextColor: UIColor?
+    private var previousNavigationBarBackgroundColor: UIColor?
     private var previousNavigationBarTintColor: UIColor?
     private var previousViewControllerBackButton: UIBarButtonItem?
     
@@ -569,23 +570,25 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         if let navi = navigationController {
             previousNavigationBarTintColor = navi.navigationBar.barTintColor
-            previousNavBarTranslucent = navi.navigationBar.isTranslucent
+            previousNavigationBarBackgroundColor = navi.navigationBar.backgroundColor
+            previousNavigationBarTranslucent = navi.navigationBar.isTranslucent
             previousNavigationBarTextColor = navi.navigationBar.tintColor
-            previousNavBarHidden = navi.isNavigationBarHidden
-            previousNavBarStyle = navi.navigationBar.barStyle
+            previousNavigationBarHidden = navi.isNavigationBarHidden
+            previousNavigationBarStyle = navi.navigationBar.barStyle
         }
     }
 
     func restorePreviousNavBarAppearance(animated: Bool) {
         if let navi = navigationController, didSavePreviousStateOfNavBar {
-            navi.setNavigationBarHidden(previousNavBarHidden, animated: animated)
+            navi.setNavigationBarHidden(previousNavigationBarHidden, animated: animated)
             
             let navBar = navi.navigationBar
             navBar.titleTextAttributes = [NSForegroundColorAttributeName:previousNavigationBarTextColor ?? UIColor.black]
+            navBar.backgroundColor = previousNavigationBarBackgroundColor
             navBar.tintColor = previousNavigationBarTextColor
-            navBar.isTranslucent = previousNavBarTranslucent
+            navBar.isTranslucent = previousNavigationBarTranslucent
             navBar.barTintColor = previousNavigationBarTintColor
-            navBar.barStyle = previousNavBarStyle
+            navBar.barStyle = previousNavigationBarStyle
 
             // Restore back button if we need to
             if previousViewControllerBackButton != nil {
