@@ -94,8 +94,7 @@ public class MWPhoto: Photo {
         if let vurl = videoURL {
             completion(vurl)
         }
-        else
-        if let a = asset {
+        else if let a = asset {
             if a.mediaType == PHAssetMediaType.video {
                 let options = PHVideoRequestOptions()
                 options.isNetworkAccessAllowed = true
@@ -110,7 +109,7 @@ public class MWPhoto: Photo {
                         else {
                             completion(nil)
                         }
-                    })
+                })
             }
         }
         

@@ -16,8 +16,6 @@ class ViewController: UITableViewController {
     var selections = [Bool]()
     var photos = [MWPhoto]()
     var thumbs = [MWPhoto]()
-    var assets = NSMutableArray()
-//    var ALAssetsLibrary = ALAssetsLibrary()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -31,7 +29,6 @@ class ViewController: UITableViewController {
         segmentedControl.setTitleTextAttributes([NSFontAttributeName: font],
                                                 for: .normal)
         segmentedControl.addTarget(self, action: #selector(segmentControlChanged), for: .valueChanged)
-        loadAssets()
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,35 +51,6 @@ class ViewController: UITableViewController {
     func segmentControlChanged() {
         self.tableView.reloadData()
     }
-
-    func loadAssets() {
-        let status = PHAuthorizationStatus.authorized
-        if status == .notDetermined {
-            PHPhotoLibrary.requestAuthorization({ (status) in
-                if status == PHAuthorizationStatus.authorized {
-                    self.performLoadAssets()
-                }
-            })
-        } else if status == .authorized {
-            self.performLoadAssets()
-        }
-    }
-
-    func performLoadAssets() {
-        DispatchQueue.global(qos: .default).async {
-            let options = PHFetchOptions.init()
-            options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-            
-            let fetchResults = PHAsset.fetchAssets(with: options)
-            fetchResults.enumerateObjects({ (obj, idx, stop) in
-                self.assets.add(obj)
-            })
-            if fetchResults.count > 0 {
-                self.tableView.performSelector(onMainThread: #selector(self.tableView.reloadData), with: nil, waitUntilDone: false)
-            }
-        }
-    }
-    
 }
 
 //MARK: PhotoBrowserDelegate
@@ -134,7 +102,7 @@ extension ViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return assets.count > 0 ? 9 : 10
+        return 9
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -177,7 +145,26 @@ extension ViewController {
             enableGrid = false
 
             break
-
+            
+        case 5, 6:
+            photos = DemoData.webPhotos()
+            thumbs = DemoData.webPhotos()
+            
+            startOnGrid = indexPath.row == 6
+            break
+            
+        case 7:
+            photos = DemoData.singleVideo()
+            
+            enableGrid = false
+            autoPlayOnAppear = true
+            break
+            
+        case 8:
+            photos = DemoData.multiVideos()
+            thumbs = DemoData.multiVideoThumbs()
+            
+            startOnGrid = true
         default:
             break
         }
@@ -262,11 +249,6 @@ extension ViewController {
         case 8:
             cell.textLabel?.text = "Web videos"
             cell.detailTextLabel?.text = "showing grid first"
-            break
-        
-        case 9:
-            cell.textLabel?.text = "Library photos and videos"
-            cell.detailTextLabel?.text = "media from device library"
             break
             
         default: break
