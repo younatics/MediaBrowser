@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MBProgressHUD
 import MediaPlayer
 import QuartzCore
 import SDWebImage
@@ -1894,49 +1893,5 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 setControlsHidden(hidden: false, animated: true, permanent: true)
             }
         }
-    }
-
-    //MARK: - Action Progress
-    var mediaProgressView: MBProgressHUD?
-
-    var progressHUD: MBProgressHUD {
-        if nil == mediaProgressView {
-            mediaProgressView = MBProgressHUD(view: self.view)
-            mediaProgressView!.minSize = CGSize(width: 120, height: 120)
-            mediaProgressView!.minShowTime = 1.0
-            
-            view.addSubview(mediaProgressView!)
-        }
-        return mediaProgressView!
-    }
-
-    private func showProgressHUDWithMessage(message: String!) {
-        progressHUD.labelText = message
-        progressHUD.mode = MBProgressHUDMode.indeterminate
-        progressHUD.show(true)
-        
-        navigationController?.navigationBar.isUserInteractionEnabled = false
-    }
-
-    private func hideProgressHUD(animated: Bool) {
-        progressHUD.hide(animated)
-        
-        navigationController?.navigationBar.isUserInteractionEnabled = true
-    }
-
-    private func showProgressHUDCompleteMessage(message: String?) {
-        if let msg = message {
-            if progressHUD.isHidden {
-                progressHUD.show(true)
-            }
-    
-            progressHUD.labelText = msg
-            progressHUD.mode = MBProgressHUDMode.customView
-            progressHUD.hide(true, afterDelay: 1.5)
-        } else {
-            progressHUD.hide(true)
-        }
-    
-        navigationController?.navigationBar.isUserInteractionEnabled = true
     }
 }
