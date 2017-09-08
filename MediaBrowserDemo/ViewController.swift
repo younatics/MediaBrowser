@@ -59,14 +59,14 @@ extension ViewController: PhotoBrowserDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func thumbPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Photo {
+    func thumbPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> MWPhoto {
         if index < thumbs.count {
             return thumbs[index]
         }
         return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "ThumbPhoto at index is wrong")
     }
     
-    func photoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Photo {
+    func photoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> MWPhoto {
         if index < photos.count {
             return photos[index]
         }

@@ -11,7 +11,7 @@ import DACircularProgress
 
 public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingImageViewDelegate, TapDetectingViewDelegate {
     public var index = 0
-    public var mwPhoto: Photo?
+    public var mwPhoto: MWPhoto?
     public weak var captionView: CaptionView?
     public weak var selectedButton: UIButton?
     public weak var playButton: UIButton?
@@ -121,7 +121,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
 
     //MARK: - Image
 
-    var photo: Photo? {
+    var photo: MWPhoto? {
         set(p) {
             // Cancel any loading on old photo
             if mwPhoto != nil && p == nil {
@@ -222,7 +222,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         DispatchQueue.main.async() {
             let dict = notification.object as! [String : AnyObject]
             
-            if let photoWithProgress = dict["photo"] as? Photo,
+            if let photoWithProgress = dict["photo"] as? MWPhoto,
                 let p = self.photo, photoWithProgress.equals(photo: p)
             {
                 if let progress = dict["progress"] as? Float {

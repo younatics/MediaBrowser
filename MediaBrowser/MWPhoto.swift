@@ -13,9 +13,12 @@ import Photos
 import MapleBacon
 import Photos
 
+let MWPHOTO_LOADING_DID_END_NOTIFICATION  = "MWPHOTO_LOADING_DID_END_NOTIFICATION"
+let MWPHOTO_PROGRESS_NOTIFICATION  = "MWPHOTO_PROGRESS_NOTIFICATION"
+
 var PHInvalidImageRequestID = PHImageRequestID(0)
 
-public class MWPhoto: Photo {
+public class MWPhoto: NSObject {
     public var caption = ""
     public var emptyImage = true
     public var isVideo = false
@@ -33,7 +36,7 @@ public class MWPhoto: Photo {
     
     //MARK: - Init
 
-    public init() {}
+    public override init() {}
 
     public convenience init(image: UIImage) {
         self.init()
@@ -334,7 +337,7 @@ public class MWPhoto: Photo {
         }
     }
     
-    public func equals(photo: Photo) -> Bool {
+    public func equals(photo: MWPhoto) -> Bool {
         if let p = photo as? MWPhoto {
             return uuid == p.uuid
         }

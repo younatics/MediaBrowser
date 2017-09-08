@@ -22,9 +22,9 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     // Data
     private var photoCount = -1
-    private var photos = [Photo?]()
-    private var thumbPhotos = [Photo?]()
-	private var fixedPhotosArray: [Photo]? // Provided via init
+    private var photos = [MWPhoto?]()
+    private var thumbPhotos = [MWPhoto?]()
+	private var fixedPhotosArray: [MWPhoto]? // Provided via init
 	
 	// Views
 	private var pagingScrollView = UIScrollView()
@@ -123,7 +123,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         self.delegate = delegate
     }
 
-    public convenience init(photos: [Photo]) {
+    public convenience init(photos: [MWPhoto]) {
         self.init()
         fixedPhotosArray = photos
     }
@@ -764,8 +764,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return photoCount
     }
 
-    func photoAtIndex(index: Int) -> Photo? {
-        var photo: Photo? = nil
+    func photoAtIndex(index: Int) -> MWPhoto? {
+        var photo: MWPhoto? = nil
         
         if index < photos.count {
             if photos[index] == nil {
@@ -789,8 +789,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return photo
     }
 
-    func thumbPhotoAtIndex(index: Int) -> Photo? {
-        var photo: Photo?
+    func thumbPhotoAtIndex(index: Int) -> MWPhoto? {
+        var photo: MWPhoto?
         
         if index < thumbPhotos.count {
             if nil == thumbPhotos[index] {
@@ -849,7 +849,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
     }
 
-    func imageForPhoto(photo: Photo?) -> UIImage? {
+    func imageForPhoto(photo: MWPhoto?) -> UIImage? {
         if let p = photo {
             // Get image or obtain in background
             if let img = p.underlyingImage {
@@ -863,7 +863,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return nil
     }
 
-    func loadAdjacentPhotosIfNecessary(photo: Photo) {
+    func loadAdjacentPhotosIfNecessary(photo: MWPhoto) {
         let page = pageDisplayingPhoto(photo: photo)
         if let p = page {
             // If page is current page then initiate loading of previous and next pages
@@ -895,7 +895,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     //MARK: - MWPhoto Loading falsetification
 
     func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
-        if let photo = notification.object as? Photo {
+        if let photo = notification.object as? MWPhoto {
             if let page = pageDisplayingPhoto(photo: photo) {
                 if photo.underlyingImage != nil {
                     // Successful load
@@ -1062,7 +1062,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return thePage
     }
 
-    func pageDisplayingPhoto(photo: Photo) -> ZoomingScrollView? {
+    func pageDisplayingPhoto(photo: MWPhoto) -> ZoomingScrollView? {
         var thePage: ZoomingScrollView?
         for page in visiblePages {
             if page.photo != nil && page.photo!.equals(photo: photo) {

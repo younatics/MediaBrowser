@@ -155,9 +155,9 @@ public class GridCell: UICollectionViewCell {
 
     //MARK: - Image Handling
 
-    private var mwPhoto: Photo?
+    private var mwPhoto: MWPhoto?
 
-    var photo: Photo? {
+    var photo: MWPhoto? {
         set(p) {
             mwPhoto = p
             
@@ -282,7 +282,7 @@ public class GridCell: UICollectionViewCell {
 
     public func setProgressFromNotification(notification: NSNotification) {
         if let dict = notification.object as? [String : AnyObject?],
-            let photoWithProgress = dict["photo"] as? Photo,
+            let photoWithProgress = dict["photo"] as? MWPhoto,
             let mwp = mwPhoto, photosEqual(p1: photoWithProgress, mwp)
         {
             if let progress = dict["progress"] as? String,
@@ -297,7 +297,7 @@ public class GridCell: UICollectionViewCell {
     }
 
     public func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
-        if let p = notification.object as? Photo,
+        if let p = notification.object as? MWPhoto,
             let mwp = mwPhoto, photosEqual(p1: p, mwp)
         {
             if p.underlyingImage != nil {
@@ -313,7 +313,7 @@ public class GridCell: UICollectionViewCell {
         }
     }
     
-    private func photosEqual(p1: Photo, _ p2: Photo) -> Bool {
+    private func photosEqual(p1: MWPhoto, _ p2: MWPhoto) -> Bool {
         return
             p1.underlyingImage == p2.underlyingImage &&
             p1.emptyImage == p2.emptyImage &&
