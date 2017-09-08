@@ -59,7 +59,6 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
             object: nil)
         
         // Setup
-        backgroundColor = UIColor.black
         delegate = self
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
