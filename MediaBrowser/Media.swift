@@ -30,7 +30,7 @@ public class Media: NSObject {
     private var assetTargetSize = CGSize.zero
     
     private var loadingInProgress = false
-    private var operationToken: SDWebImageDownloadToken?
+    private var operation: SDWebImageOperation?
     private var assetRequestID = PHInvalidImageRequestID
     
     //MARK: - Init
@@ -180,7 +180,7 @@ public class Media: NSObject {
     }
     
     func cancelDownload() {
-        SDWebImageDownloader.shared().cancel(self.operationToken)
+        self.operation?.cancel()
     }
 
     // Load from local file
@@ -199,7 +199,7 @@ public class Media: NSObject {
                 }
             },
         */
-        operationToken = SDWebImageDownloader.shared().downloadImage(with: url, options: [SDWebImageDownloaderOptions.useNSURLCache, SDWebImageDownloaderOptions.continueInBackground], progress: nil) { [weak self] (image, _, error, finish) in
+        operation = SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil) { [weak self] (image, _, error, cacheType, finish, imageUrl) in
             guard let wself = self else { return }
 
             DispatchQueue.main.async {
@@ -318,8 +318,8 @@ public class Media: NSObject {
     }
 
     public func cancelAnyLoading() {
-        if let token = self.operationToken {
-            SDWebImageDownloader.shared().cancel(token)
+        if let op = self.operation {
+            op.cancel()
             loadingInProgress = false
         }
         else
