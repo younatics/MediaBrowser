@@ -199,19 +199,29 @@ public class Media: NSObject {
                 }
             },
         */
-        operationToken = SDWebImageDownloader.shared().downloadImage(with: url, options: [SDWebImageDownloaderOptions.useNSURLCache, SDWebImageDownloaderOptions.continueInBackground], progress: nil) { [weak self] (image, _, error, finish) in
+        operationToken = SDWebImageDownloader.shared().downloadImage(with: url, options: [SDWebImageDownloaderOptions.useNSURLCache, SDWebImageDownloaderOptions.continueInBackground], progress: { (receivedSize, expectedSize, targetURL) in
+            let dict = [
+                "progress" : CGFloat(receivedSize)/CGFloat(expectedSize),
+                "photo" : self
+                ] as [String : Any]
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: MEDIA_PROGRESS_NOTIFICATION), object: dict)
+            
+        }, completed: { [weak self](image, _, error, finish) in
             guard let wself = self else { return }
-
+            
             DispatchQueue.main.async {
                 if let _image = image {
                     wself.underlyingImage = _image
                 }
-
+                
                 DispatchQueue.main.async() {
                     wself.imageLoadingComplete()
                 }
             }
-        }
+
+        })
+        
     }
     
     // Load from local file
