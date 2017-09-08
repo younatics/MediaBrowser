@@ -34,6 +34,7 @@ Awesome Media Browser
   s.dependency 'MBProgressHUD', '~> 0.9'
   s.dependency 'DACircularProgress', '~> 2.3'
   s.dependency 'MapleBacon'
+  s.dependency 'SDWebImage'
 
   s.requires_arc = true
 end
