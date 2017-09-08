@@ -16,7 +16,7 @@
 		1906ABDE1F5F83960052DC3A /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD31F5F83960052DC3A /* GridCell.swift */; };
 		1906ABDF1F5F83960052DC3A /* GridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD41F5F83960052DC3A /* GridViewController.swift */; };
 		1906ABE01F5F83960052DC3A /* MWLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD51F5F83960052DC3A /* MWLog.swift */; };
-		1906ABE11F5F83960052DC3A /* MWPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD61F5F83960052DC3A /* MWPhoto.swift */; };
+		1906ABE11F5F83960052DC3A /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD61F5F83960052DC3A /* Media.swift */; };
 		1906ABE31F5F83960052DC3A /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD81F5F83960052DC3A /* PhotoBrowser.swift */; };
 		1906ABE41F5F83960052DC3A /* TapDetectingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD91F5F83960052DC3A /* TapDetectingImageView.swift */; };
 		1906ABE51F5F83960052DC3A /* TapDetectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDA1F5F83960052DC3A /* TapDetectingView.swift */; };
@@ -72,7 +72,7 @@
 		1906ABD31F5F83960052DC3A /* GridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		1906ABD41F5F83960052DC3A /* GridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridViewController.swift; sourceTree = "<group>"; };
 		1906ABD51F5F83960052DC3A /* MWLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MWLog.swift; sourceTree = "<group>"; };
-		1906ABD61F5F83960052DC3A /* MWPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MWPhoto.swift; sourceTree = "<group>"; };
+		1906ABD61F5F83960052DC3A /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		1906ABD81F5F83960052DC3A /* PhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowser.swift; sourceTree = "<group>"; };
 		1906ABD91F5F83960052DC3A /* TapDetectingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapDetectingImageView.swift; sourceTree = "<group>"; };
 		1906ABDA1F5F83960052DC3A /* TapDetectingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapDetectingView.swift; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 				1906ABD31F5F83960052DC3A /* GridCell.swift */,
 				1906ABD41F5F83960052DC3A /* GridViewController.swift */,
 				1906ABD51F5F83960052DC3A /* MWLog.swift */,
-				1906ABD61F5F83960052DC3A /* MWPhoto.swift */,
+				1906ABD61F5F83960052DC3A /* Media.swift */,
 				1906ABD81F5F83960052DC3A /* PhotoBrowser.swift */,
 				19E1F62D1F5FD8EE004D3BA8 /* PhotoBrowserDelegate.swift */,
 				1906ABD91F5F83960052DC3A /* TapDetectingImageView.swift */,
@@ -395,7 +395,7 @@
 				19E1F62E1F5FD8EE004D3BA8 /* PhotoBrowserDelegate.swift in Sources */,
 				1906ABE51F5F83960052DC3A /* TapDetectingView.swift in Sources */,
 				1906ABE61F5F83960052DC3A /* UIImageExtension.swift in Sources */,
-				1906ABE11F5F83960052DC3A /* MWPhoto.swift in Sources */,
+				1906ABE11F5F83960052DC3A /* Media.swift in Sources */,
 				1906ABE01F5F83960052DC3A /* MWLog.swift in Sources */,
 				1906ABE31F5F83960052DC3A /* PhotoBrowser.swift in Sources */,
 				1906ABDD1F5F83960052DC3A /* CaptionView.swift in Sources */,

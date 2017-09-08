@@ -11,7 +11,7 @@ import DACircularProgress
 
 public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingImageViewDelegate, TapDetectingViewDelegate {
     public var index = 0
-    public var mwPhoto: MWPhoto?
+    public var Media: Media?
     public weak var captionView: CaptionView?
     public weak var selectedButton: UIButton?
     public weak var playButton: UIButton?
@@ -72,8 +72,8 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     }
 
     deinit {
-        if mwPhoto != nil {
-            mwPhoto!.cancelAnyLoading()
+        if Media != nil {
+            Media!.cancelAnyLoading()
         }
 
         NotificationCenter.default.removeObserver(self)
@@ -121,14 +121,14 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
 
     //MARK: - Image
 
-    var photo: MWPhoto? {
+    var photo: Media? {
         set(p) {
             // Cancel any loading on old photo
-            if mwPhoto != nil && p == nil {
-                mwPhoto!.cancelAnyLoading()
+            if Media != nil && p == nil {
+                Media!.cancelAnyLoading()
             }
-            mwPhoto = p
-            if photoBrowser.imageForPhoto(photo: mwPhoto) != nil {
+            Media = p
+            if photoBrowser.imageForPhoto(photo: Media) != nil {
                 self.displayImage()
             }
             else {
@@ -138,13 +138,13 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         }
         
         get {
-            return mwPhoto
+            return Media
         }
     }
 
     // Get and display image
     func displayImage() {
-        if mwPhoto != nil && photoImageView.image == nil {
+        if Media != nil && photoImageView.image == nil {
             // Reset
             maximumZoomScale = 1.0
             minimumZoomScale = 1.0
@@ -222,7 +222,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         DispatchQueue.main.async() {
             let dict = notification.object as! [String : AnyObject]
             
-            if let photoWithProgress = dict["photo"] as? MWPhoto,
+            if let photoWithProgress = dict["photo"] as? Media,
                 let p = self.photo, photoWithProgress.equals(photo: p)
             {
                 if let progress = dict["progress"] as? Float {

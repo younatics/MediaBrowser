@@ -22,9 +22,9 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     // Data
     private var photoCount = -1
-    private var photos = [MWPhoto?]()
-    private var thumbPhotos = [MWPhoto?]()
-	private var fixedPhotosArray: [MWPhoto]? // Provided via init
+    private var photos = [Media?]()
+    private var thumbPhotos = [Media?]()
+	private var fixedPhotosArray: [Media]? // Provided via init
 	
 	// Views
 	private var pagingScrollView = UIScrollView()
@@ -123,7 +123,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         self.delegate = delegate
     }
 
-    public convenience init(photos: [MWPhoto]) {
+    public convenience init(photos: [Media]) {
         self.init()
         fixedPhotosArray = photos
     }
@@ -147,7 +147,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 //        extendedLayoutIncludesOpaqueBars = true
 //        navigationController?.view.backgroundColor = UIColor.white
         
-        // Listen for MWPhoto falsetifications
+        // Listen for Media falsetifications
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handlePhotoLoadingDidEndNotification),
@@ -764,8 +764,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return photoCount
     }
 
-    func photoAtIndex(index: Int) -> MWPhoto? {
-        var photo: MWPhoto? = nil
+    func photoAtIndex(index: Int) -> Media? {
+        var photo: Media? = nil
         
         if index < photos.count {
             if photos[index] == nil {
@@ -789,8 +789,8 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return photo
     }
 
-    func thumbPhotoAtIndex(index: Int) -> MWPhoto? {
-        var photo: MWPhoto?
+    func thumbPhotoAtIndex(index: Int) -> Media? {
+        var photo: Media?
         
         if index < thumbPhotos.count {
             if nil == thumbPhotos[index] {
@@ -849,7 +849,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
     }
 
-    func imageForPhoto(photo: MWPhoto?) -> UIImage? {
+    func imageForPhoto(photo: Media?) -> UIImage? {
         if let p = photo {
             // Get image or obtain in background
             if let img = p.underlyingImage {
@@ -863,7 +863,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return nil
     }
 
-    func loadAdjacentPhotosIfNecessary(photo: MWPhoto) {
+    func loadAdjacentPhotosIfNecessary(photo: Media) {
         let page = pageDisplayingPhoto(photo: photo)
         if let p = page {
             // If page is current page then initiate loading of previous and next pages
@@ -892,10 +892,10 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
     }
 
-    //MARK: - MWPhoto Loading falsetification
+    //MARK: - Media Loading falsetification
 
     func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
-        if let photo = notification.object as? MWPhoto {
+        if let photo = notification.object as? Media {
             if let page = pageDisplayingPhoto(photo: photo) {
                 if photo.underlyingImage != nil {
                     // Successful load
@@ -1062,7 +1062,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return thePage
     }
 
-    func pageDisplayingPhoto(photo: MWPhoto) -> ZoomingScrollView? {
+    func pageDisplayingPhoto(photo: Media) -> ZoomingScrollView? {
         var thePage: ZoomingScrollView?
         for page in visiblePages {
             if page.photo != nil && page.photo!.equals(photo: photo) {

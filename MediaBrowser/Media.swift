@@ -1,5 +1,5 @@
 //
-//  MWPhoto.swift
+//  Media.swift
 //  MediaBrowser
 //
 //  Created by Seungyoun Yi on 2017. 9. 6..
@@ -18,7 +18,7 @@ let MWPHOTO_PROGRESS_NOTIFICATION  = "MWPHOTO_PROGRESS_NOTIFICATION"
 
 var PHInvalidImageRequestID = PHImageRequestID(0)
 
-public class MWPhoto: NSObject {
+public class Media: NSObject {
     public var caption = ""
     public var emptyImage = true
     public var isVideo = false
@@ -337,8 +337,8 @@ public class MWPhoto: NSObject {
         }
     }
     
-    public func equals(photo: MWPhoto) -> Bool {
-        if let p = photo as? MWPhoto {
+    public func equals(photo: Media) -> Bool {
+        if let p = photo as? Media {
             return uuid == p.uuid
         }
         

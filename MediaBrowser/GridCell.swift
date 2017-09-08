@@ -155,11 +155,11 @@ public class GridCell: UICollectionViewCell {
 
     //MARK: - Image Handling
 
-    private var mwPhoto: MWPhoto?
+    private var Media: Media?
 
-    var photo: MWPhoto? {
+    var photo: Media? {
         set(p) {
-            mwPhoto = p
+            Media = p
             
             if let ph = p {
                 videoIndicator.isHidden = !ph.isVideo
@@ -177,12 +177,12 @@ public class GridCell: UICollectionViewCell {
         }
         
         get {
-            return mwPhoto
+            return Media
         }
     }
 
     func displayImage() {
-        if let p = mwPhoto {
+        if let p = Media {
             imageView.image = p.underlyingImage
             selectedButton.isHidden = !selectionMode
             self.hideImageFailure()
@@ -282,8 +282,8 @@ public class GridCell: UICollectionViewCell {
 
     public func setProgressFromNotification(notification: NSNotification) {
         if let dict = notification.object as? [String : AnyObject?],
-            let photoWithProgress = dict["photo"] as? MWPhoto,
-            let mwp = mwPhoto, photosEqual(p1: photoWithProgress, mwp)
+            let photoWithProgress = dict["photo"] as? Media,
+            let mwp = Media, photosEqual(p1: photoWithProgress, mwp)
         {
             if let progress = dict["progress"] as? String,
                 let progressVal =  NumberFormatter().number(from: progress)
@@ -297,8 +297,8 @@ public class GridCell: UICollectionViewCell {
     }
 
     public func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
-        if let p = notification.object as? MWPhoto,
-            let mwp = mwPhoto, photosEqual(p1: p, mwp)
+        if let p = notification.object as? Media,
+            let mwp = Media, photosEqual(p1: p, mwp)
         {
             if p.underlyingImage != nil {
                 // Successful load
@@ -313,7 +313,7 @@ public class GridCell: UICollectionViewCell {
         }
     }
     
-    private func photosEqual(p1: MWPhoto, _ p2: MWPhoto) -> Bool {
+    private func photosEqual(p1: Media, _ p2: Media) -> Bool {
         return
             p1.underlyingImage == p2.underlyingImage &&
             p1.emptyImage == p2.emptyImage &&

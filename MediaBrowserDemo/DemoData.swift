@@ -10,14 +10,14 @@ import Foundation
 import MediaBrowser
 
 class DemoData {
-    class func singlePhoto() -> [MWPhoto] {
+    class func singlePhoto() -> [Media] {
         let photo = localMediaPhoto(imageName: "MotionBookIcon", caption: "MotionBookIcon")
         
         return [photo]
     }
     
-    class func multiplePhotoAndVideo() -> [MWPhoto] {
-        var photos = [MWPhoto]()
+    class func multiplePhotoAndVideo() -> [Media] {
+        var photos = [Media]()
         var photo = localMediaPhoto(imageName: "MotionBookIntro1", caption: "MotionBook Intro 1")
         photos.append(photo)
         
@@ -40,8 +40,8 @@ class DemoData {
         return photos
     }
     
-    class func multiplePhotoGrid() -> [MWPhoto] {
-        var photos = [MWPhoto]()
+    class func multiplePhotoGrid() -> [Media] {
+        var photos = [Media]()
 
         var photo = localMediaPhoto(imageName: "MotionBookIntro1", caption: "MotionBook Intro 1")
         photos.append(photo)
@@ -82,8 +82,8 @@ class DemoData {
         return photos
     }
     
-    class func photoSelection() -> [MWPhoto] {
-        var photos = [MWPhoto]()
+    class func photoSelection() -> [Media] {
+        var photos = [Media]()
         
         var photo = localMediaPhoto(imageName: "demo1", caption: "Demo Image 1 from Pixabay")
         photos.append(photo)
@@ -110,8 +110,8 @@ class DemoData {
 
     }
     
-    class func webPhotos() -> [MWPhoto] {
-        var photos = [MWPhoto]()
+    class func webPhotos() -> [Media] {
+        var photos = [Media]()
         
         var photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/03/11/22/laptop-2575689_1280.jpg", caption: nil)
         photos.append(photo)
@@ -134,8 +134,8 @@ class DemoData {
         return photos
     }
     
-    class func singleVideo() -> [MWPhoto] {
-        var photos = [MWPhoto]()
+    class func singleVideo() -> [Media] {
+        var photos = [Media]()
 
         let photo = localMediaPhoto(imageName: "Atoms_thumb", caption: "Atom")
         photo.videoURL = URL(fileURLWithPath: Bundle.main.path(forResource: "Atoms", ofType: "mp4")!)
@@ -145,8 +145,8 @@ class DemoData {
 
     }
     
-    class func multiVideos() -> [MWPhoto] {
-        var photos = [MWPhoto]()
+    class func multiVideos() -> [Media] {
+        var photos = [Media]()
         
         var photo = webMediaVideo(url: "https://player.vimeo.com/external/199627560.sd.mp4?s=4d51ea25ca083b46834911fc794db2e99e6075c7&profile_id=165")
         photos.append(photo)
@@ -161,8 +161,8 @@ class DemoData {
         return photos
     }
     
-    class func multiVideoThumbs() -> [MWPhoto] {
-        var thumbs = [MWPhoto]()
+    class func multiVideoThumbs() -> [Media] {
+        var thumbs = [Media]()
         
         var thumb = webMediaPhoto(url: "https://i.vimeocdn.com/video/612917789_640x360.jpg", caption: nil)
         thumb.isVideo = true
@@ -180,35 +180,35 @@ class DemoData {
     }
 
     
-    class func localMediaPhoto(imageName: String, caption: String) -> MWPhoto {
+    class func localMediaPhoto(imageName: String, caption: String) -> Media {
         guard let image = UIImage(named: imageName) else {
             fatalError("Image is nil")
         }
         
-        let photo = MWPhoto(image: image, caption: caption)
+        let photo = Media(image: image, caption: caption)
         return photo
     }
     
-    class func webMediaPhoto(url: String, caption: String?) -> MWPhoto {
+    class func webMediaPhoto(url: String, caption: String?) -> Media {
         guard let validUrl = URL(string: url) else {
             fatalError("Image is nil")
         }
         
-        var photo = MWPhoto()
+        var photo = Media()
         if let _caption = caption {
-            photo = MWPhoto(url: validUrl, caption: _caption)
+            photo = Media(url: validUrl, caption: _caption)
         } else {
-            photo = MWPhoto(url: validUrl)
+            photo = Media(url: validUrl)
         }
         return photo
     }
     
-    class func webMediaVideo(url: String) -> MWPhoto {
+    class func webMediaVideo(url: String) -> Media {
         guard let validUrl = URL(string: url) else {
             fatalError("Video is nil")
         }
         
-        let photo = MWPhoto(videoURL: validUrl)
+        let photo = Media(videoURL: validUrl)
         return photo
     }
 }

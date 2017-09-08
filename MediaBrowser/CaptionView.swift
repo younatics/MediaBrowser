@@ -10,11 +10,11 @@
 import UIKit
 
 public class CaptionView: UIToolbar {
-    private var photo: MWPhoto?
+    private var photo: Media?
     private var label = UILabel()
     public let labelPadding = CGFloat(10.0)
 
-    init(photo: MWPhoto?) {
+    init(photo: Media?) {
         super.init(frame: CGRect(x: 0, y: 0, width: 320.0, height: 44.0)) // Random initial frame
         self.photo = photo
         

@@ -11,9 +11,9 @@ import UIKit
 public protocol PhotoBrowserDelegate: class {
     func numberOfPhotosInPhotoBrowser(photoBrowser: PhotoBrowser) -> Int
     
-    func photoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> MWPhoto
+    func photoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Media
     
-    func thumbPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> MWPhoto
+    func thumbPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Media
     
     func captionViewForPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> CaptionView?
     

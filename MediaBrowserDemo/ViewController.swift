@@ -14,8 +14,8 @@ class ViewController: UITableViewController {
     @IBOutlet var segmentedControl: UISegmentedControl!
     
     var selections = [Bool]()
-    var photos = [MWPhoto]()
-    var thumbs = [MWPhoto]()
+    var photos = [Media]()
+    var thumbs = [Media]()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -59,14 +59,14 @@ extension ViewController: PhotoBrowserDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func thumbPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> MWPhoto {
+    func thumbPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Media {
         if index < thumbs.count {
             return thumbs[index]
         }
         return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "ThumbPhoto at index is wrong")
     }
     
-    func photoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> MWPhoto {
+    func photoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Media {
         if index < photos.count {
             return photos[index]
         }
@@ -106,8 +106,8 @@ extension ViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        photos = [MWPhoto]()
-        thumbs = [MWPhoto]()
+        photos = [Media]()
+        thumbs = [Media]()
         
         var displayActionButton = true
         var displaySelectionButtons = false
