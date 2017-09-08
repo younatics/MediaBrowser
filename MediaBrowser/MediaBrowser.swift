@@ -833,7 +833,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var value = false
         if displaySelectionButtons {
             if let d = delegate {
-                value = d.isMediaSelectedAtIndex(index: index, mediaBrowser: self)
+                value = d.isMediaSelected(at: index, in: self)
             }
         }
         
@@ -843,7 +843,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func setPhotoSelected(selected: Bool, atIndex index: Int) {
         if displaySelectionButtons {
             if let d = delegate {
-                d.selectedChanged(selected: selected, index: index, mediaBrowser: self)
+                d.mediaDid(selected: selected, at: index, in: self)
             }
         }
     }
@@ -1143,7 +1143,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Notify delegate
         if index != previousPageIndex {
             if let d = delegate {
-                d.didDisplayMediaAtIndex(index: index, mediaBrowser: self)
+                d.didDisplayMedia(at: index, in: self)
             }
             previousPageIndex = index
         }
@@ -1305,7 +1305,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         else
         if medias > 1 {
             if let d = delegate {
-                title = d.titleForMediaAtIndex(index: currentPageIndex, mediaBrowser: self)
+                title = d.title(for: self, at: currentPageIndex)
             }
             
             if nil == title {
@@ -1859,7 +1859,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // If they have defined a delegate method then just message them
                 // Let delegate handle things
                 if let d = delegate {
-                    d.actionButtonPressedForPhotoAtIndex(index: currentPageIndex, mediaBrowser: self)
+                    d.actionButtonPressed(at: currentPageIndex, in: self)
                 }
 
                 // Show activity view controller

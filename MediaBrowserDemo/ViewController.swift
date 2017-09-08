@@ -77,15 +77,17 @@ extension ViewController: MediaBrowserDelegate {
         return mediaArray.count
     }
     
-    func isMediaSelectedAtIndex(index: Int, MediaBrowser: MediaBrowser) -> Bool {
+    func isMediaSelected(at index: Int, in mediaBrowser: MediaBrowser) -> Bool {
         return selections[index]
+
     }
     
-    func didDisplayMediaAtIndex(index: Int, mediaBrowser: MediaBrowser) {
+    func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser) {
         print("Did start viewing photo at index \(index)")
+
     }
     
-    func selectedChanged(selected: Bool, index: Int, mediaBrowser: MediaBrowser) {
+    func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser) {
         selections[index] = selected
     }
     

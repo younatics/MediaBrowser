@@ -17,41 +17,29 @@ public protocol MediaBrowserDelegate: class {
     
     func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView?
     
-    func titleForMediaAtIndex(index: Int, mediaBrowser: MediaBrowser) -> String
+    func title(for mediaBrowser: MediaBrowser, at index: Int) -> String
     
-    func didDisplayMediaAtIndex(index: Int, mediaBrowser: MediaBrowser)
+    func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser)
     
-    func actionButtonPressedForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser)
+    func actionButtonPressed(at photoIndex: Int, in mediaBrowser: MediaBrowser)
     
-    func isMediaSelectedAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Bool
+    func isMediaSelected(at index: Int, in mediaBrowser: MediaBrowser) -> Bool
     
-    func selectedChanged(selected: Bool, index: Int, mediaBrowser: MediaBrowser)
+    func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser)
     
     func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser)
 }
 
 public extension MediaBrowserDelegate {
-    func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView? {
-        return nil
-    }
+    func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView? { return nil }
     
-    func didDisplayMediaAtIndex(index: Int, mediaBrowser: MediaBrowser) {
-        
-    }
+    func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser) { }
     
-    func actionButtonPressedForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) {
-        
-    }
+    func actionButtonPressed(at photoIndex: Int, in mediaBrowser: MediaBrowser) { }
     
-    func isMediaSelectedAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Bool {
-        return false
-    }
+    func isMediaSelected(at index: Int, in mediaBrowser: MediaBrowser) -> Bool { return false }
     
-    func selectedChanged(selected: Bool, index: Int, mediaBrowser: MediaBrowser) {
-        
-    }
+    func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser) { }
     
-    func titleForMediaAtIndex(index: Int, mediaBrowser: MediaBrowser) -> String {
-        return ""
-    }
+    func title(for mediaBrowser: MediaBrowser, at index: Int) -> String { return "" }
 }
