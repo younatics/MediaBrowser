@@ -749,7 +749,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     var numberOfPhotos: Int {
         if photoCount == -1 {
             if let d = delegate {
-                photoCount = d.numberOfPhotosInPhotoBrowser(MediaBrowser: self)
+                photoCount = d.numberOfPhotosInPhotoBrowser(mediaBrowser: self)
             }
             
             if let fpa = fixedPhotosArray {
@@ -770,7 +770,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if index < photos.count {
             if photos[index] == nil {
                 if let d = delegate {
-                    photo = d.photoAtIndex(index: index, MediaBrowser: self)
+                    photo = d.photoAtIndex(index: index, mediaBrowser: self)
                     
                     if nil == photo && fixedPhotosArray != nil && index < fixedPhotosArray!.count {
                         photo = fixedPhotosArray![index]
@@ -795,7 +795,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if index < thumbPhotos.count {
             if nil == thumbPhotos[index] {
                 if let d = delegate {
-                    photo = d.thumbPhotoAtIndex(index: index, MediaBrowser: self)
+                    photo = d.thumbPhotoAtIndex(index: index, mediaBrowser: self)
                 
                     if let p = photo {
                         thumbPhotos[index] = p
@@ -814,7 +814,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var captionView: CaptionView?
         
         if let d = delegate {
-            captionView = d.captionViewForPhotoAtIndex(index: index, MediaBrowser: self)
+            captionView = d.captionViewForPhotoAtIndex(index: index, mediaBrowser: self)
             
             if let p = photoAtIndex(index: index), nil == captionView {
                 if p.caption.characters.count > 0 {
@@ -834,7 +834,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var value = false
         if displaySelectionButtons {
             if let d = delegate {
-                value = d.isPhotoSelectedAtIndex(index: index, MediaBrowser: self)
+                value = d.isPhotoSelectedAtIndex(index: index, mediaBrowser: self)
             }
         }
         
@@ -844,7 +844,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func setPhotoSelected(selected: Bool, atIndex index: Int) {
         if displaySelectionButtons {
             if let d = delegate {
-                d.selectedChanged(selected: selected, index: index, MediaBrowser: self)
+                d.selectedChanged(selected: selected, index: index, mediaBrowser: self)
             }
         }
     }
@@ -977,7 +977,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // Add new page
                 var p = dequeueRecycledPage
                 if nil == p {
-                    p = ZoomingScrollView(MediaBrowser: self)
+                    p = ZoomingScrollView(mediaBrowser: self)
                 }
                 
                 let page = p!
@@ -1145,7 +1145,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Notify delegate
         if index != previousPageIndex {
             if let d = delegate {
-                d.didDisplayPhotoAtIndex(index: index, MediaBrowser: self)
+                d.didDisplayPhotoAtIndex(index: index, mediaBrowser: self)
             }
             previousPageIndex = index
         }
@@ -1307,7 +1307,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         else
         if photos > 1 {
             if let d = delegate {
-                title = d.titleForPhotoAtIndex(index: currentPageIndex, MediaBrowser: self)
+                title = d.titleForPhotoAtIndex(index: currentPageIndex, mediaBrowser: self)
             }
             
             if nil == title {
@@ -1846,7 +1846,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             // Dismiss view controller
             // Call delegate method and let them dismiss us
             if let d = delegate {
-                d.photoBrowserDidFinishModalPresentation(MediaBrowser: self)
+                d.photoBrowserDidFinishModalPresentation(mediaBrowser: self)
             }
             // dismissViewControllerAnimated:true completion:nil]
         }
@@ -1861,7 +1861,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // If they have defined a delegate method then just message them
                 // Let delegate handle things
                 if let d = delegate {
-                    d.actionButtonPressedForPhotoAtIndex(index: currentPageIndex, MediaBrowser: self)
+                    d.actionButtonPressedForPhotoAtIndex(index: currentPageIndex, mediaBrowser: self)
                 }
 
                 // Show activity view controller

@@ -55,18 +55,18 @@ class ViewController: UITableViewController {
 
 //MARK: PhotoBrowserDelegate
 extension ViewController: PhotoBrowserDelegate {
-    func photoBrowserDidFinishModalPresentation(MediaBrowser: MediaBrowser) {
+    func photoBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func thumbPhotoAtIndex(index: Int, MediaBrowser: MediaBrowser) -> Media {
+    func thumbPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Media {
         if index < thumbs.count {
             return thumbs[index]
         }
         return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "ThumbPhoto at index is wrong")
     }
     
-    func photoAtIndex(index: Int, MediaBrowser: MediaBrowser) -> Media {
+    func photoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Media {
         if index < photos.count {
             return photos[index]
         }
@@ -74,7 +74,7 @@ extension ViewController: PhotoBrowserDelegate {
 
     }
     
-    func numberOfPhotosInPhotoBrowser(MediaBrowser: MediaBrowser) -> Int {
+    func numberOfPhotosInPhotoBrowser(mediaBrowser: MediaBrowser) -> Int {
         return photos.count
     }
     
@@ -82,11 +82,11 @@ extension ViewController: PhotoBrowserDelegate {
         return selections[index]
     }
     
-    func didDisplayPhotoAtIndex(index: Int, MediaBrowser: MediaBrowser) {
+    func didDisplayPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) {
         print("Did start viewing photo at index \(index)")
     }
     
-    func selectedChanged(selected: Bool, index: Int, MediaBrowser: MediaBrowser) {
+    func selectedChanged(selected: Bool, index: Int, mediaBrowser: MediaBrowser) {
         selections[index] = selected
     }
     

@@ -11,23 +11,23 @@ import DACircularProgress
 
 public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingImageViewDelegate, TapDetectingViewDelegate {
     public var index = 0
-    public var Media: Media?
+    public var media: Media?
     public weak var captionView: CaptionView?
     public weak var selectedButton: UIButton?
     public weak var playButton: UIButton?
 
-    private weak var MediaBrowser: MediaBrowser!
+    private weak var mediaBrowser: MediaBrowser!
 	private var tapView = TapDetectingView(frame: .zero) // for background taps
 	private var photoImageView = TapDetectingImageView(frame: .zero)
     private var loadingIndicator = DACircularProgressView(frame: CGRect(x: 140, y: 30, width: 40, height: 40))
     private var loadingError: UIImageView?
     
-    public init(MediaBrowser: MediaBrowser) {
+    public init(mediaBrowser: MediaBrowser) {
         super.init(frame: .zero)
         
         // Setup
         index = Int.max
-        self.MediaBrowser = MediaBrowser
+        self.mediaBrowser = mediaBrowser
         
         // Tap view for background
         tapView = TapDetectingView(frame: bounds)
@@ -72,8 +72,8 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     }
 
     deinit {
-        if Media != nil {
-            Media!.cancelAnyLoading()
+        if media != nil {
+            media!.cancelAnyLoading()
         }
 
         NotificationCenter.default.removeObserver(self)
@@ -124,11 +124,11 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     var photo: Media? {
         set(p) {
             // Cancel any loading on old photo
-            if Media != nil && p == nil {
-                Media!.cancelAnyLoading()
+            if media != nil && p == nil {
+                media!.cancelAnyLoading()
             }
-            Media = p
-            if MediaBrowser.imageForPhoto(photo: Media) != nil {
+            media = p
+            if mediaBrowser.imageForPhoto(photo: media) != nil {
                 self.displayImage()
             }
             else {
@@ -138,13 +138,13 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         }
         
         get {
-            return Media
+            return media
         }
     }
 
     // Get and display image
     func displayImage() {
-        if Media != nil && photoImageView.image == nil {
+        if media != nil && photoImageView.image == nil {
             // Reset
             maximumZoomScale = 1.0
             minimumZoomScale = 1.0
@@ -152,7 +152,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
             contentSize = CGSize.zero
             
             // Get image from browser as it handles ordering of fetching
-            if let img = MediaBrowser.imageForPhoto(photo: photo) {
+            if let img = mediaBrowser.imageForPhoto(photo: photo) {
                 // Hide indicator
                 hideLoadingIndicator()
                 
@@ -250,7 +250,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
 
     private func initialZoomScaleWithMinScale() -> CGFloat {
         var zoomScale = minimumZoomScale
-        if let pb = MediaBrowser,let image = photoImageView.image, pb.zoomPhotosToFill {
+        if let pb = mediaBrowser,let image = photoImageView.image, pb.zoomPhotosToFill {
             // Zoom image to fill if the aspect ratios are fairly similar
             let boundsSize = self.bounds.size
             let imageSize = image.size
@@ -386,16 +386,16 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
     }
     
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        MediaBrowser.cancelControlHiding()
+        mediaBrowser.cancelControlHiding()
     }
     
     public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
         isScrollEnabled = true // reset
-        MediaBrowser.cancelControlHiding()
+        mediaBrowser.cancelControlHiding()
     }
 
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        MediaBrowser.hideControlsAfterDelay()
+        mediaBrowser.hideControlsAfterDelay()
     }
 
     public func scrollViewDidZoom(_ scrollView: UIScrollView) {
@@ -405,7 +405,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
 
     //MARK: - Tap Detection
     private func handleSingleTap(touchPoint: CGPoint) {
-        self.MediaBrowser.perform(#selector(MediaBrowser.toggleControls), with: nil, afterDelay: 0.2)
+        mediaBrowser.perform(#selector(MediaBrowser.toggleControls), with: nil, afterDelay: 0.2)
     }
 
     private func handleDoubleTap(touchPoint: CGPoint) {
@@ -415,7 +415,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         }
         
         // Cancel any single tap handling
-        NSObject.cancelPreviousPerformRequests(withTarget: MediaBrowser)
+        NSObject.cancelPreviousPerformRequests(withTarget: mediaBrowser)
         
         // Zoom
         if zoomScale != minimumZoomScale && zoomScale != initialZoomScaleWithMinScale() {
@@ -431,7 +431,7 @@ public class ZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetecting
         }
         
         // Delay controls
-        MediaBrowser.hideControlsAfterDelay()
+        mediaBrowser.hideControlsAfterDelay()
     }
 
     // Image View
