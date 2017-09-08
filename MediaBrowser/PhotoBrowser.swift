@@ -1010,13 +1010,12 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // Add selected button
                 if self.displaySelectionButtons {
                     let selectedButton = UIButton(type: .custom)
-                    selectedButton.setImage(UIImage(named: "ImageSelectedOff", in: Bundle(for: PhotoBrowser.self), compatibleWith: nil), for: .normal)
+                    selectedButton.setImage(UIImage(named: "ImageSelectedSmallOff", in: Bundle(for: PhotoBrowser.self), compatibleWith: nil), for: .normal)
                     let selectedOnImage: UIImage?
                     if customImageSelectedIconName.characters.count > 0 {
                         selectedOnImage = UIImage(named: customImageSelectedIconName)
-                    }
-                    else {
-                        selectedOnImage = UIImage(named: "ImageSelectedOn", in: Bundle(for: PhotoBrowser.self), compatibleWith: nil)
+                    } else {
+                        selectedOnImage = UIImage(named: "ImageSelectedSmallOn", in: Bundle(for: PhotoBrowser.self), compatibleWith: nil)
                     }
                     
                     selectedButton.setImage(selectedOnImage, for: .selected)

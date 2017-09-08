@@ -110,6 +110,21 @@ extension ViewController: PhotoBrowserDelegate {
         return photos.count
     }
     
+    func isPhotoSelectedAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Bool {
+        return selections[index]
+    }
+    
+    func didDisplayPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) {
+        print("Did start viewing photo at index \(index)")
+    }
+    
+    func selectedChanged(selected: Bool, index: Int, photoBrowser: PhotoBrowser) {
+        selections[index] = selected
+    }
+    
+//    func titleForPhotoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> String {
+//    }
+    
 
 }
 //MARK: UITableViewDelegate, UITableviewDataSource
