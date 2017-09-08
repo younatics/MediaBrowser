@@ -60,14 +60,13 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     
     public var navigationBarTranslucent = true
     public var navigationBarTextColor = UIColor.white
-    public var navigationBarBackgroundColor = UIColor.white
+    public var navigationBarBackgroundColor = UIColor.black
     public var navigationBarTintColor = UIColor.black.withAlphaComponent(0.5)
     public var statusBarStyle = UIStatusBarStyle.lightContent
     
     public var toolbarTextColor = UIColor.white
     public var toolbarBarTintColor = UIColor.black.withAlphaComponent(0.5)
-    public var toolbarBackgroundColor = UIColor.white
-
+    public var toolbarBackgroundColor = UIColor.black
     
     // Video
     var currentVideoPlayerViewController: MPMoviePlayerViewController?
@@ -102,9 +101,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var hideControlsOnStartup = false
     public var delayToHideElements = TimeInterval(5.0)
     
-    
-    public var captionAlpha = CGFloat(0.5)
-    public var toolbarAlpha = CGFloat(0.8)
+    public var captionAlpha = CGFloat(1)
+    public var toolbarAlpha = CGFloat(1)
     
     // Customise image selection icons as they are the only icons with a colour tint
     // Icon should be located in the app's main bundle
@@ -234,7 +232,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         toolbar.tintColor = toolbarTextColor
         toolbar.barTintColor = toolbarBarTintColor
         toolbar.backgroundColor = toolbarBackgroundColor
-        toolbar.alpha = 0.8
+        toolbar.alpha = toolbarAlpha
         toolbar.setBackgroundImage(nil, forToolbarPosition: .any, barMetrics: .default)
         toolbar.setBackgroundImage(nil, forToolbarPosition: .any, barMetrics: .compact)
         toolbar.barStyle = .default
@@ -1075,7 +1073,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         page.frame = frameForPageAtIndex(index: index)
         page.index = index
         page.photo = mediaAtIndex(index: index)
-        page.backgroundColor = areControlsHidden ? UIColor.black : UIColor.white
+//        page.backgroundColor = areControlsHidden ? UIColor.black : UIColor.white
     }
 
     var dequeueRecycledPage: MediaZoomingScrollView? {
@@ -1687,26 +1685,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             
             if hidden {
                 self.toolbar.frame = self.toolbar.frame.offsetBy(dx: 0, dy: animatonOffset)
-                self.view.backgroundColor = UIColor.black
-                
-                self.pagingScrollView.backgroundColor = UIColor.black
-                self.navigationController?.view.backgroundColor = UIColor.black
-                
-                for page in self.visiblePages {
-                    page.backgroundColor = UIColor.black
-                }
             }
-            else {
-                self.view.backgroundColor = UIColor.white
-                
-                self.pagingScrollView.backgroundColor = UIColor.white
-                self.navigationController?.view.backgroundColor = UIColor.white
-                
-                for page in self.visiblePages {
-                    page.backgroundColor = UIColor.white
-                }
-            }
-            
             self.toolbar.alpha = hidden ? 0.0 : self.toolbarAlpha
 
             // Captions
