@@ -151,7 +151,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handlePhotoLoadingDidEndNotification),
-            name: NSNotification.Name(rawValue: MWPHOTO_LOADING_DID_END_NOTIFICATION),
+            name: NSNotification.Name(rawValue: MEDIA_LOADING_DID_END_NOTIFICATION),
             object: nil)
     }
 

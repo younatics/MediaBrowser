@@ -83,13 +83,13 @@ public class MediaGridCell: UICollectionViewCell {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(setProgressFromNotification),
-            name: NSNotification.Name(rawValue: MWPHOTO_PROGRESS_NOTIFICATION),
+            name: NSNotification.Name(rawValue: MEDIA_PROGRESS_NOTIFICATION),
             object: nil)
         
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handlePhotoLoadingDidEndNotification),
-            name: NSNotification.Name(rawValue: MWPHOTO_LOADING_DID_END_NOTIFICATION),
+            name: NSNotification.Name(rawValue: MEDIA_LOADING_DID_END_NOTIFICATION),
             object: nil)
     }
 

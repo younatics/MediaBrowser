@@ -13,8 +13,8 @@ import Photos
 import MapleBacon
 import Photos
 
-let MWPHOTO_LOADING_DID_END_NOTIFICATION  = "MWPHOTO_LOADING_DID_END_NOTIFICATION"
-let MWPHOTO_PROGRESS_NOTIFICATION  = "MWPHOTO_PROGRESS_NOTIFICATION"
+let MEDIA_LOADING_DID_END_NOTIFICATION  = "MEDIA_LOADING_DID_END_NOTIFICATION"
+let MEDIA_PROGRESS_NOTIFICATION  = "MEDIA_PROGRESS_NOTIFICATION"
 
 var PHInvalidImageRequestID = PHImageRequestID(0)
 
@@ -285,7 +285,7 @@ public class Media: NSObject {
                 "photo" : self
             ] as [String : Any]
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: MWPHOTO_PROGRESS_NOTIFICATION), object: dict)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: MEDIA_PROGRESS_NOTIFICATION), object: dict)
         }
         
         assetRequestID = imageManager.requestImage(
@@ -321,7 +321,7 @@ public class Media: NSObject {
 
     private func postCompleteNotification() {
         NotificationCenter.default.post(
-            name: NSNotification.Name(rawValue: MWPHOTO_LOADING_DID_END_NOTIFICATION),
+            name: NSNotification.Name(rawValue: MEDIA_LOADING_DID_END_NOTIFICATION),
             object: self)
     }
 
