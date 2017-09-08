@@ -119,6 +119,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var mediaSelectedGridOnIcon: UIImage?
     public var mediaSelectedGridOffIcon: UIImage?
     
+    public var cachingImageCount = 1
+    
     //MARK: - Init
     public override init(nibName: String?, bundle nibBundle: Bundle?) {
         super.init(nibName: nibName, bundle: nibBundle)
@@ -878,7 +880,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             // If page is current page then initiate loading of previous and next pages
             let pageIndex = p.index
             if currentPageIndex == pageIndex {
-                if pageIndex > 0 {
+                if pageIndex > 0  && mediaArray.count >= cachingImageCount {
                     // Preload index - 1
                     if let photo = mediaAtIndex(index: pageIndex - 1) {
                         if nil == photo.underlyingImage {

@@ -187,18 +187,6 @@ public class Media: NSObject {
     private func performLoadUnderlyingImageAndNotifyWithWebURL(url: URL) {
         cancelDownload()
         
-        /*
-            progress: { receivedSize, expectedSize in
-                if expectedSize > 0 {
-                    NSNotificationCenter.defaultCenter().postNotificationName(
-                        MWPHOTO_PROGRESS_NOTIFICATION,
-                        object: [
-                            "progress": Float(receivedSize) / Float(expectedSize),
-                            "photo": self
-                        ])
-                }
-            },
-        */
         operation = SDWebImageManager.shared().loadImage(with: url, options: [], progress: { (receivedSize, expectedSize, targetURL) in
             let dict = [
             "progress" : CGFloat(receivedSize)/CGFloat(expectedSize),
@@ -227,10 +215,6 @@ public class Media: NSObject {
         DispatchQueue.global(qos: .default).async {
             let path = url.path
             self.underlyingImage = UIImage(contentsOfFile: path)
-            //if nil == underlyingImage {
-            //}
-            //}
-            //finally {
             DispatchQueue.main.async() {
                 self.imageLoadingComplete()
             }
@@ -243,7 +227,6 @@ public class Media: NSObject {
     // Load from asset library async
     private func performLoadUnderlyingImageAndNotifyWithAssetsLibraryURL(url: URL) {
         DispatchQueue.global(qos: .default).async {
-            //try {
             let assetslibrary = ALAssetsLibrary()
             assetslibrary.asset(
                 for: url,
@@ -263,10 +246,6 @@ public class Media: NSObject {
                             self.imageLoadingComplete()
                         }
                     })
-            //}
-            //catch (NSException e) {
-            //    self.performSelectorOnMainThread(Selector("imageLoadingComplete"), withObject: nil, waitUntilDone: false)
-            //}
         }
     }
 
