@@ -45,7 +45,11 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
         
         // Loading indicator
         loadingIndicator.isUserInteractionEnabled = false
-        loadingIndicator.innerRingColor = UIColor.blue
+        loadingIndicator.innerRingColor = UIColor.white
+        loadingIndicator.innerRingWidth = 1
+        loadingIndicator.outerRingWidth = 1
+        loadingIndicator.font = UIFont.systemFont(ofSize: 10)
+        loadingIndicator.fontColor = UIColor.white
         loadingIndicator.autoresizingMask =
             [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin, .flexibleRightMargin]
         
@@ -222,7 +226,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
             let dict = notification.object as! [String : AnyObject]
             
             if let photoWithProgress = dict["photo"] as? Media, let progress = dict["progress"] as? CGFloat, let p = self.photo, photoWithProgress.equals(photo: p) {
-                self.loadingIndicator.setProgress(value: progress, animationDuration: 0.5)
+                self.loadingIndicator.setProgress(value: progress * 100, animationDuration: 0.1)
             }
         }
     }
