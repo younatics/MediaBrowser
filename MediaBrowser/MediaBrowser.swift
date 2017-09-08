@@ -21,10 +21,10 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private let padding = CGFloat(10.0)
 
     // Data
-    private var photoCount = -1
+    private var mediaCount = -1
     private var medias = [Media?]()
-    private var thumbPhotos = [Media?]()
-	private var fixedPhotosArray: [Media]? // Provided via init
+    private var thumbMedias = [Media?]()
+	private var fixedMediasArray: [Media]? // Provided via init
 	
 	// Views
 	private var pagingScrollView = UIScrollView()
@@ -125,7 +125,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     public convenience init(photos: [Media]) {
         self.init()
-        fixedPhotosArray = photos
+        fixedMediasArray = photos
     }
 
     public required init?(coder: NSCoder) {
@@ -180,7 +180,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
         // Release thumbs
-        copy = thumbPhotos
+        copy = thumbMedias
         for p in copy {
             if let ph = p {
                 ph.unloadUnderlyingImage()
@@ -714,17 +714,17 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     func reloadData() {
         // Reset
-        photoCount = -1
+        mediaCount = -1
         
         // Get data
         let photosNum = numberOfMedias
         releaseAllUnderlyingPhotos(preserveCurrent: true)
         medias.removeAll()
-        thumbPhotos.removeAll()
+        thumbMedias.removeAll()
         
         for _ in 0...(photosNum - 1) {
             medias.append(nil)
-            thumbPhotos.append(nil)
+            thumbMedias.append(nil)
         }
 
         // Update current page index
@@ -747,21 +747,21 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     var numberOfMedias: Int {
-        if photoCount == -1 {
+        if mediaCount == -1 {
             if let d = delegate {
-                photoCount = d.numberOfPhotosInPhotoBrowser(mediaBrowser: self)
+                mediaCount = d.numberOfPhotosInPhotoBrowser(mediaBrowser: self)
             }
             
-            if let fpa = fixedPhotosArray {
-                photoCount = fpa.count
+            if let fpa = fixedMediasArray {
+                mediaCount = fpa.count
             }
         }
         
-        if -1 == photoCount {
-            photoCount = 0
+        if -1 == mediaCount {
+            mediaCount = 0
         }
 
-        return photoCount
+        return mediaCount
     }
 
     func photoAtIndex(index: Int) -> Media? {
@@ -772,8 +772,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 if let d = delegate {
                     photo = d.photoAtIndex(index: index, mediaBrowser: self)
                     
-                    if nil == photo && fixedPhotosArray != nil && index < fixedPhotosArray!.count {
-                        photo = fixedPhotosArray![index]
+                    if nil == photo && fixedMediasArray != nil && index < fixedMediasArray!.count {
+                        photo = fixedMediasArray![index]
                     }
                     
                     if photo != nil {
@@ -792,18 +792,18 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func thumbPhotoAtIndex(index: Int) -> Media? {
         var photo: Media?
         
-        if index < thumbPhotos.count {
-            if nil == thumbPhotos[index] {
+        if index < thumbMedias.count {
+            if nil == thumbMedias[index] {
                 if let d = delegate {
                     photo = d.thumbPhotoAtIndex(index: index, mediaBrowser: self)
                 
                     if let p = photo {
-                        thumbPhotos[index] = p
+                        thumbMedias[index] = p
                     }
                 }
             }
             else {
-                photo = thumbPhotos[index]
+                photo = thumbMedias[index]
             }
         }
         
