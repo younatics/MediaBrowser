@@ -64,6 +64,7 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var navigationBarBackgroundColor = UIColor.white
     public var navigationBarTintColor = UIColor.black.withAlphaComponent(0.5)
     public var statusBarStyle = UIStatusBarStyle.lightContent
+    
     public var toolbarTextColor = UIColor.white
     public var toolbarBarTintColor = UIColor.black.withAlphaComponent(0.5)
     public var toolbarBackgroundColor = UIColor.white
@@ -1649,12 +1650,14 @@ public class PhotoBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             // Hide status bar
             if !isVCBasedStatusBarAppearance {
                 // falsen-view controller based
-                UIApplication.shared.setStatusBarHidden(
-                    hidden, with:
-                    animated ? UIStatusBarAnimation.fade : UIStatusBarAnimation.none)
+                statusBarShouldBeHidden = hidden
+                UIView.animate(
+                    withDuration: animationDuration,
+                    animations: {
+                        self.setNeedsStatusBarAppearanceUpdate()
+                })
                 
-            }
-            else {
+            } else {
                 // View controller based so animate away
                 UIApplication.shared.setStatusBarHidden(
                     hidden, with:

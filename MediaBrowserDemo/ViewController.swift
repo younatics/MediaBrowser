@@ -83,14 +83,6 @@ class ViewController: UITableViewController {
         }
     }
     
-    func localMediaPhoto(imageName: String, caption: String) -> MWPhoto {
-        guard let image = UIImage(named: imageName) else {
-            fatalError("Image is nil")
-        }
-        
-        let photo = MWPhoto(image: image, caption: caption)
-        return photo
-    }
 }
 
 //MARK: PhotoBrowserDelegate
@@ -103,14 +95,14 @@ extension ViewController: PhotoBrowserDelegate {
         if index < thumbs.count {
             return thumbs[index]
         }
-        return localMediaPhoto(imageName: "MotionBookIcon", caption: "ThumbPhoto at index is wrong")
+        return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "ThumbPhoto at index is wrong")
     }
     
     func photoAtIndex(index: Int, photoBrowser: PhotoBrowser) -> Photo {
         if index < photos.count {
             return photos[index]
         }
-        return localMediaPhoto(imageName: "MotionBookIcon", caption: "Photo at index is Wrong")
+        return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "Photo at index is Wrong")
 
     }
     
@@ -143,81 +135,18 @@ extension ViewController {
         
         switch indexPath.row {
         case 0:
-            let photo = localMediaPhoto(imageName: "MotionBookIcon", caption: "MotionBookIcon")
-            photos.append(photo)
+            photos = DemoData.singlePhoto()
             enableGrid = false
             break
         case 1:
-            var photo = localMediaPhoto(imageName: "MotionBookIntro1", caption: "MotionBook Intro 1")
-            photos.append(photo)
-            
-            photo = localMediaPhoto(imageName: "MotionBookIntro2", caption: "MotionBook Intro 2")
-            photos.append(photo)
-            
-            photo = localMediaPhoto(imageName: "Atoms_thumb", caption: "Atom")
-            photo.videoURL = URL(fileURLWithPath: Bundle.main.path(forResource: "Atoms", ofType: "mp4")!)
-            photos.append(photo)
-
-            photo = localMediaPhoto(imageName: "MotionBookIntro3", caption: "MotionBook Intro 3")
-            photos.append(photo)
-
-            photo = localMediaPhoto(imageName: "MotionBookIntro4", caption: "MotionBook Intro 4")
-            photos.append(photo)
-            
-            photo = localMediaPhoto(imageName: "MotionBookIntro5", caption: "MotionBook Intro 5")
-            photos.append(photo)
-
+            photos = DemoData.multiplePhotoAndVideo()
+            thumbs = DemoData.multiplePhotoAndVideo()
             enableGrid = false
             
             break
         case 2:
-            var photo = localMediaPhoto(imageName: "MotionBookIntro1", caption: "MotionBook Intro 1")
-            photos.append(photo)
-            thumbs.append(photo)
-            
-            photo = localMediaPhoto(imageName: "MotionBookIntro2", caption: "MotionBook Intro 2")
-            photos.append(photo)
-            thumbs.append(photo)
-
-            photo = localMediaPhoto(imageName: "MotionBookIntro3", caption: "MotionBook Intro 3")
-            photos.append(photo)
-            thumbs.append(photo)
-
-            photo = localMediaPhoto(imageName: "MotionBookIntro4", caption: "MotionBook Intro 4")
-            photos.append(photo)
-            thumbs.append(photo)
-
-            photo = localMediaPhoto(imageName: "MotionBookIntro5", caption: "MotionBook Intro 5")
-            photos.append(photo)
-            thumbs.append(photo)
-            
-            photo = localMediaPhoto(imageName: "demo1", caption: "Demo Image 1 from Pixabay")
-            photos.append(photo)
-            thumbs.append(photo)
-            
-            photo = localMediaPhoto(imageName: "demo2", caption: "Demo Image 2 from Pixabay")
-            photos.append(photo)
-            thumbs.append(photo)
-            
-            photo = localMediaPhoto(imageName: "demo3", caption: "Demo Image 3 from Pixabay")
-            photos.append(photo)
-            thumbs.append(photo)
-            
-            photo = localMediaPhoto(imageName: "demo4", caption: "Demo Image 4 from Pixabay")
-            photos.append(photo)
-            thumbs.append(photo)
-            
-            photo = localMediaPhoto(imageName: "demo5", caption: "Demo Image 5 from Pixabay")
-            photos.append(photo)
-            thumbs.append(photo)
-            
-            photo = localMediaPhoto(imageName: "demo6", caption: "Demo Image 6 from Pixabay")
-            photos.append(photo)
-            thumbs.append(photo)
-            
-            photo = localMediaPhoto(imageName: "demo7", caption: "Demo Image 7 from Pixabay")
-            photos.append(photo)
-            thumbs.append(photo)
+            photos = DemoData.multiplePhotoGrid()
+            thumbs = DemoData.multiplePhotoGrid()
 
             startOnGrid = true
             displayNavArrows = true
