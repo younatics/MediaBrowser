@@ -9,33 +9,33 @@
 import UIKit
 
 public protocol MediaBrowserDelegate: class {
-    func numberOfPhotosInPhotoBrowser(mediaBrowser: MediaBrowser) -> Int
+    func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int
     
-    func photoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Media
+    func media(at index: Int, mediaBrowser: MediaBrowser) -> Media
     
-    func thumbPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Media
+    func thumbnail(at index: Int, mediaBrowser: MediaBrowser) -> Media
     
-    func captionViewForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> MediaCaptionView?
+    func captionViewForMediaAtIndex(index: Int, mediaBrowser: MediaBrowser) -> MediaCaptionView?
     
-    func titleForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> String
+    func titleForMediaAtIndex(index: Int, mediaBrowser: MediaBrowser) -> String
     
-    func didDisplayPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser)
+    func didDisplayMediaAtIndex(index: Int, mediaBrowser: MediaBrowser)
     
     func actionButtonPressedForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser)
     
-    func isPhotoSelectedAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Bool
+    func isMediaSelectedAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Bool
     
     func selectedChanged(selected: Bool, index: Int, mediaBrowser: MediaBrowser)
     
-    func photoBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser)
+    func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser)
 }
 
 public extension MediaBrowserDelegate {
-    func captionViewForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> MediaCaptionView? {
+    func captionViewForMediaAtIndex(index: Int, mediaBrowser: MediaBrowser) -> MediaCaptionView? {
         return nil
     }
     
-    func didDisplayPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) {
+    func didDisplayMediaAtIndex(index: Int, mediaBrowser: MediaBrowser) {
         
     }
     
@@ -43,7 +43,7 @@ public extension MediaBrowserDelegate {
         
     }
     
-    func isPhotoSelectedAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Bool {
+    func isMediaSelectedAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Bool {
         return false
     }
     
@@ -51,7 +51,7 @@ public extension MediaBrowserDelegate {
         
     }
     
-    func titleForPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> String {
+    func titleForMediaAtIndex(index: Int, mediaBrowser: MediaBrowser) -> String {
         return ""
     }
 }

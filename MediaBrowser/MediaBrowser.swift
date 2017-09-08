@@ -10,7 +10,6 @@ import UIKit
 import MBProgressHUD
 import MediaPlayer
 import QuartzCore
-import MBProgressHUD
 import MapleBacon
 
 func floorcgf(x: CGFloat) -> CGFloat {
@@ -749,7 +748,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     var numberOfMedias: Int {
         if mediaCount == -1 {
             if let d = delegate {
-                mediaCount = d.numberOfPhotosInPhotoBrowser(mediaBrowser: self)
+                mediaCount = d.numberOfMedia(in: self)
             }
             
             if let fpa = fixedMediasArray {
@@ -770,7 +769,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if index < medias.count {
             if medias[index] == nil {
                 if let d = delegate {
-                    photo = d.photoAtIndex(index: index, mediaBrowser: self)
+                    photo = d.media(at: index, mediaBrowser: self)
                     
                     if nil == photo && fixedMediasArray != nil && index < fixedMediasArray!.count {
                         photo = fixedMediasArray![index]
@@ -795,7 +794,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if index < thumbMedias.count {
             if nil == thumbMedias[index] {
                 if let d = delegate {
-                    photo = d.thumbPhotoAtIndex(index: index, mediaBrowser: self)
+                    photo = d.thumbnail(at: index, mediaBrowser: self)
                 
                     if let p = photo {
                         thumbMedias[index] = p
@@ -814,7 +813,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var captionView: MediaCaptionView?
         
         if let d = delegate {
-            captionView = d.captionViewForPhotoAtIndex(index: index, mediaBrowser: self)
+            captionView = d.captionViewForMediaAtIndex(index: index, mediaBrowser: self)
             
             if let p = mediaAtIndex(index: index), nil == captionView {
                 if p.caption.characters.count > 0 {
@@ -834,7 +833,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var value = false
         if displaySelectionButtons {
             if let d = delegate {
-                value = d.isPhotoSelectedAtIndex(index: index, mediaBrowser: self)
+                value = d.isMediaSelectedAtIndex(index: index, mediaBrowser: self)
             }
         }
         
@@ -893,7 +892,6 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     //MARK: - Media Loading falsetification
-
     func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
         if let photo = notification.object as? Media {
             if let page = pageDisplayingPhoto(photo: photo) {
@@ -1145,7 +1143,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Notify delegate
         if index != previousPageIndex {
             if let d = delegate {
-                d.didDisplayPhotoAtIndex(index: index, mediaBrowser: self)
+                d.didDisplayMediaAtIndex(index: index, mediaBrowser: self)
             }
             previousPageIndex = index
         }
@@ -1307,7 +1305,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         else
         if medias > 1 {
             if let d = delegate {
-                title = d.titleForPhotoAtIndex(index: currentPageIndex, mediaBrowser: self)
+                title = d.titleForMediaAtIndex(index: currentPageIndex, mediaBrowser: self)
             }
             
             if nil == title {
@@ -1846,7 +1844,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             // Dismiss view controller
             // Call delegate method and let them dismiss us
             if let d = delegate {
-                d.photoBrowserDidFinishModalPresentation(mediaBrowser: self)
+                d.mediaBrowserDidFinishModalPresentation(mediaBrowser: self)
             }
             // dismissViewControllerAnimated:true completion:nil]
         }
@@ -1874,14 +1872,6 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 }
                 activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
                 
-                // Show loading spinner after a couple of seconds
-                let delayInSeconds: Double = 2.0
-                DispatchQueue.main.asyncAfter(deadline: .now() + Double(delayInSeconds * Double(NSEC_PER_SEC)), execute: {
-                    if let _ = self.activityViewController {
-                        self.showProgressHUDWithMessage(message: nil)
-                    }
-                })
-
                 // Show
                 if let vc = self.activityViewController {
                     vc.completionWithItemsHandler = { [weak self] (activityType, completed, returnedItems, activityError) in
@@ -1889,9 +1879,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
                         wself.activityViewController = nil
                         wself.hideControlsAfterDelay()
-                        wself.hideProgressHUD(animated: true)
                     }
-
                     vc.popoverPresentationController?.barButtonItem = actionButton
 
                     self.present(vc, animated: true, completion: nil)
@@ -1940,8 +1928,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             progressHUD.labelText = msg
             progressHUD.mode = MBProgressHUDMode.customView
             progressHUD.hide(true, afterDelay: 1.5)
-        }
-        else {
+        } else {
             progressHUD.hide(true)
         }
     

@@ -14,7 +14,7 @@ class ViewController: UITableViewController {
     @IBOutlet var segmentedControl: UISegmentedControl!
     
     var selections = [Bool]()
-    var medias = [Media]()
+    var mediaArray = [Media]()
     var thumbs = [Media]()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -55,34 +55,34 @@ class ViewController: UITableViewController {
 
 //MARK: PhotoBrowserDelegate
 extension ViewController: MediaBrowserDelegate {
-    func photoBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser) {
+    func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func thumbPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Media {
+    func thumbnail(at index: Int, mediaBrowser: MediaBrowser) -> Media {
         if index < thumbs.count {
             return thumbs[index]
         }
         return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "ThumbPhoto at index is wrong")
     }
     
-    func photoAtIndex(index: Int, mediaBrowser: MediaBrowser) -> Media {
-        if index < medias.count {
-            return medias[index]
+    func media(at index: Int, mediaBrowser: MediaBrowser) -> Media {
+        if index < mediaArray.count {
+            return mediaArray[index]
         }
         return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "Photo at index is Wrong")
-
+        
     }
     
-    func numberOfPhotosInPhotoBrowser(mediaBrowser: MediaBrowser) -> Int {
-        return medias.count
+    func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int {
+        return mediaArray.count
     }
     
-    func isPhotoSelectedAtIndex(index: Int, MediaBrowser: MediaBrowser) -> Bool {
+    func isMediaSelectedAtIndex(index: Int, MediaBrowser: MediaBrowser) -> Bool {
         return selections[index]
     }
     
-    func didDisplayPhotoAtIndex(index: Int, mediaBrowser: MediaBrowser) {
+    func didDisplayMediaAtIndex(index: Int, mediaBrowser: MediaBrowser) {
         print("Did start viewing photo at index \(index)")
     }
     
@@ -106,7 +106,7 @@ extension ViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        medias = [Media]()
+        mediaArray = [Media]()
         thumbs = [Media]()
         
         var displayActionButton = true
@@ -118,17 +118,17 @@ extension ViewController {
         
         switch indexPath.row {
         case 0:
-            medias = DemoData.singlePhoto()
+            mediaArray = DemoData.singlePhoto()
             enableGrid = false
             break
         case 1:
-            medias = DemoData.multiplePhotoAndVideo()
+            mediaArray = DemoData.multiplePhotoAndVideo()
             thumbs = DemoData.multiplePhotoAndVideo()
             enableGrid = false
             
             break
         case 2:
-            medias = DemoData.multiplePhotoGrid()
+            mediaArray = DemoData.multiplePhotoGrid()
             thumbs = DemoData.multiplePhotoGrid()
 
             startOnGrid = true
@@ -136,7 +136,7 @@ extension ViewController {
             
             break
         case 3, 4:
-            medias = DemoData.photoSelection()
+            mediaArray = DemoData.photoSelection()
             thumbs = DemoData.photoSelection()
             
             displayActionButton = false
@@ -147,21 +147,21 @@ extension ViewController {
             break
             
         case 5, 6:
-            medias = DemoData.webPhotos()
+            mediaArray = DemoData.webPhotos()
             thumbs = DemoData.webPhotos()
             
             startOnGrid = indexPath.row == 6
             break
             
         case 7:
-            medias = DemoData.singleVideo()
+            mediaArray = DemoData.singleVideo()
             
             enableGrid = false
             autoPlayOnAppear = true
             break
             
         case 8:
-            medias = DemoData.multiVideos()
+            mediaArray = DemoData.multiVideos()
             thumbs = DemoData.multiVideoThumbs()
             
             startOnGrid = true
@@ -184,7 +184,7 @@ extension ViewController {
         if displaySelectionButtons {
             selections.removeAll()
             
-            for _ in 0..<medias.count {
+            for _ in 0..<mediaArray.count {
                 selections.append(false)
             }
         }
