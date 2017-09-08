@@ -59,19 +59,18 @@ extension ViewController: MediaBrowserDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func thumbnail(at index: Int, mediaBrowser: MediaBrowser) -> Media {
+    func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
         if index < thumbs.count {
             return thumbs[index]
         }
         return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "ThumbPhoto at index is wrong")
     }
     
-    func media(at index: Int, mediaBrowser: MediaBrowser) -> Media {
+    func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
         if index < mediaArray.count {
             return mediaArray[index]
         }
         return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "Photo at index is Wrong")
-        
     }
     
     func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int {

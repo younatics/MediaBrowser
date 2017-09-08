@@ -11,11 +11,11 @@ import UIKit
 public protocol MediaBrowserDelegate: class {
     func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int
     
-    func media(at index: Int, mediaBrowser: MediaBrowser) -> Media
+    func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media
     
-    func thumbnail(at index: Int, mediaBrowser: MediaBrowser) -> Media
+    func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media
     
-    func captionViewForMediaAtIndex(index: Int, mediaBrowser: MediaBrowser) -> MediaCaptionView?
+    func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView?
     
     func titleForMediaAtIndex(index: Int, mediaBrowser: MediaBrowser) -> String
     
@@ -31,7 +31,7 @@ public protocol MediaBrowserDelegate: class {
 }
 
 public extension MediaBrowserDelegate {
-    func captionViewForMediaAtIndex(index: Int, mediaBrowser: MediaBrowser) -> MediaCaptionView? {
+    func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView? {
         return nil
     }
     

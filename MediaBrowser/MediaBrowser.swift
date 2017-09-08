@@ -769,7 +769,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if index < medias.count {
             if medias[index] == nil {
                 if let d = delegate {
-                    photo = d.media(at: index, mediaBrowser: self)
+                    photo = d.media(for: self, at: index)
                     
                     if nil == photo && fixedMediasArray != nil && index < fixedMediasArray!.count {
                         photo = fixedMediasArray![index]
@@ -794,7 +794,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if index < thumbMedias.count {
             if nil == thumbMedias[index] {
                 if let d = delegate {
-                    photo = d.thumbnail(at: index, mediaBrowser: self)
+                    photo = d.thumbnail(for: self, at: index)
                 
                     if let p = photo {
                         thumbMedias[index] = p
@@ -813,7 +813,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var captionView: MediaCaptionView?
         
         if let d = delegate {
-            captionView = d.captionViewForMediaAtIndex(index: index, mediaBrowser: self)
+            captionView = d.captionView(for: self, at: index)
             
             if let p = mediaAtIndex(index: index), nil == captionView {
                 if p.caption.characters.count > 0 {
