@@ -65,7 +65,7 @@ public class MediaGridViewController: UICollectionViewController, UICollectionVi
         }
         
         // Check if current item is visible and if not, make it so!
-        if let b = browser, b.numberOfPhotos > 0 {
+        if let b = browser, b.numberOfMedias > 0 {
             let currentPhotoIndexPath = IndexPath(item: b.currentIndex, section: 0)
             let visibleIndexPaths = collectionView!.indexPathsForVisibleItems
             
@@ -107,7 +107,7 @@ public class MediaGridViewController: UICollectionViewController, UICollectionVi
 
     public override func collectionView(_ view: UICollectionView, numberOfItemsInSection section: Int) -> NSInteger {
         if let b = browser {
-            return b.numberOfPhotos
+            return b.numberOfMedias
         }
         
         return 0

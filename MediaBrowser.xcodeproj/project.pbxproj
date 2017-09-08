@@ -15,7 +15,6 @@
 		1906ABDD1F5F83960052DC3A /* MediaCaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD21F5F83960052DC3A /* MediaCaptionView.swift */; };
 		1906ABDE1F5F83960052DC3A /* MediaGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD31F5F83960052DC3A /* MediaGridCell.swift */; };
 		1906ABDF1F5F83960052DC3A /* MediaGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD41F5F83960052DC3A /* MediaGridViewController.swift */; };
-		1906ABE01F5F83960052DC3A /* MWLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD51F5F83960052DC3A /* MWLog.swift */; };
 		1906ABE11F5F83960052DC3A /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD61F5F83960052DC3A /* Media.swift */; };
 		1906ABE31F5F83960052DC3A /* MediaBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD81F5F83960052DC3A /* MediaBrowser.swift */; };
 		1906ABE41F5F83960052DC3A /* MediaTapDetectingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABD91F5F83960052DC3A /* MediaTapDetectingImageView.swift */; };
@@ -71,7 +70,6 @@
 		1906ABD21F5F83960052DC3A /* MediaCaptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaCaptionView.swift; sourceTree = "<group>"; };
 		1906ABD31F5F83960052DC3A /* MediaGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaGridCell.swift; sourceTree = "<group>"; };
 		1906ABD41F5F83960052DC3A /* MediaGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaGridViewController.swift; sourceTree = "<group>"; };
-		1906ABD51F5F83960052DC3A /* MWLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MWLog.swift; sourceTree = "<group>"; };
 		1906ABD61F5F83960052DC3A /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		1906ABD81F5F83960052DC3A /* MediaBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaBrowser.swift; sourceTree = "<group>"; };
 		1906ABD91F5F83960052DC3A /* MediaTapDetectingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTapDetectingImageView.swift; sourceTree = "<group>"; };
@@ -148,7 +146,6 @@
 				1906ABD21F5F83960052DC3A /* MediaCaptionView.swift */,
 				1906ABD31F5F83960052DC3A /* MediaGridCell.swift */,
 				1906ABD41F5F83960052DC3A /* MediaGridViewController.swift */,
-				1906ABD51F5F83960052DC3A /* MWLog.swift */,
 				1906ABD61F5F83960052DC3A /* Media.swift */,
 				1906ABD81F5F83960052DC3A /* MediaBrowser.swift */,
 				19E1F62D1F5FD8EE004D3BA8 /* MediaBrowserDelegate.swift */,
@@ -396,7 +393,6 @@
 				1906ABE51F5F83960052DC3A /* MediaTapDetectingView.swift in Sources */,
 				1906ABE61F5F83960052DC3A /* UIImageExtension.swift in Sources */,
 				1906ABE11F5F83960052DC3A /* Media.swift in Sources */,
-				1906ABE01F5F83960052DC3A /* MWLog.swift in Sources */,
 				1906ABE31F5F83960052DC3A /* MediaBrowser.swift in Sources */,
 				1906ABDD1F5F83960052DC3A /* MediaCaptionView.swift in Sources */,
 				1906ABDE1F5F83960052DC3A /* MediaGridCell.swift in Sources */,

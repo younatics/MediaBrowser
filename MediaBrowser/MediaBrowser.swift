@@ -22,7 +22,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     // Data
     private var photoCount = -1
-    private var photos = [Media?]()
+    private var medias = [Media?]()
     private var thumbPhotos = [Media?]()
 	private var fixedPhotosArray: [Media]? // Provided via init
 	
@@ -166,7 +166,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private func releaseAllUnderlyingPhotos(preserveCurrent: Bool) {
         // Create a copy in case this array is modified while we are looping through
         // Release photos
-        var copy = photos
+        var copy = medias
         for p in copy {
             if let ph = p {
                 if let paci = photoAtIndex(index: currentIndex) {
@@ -299,7 +299,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func performLayout() {
         // Setup
         performingLayout = true
-        let photos = numberOfPhotos
+        let photos = numberOfMedias
         
         // Setup pages
         visiblePages.removeAll()
@@ -717,18 +717,18 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         photoCount = -1
         
         // Get data
-        let photosNum = numberOfPhotos
+        let photosNum = numberOfMedias
         releaseAllUnderlyingPhotos(preserveCurrent: true)
-        photos.removeAll()
+        medias.removeAll()
         thumbPhotos.removeAll()
         
         for _ in 0...(photosNum - 1) {
-            photos.append(nil)
+            medias.append(nil)
             thumbPhotos.append(nil)
         }
 
         // Update current page index
-        if numberOfPhotos > 0 {
+        if numberOfMedias > 0 {
             currentPageIndex = max(0, min(currentPageIndex, photosNum - 1))
         }
         else {
@@ -746,7 +746,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
     }
 
-    var numberOfPhotos: Int {
+    var numberOfMedias: Int {
         if photoCount == -1 {
             if let d = delegate {
                 photoCount = d.numberOfPhotosInPhotoBrowser(mediaBrowser: self)
@@ -767,8 +767,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func photoAtIndex(index: Int) -> Media? {
         var photo: Media? = nil
         
-        if index < photos.count {
-            if photos[index] == nil {
+        if index < medias.count {
+            if medias[index] == nil {
                 if let d = delegate {
                     photo = d.photoAtIndex(index: index, mediaBrowser: self)
                     
@@ -777,12 +777,12 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     }
                     
                     if photo != nil {
-                        photos[index] = photo
+                        medias[index] = photo
                     }
                 }
             }
             else {
-                photo = photos[index]
+                photo = medias[index]
             }
         }
         
@@ -879,7 +879,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     }
                 }
                 
-                if pageIndex < numberOfPhotos - 1 {
+                if pageIndex < numberOfMedias - 1 {
                     // Preload index + 1
                     if let photo = photoAtIndex(index: pageIndex + 1) {
                         if nil == photo.underlyingImage {
@@ -926,16 +926,16 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             iFirstIndex = 0
         }
         
-        if iFirstIndex > numberOfPhotos - 1 {
-            iFirstIndex = numberOfPhotos - 1
+        if iFirstIndex > numberOfMedias - 1 {
+            iFirstIndex = numberOfMedias - 1
         }
         
         if iLastIndex < 0 {
             iLastIndex = 0
         }
         
-        if iLastIndex > numberOfPhotos - 1 {
-            iLastIndex = numberOfPhotos - 1
+        if iLastIndex > numberOfMedias - 1 {
+            iLastIndex = numberOfMedias - 1
         }
         
         // Recycle false longer needed pages
@@ -1091,7 +1091,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     // Handle page changes
     func didStartViewingPageAtIndex(index: Int) {
         // Handle 0 photos
-        if 0 == numberOfPhotos {
+        if 0 == numberOfMedias {
             // Show controls
             setControlsHidden(hidden: false, animated: true, permanent: true)
             return
@@ -1107,9 +1107,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             // Release anything < index - 1
             if index - 2 >= 0 {
                 for i in 0...(index - 2) {
-                    if let photo = photos[i] {
-                        photo.unloadUnderlyingImage()
-                        photos[i] = nil
+                    if let media = medias[i] {
+                        media.unloadUnderlyingImage()
+                        medias[i] = nil
                         
                         //MWLog.log("Released underlying image at index \(i)")
                     }
@@ -1117,13 +1117,13 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             }
         }
         
-        if index < numberOfPhotos - 1 {
+        if index < numberOfMedias - 1 {
             // Release anything > index + 1
-            if index + 2 <= photos.count - 1 {
-                for i in (index + 2)...(photos.count - 1) {
-                    if let photo = photos[i] {
-                        photo.unloadUnderlyingImage()
-                        photos[i] = nil
+            if index + 2 <= medias.count - 1 {
+                for i in (index + 2)...(medias.count - 1) {
+                    if let media = medias[i] {
+                        media.unloadUnderlyingImage()
+                        medias[i] = nil
                     
                         //MWLog.log("Released underlying image at index \(i)")
                     }
@@ -1178,7 +1178,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func contentSizeForPagingScrollView() -> CGSize {
         // We have to use the paging scroll view's bounds to calculate the contentSize, for the same reason outlined above.
         let bounds = pagingScrollView.bounds
-        return CGSize(width: bounds.size.width * CGFloat(numberOfPhotos), height: bounds.size.height)
+        return CGSize(width: bounds.size.width * CGFloat(numberOfMedias), height: bounds.size.height)
     }
 
     func contentOffsetForPageAtIndex(index: Int) -> CGPoint {
@@ -1260,8 +1260,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             index = 0
         }
         
-        if index > numberOfPhotos - 1 {
-            index = numberOfPhotos - 1
+        if index > numberOfMedias - 1 {
+            index = numberOfMedias - 1
         }
         
         let previousCurrentPage = currentPageIndex
@@ -1286,7 +1286,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     func updateNavigation() {
         // Title
-        let photos = numberOfPhotos
+        let photos = numberOfMedias
         if let gc = gridController {
             if gc.selectionMode {
                 self.title = NSLocalizedString("Select Photos", comment: "")
@@ -1312,7 +1312,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             
             if nil == title {
                 let str = NSLocalizedString("of", comment: "Used in the context: 'Showing 1 of 3 items'")
-                title = "\(currentPageIndex + 1) \(str) \(numberOfPhotos)"
+                title = "\(currentPageIndex + 1) \(str) \(numberOfMedias)"
             }
         }
         else {
@@ -1345,7 +1345,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     func jumpToPageAtIndex(index: Int, animated: Bool) {
         // Change page
-        if index < numberOfPhotos {
+        if index < numberOfMedias {
             let pageFrame = frameForPageAtIndex(index: index)
             pagingScrollView.setContentOffset(CGPoint(x: pageFrame.origin.x - padding, y: 0), animated: animated)
             updateNavigation()
@@ -1633,7 +1633,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func setControlsHidden( hidden: Bool, animated: Bool, permanent: Bool) {
         // Force visible
         var hidden = hidden
-        if 0 == numberOfPhotos || gridController != nil || alwaysShowControls {
+        if 0 == numberOfMedias || gridController != nil || alwaysShowControls {
             hidden = false
         }
         
@@ -1800,7 +1800,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             var index = i
         
             // Validate
-            let photoCount = numberOfPhotos
+            let photoCount = numberOfMedias
         
             if 0 == photoCount {
                 index = 0
@@ -1857,7 +1857,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func actionButtonPressed(_ sender: Any) {
         // Only react when image has loaded
         if let photo = photoAtIndex(index: currentPageIndex) {
-            if numberOfPhotos > 0 && photo.underlyingImage != nil {
+            if numberOfMedias > 0 && photo.underlyingImage != nil {
                 // If they have defined a delegate method then just message them
                 // Let delegate handle things
                 if let d = delegate {
