@@ -15,12 +15,11 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
     public weak var captionView: MediaCaptionView?
     public weak var selectedButton: UIButton?
     public weak var playButton: UIButton?
+    public var loadingIndicator = UICircularProgressRingView(frame: CGRect(x: 140, y: 30, width: 40, height: 40))
 
     private weak var mediaBrowser: MediaBrowser!
 	private var tapView = MediaTapDetectingView(frame: .zero) // for background taps
 	private var photoImageView = MediaTapDetectingImageView(frame: .zero)
-//    private var loadingIndicator = DACircularProgressView(frame: CGRect(x: 140, y: 30, width: 40, height: 40))
-    private var loadingIndicator = UICircularProgressRingView(frame: CGRect(x: 140, y: 30, width: 40, height: 40))
     private var loadingError: UIImageView?
     
     public init(mediaBrowser: MediaBrowser) {
@@ -45,11 +44,6 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
         
         // Loading indicator
         loadingIndicator.isUserInteractionEnabled = false
-        loadingIndicator.innerRingColor = UIColor.white
-        loadingIndicator.innerRingWidth = 1
-        loadingIndicator.outerRingWidth = 1
-        loadingIndicator.font = UIFont.systemFont(ofSize: 10)
-        loadingIndicator.fontColor = UIColor.white
         loadingIndicator.autoresizingMask =
             [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin, .flexibleRightMargin]
         

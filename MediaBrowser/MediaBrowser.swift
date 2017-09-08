@@ -105,6 +105,15 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var captionAlpha = CGFloat(1)
     public var toolbarAlpha = CGFloat(1)
     
+    // Loading Indicator
+    public var loadingIndicatorInnerRingColor = UIColor.white
+    public var loadingIndicatorOuterRingColor = UIColor.gray
+    public var loadingIndicatorInnerRingWidth:CGFloat = 1.0
+    public var loadingIndicatorOuterRingWidth:CGFloat = 1.0
+    public var loadingIndicatorFont = UIFont.systemFont(ofSize: 10)
+    public var loadingIndicatorFontColor = UIColor.white
+    public var loadingIndicatorShouldShowValueText = true
+    
     // Customise image selection icons as they are the only icons with a colour tint
     // Icon should be located in the app's main bundle
     public var customImageSelectedIconName = ""
@@ -981,11 +990,18 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 
                 let page = p!
                 
+                page.loadingIndicator.innerRingColor = loadingIndicatorInnerRingColor
+                page.loadingIndicator.outerRingColor = loadingIndicatorOuterRingColor
+                page.loadingIndicator.innerRingWidth = loadingIndicatorInnerRingWidth
+                page.loadingIndicator.outerRingWidth = loadingIndicatorOuterRingWidth
+                page.loadingIndicator.font = loadingIndicatorFont
+                page.loadingIndicator.fontColor = loadingIndicatorFontColor
+                page.loadingIndicator.shouldShowValueText = loadingIndicatorShouldShowValueText
+                
                 visiblePages.insert(page)
                 configurePage(page: page, forIndex: index)
 
                 pagingScrollView.addSubview(page)
-                // MWLog(@"Added page at index %lu", (unsigned long)index)
                 
                 // Add caption
                 if let captionView = captionViewForPhotoAtIndex(index: index) {
