@@ -199,7 +199,7 @@ public class Media: NSObject {
                 }
             },
         */
-        operationToken = SDWebImageDownloader.shared().downloadImage(with: url, options: [], progress: nil) { [weak self] (image, _, error, finish) in
+        operationToken = SDWebImageDownloader.shared().downloadImage(with: url, options: [SDWebImageDownloaderOptions.useNSURLCache, SDWebImageDownloaderOptions.continueInBackground], progress: nil) { [weak self] (image, _, error, finish) in
             guard let wself = self else { return }
 
             DispatchQueue.main.async {
