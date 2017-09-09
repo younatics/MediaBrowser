@@ -3,7 +3,7 @@
 
 <p align="center">
   <a href="(https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat">
   </a>
   <img alt="Swift" src="https://img.shields.io/badge/Swift-3.1-orange.svg">
   <img alt="iOS 8.1+" src="https://img.shields.io/badge/iOS-8.1%2B-blue.svg">
@@ -16,8 +16,8 @@
   <a href="https://github.com/Carthage/Carthage" target="_blank">
     <img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat">
   </a>
-    <a href="https://github.com/Carthage/Carthage" target="_blank">
-    <img alt="ReadMe-KR" src="https://img.shields.io/badge/한국어-리드미-red.svg?maxAge=2592000">
+  <a href="https://github.com/Carthage/Carthage" target="_blank">
+    <img alt="ReadMe-KR" src="https://img.shields.io/badge/한국어-리드미-red.svg">
   </a>
 
 </p>
