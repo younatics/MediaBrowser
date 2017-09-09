@@ -21,10 +21,10 @@
 </p>
 
 ## Intoduction
-🏞 **MediaBrowser** is written in Swift3, using latest [SDWebImage](https://github.com/rs/SDWebImage) version for caching. 
+🏞 **MediaBrowser** is browser of photos and videos written in Swift3, using latest [SDWebImage](https://github.com/rs/SDWebImage) version for caching. 
 
 | Single Photo | Multiple Photos And Video |
-| ------------- | ------------------------- |
+| ------------- | ------------------------ |
 | ![SinglePhoto](Images/SinglePhoto.gif) | ![MultiplePhotosAndVideo](Images/MultiplePhotosAndVideo.gif) |
 | Multiple Photo Grid | Multiple Photo Selection |
 | ![MultiplePhotoGrid](Images/MultiplePhotoGrid.gif)  | ![PhotoSelection](Images/PhotoSelection.gif)  |
@@ -72,4 +72,4 @@ github "younatics/MediaBrowser"
 [younatics 🇰🇷](http://younatics.github.io)
 
 ## License
-MediaBrowser is available under the MIT license. See the LICENSE file for more info.
+**MediaBrowser** is available under the MIT license. See the LICENSE file for more info.
