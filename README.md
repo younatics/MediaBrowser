@@ -1,9 +1,24 @@
-# MediaBrowser
-[![Version](https://img.shields.io/cocoapods/v/MediaBrowser.svg?style=flat)](http://cocoapods.org/pods/MediaBrowser)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/younatics/MediaBrowser/blob/master/LICENSE)
-[![Platform](https://img.shields.io/cocoapods/p/MediaBrowser.svg?style=flat)](http://cocoapods.org/pods/MediaBrowser)
-[![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
+
+![title](Images/MediaBrowser_w.png)
+
+<p align="center">
+  <img alt="Swift" src="https://img.shields.io/badge/Swift-3.1-orange.svg">
+  <a href="https://cocoapods.org/pods/MediaBrowser" target="_blank">
+    <img alt="CocoaPods" src="http://img.shields.io/cocoapods/v/MediaBrowser.svg">
+  </a>
+  <a href="https://github.com/younatics/MediaBrowser" target="_blank">
+    <img alt="Platform" src="https://img.shields.io/cocoapods/v/MediaBrowser.svg?style=flat">
+  </a>
+  <a href="http://cocoadocs.org/docsets/MediaBrowser" target="_blank">
+    <img alt="CocoaDocs" src="https://img.shields.io/cocoapods/metrics/doc-percent/MediaBrowser.svg">
+  </a>
+  <a href="https://github.com/Carthage/Carthage" target="_blank">
+    <img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat">
+  </a>
+    <a href="(https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat">
+  </a>
+</p>
 
 Awesome media(photo, video) browser
 
