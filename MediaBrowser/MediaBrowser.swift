@@ -58,9 +58,17 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var previousViewControllerBackButton: UIBarButtonItem?
     private var previousStatusBarStyle: UIStatusBarStyle = .lightContent
     
+    
+    /// UINavigationBar Translucent
     public var navigationBarTranslucent = true
+    
+    /// UINavigationBar Text Color
     public var navigationBarTextColor = UIColor.white
+    
+    /// UINavigationBar Background Color
     public var navigationBarBackgroundColor = UIColor.black
+    
+    /// UINavigationBar Tint Color
     public var navigationBarTintColor = UIColor.black.withAlphaComponent(0.5)
     public var statusBarStyle: UIStatusBarStyle = .lightContent
     
