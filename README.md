@@ -13,12 +13,13 @@
   <a href="http://cocoadocs.org/docsets/MediaBrowser" target="_blank">
     <img alt="CocoaDocs" src="https://img.shields.io/cocoapods/metrics/doc-percent/MediaBrowser.svg">
   </a>
+    <a href="(https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat">
+  </a>
   <a href="https://github.com/Carthage/Carthage" target="_blank">
     <img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat">
   </a>
-  <a href="(https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat">
-  </a>
+
 </p>
 
 ## Intoduction
