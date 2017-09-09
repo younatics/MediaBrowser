@@ -53,18 +53,18 @@ class ViewController: UITableViewController {
     }
 }
 
-//MARK: PhotoBrowserDelegate
+//MARK: MediaBrowserDelegate
 extension ViewController: MediaBrowserDelegate {
     func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
-        if index < thumbs.count {
-            return thumbs[index]
-        }
-        return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "ThumbPhoto at index is wrong")
-    }
+//    func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
+//        if index < thumbs.count {
+//            return thumbs[index]
+//        }
+//        return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "ThumbPhoto at index is wrong")
+//    }
     
     func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
         if index < mediaArray.count {
