@@ -43,27 +43,19 @@ public class MediaTapDetectingImageView: UIImageView {
             }
         }
         
-        if let nr = next {
-            nr.touchesEnded(touches, with: event)
-        }
+        next?.touchesEnded(touches, with: event)
     }
 
     private func handleSingleTap(touch: UITouch) {
-        if let td = tapDelegate {
-            td.singleTapDetectedInImageView(view: self, touch: touch)
-        }
+        tapDelegate?.singleTapDetectedInImageView(view: self, touch: touch)
     }
 
     private func handleDoubleTap(touch: UITouch) {
-        if let td = tapDelegate {
-            td.doubleTapDetectedInImageView(view: self, touch: touch)
-        }
+        tapDelegate?.doubleTapDetectedInImageView(view: self, touch: touch)
     }
 
     private func handleTripleTap(touch: UITouch) {
-        if let td = tapDelegate {
-            td.tripleTapDetectedInImageView(view: self, touch: touch)
-        }
+        tapDelegate?.tripleTapDetectedInImageView(view: self, touch: touch)
     }
 }
 

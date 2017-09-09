@@ -69,10 +69,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
     }
 
     deinit {
-        if media != nil {
-            media!.cancelAnyLoading()
-        }
-
+        media?.cancelAnyLoading()
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -88,11 +85,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
     }
 
     func displayingVideo() -> Bool {
-        if let p = photo {
-            return p.isVideo
-        }
-        
-        return false
+        return photo?.isVideo ?? false
     }
     
     public override var backgroundColor: UIColor? {
