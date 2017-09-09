@@ -16,7 +16,7 @@
   <a href="https://github.com/Carthage/Carthage" target="_blank">
     <img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat">
   </a>
-    <a href="(https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank">
+  <a href="(https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat">
   </a>
 </p>
