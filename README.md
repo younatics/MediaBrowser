@@ -20,10 +20,8 @@
   </a>
 </p>
 
-Awesome media(photo, video) browser
-
 ## Intoduction
-#### 🌃 Make simple shade view with Shader!
+🏞 MediaBrowser is written in Swift3, using [SDWebImage](https://github.com/rs/SDWebImage) 4.2.0 version for caching. 
 
 | Single Photo | Multiple Photos And Video |
 | ------------- | ------------------------- |
@@ -32,17 +30,12 @@ Awesome media(photo, video) browser
 | ![MultiplePhotoGrid](Images/MultiplePhotoGrid.gif)  | ![PhotoSelection](Images/PhotoSelection.gif)  |
 | Web Photos | Web Photos Grid |
 | ![WebPhotos](Images/WebPhotos.gif)  | ![WebPhotoGrid](Images/WebPhotoGrid.gif)  |
-## Requirements
 
-`MediaBrowser` is written in Swift 3. Compatible with iOS 8.0+
+## Requirements
+`MediaBrowser` is written in Swift 3. Compatible with iOS 8.1+
 
 ## Installation
-
 ### Cocoapods
-
-MediaBrowser is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
 ```ruby
 pod 'MediaBrowser'
 ```
@@ -52,21 +45,24 @@ github "younatics/MediaBrowser"
 ```
 
 ## Usage
-4 methods is available
+### Basic Usage
+
+Get `MediaBrowser` and set `MediaBrowserDelegate`
 ```Swift 
-// Add multiple view using tuple with cornerRadius
-let shaderView = Shader.at(framesAndRadius: [(originView.frame, 50), (originView2.frame, 0)], color: UIColor.black.withAlphaComponent(0.5))
+let browser = MediaBrowser(delegate: self)
+self.navigationController?.pushViewController(browser, animated: true)
 
-// Add common view
-let shaderView = Shader.at(frame: originView.frame, color: UIColor.blue.withAlphaComponent(0.3))
-
-// Add common view array
-let shaderView = Shader.at(frames: [originView.frame, originView2.frame], color: UIColor.black.withAlphaComponent(0.5))
-
-// Add common view and cornerRadius
-let shaderView = Shader.at(frame: originView.frame, cornerRadius: 50, color: UIColor.black.withAlphaComponent(0.5))
-
-self.view.addSubview(shaderView)
+//MediaBrowserDelegate
+func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int {
+  return mediaArray.count
+}
+    
+func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
+  if index < mediaArray.count {
+    return mediaArray[index]
+  }
+  return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "Photo at index is Wrong")
+}
 ```
 
 ## References
