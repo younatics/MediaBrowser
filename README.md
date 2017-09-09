@@ -13,18 +13,17 @@
     <img alt="CocoaPods" src="http://img.shields.io/cocoapods/v/MediaBrowser.svg">
   </a>
   
-  <a href="https://github.com/Carthage/Carthage" target="_blank">
-    <img alt="ReadMe-KR" src="https://img.shields.io/badge/한국어-리드미-red.svg">
+  <a href="http://cocoadocs.org/docsets/MediaBrowser" target="_blank">
+    <img alt="CocoaDocs" src="https://img.shields.io/cocoapods/metrics/doc-percent/MediaBrowser.svg">
   </a>
   
   <a href="https://github.com/Carthage/Carthage" target="_blank">
     <img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat">
   </a>
   
-  <a href="http://cocoadocs.org/docsets/MediaBrowser" target="_blank">
-    <img alt="CocoaDocs" src="https://img.shields.io/cocoapods/metrics/doc-percent/MediaBrowser.svg">
+  <a href="https://github.com/Carthage/Carthage" target="_blank">
+    <img alt="ReadMe-KR" src="https://img.shields.io/badge/한국어-리드미-red.svg">
   </a>
-
 </p>
 
 ## Intoduction
