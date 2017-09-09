@@ -11,7 +11,7 @@
   <a href="https://github.com/Carthage/Carthage" target="_blank"><img alt="ReadMe-KR" src="https://img.shields.io/badge/한국어-리드미-red.svg"></a>
   
 </p>
-
+#### 한국어로 리드미가 작성 될 예정입니다. PR이나 커밋은 환영합니다. 
 ## Intoduction
 🏞 **MediaBrowser** can display one or more images or videos by providing either `UIImage` objects, `PHAsset` objects, or `URLs` to library assets, web images/videos or local files. MediaBrowser handles the downloading and caching of photos from the web seamlessly. Photos can be zoomed and panned, and optional (customisable) captions can be displayed. This can also be used to allow the user to select one or more photos using either the grid or main image view.
 
