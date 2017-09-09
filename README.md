@@ -25,10 +25,13 @@ Awesome media(photo, video) browser
 ## Intoduction
 #### 🌃 Make simple shade view with Shader!
 
-| Facebook Picker | TLPhotoPicker  |
-| ------------- | ------------- |
-| ![Facebook Picker](Images/facebook_ex.gif)  | ![TLPhotoPicker](Images/tlphotopicker_ex.gif)  |
-
+| Single Photo | Multiple Photos And Video |
+| ------------- | ------------------------- |
+| ![SinglePhoto](Images/SinglePhoto.gif) | ![MultiplePhotosAndVideo](Images/MultiplePhotosAndVideo.gif) |
+| Multiple Photo Grid | Multiple Photo Selection |
+| ![MultiplePhotoGrid](Images/MultiplePhotoGrid.gif)  | ![PhotoSelection](Images/PhotoSelection.gif)  |
+| Web Photos | Web Photos Grid |
+| ![WebPhotos](Images/WebPhotos.gif)  | ![WebPhotoGrid](Images/WebPhotoGrid.gif)  |
 ## Requirements
 
 `MediaBrowser` is written in Swift 3. Compatible with iOS 8.0+
