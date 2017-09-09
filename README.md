@@ -8,7 +8,7 @@
   <a href="https://cocoapods.org/pods/MediaBrowser" target="_blank"><img alt="CocoaPods" src="http://img.shields.io/cocoapods/v/MediaBrowser.svg"></a>
   <a href="https://younatics.github.io/MediaBrowser" target="_blank"><img alt="CocoaDocs" src="https://github.com/younatics/MediaBrowser/blob/master/docs/badge.svg"></a>
   <a href="https://github.com/Carthage/Carthage" target="_blank"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
-  <a href="https://github.com/Carthage/Carthage" target="_blank"><img alt="ReadMe-KR" src="https://img.shields.io/badge/한국어-리드미-red.svg"></a>
+  <a href="https://github.com/younatics/MediaBrowser/blob/master/README-KR.md" target="_blank"><img alt="ReadMe-KR" src="https://img.shields.io/badge/한국어-리드미-red.svg"></a>
   
 </p>
 
