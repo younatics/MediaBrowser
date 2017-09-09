@@ -16,6 +16,9 @@
   <a href="https://github.com/Carthage/Carthage" target="_blank">
     <img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat">
   </a>
+    <a href="https://github.com/Carthage/Carthage" target="_blank">
+    <img alt="ReadMe-KR" src="https://img.shields.io/badge/한국어-리드미-red.svg?maxAge=2592000">
+  </a>
 
 </p>
 
