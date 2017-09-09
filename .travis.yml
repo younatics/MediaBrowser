@@ -1,0 +1,6 @@
+
+pod install
+
+language: objective-c
+xcode_workspace: MediaBrowser.xcodeproj # path to your xcodeproj folder
+xcode_scheme: MediaBrowser
