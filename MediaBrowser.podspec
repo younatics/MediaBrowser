@@ -14,13 +14,11 @@ Pod::Spec.new do |s|
   s.description = <<-DESCRIPTION
 MediaBrowser can display one or more images or videos by providing either UIImage objects, PHAsset objects, or URLs to library assets, web images/videos or local files. MediaBrowser handles the downloading and caching of photos from the web seamlessly. Photos can be zoomed and panned, and optional (customisable) captions can be displayed. This can also be used to allow the user to select one or more photos using either the grid or main image view. Also, MediaBrowser use latest SDWebImage version for caching, motivated by MWPhotoBrowser            
         DESCRIPTION
-
   s.screenshots = [
-    'https://github.com/younatics/MediaBrowser/blob/master/Images/intro.png?raw=true',
-    'https://github.com/younatics/MediaBrowser/blob/master/Images/MultiplePhotoGrid.png?raw=true',
-    'https://github.com/younatics/MediaBrowser/blob/master/Images/SinglePhoto.png?raw=true',
-    'https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotoGrid.png?raw=true',
-    'https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotos.png?raw=true'
+    'https://raw.githubusercontent.com/younatics/MediaBrowser/master/Images/cocoapodsImage1.png',
+    'https://raw.githubusercontent.com/younatics/MediaBrowser/master/Images/cocoapodsImage2.png',
+    'https://raw.githubusercontent.com/younatics/MediaBrowser/master/Images/cocoapodsImage3.png',
+    'https://raw.githubusercontent.com/younatics/MediaBrowser/master/Images/cocoapodsImage4.png'
   ]
   s.homepage         = 'https://github.com/younatics/MediaBrowser'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
