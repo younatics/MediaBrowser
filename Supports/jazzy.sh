@@ -16,17 +16,17 @@ jazzy --clean \
       --module MediaBrowser
 
 # Publish
-git clone git@github.com:younatics/MediaBrowser.git -b gh-pages _temp
-cd _temp
-git branch -m gh-pages _gh-pages
-git checkout --orphan gh-pages
-git reset -- *
-rm -rf ./*
-cp -r ../docs/latest/* ./
-git add ./*
-git commit -am "Update Documentation"
-git push origin gh-pages -f
-cd ..
+#git clone git@github.com:younatics/MediaBrowser.git -b gh-pages _temp
+#cd _temp
+#git branch -m gh-pages _gh-pages
+#git checkout --orphan gh-pages
+#git reset -- *
+#rm -rf ./*
+#cp -r ../docs/latest/* ./
+#git add ./*
+#git commit -am "Update Documentation"
+#git push origin gh-pages -f
+#cd ..
 
 # Clean
-rm -rf _sourcekitten.output.json build/ docs/ _temp/
+# rm -rf _sourcekitten.output.json build/ docs/ _temp/
