@@ -10,9 +10,6 @@
   <a href="https://cocoapods.org/pods/MediaBrowser" target="_blank">
     <img alt="CocoaPods" src="http://img.shields.io/cocoapods/v/MediaBrowser.svg">
   </a>
-  <a href="https://github.com/younatics/MediaBrowser" target="_blank">
-    <img alt="Platform" src="https://img.shields.io/cocoapods/v/MediaBrowser.svg?style=flat">
-  </a>
   <a href="http://cocoadocs.org/docsets/MediaBrowser" target="_blank">
     <img alt="CocoaDocs" src="https://img.shields.io/cocoapods/metrics/doc-percent/MediaBrowser.svg">
   </a>
