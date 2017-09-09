@@ -3,6 +3,7 @@
 
 <p align="center">
   <img alt="Swift" src="https://img.shields.io/badge/Swift-3.1-orange.svg">
+  <img alt="iOS 8.1+" src="https://img.shields.io/badge/iOS-8.1%2B-blue.svg">
   <a href="https://cocoapods.org/pods/MediaBrowser" target="_blank">
     <img alt="CocoaPods" src="http://img.shields.io/cocoapods/v/MediaBrowser.svg">
   </a>
