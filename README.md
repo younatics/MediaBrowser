@@ -21,7 +21,7 @@
 </p>
 
 ## Intoduction
-🏞 MediaBrowser is written in Swift3, using [SDWebImage](https://github.com/rs/SDWebImage) 4.2.0 version for caching. 
+🏞 **MediaBrowser** is written in Swift3, using latest [SDWebImage](https://github.com/rs/SDWebImage) version for caching. 
 
 | Single Photo | Multiple Photos And Video |
 | ------------- | ------------------------- |
@@ -34,18 +34,8 @@
 ## Requirements
 `MediaBrowser` is written in Swift 3. Compatible with iOS 8.1+
 
-## Installation
-### Cocoapods
-```ruby
-pod 'MediaBrowser'
-```
-### Carthage
-```
-github "younatics/MediaBrowser"
-```
-
 ## Usage
-### Basic Usage
+### Basic
 
 Get `MediaBrowser` and set `MediaBrowserDelegate`
 ```Swift 
@@ -63,6 +53,16 @@ func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
   }
   return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "Photo at index is Wrong")
 }
+```
+
+## Installation
+### Cocoapods
+```ruby
+pod 'MediaBrowser'
+```
+### Carthage
+```
+github "younatics/MediaBrowser"
 ```
 
 ## References
