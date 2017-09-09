@@ -1,5 +1,5 @@
 
-![title](Images/MediaBrowser_w.png)
+![title](https://github.com/younatics/MediaBrowser/blob/master/Images/MediaBrowser_w.png?raw=true)
 
 <p align="center">
   <a href="(https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank">
