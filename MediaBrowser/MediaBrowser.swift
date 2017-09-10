@@ -15,6 +15,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
     return CGFloat(floorf(Float(x)))
 }
 
+/// MediaBrwoser is based in UIViewController, UIScrollViewDelegate and UIActionSheetDelegate. So you can push, or make modal.
 public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDelegate {
     private let padding = CGFloat(10.0)
 
@@ -201,11 +202,17 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var cachingImageCount = 1
     
     //MARK: - Init
+    
+    /**
+     init with delegate
+     
+     - Parameter nibName: nibName
+     - Parameter nibBundle: nibBundle
+     */
     public override init(nibName: String?, bundle nibBundle: Bundle?) {
         super.init(nibName: nibName, bundle: nibBundle)
         initialisation()
     }
-    
     
     /**
      init with delegate
@@ -227,6 +234,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         fixedMediasArray = media
     }
 
+    /**
+     init with coder
+     
+     - Parameter coder: coder
+     */
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
         initialisation()
@@ -298,7 +310,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     //MARK: - View Loading
 
-    // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+    /// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
     public override func viewDidLoad() {
         // Validate grid settings
         if startOnGrid {
@@ -372,27 +384,29 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 action: #selector(actionButtonPressed(_:)))
         }
         
-        // Update
         reloadData()
         
-        // Swipe to dismiss
         if enableSwipeToDismiss {
             let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(doneButtonPressed))
             swipeGesture.direction = [.down, .up]
             view.addGestureRecognizer(swipeGesture)
         }
         
-        // Super
         super.viewDidLoad()
     }
     
+    /**
+     view will transition
+     
+     - Parameter size: size
+     - Parameter coordinator: UIViewControllerTransitionCoordinator
+     */
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: nil) { _ in
             self.toolbar.frame = self.frameForToolbar
         }
         
         super.viewWillTransition(to: size, with: coordinator)
-
     }
     
     func performLayout() {
@@ -536,6 +550,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     //MARK: - Appearance
 
+    /**
+     viewWillAppear
+     
+     - Parameter animated: Bool
+     */
     public override func viewWillAppear(_ animated: Bool) {
         // Super
         super.viewWillAppear(animated)
@@ -584,6 +603,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         self.view.setNeedsLayout()
     }
 
+    /**
+     view Did Appear
+     
+     - Parameter animated: Bool
+     */
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewIsActive = true
@@ -600,6 +624,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         viewHasAppearedInitially = true
     }
 
+    /**
+     view will disappear
+     
+     - Parameter animated: Bool
+     */
     public override func viewWillDisappear(_ animated: Bool) {
         // Detect if rotation occurs while we're presenting a modal
         pageIndexBeforeRotation = currentPageIndex
@@ -639,11 +668,22 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         super.viewWillDisappear(animated)
     }
 
+    /**
+     will move toParentViewController
+     
+     - Parameter parent: UIViewController
+     */
     public override func willMove(toParentViewController parent: UIViewController?) {
         if parent != nil && hasBelongedToViewController {
             fatalError("MediaBrowser Instance Reuse")
         }
     }
+    
+    /**
+     did move toParentViewController
+     
+     - Parameter parent: UIViewController
+     */
     public override func didMove(toParentViewController parent: UIViewController?) {
         if nil == parent {
             hasBelongedToViewController = true
@@ -770,11 +810,12 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     //MARK: - Rotation
-    
+    /// supported interface orientations
     public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .all
     }
 
+    /// will rotate to interfaceOrientation
     public override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         // Remember page index before rotation
         pageIndexBeforeRotation = currentPageIndex
@@ -786,7 +827,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             navigationController?.isNavigationBarHidden = true
         }
     }
-
+    
+    /// will animate rotation
     public override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         // Perform layout
         currentPageIndex = pageIndexBeforeRotation
@@ -797,7 +839,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Layout
         layoutVisiblePages()
     }
-
+    
+    /// did rotate
     public override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         rotating = false
         // Ensure nav bar isn't re-displayed
@@ -1353,7 +1396,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     //MARK: - UIScrollView Delegate
-
+    /// UIScrollViewDelegate - scrollViewDidScroll
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Checks
         if !viewIsActive || performingLayout || rotating {
@@ -1382,11 +1425,13 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
     }
 
+    /// UIScrollViewDelegate - scrollViewWillBeginDragging
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         // Hide controls when dragging begins
         setControlsHidden(hidden: true, animated: true, permanent: false)
     }
 
+    /// UIScrollViewDelegate - scrollViewDidEndDecelerating
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Update nav when page changes
         updateNavigation()
@@ -1832,6 +1877,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
     }
 
+    /// prefersStatusBarHidden
     public override var prefersStatusBarHidden: Bool {
         if !leaveStatusBarAlone {
             return statusBarShouldBeHidden
@@ -1840,6 +1886,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return presentingViewControllerPrefersStatusBarHidden
     }
     
+    /// preferredStatusBarUpdateAnimation
     public override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .slide
     }

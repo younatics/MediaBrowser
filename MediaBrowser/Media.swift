@@ -17,10 +17,19 @@ let MEDIA_PROGRESS_NOTIFICATION  = "MEDIA_PROGRESS_NOTIFICATION"
 
 var PHInvalidImageRequestID = PHImageRequestID(0)
 
+/// Media is object for photo and video
 public class Media: NSObject {
+    
+    /// caption
     public var caption = ""
+    
+    /// emptyImage
     public var emptyImage = true
+    
+    /// isVideo
     public var isVideo = false
+    
+    /// underlyingImage
     public var underlyingImage: UIImage?
 
     private let uuid = NSUUID().uuidString
@@ -34,31 +43,37 @@ public class Media: NSObject {
     private var assetRequestID = PHInvalidImageRequestID
     
     //MARK: - Init
-
+    /// init
     public override init() {}
 
+    
+    /// init with image
     public convenience init(image: UIImage) {
         self.init()
         self.image = image
     }
     
+    /// init with image and caption
     public convenience init(image: UIImage, caption: String) {
         self.init()
         self.image = image
         self.caption = caption
     }
 
+    /// init with image url and caption
     public convenience init(url: URL, caption: String) {
         self.init()
         self.photoURL = url
         self.caption = caption
     }
 
+    /// init with image url
     public convenience init(url: URL) {
         self.init()
         self.photoURL = url
     }
 
+    /// init with PHAsset and targetSize
     public convenience init(asset: PHAsset, targetSize: CGSize) {
         self.init()
         
@@ -66,7 +81,8 @@ public class Media: NSObject {
         assetTargetSize = targetSize
         isVideo = asset.mediaType == PHAssetMediaType.video
     }
-
+    
+    /// init with video URL
     public convenience init(videoURL: URL) {
         self.init()
     
@@ -78,6 +94,8 @@ public class Media: NSObject {
     //MARK: - Video
 
     private var _videoURL: URL?
+    
+    /// Set video URL
     public var videoURL: URL? {
         set {
             setVideoURL(url: newValue)
@@ -87,12 +105,12 @@ public class Media: NSObject {
         }
     }
 
-    public func setVideoURL(url: URL?) {
+    func setVideoURL(url: URL?) {
         self._videoURL = url
         isVideo = true
     }
 
-    public func getVideoURL(completion: @escaping (URL?) -> ()) {
+    func getVideoURL(completion: @escaping (URL?) -> ()) {
         if let vurl = videoURL {
             completion(vurl)
         }
@@ -119,7 +137,7 @@ public class Media: NSObject {
     }
 
     //MARK: - Photo Protocol Methods
-    public func loadUnderlyingImageAndNotify() {
+    func loadUnderlyingImageAndNotify() {
         assert(Thread.current.isMainThread, "This method must be called on the main thread.")
         
         if loadingInProgress {
@@ -144,7 +162,7 @@ public class Media: NSObject {
     }
 
     // Set the underlyingImage
-    public func performLoadUnderlyingImageAndNotify() {
+    func performLoadUnderlyingImageAndNotify() {
         // Get underlying image
         if let img = image {
             // We have UIImage!
@@ -280,7 +298,7 @@ public class Media: NSObject {
             })
     }
 
-    // Release if we can get it again from path or url
+    /// Release if we can get it again from path or url
     public func unloadUnderlyingImage() {
         loadingInProgress = false
         underlyingImage = nil
@@ -303,7 +321,8 @@ public class Media: NSObject {
             name: NSNotification.Name(rawValue: MEDIA_LOADING_DID_END_NOTIFICATION),
             object: self)
     }
-
+    
+    /// Cancel loading
     public func cancelAnyLoading() {
         if let op = self.operation {
             op.cancel()
@@ -316,7 +335,7 @@ public class Media: NSObject {
         }
     }
     
-    public func equals(photo: Media) -> Bool {
+    func equals(photo: Media) -> Bool {
         return uuid == photo.uuid
     }
 }

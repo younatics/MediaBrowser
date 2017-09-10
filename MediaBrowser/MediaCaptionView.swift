@@ -9,23 +9,39 @@
 
 import UIKit
 
+/// MediaCaptionView is based in UIToolbar
 public class MediaCaptionView: UIToolbar {
     private var media: Media?
     private var label = UILabel()
     public let labelPadding = CGFloat(10.0)
 
-    init(media: Media?) {
+    /**
+     init with Media
+     
+     - Parameter media: Media
+     */
+    public init(media: Media?) {
         super.init(frame: CGRect(x: 0, y: 0, width: 320.0, height: 44.0)) // Random initial frame
         self.media = media
         
         setupCaption()
     }
 
+    /**
+     init with coder
+     
+     - Parameter coder: aDecoder
+     */
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupCaption()
     }
     
+    /**
+     sizeThatFits
+     
+     - Parameter size: CGSize
+     */
     public override func sizeThatFits(_ size: CGSize) -> CGSize {
         var maxHeight = CGFloat(9999.0)
         if label.numberOfLines > 0 {
