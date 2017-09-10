@@ -13,6 +13,8 @@ import UIKit
 public class MediaCaptionView: UIToolbar {
     private var media: Media?
     private var label = UILabel()
+    
+    /// labelPadding
     public let labelPadding = CGFloat(10.0)
 
     /**

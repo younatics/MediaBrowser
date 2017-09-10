@@ -27,13 +27,6 @@
       "symbol": "MediaBrowserDelegate",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
-    },
-    {
-      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaCaptionView.swift",
-      "line": 16,
-      "symbol": "MediaCaptionView.labelPadding",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
     }
   ],
   "source_directory": "/Users/seungyounyi/MediaBrowser"
