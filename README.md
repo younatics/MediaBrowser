@@ -50,6 +50,55 @@ func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
 }
 ```
 
+### Advanced
+<a href="https://younatics.github.io/MediaBrowser" target="_blank"><img alt="CocoaDocs" src="https://github.com/younatics/MediaBrowser/blob/master/docs/badge.svg"></a> is the best place to start!
+
+#### `MediaBrowser`
+| Property | Type |
+| -------- | ---  |
+| navigationBarTranslucent | Bool |
+| navigationBarTextColor | UIColor |
+| navigationBarTintColor | UIColor |
+| statusBarStyle | UIStatusBarStyle |
+| toolbarTextColor | UIColor |
+| toolbarBarTintColor | UIColor |
+| toolbarBackgroundColor | UIColor |
+| hasBelongedToViewController | Bool |
+| isVCBasedStatusBarAppearance | Bool |
+| statusBarShouldBeHidden | Bool |
+| displayActionButton | Bool |
+| leaveStatusBarAlone | Bool |
+| performingLayout | Bool |
+| rotating | Bool |
+| viewIsActive | Bool |
+| didSavePreviousStateOfNavBar | Bool |
+| skipNextPagingScrollViewPositioning | Bool |
+| viewHasAppearedInitially | Bool |
+| currentGridContentOffset | CGPoint |
+| zoomPhotosToFill | Bool |
+| displayMediaNavigationArrows | Bool |
+| displaySelectionButtons | Bool |
+| alwaysShowControls | Bool |
+| enableGrid | Bool |
+| enableSwipeToDismiss | Bool |
+| startOnGrid | Bool |
+| autoPlayOnAppear | Bool |
+| hideControlsOnStartup | Bool |
+| delayToHideElements | TimeInterval |
+| captionAlpha | CGFloat |
+| toolbarAlpha | CGFloat |
+| loadingIndicatorInnerRingColor | UIColor |
+| loadingIndicatorOuterRingColor | UIColor |
+| loadingIndicatorInnerRingWidth | CGFloat |
+| loadingIndicatorOuterRingWidth | CGFloat |
+| loadingIndicatorFont | UIFont |
+| loadingIndicatorFontColor | UIColor |
+| loadingIndicatorShouldShowValueText | Bool |
+| mediaSelectedOnIcon | UIImage? |
+| mediaSelectedOffIcon | UIImage? |
+| mediaSelectedGridOnIcon | UIImage? |
+| mediaSelectedGridOffIcon | UIImage? |
+
 ## Installation
 ### Cocoapods
 ```ruby
