@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Required delegate to use MediaBrowser
 public protocol MediaBrowserDelegate: class {
     //MARK: Required methods
     

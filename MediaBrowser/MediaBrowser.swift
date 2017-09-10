@@ -298,7 +298,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             }
         }
     }
-
+    /// didReceiveMemoryWarning
     public override func didReceiveMemoryWarning() {
         // Release any cached data, images, etc that aren't in use.
         releaseAllUnderlyingPhotos(preserveCurrent: true)
@@ -742,7 +742,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     //MARK: - Layout
-
+    /// viewWillLayoutSubviews
     public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         layoutVisiblePages()
