@@ -13,7 +13,7 @@
     <a title="MediaBrowser  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">MediaBrowser Docs</a> (96% documented)</p>
+        <p><a href="index.html">MediaBrowser Docs</a> (100% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -130,6 +130,186 @@ func media(for mediaBrowser: MediaBrowser, at index: Int) -&gt; Media {
   return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "Photo at index is Wrong")
 }
 </code></pre>
+<h3 id='advanced' class='heading'>Advanced</h3>
+
+<p><a href="https://younatics.github.io/MediaBrowser" target="_blank"><img alt="CocoaDocs" src="https://github.com/younatics/MediaBrowser/blob/master/docs/badge.svg"></a> is the best place to start!</p>
+<h4 id='mediabrowser' class='heading'>MediaBrowser</h4>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>navigationBarTranslucent</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>navigationBarTextColor</td>
+<td>UIColor</td>
+</tr>
+<tr>
+<td>navigationBarTintColor</td>
+<td>UIColor</td>
+</tr>
+<tr>
+<td>statusBarStyle</td>
+<td>UIStatusBarStyle</td>
+</tr>
+<tr>
+<td>toolbarTextColor</td>
+<td>UIColor</td>
+</tr>
+<tr>
+<td>toolbarBarTintColor</td>
+<td>UIColor</td>
+</tr>
+<tr>
+<td>toolbarBackgroundColor</td>
+<td>UIColor</td>
+</tr>
+<tr>
+<td>hasBelongedToViewController</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>isVCBasedStatusBarAppearance</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>statusBarShouldBeHidden</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>displayActionButton</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>leaveStatusBarAlone</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>performingLayout</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>rotating</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>viewIsActive</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>didSavePreviousStateOfNavBar</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>skipNextPagingScrollViewPositioning</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>viewHasAppearedInitially</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>currentGridContentOffset</td>
+<td>CGPoint</td>
+</tr>
+<tr>
+<td>zoomPhotosToFill</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>displayMediaNavigationArrows</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>displaySelectionButtons</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>alwaysShowControls</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>enableGrid</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>enableSwipeToDismiss</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>startOnGrid</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>autoPlayOnAppear</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>hideControlsOnStartup</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>delayToHideElements</td>
+<td>TimeInterval</td>
+</tr>
+<tr>
+<td>captionAlpha</td>
+<td>CGFloat</td>
+</tr>
+<tr>
+<td>toolbarAlpha</td>
+<td>CGFloat</td>
+</tr>
+<tr>
+<td>loadingIndicatorInnerRingColor</td>
+<td>UIColor</td>
+</tr>
+<tr>
+<td>loadingIndicatorOuterRingColor</td>
+<td>UIColor</td>
+</tr>
+<tr>
+<td>loadingIndicatorInnerRingWidth</td>
+<td>CGFloat</td>
+</tr>
+<tr>
+<td>loadingIndicatorOuterRingWidth</td>
+<td>CGFloat</td>
+</tr>
+<tr>
+<td>loadingIndicatorFont</td>
+<td>UIFont</td>
+</tr>
+<tr>
+<td>loadingIndicatorFontColor</td>
+<td>UIColor</td>
+</tr>
+<tr>
+<td>loadingIndicatorShouldShowValueText</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>mediaSelectedOnIcon</td>
+<td>UIImage?</td>
+</tr>
+<tr>
+<td>mediaSelectedOffIcon</td>
+<td>UIImage?</td>
+</tr>
+<tr>
+<td>mediaSelectedGridOnIcon</td>
+<td>UIImage?</td>
+</tr>
+<tr>
+<td>mediaSelectedGridOffIcon</td>
+<td>UIImage?</td>
+</tr>
+</tbody></table>
 <h2 id='installation' class='heading'>Installation</h2>
 <h3 id='cocoapods' class='heading'>Cocoapods</h3>
 <pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'MediaBrowser'</span>
@@ -139,6 +319,9 @@ func media(for mediaBrowser: MediaBrowser, at index: Int) -&gt; Media {
 </code></pre>
 <h2 id='references' class='heading'>References</h2>
 <h4 id='please-tell-me-or-make-pull-request-if-you-use-this-library-in-your-application' class='heading'>Please tell me or make pull request if you use this library in your application :)</h4>
+<h2 id='updates' class='heading'>Updates</h2>
+
+<p>See <a href="https://github.com/younatics/MediaBrowser/blob/master/CHANGELOG.md">CHANGELOG</a> for details</p>
 <h2 id='author' class='heading'>Author</h2>
 
 <p><a href="https://twitter.com/younatics">younatics 🇰🇷</a></p>
