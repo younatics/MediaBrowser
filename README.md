@@ -53,7 +53,7 @@ func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
 ### Advanced
 <a href="https://younatics.github.io/MediaBrowser" target="_blank"><img alt="CocoaDocs" src="https://github.com/younatics/MediaBrowser/blob/master/docs/badge.svg"></a> is the best place to start!
 
-#### `MediaBrowser`
+#### MediaBrowser
 | Property | Type |
 | -------- | ---  |
 | navigationBarTranslucent | Bool |
@@ -111,6 +111,9 @@ github "younatics/MediaBrowser"
 
 ## References
 #### Please tell me or make pull request if you use this library in your application :) 
+
+## Updates
+See [CHANGELOG](https://github.com/younatics/MediaBrowser/blob/master/CHANGELOG.md) for details
 
 ## Author
 [younatics 🇰🇷](https://twitter.com/younatics)
