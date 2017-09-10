@@ -206,14 +206,25 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         initialisation()
     }
     
+    
+    /**
+     init with delegate
+     
+     - Parameter delegate: MediaBrowserDelegate
+     */
     public convenience init(delegate: MediaBrowserDelegate) {
         self.init()
         self.delegate = delegate
     }
 
-    public convenience init(photos: [Media]) {
+    /**
+     init with media
+     
+     - Parameter media: Media array
+     */
+    public convenience init(media: [Media]) {
         self.init()
-        fixedMediasArray = photos
+        fixedMediasArray = media
     }
 
     public required init?(coder: NSCoder) {
