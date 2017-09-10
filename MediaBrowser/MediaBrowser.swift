@@ -58,75 +58,146 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var previousViewControllerBackButton: UIBarButtonItem?
     private var previousStatusBarStyle: UIStatusBarStyle = .lightContent
     
-    
-    /// UINavigationBar Translucent
-    public var navigationBarTranslucent = true
-    
-    /// UINavigationBar Text Color
-    public var navigationBarTextColor = UIColor.white
-    
-    /// UINavigationBar Background Color
-    public var navigationBarBackgroundColor = UIColor.black
-    
-    /// UINavigationBar Tint Color
-    public var navigationBarTintColor = UIColor.black.withAlphaComponent(0.5)
-    public var statusBarStyle: UIStatusBarStyle = .lightContent
-    
-    public var toolbarTextColor = UIColor.white
-    public var toolbarBarTintColor = UIColor.black.withAlphaComponent(0.5)
-    public var toolbarBackgroundColor = UIColor.black
-    
     // Video
     var currentVideoPlayerViewController: MPMoviePlayerViewController?
     var currentVideoIndex = 0
     var currentVideoLoadingIndicator: UIActivityIndicatorView?
+
+    var activityViewController: UIActivityViewController?
+
+    /// UINavigationBar Translucent for MediaBrowser
+    public var navigationBarTranslucent = true
     
-    // Misc
+    /// UINavigationBar Text Color for MediaBrowser
+    public var navigationBarTextColor = UIColor.white
+    
+    /// UINavigationBar Background Color for MediaBrowser
+    public var navigationBarBackgroundColor = UIColor.black
+    
+    /// UINavigationBar Tint Color for MediaBrowser
+    public var navigationBarTintColor = UIColor.black.withAlphaComponent(0.5)
+    
+    /// UIStatusBarStyle for MediaBrowser
+    public var statusBarStyle: UIStatusBarStyle = .lightContent
+    
+    /// UIToolBar Text Color for MediaBrowser
+    public var toolbarTextColor = UIColor.white
+    
+    /// UIToolBar Tint Color for MediaBrowser
+    public var toolbarBarTintColor = UIColor.black.withAlphaComponent(0.5)
+    
+    /// UIToolBar Tint Background for MediaBrowser
+    public var toolbarBackgroundColor = UIColor.black
+    
+    /// MediaBrowser has belonged to viewcontroller
     public var hasBelongedToViewController = false
+    
+    /// Check viewcontroller based status bar apperance
     public var isVCBasedStatusBarAppearance = false
+    
+    /// Hide or show status bar
     public var statusBarShouldBeHidden = false
+    
+    /// Display action button (share)
     public var displayActionButton = true
+    
+    /// Make status bar not hide
     public var leaveStatusBarAlone = false
+    
+    /// Perform layout
 	public var performingLayout = false
+    
+    /// Support rotating
 	public var rotating = false
-    public var viewIsActive = false // active as in it's in the view heirarchy
+    
+    /// Active as in it's in the view heirarchy
+    public var viewIsActive = false
+    
+    /// Save previous status bar style to return when push
     public var didSavePreviousStateOfNavBar = false
+    
+    /// Stop specific layout being triggered
     public var skipNextPagingScrollViewPositioning = false
+    
+    /// View has appeared initially
     public var viewHasAppearedInitially = false
+    
+    /// Make current grid offset
     public var currentGridContentOffset = CGPoint(x: 0, y: CGFloat.greatestFiniteMagnitude)
     
-    var activityViewController: UIActivityViewController?
-    
+    /// Set MediaBrowserDelegate for MediaBrowser
     public var delegate: MediaBrowserDelegate?
+    
+    /// Available zoom photos to fill
     public var zoomPhotosToFill = true
-    public var displayNavArrows = false
+    
+    /// Display Media Navigation Arrows
+    public var displayMediaNavigationArrows = false
+    
+    /// Display selection buttons
     public var displaySelectionButtons = false
+    
+    /// Always show controls
     public var alwaysShowControls = false
+    
+    /// Enable grid
     public var enableGrid = true
+    
+    /// Enable swipe to dismiss
     public var enableSwipeToDismiss = true
+    
+    /// Start on Grid
     public var startOnGrid = false
+    
+    /// Auto play video on appear
     public var autoPlayOnAppear = false
+    
+    /// Hide control when MediaBrowser start
     public var hideControlsOnStartup = false
+    
+    /// Hide time inerval
     public var delayToHideElements = TimeInterval(5.0)
     
+    /// Captionview alpha
     public var captionAlpha = CGFloat(1)
+    
+    /// Toolbar alpha
     public var toolbarAlpha = CGFloat(1)
     
-    // Loading Indicator
+    /// Loading Indicator Inner Ring Color
     public var loadingIndicatorInnerRingColor = UIColor.white
+    
+    /// Loading Indicator Outer Ring Color
     public var loadingIndicatorOuterRingColor = UIColor.gray
+    
+    /// Loading Indicator Inner Ring Width
     public var loadingIndicatorInnerRingWidth:CGFloat = 1.0
+    
+    /// Loading Indicator Outer Ring Width
     public var loadingIndicatorOuterRingWidth:CGFloat = 1.0
+    
+    /// Loading Indicator Font
     public var loadingIndicatorFont = UIFont.systemFont(ofSize: 10)
+    
+    /// Loading Indicator Font Color
     public var loadingIndicatorFontColor = UIColor.white
+    
+    /// Loading Indicator Show or hide text
     public var loadingIndicatorShouldShowValueText = true
     
+    /// Media selected on icon
     public var mediaSelectedOnIcon: UIImage?
+    
+    /// Media selected off icon
     public var mediaSelectedOffIcon: UIImage?
     
+    /// Media selected grid on icon
     public var mediaSelectedGridOnIcon: UIImage?
+    
+    /// Media selected grid off icon
     public var mediaSelectedGridOffIcon: UIImage?
     
+    /// Caching image count both side (e.g. when index 1, caching 0 and 2)
     public var cachingImageCount = 1
     
     //MARK: - Init
@@ -259,7 +330,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         toolbar.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
         
         // Toolbar Items
-        if displayNavArrows {
+        if displayMediaNavigationArrows {
             let arrowPathFormat = "UIBarButtonItemArrow"
             
             let previousButtonImage = UIImage.imageForResourcePath(

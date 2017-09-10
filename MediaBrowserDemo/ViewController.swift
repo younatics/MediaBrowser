@@ -112,7 +112,7 @@ extension ViewController {
         
         var displayActionButton = true
         var displaySelectionButtons = false
-        var displayNavArrows = false
+        var displayMediaNavigationArrows = false
         var enableGrid = true
         var startOnGrid = false
         var autoPlayOnAppear = false
@@ -133,7 +133,7 @@ extension ViewController {
             thumbs = DemoData.multiplePhotoGrid()
 
             startOnGrid = true
-            displayNavArrows = true
+            displayMediaNavigationArrows = true
             
             break
         case 3, 4:
@@ -172,13 +172,13 @@ extension ViewController {
         
         let browser = MediaBrowser(delegate: self)
         browser.displayActionButton = displayActionButton
-        browser.displayNavArrows = displayNavArrows
+        browser.displayMediaNavigationArrows = displayMediaNavigationArrows
         browser.displaySelectionButtons = displaySelectionButtons
         browser.alwaysShowControls = displaySelectionButtons
         browser.zoomPhotosToFill = true
         browser.enableGrid = enableGrid
         browser.startOnGrid = startOnGrid
-        browser.enableSwipeToDismiss = false
+        browser.enableSwipeToDismiss = true
         browser.autoPlayOnAppear = autoPlayOnAppear
         
         
