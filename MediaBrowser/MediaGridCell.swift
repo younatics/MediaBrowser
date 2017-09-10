@@ -7,23 +7,24 @@
 //
 
 import UIKit
-import DACircularProgress
+import UICircularProgressRing
 
-public class MediaGridCell: UICollectionViewCell {
+class MediaGridCell: UICollectionViewCell {
     let videoIndicatorPadding = CGFloat(10.0)
     
     var index = 0
     var selectionMode = false
     
-    private let imageView = UIImageView()
-    private let videoIndicator = UIImageView()
-    private var loadingError: UIImageView?
-	private let loadingIndicator = DACircularProgressView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-    private let selectedButton = UIButton(type: .custom)
+    let imageView = UIImageView()
+    let videoIndicator = UIImageView()
+    var loadingError: UIImageView?
+    let selectedButton = UIButton(type: .custom)
+    
+    let loadingIndicator = UICircularProgressRingView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         // Grey background
         backgroundColor = UIColor(white: 0.12, alpha: 1.0)
         
@@ -41,7 +42,7 @@ public class MediaGridCell: UICollectionViewCell {
         let videoIndicatorImage = UIImage.imageForResourcePath(
             name: "VideoOverlay",
             inBundle: Bundle(for: MediaGridCell.self))!
-            
+        
         videoIndicator.frame = CGRect(
             x: self.bounds.size.width - videoIndicatorImage.size.width - videoIndicatorPadding,
             y: self.bounds.size.height - videoIndicatorImage.size.height - videoIndicatorPadding,
@@ -56,27 +57,25 @@ public class MediaGridCell: UICollectionViewCell {
         // Selection button
         selectedButton.contentMode = UIViewContentMode.topRight
         selectedButton.adjustsImageWhenHighlighted = false
-
+        
         selectedButton.setImage(
             UIImage.imageForResourcePath(
                 name: "ImageSelectedSmallOff",
                 inBundle: Bundle(for: MediaGridCell.self)),
             for: .normal)
-
+        
         selectedButton.setImage(UIImage.imageForResourcePath(
-                name: "ImageSelectedSmallOn",
-                inBundle: Bundle(for: MediaGridCell.self)),
-            for: .selected)
-
+            name: "ImageSelectedSmallOn",
+            inBundle: Bundle(for: MediaGridCell.self)),
+                                for: .selected)
+        
         selectedButton.addTarget(self, action: #selector(MediaGridCell.selectionButtonPressed), for: .touchDown)
         selectedButton.isHidden = true
         selectedButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         addSubview(selectedButton)
-    
+        
         // Loading indicator
         loadingIndicator.isUserInteractionEnabled = false
-        loadingIndicator.thicknessRatio = 0.1
-        loadingIndicator.roundedCorners = 0
         addSubview(loadingIndicator)
         
         // Listen for photo loading notifications
@@ -92,27 +91,44 @@ public class MediaGridCell: UICollectionViewCell {
             name: NSNotification.Name(rawValue: MEDIA_LOADING_DID_END_NOTIFICATION),
             object: nil)
     }
-
-    public required init?(coder aDecoder: NSCoder) {
+    
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
-    private weak var mwGridController: MediaGridViewController?
-
+    
+    weak var mwGridController: MediaGridViewController?
+    
     var gridController: MediaGridViewController? {
         set(gridCtl) {
             mwGridController = gridCtl
-        
+            
             if let gc = gridCtl {
                 // Set custom selection image if required
                 if let browser = gc.browser {
-                    if browser.customImageSelectedSmallIconName.characters.count > 0 {
-                        selectedButton.setImage(UIImage(named: browser.customImageSelectedSmallIconName), for: .selected)
+                    if let selectedOffImage = browser.mediaSelectedGridOffIcon {
+                        selectedButton.setImage(selectedOffImage, for: .normal)
+                    } else {
+                        selectedButton.setImage(UIImage(named: "ImageSelectedSmallOff", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .normal)
                     }
+                    
+                    if let selectedOnImage = browser.mediaSelectedGridOnIcon {
+                        selectedButton.setImage(selectedOnImage, for: .selected)
+                    } else {
+                        selectedButton.setImage(UIImage(named: "ImageSelectedSmallOn", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .selected)
+                    }
+                    
+                    loadingIndicator.innerRingColor = browser.loadingIndicatorInnerRingColor
+                    loadingIndicator.outerRingColor = browser.loadingIndicatorOuterRingColor
+                    loadingIndicator.innerRingWidth = browser.loadingIndicatorInnerRingWidth
+                    loadingIndicator.outerRingWidth = browser.loadingIndicatorOuterRingWidth
+                    loadingIndicator.font = browser.loadingIndicatorFont
+                    loadingIndicator.fontColor = browser.loadingIndicatorFontColor
+                    loadingIndicator.shouldShowValueText = browser.loadingIndicatorShouldShowValueText
+                    
                 }
             }
         }
@@ -121,10 +137,10 @@ public class MediaGridCell: UICollectionViewCell {
             return mwGridController
         }
     }
-
+    
     //MARK: - View
-
-    public override func layoutSubviews() {
+    
+    override func layoutSubviews() {
         super.layoutSubviews()
         
         imageView.frame = bounds
@@ -139,24 +155,24 @@ public class MediaGridCell: UICollectionViewCell {
                                       width: selectedButton.frame.size.width,
                                       height: selectedButton.frame.size.height)
     }
-
+    
     //MARK: - Cell
-
-    public override func prepareForReuse() {
+    
+    override func prepareForReuse() {
         photo = nil
         mwGridController = nil
         imageView.image = nil
-        loadingIndicator.progress = 0
+        loadingIndicator.setProgress(value: 0.0, animationDuration: 1)
         selectedButton.isHidden = true
         hideImageFailure()
         
         super.prepareForReuse()
     }
-
+    
     //MARK: - Image Handling
-
-    private var Media: Media?
-
+    
+    var Media: Media?
+    
     var photo: Media? {
         set(p) {
             Media = p
@@ -180,7 +196,7 @@ public class MediaGridCell: UICollectionViewCell {
             return Media
         }
     }
-
+    
     func displayImage() {
         if let p = Media {
             imageView.image = p.underlyingImage
@@ -188,10 +204,10 @@ public class MediaGridCell: UICollectionViewCell {
             self.hideImageFailure()
         }
     }
-
+    
     //MARK: - Selection
-
-    public override var isSelected: Bool {
+    
+    override var isSelected: Bool {
         set(sel) {
             super.isSelected = sel
             selectedButton.isSelected = sel
@@ -201,7 +217,7 @@ public class MediaGridCell: UICollectionViewCell {
             return super.isSelected
         }
     }
-
+    
     func selectionButtonPressed() {
         selectedButton.isSelected = !selectedButton.isSelected
         
@@ -211,38 +227,38 @@ public class MediaGridCell: UICollectionViewCell {
             }
         }
     }
-
+    
     //MARK: - Touches
-
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         imageView.alpha = 0.6
         super.touchesBegan(touches, with: event)
     }
-
-    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         imageView.alpha = 1
         super.touchesEnded(touches, with: event)
     }
-
-    public override func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
+    
+    override func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
         imageView.alpha = 1
         super.touchesCancelled(touches!, with: event)
     }
-
+    
     //MARK: - Indicators
-
-    private func hideLoadingIndicator() {
+    
+    func hideLoadingIndicator() {
         loadingIndicator.isHidden = true
     }
-
-    private func showLoadingIndicator() {
-        loadingIndicator.progress = 0
+    
+    func showLoadingIndicator() {
+        loadingIndicator.setProgress(value: 0.0, animationDuration: 1)
         loadingIndicator.isHidden = false
         
         hideImageFailure()
     }
-
-    private func showImageFailure() {
+    
+    func showImageFailure() {
         // Only show if image is not empty
         if let p = photo, p.emptyImage {
             if nil == loadingError {
@@ -250,10 +266,10 @@ public class MediaGridCell: UICollectionViewCell {
                 error.image = UIImage.imageForResourcePath(
                     name: "ImageError",
                     inBundle: Bundle(for: MediaGridCell.self))
-        
+                
                 error.isUserInteractionEnabled = false
                 error.sizeToFit()
-            
+                
                 addSubview(error)
                 loadingError = error
             }
@@ -270,33 +286,26 @@ public class MediaGridCell: UICollectionViewCell {
         hideLoadingIndicator()
         imageView.image = nil
     }
-
-    private func hideImageFailure() {
+    
+    func hideImageFailure() {
         if loadingError != nil {
             loadingError!.removeFromSuperview()
             loadingError = nil
         }
     }
-
+    
     //MARK: - Notifications
-
-    public func setProgressFromNotification(notification: NSNotification) {
-        if let dict = notification.object as? [String : AnyObject?],
-            let photoWithProgress = dict["photo"] as? Media,
-            let mwp = Media, photosEqual(p1: photoWithProgress, mwp)
-        {
-            if let progress = dict["progress"] as? String,
-                let progressVal =  NumberFormatter().number(from: progress)
-            {
-                DispatchQueue.main.async() {
-                    self.loadingIndicator.progress = CGFloat(max(min(1.0, progressVal.floatValue), 1.0))
-                    return
-                }
+    func setProgressFromNotification(notification: NSNotification) {
+        DispatchQueue.main.async() {
+            let dict = notification.object as! [String : AnyObject]
+            
+            if let photoWithProgress = dict["photo"] as? Media, let progress = dict["progress"] as? CGFloat, let p = self.photo, photoWithProgress.equals(photo: p) {
+                self.loadingIndicator.setProgress(value: progress * 100, animationDuration: 0.1)
             }
         }
     }
-
-    public func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
+    
+    func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
         if let p = notification.object as? Media,
             let mwp = Media, photosEqual(p1: p, mwp)
         {
@@ -313,11 +322,11 @@ public class MediaGridCell: UICollectionViewCell {
         }
     }
     
-    private func photosEqual(p1: Media, _ p2: Media) -> Bool {
+    func photosEqual(p1: Media, _ p2: Media) -> Bool {
         return
             p1.underlyingImage == p2.underlyingImage &&
-            p1.emptyImage == p2.emptyImage &&
-            p1.isVideo == p2.isVideo &&
-            p1.caption == p2.caption
+                p1.emptyImage == p2.emptyImage &&
+                p1.isVideo == p2.isVideo &&
+                p1.caption == p2.caption
     }
 }

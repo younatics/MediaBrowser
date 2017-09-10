@@ -1,30 +1,57 @@
-# MediaBrowser
-[![Version](https://img.shields.io/cocoapods/v/MediaBrowser.svg?style=flat)](http://cocoapods.org/pods/MediaBrowser)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/younatics/MediaBrowser/blob/master/LICENSE)
-[![Platform](https://img.shields.io/cocoapods/p/MediaBrowser.svg?style=flat)](http://cocoapods.org/pods/MediaBrowser)
-[![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 
-Awesome media(photo, video) browser
+![title](https://github.com/younatics/MediaBrowser/blob/master/Images/MediaBrowser_w.png?raw=true)
+
+<p align="center">
+  <a href="(https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat"></a>
+  <img alt="Swift" src="https://img.shields.io/badge/Swift-3.1-orange.svg">
+  <img alt="iOS 8.1+" src="https://img.shields.io/badge/iOS-8.1%2B-blue.svg">
+  <a href="https://travis-ci.org/younatics/MediaBrowser" target="_blank"><img alt="travis" src="https://travis-ci.org/younatics/MediaBrowser.svg?branch=master"></a>
+  <a href="https://cocoapods.org/pods/MediaBrowser" target="_blank"><img alt="CocoaPods" src="http://img.shields.io/cocoapods/v/MediaBrowser.svg"></a>
+  <a href="https://younatics.github.io/MediaBrowser" target="_blank"><img alt="CocoaDocs" src="https://github.com/younatics/MediaBrowser/blob/master/docs/badge.svg"></a>
+  <a href="https://github.com/Carthage/Carthage" target="_blank"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
+  <a href="https://github.com/younatics/MediaBrowser/blob/master/README-KR.md" target="_blank"><img alt="ReadMe-KR" src="https://img.shields.io/badge/한국어-리드미-red.svg"></a>
+  
+</p>
 
 ## Intoduction
-#### 🌃 Make simple shade view with Shader!
+🏞 **MediaBrowser** can display one or more images or videos by providing either `UIImage` objects, `PHAsset` objects, or `URLs` to library assets, web images/videos or local files. MediaBrowser handles the downloading and caching of photos from the web seamlessly. Photos can be zoomed and panned, and optional (customisable) captions can be displayed. This can also be used to allow the user to select one or more photos using either the grid or main image view.
 
-| Facebook Picker | TLPhotoPicker  |
-| ------------- | ------------- |
-| ![Facebook Picker](Images/facebook_ex.gif)  | ![TLPhotoPicker](Images/tlphotopicker_ex.gif)  |
+Also, MediaBrowser use latest [SDWebImage](https://github.com/rs/SDWebImage) version for caching, motivated by [MWPhotoBrowser](https://github.com/mwaterfall/MWPhotoBrowser)
+
+| Single Photo | Multiple Photos And Video |
+| ------------- | ------------------------ |
+| ![SinglePhoto](https://github.com/younatics/MediaBrowser/blob/master/Images/SinglePhoto.gif?raw=true) | ![MultiplePhotosAndVideo](https://github.com/younatics/MediaBrowser/blob/master/Images/MultiplePhotosAndVideo.gif?raw=true) |
+| Multiple Photo Grid | Multiple Photo Selection |
+| ![MultiplePhotoGrid](https://github.com/younatics/MediaBrowser/blob/master/Images/MultiplePhotoGrid.gif?raw=true)  | ![PhotoSelection](https://github.com/younatics/MediaBrowser/blob/master/Images/PhotoSelection.gif?raw=true)  |
+| Web Photos | Web Photos Grid |
+| ![WebPhotos](https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotos.gif?raw=true)  | ![WebPhotoGrid](https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotoGrid.gif?raw=true)  |
 
 ## Requirements
+`MediaBrowser` is written in Swift 3. Compatible with iOS 8.1+
 
-`MediaBrowser` is written in Swift 3. Compatible with iOS 8.0+
+## Usage
+### Basic
+
+Get `MediaBrowser` and set `MediaBrowserDelegate`
+```Swift 
+let browser = MediaBrowser(delegate: self)
+self.navigationController?.pushViewController(browser, animated: true)
+
+//MediaBrowserDelegate
+func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int {
+  return mediaArray.count
+}
+    
+func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
+  if index < mediaArray.count {
+    return mediaArray[index]
+  }
+  return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "Photo at index is Wrong")
+}
+```
 
 ## Installation
-
 ### Cocoapods
-
-MediaBrowser is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
 ```ruby
 pod 'MediaBrowser'
 ```
@@ -33,29 +60,11 @@ pod 'MediaBrowser'
 github "younatics/MediaBrowser"
 ```
 
-## Usage
-4 methods is available
-```Swift 
-// Add multiple view using tuple with cornerRadius
-let shaderView = Shader.at(framesAndRadius: [(originView.frame, 50), (originView2.frame, 0)], color: UIColor.black.withAlphaComponent(0.5))
-
-// Add common view
-let shaderView = Shader.at(frame: originView.frame, color: UIColor.blue.withAlphaComponent(0.3))
-
-// Add common view array
-let shaderView = Shader.at(frames: [originView.frame, originView2.frame], color: UIColor.black.withAlphaComponent(0.5))
-
-// Add common view and cornerRadius
-let shaderView = Shader.at(frame: originView.frame, cornerRadius: 50, color: UIColor.black.withAlphaComponent(0.5))
-
-self.view.addSubview(shaderView)
-```
-
 ## References
 #### Please tell me or make pull request if you use this library in your application :) 
 
 ## Author
-[younatics 🇰🇷](http://younatics.github.io)
+[younatics 🇰🇷](https://twitter.com/younatics)
 
 ## License
-MediaBrowser is available under the MIT license. See the LICENSE file for more info.
+**MediaBrowser** is available under the MIT license. See the LICENSE file for more info.

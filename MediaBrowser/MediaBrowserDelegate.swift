@@ -9,15 +9,17 @@
 import UIKit
 
 public protocol MediaBrowserDelegate: class {
+    //MARK: Required methods
     func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int
     
     func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media
     
+    //MARK: Optional methods
+    func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser)
+
     func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media
-    
+
     func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView?
-    
-    func title(for mediaBrowser: MediaBrowser, at index: Int) -> String
     
     func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser)
     
@@ -27,10 +29,14 @@ public protocol MediaBrowserDelegate: class {
     
     func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser)
     
-    func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser)
+    func title(for mediaBrowser: MediaBrowser, at index: Int) -> String
 }
 
 public extension MediaBrowserDelegate {
+    func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser) { }
+
+    func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media { return Media() }
+
     func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView? { return nil }
     
     func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser) { }

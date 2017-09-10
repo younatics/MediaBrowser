@@ -1,0 +1,775 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 20,
+      "symbol": "Media",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 21,
+      "symbol": "Media.caption",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 22,
+      "symbol": "Media.emptyImage",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 23,
+      "symbol": "Media.isVideo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 24,
+      "symbol": "Media.underlyingImage",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 38,
+      "symbol": "Media.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 40,
+      "symbol": "Media.init(image:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 45,
+      "symbol": "Media.init(image:caption:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 51,
+      "symbol": "Media.init(url:caption:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 57,
+      "symbol": "Media.init(url:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 62,
+      "symbol": "Media.init(asset:targetSize:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 70,
+      "symbol": "Media.init(videoURL:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 81,
+      "symbol": "Media.videoURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 90,
+      "symbol": "Media.setVideoURL(url:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 95,
+      "symbol": "Media.getVideoURL(completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 122,
+      "symbol": "Media.loadUnderlyingImageAndNotify()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 147,
+      "symbol": "Media.performLoadUnderlyingImageAndNotify()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 284,
+      "symbol": "Media.unloadUnderlyingImage()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 307,
+      "symbol": "Media.cancelAnyLoading()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/Media.swift",
+      "line": 319,
+      "symbol": "Media.equals(photo:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 18,
+      "symbol": "MediaBrowser",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 73,
+      "symbol": "MediaBrowser.statusBarStyle",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 75,
+      "symbol": "MediaBrowser.toolbarTextColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 76,
+      "symbol": "MediaBrowser.toolbarBarTintColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 77,
+      "symbol": "MediaBrowser.toolbarBackgroundColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 85,
+      "symbol": "MediaBrowser.hasBelongedToViewController",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 86,
+      "symbol": "MediaBrowser.isVCBasedStatusBarAppearance",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 87,
+      "symbol": "MediaBrowser.statusBarShouldBeHidden",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 88,
+      "symbol": "MediaBrowser.displayActionButton",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 89,
+      "symbol": "MediaBrowser.leaveStatusBarAlone",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 90,
+      "symbol": "MediaBrowser.performingLayout",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 91,
+      "symbol": "MediaBrowser.rotating",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 92,
+      "symbol": "MediaBrowser.viewIsActive",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 93,
+      "symbol": "MediaBrowser.didSavePreviousStateOfNavBar",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 94,
+      "symbol": "MediaBrowser.skipNextPagingScrollViewPositioning",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 95,
+      "symbol": "MediaBrowser.viewHasAppearedInitially",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 96,
+      "symbol": "MediaBrowser.currentGridContentOffset",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 100,
+      "symbol": "MediaBrowser.delegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 101,
+      "symbol": "MediaBrowser.zoomPhotosToFill",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 102,
+      "symbol": "MediaBrowser.displayNavArrows",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 103,
+      "symbol": "MediaBrowser.displaySelectionButtons",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 104,
+      "symbol": "MediaBrowser.alwaysShowControls",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 105,
+      "symbol": "MediaBrowser.enableGrid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 106,
+      "symbol": "MediaBrowser.enableSwipeToDismiss",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 107,
+      "symbol": "MediaBrowser.startOnGrid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 108,
+      "symbol": "MediaBrowser.autoPlayOnAppear",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 109,
+      "symbol": "MediaBrowser.hideControlsOnStartup",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 110,
+      "symbol": "MediaBrowser.delayToHideElements",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 112,
+      "symbol": "MediaBrowser.captionAlpha",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 113,
+      "symbol": "MediaBrowser.toolbarAlpha",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 116,
+      "symbol": "MediaBrowser.loadingIndicatorInnerRingColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 117,
+      "symbol": "MediaBrowser.loadingIndicatorOuterRingColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 118,
+      "symbol": "MediaBrowser.loadingIndicatorInnerRingWidth",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 119,
+      "symbol": "MediaBrowser.loadingIndicatorOuterRingWidth",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 120,
+      "symbol": "MediaBrowser.loadingIndicatorFont",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 121,
+      "symbol": "MediaBrowser.loadingIndicatorFontColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 122,
+      "symbol": "MediaBrowser.loadingIndicatorShouldShowValueText",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 124,
+      "symbol": "MediaBrowser.mediaSelectedOnIcon",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 125,
+      "symbol": "MediaBrowser.mediaSelectedOffIcon",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 127,
+      "symbol": "MediaBrowser.mediaSelectedGridOnIcon",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 128,
+      "symbol": "MediaBrowser.mediaSelectedGridOffIcon",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 130,
+      "symbol": "MediaBrowser.cachingImageCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 133,
+      "symbol": "MediaBrowser.init(nibName:bundle:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 138,
+      "symbol": "MediaBrowser.init(delegate:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 143,
+      "symbol": "MediaBrowser.init(photos:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 148,
+      "symbol": "MediaBrowser.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 208,
+      "symbol": "MediaBrowser.didReceiveMemoryWarning()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 220,
+      "symbol": "MediaBrowser.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 307,
+      "symbol": "MediaBrowser.viewWillTransition(to:with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 457,
+      "symbol": "MediaBrowser.viewWillAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 505,
+      "symbol": "MediaBrowser.viewDidAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 521,
+      "symbol": "MediaBrowser.viewWillDisappear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 560,
+      "symbol": "MediaBrowser.willMove(toParentViewController:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 565,
+      "symbol": "MediaBrowser.didMove(toParentViewController:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 624,
+      "symbol": "MediaBrowser.viewWillLayoutSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 692,
+      "symbol": "MediaBrowser.supportedInterfaceOrientations",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 696,
+      "symbol": "MediaBrowser.willRotate(to:duration:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 708,
+      "symbol": "MediaBrowser.willAnimateRotation(to:duration:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 719,
+      "symbol": "MediaBrowser.didRotate(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 1275,
+      "symbol": "MediaBrowser.scrollViewDidScroll(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 1303,
+      "symbol": "MediaBrowser.scrollViewWillBeginDragging(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 1308,
+      "symbol": "MediaBrowser.scrollViewDidEndDecelerating(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 1755,
+      "symbol": "MediaBrowser.prefersStatusBarHidden",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowser.swift",
+      "line": 1763,
+      "symbol": "MediaBrowser.preferredStatusBarUpdateAnimation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": null,
+      "symbol": "MediaBrowserDelegate",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 11,
+      "symbol": "MediaBrowserDelegate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 13,
+      "symbol": "MediaBrowserDelegate.numberOfMedia(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 15,
+      "symbol": "MediaBrowserDelegate.media(for:at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 18,
+      "symbol": "MediaBrowserDelegate.mediaBrowserDidFinishModalPresentation(mediaBrowser:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 20,
+      "symbol": "MediaBrowserDelegate.thumbnail(for:at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 22,
+      "symbol": "MediaBrowserDelegate.captionView(for:at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 24,
+      "symbol": "MediaBrowserDelegate.didDisplayMedia(at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 26,
+      "symbol": "MediaBrowserDelegate.actionButtonPressed(at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 28,
+      "symbol": "MediaBrowserDelegate.isMediaSelected(at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 30,
+      "symbol": "MediaBrowserDelegate.mediaDid(selected:at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 32,
+      "symbol": "MediaBrowserDelegate.title(for:at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 36,
+      "symbol": "MediaBrowserDelegate.mediaBrowserDidFinishModalPresentation(mediaBrowser:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 38,
+      "symbol": "MediaBrowserDelegate.thumbnail(for:at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 40,
+      "symbol": "MediaBrowserDelegate.captionView(for:at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 42,
+      "symbol": "MediaBrowserDelegate.didDisplayMedia(at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 44,
+      "symbol": "MediaBrowserDelegate.actionButtonPressed(at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 46,
+      "symbol": "MediaBrowserDelegate.isMediaSelected(at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 48,
+      "symbol": "MediaBrowserDelegate.mediaDid(selected:at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaBrowserDelegate.swift",
+      "line": 50,
+      "symbol": "MediaBrowserDelegate.title(for:at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaCaptionView.swift",
+      "line": 12,
+      "symbol": "MediaCaptionView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaCaptionView.swift",
+      "line": 15,
+      "symbol": "MediaCaptionView.labelPadding",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaCaptionView.swift",
+      "line": 24,
+      "symbol": "MediaCaptionView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/MediaCaptionView.swift",
+      "line": 29,
+      "symbol": "MediaCaptionView.sizeThatFits(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/UIImageExtension.swift",
+      "line": 13,
+      "symbol": "UIImage.imageForResourcePath(name:inBundle:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/seungyounyi/MediaBrowser/MediaBrowser/UIImageExtension.swift",
+      "line": 17,
+      "symbol": "UIImage.clearImageWithSize(size:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/seungyounyi/MediaBrowser"
+}

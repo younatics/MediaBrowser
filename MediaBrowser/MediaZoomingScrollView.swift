@@ -9,20 +9,20 @@
 import UIKit
 import UICircularProgressRing
 
-public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingImageViewDelegate, TapDetectingViewDelegate {
-    public var index = 0
-    public var media: Media?
-    public weak var captionView: MediaCaptionView?
-    public weak var selectedButton: UIButton?
-    public weak var playButton: UIButton?
-    public var loadingIndicator = UICircularProgressRingView(frame: CGRect(x: 140, y: 30, width: 40, height: 40))
-
-    private weak var mediaBrowser: MediaBrowser!
-	private var tapView = MediaTapDetectingView(frame: .zero) // for background taps
-	private var photoImageView = MediaTapDetectingImageView(frame: .zero)
-    private var loadingError: UIImageView?
+class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingImageViewDelegate, TapDetectingViewDelegate {
+    var index = 0
+    var media: Media?
+    weak var captionView: MediaCaptionView?
+    weak var selectedButton: UIButton?
+    weak var playButton: UIButton?
+    var loadingIndicator = UICircularProgressRingView(frame: CGRect(x: 140, y: 30, width: 40, height: 40))
     
-    public init(mediaBrowser: MediaBrowser) {
+    weak var mediaBrowser: MediaBrowser!
+    var tapView = MediaTapDetectingView(frame: .zero) // for background taps
+    var photoImageView = MediaTapDetectingImageView(frame: .zero)
+    var loadingError: UIImageView?
+    
+    init(mediaBrowser: MediaBrowser) {
         super.init(frame: .zero)
         
         // Setup
@@ -48,7 +48,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
             [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin, .flexibleRightMargin]
         
         addSubview(loadingIndicator)
-
+        
         // Listen progress notifications
         NotificationCenter.default.addObserver(
             self,
@@ -63,16 +63,16 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
         decelerationRate = UIScrollViewDecelerationRateFast
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
-
-    public required init?(coder aDecoder: NSCoder) {
+    
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
     deinit {
         media?.cancelAnyLoading()
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     func prepareForReuse() {
         hideImageFailure()
         photo = nil
@@ -83,7 +83,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
         photoImageView.image = nil
         index = Int.max
     }
-
+    
     func displayingVideo() -> Bool {
         return photo?.isVideo ?? false
     }
@@ -98,7 +98,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
             return super.backgroundColor
         }
     }
-
+    
     var imageHidden: Bool {
         set(hidden) {
             photoImageView.isHidden = hidden
@@ -108,9 +108,9 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
             return photoImageView.isHidden
         }
     }
-
+    
     //MARK: - Image
-
+    
     var photo: Media? {
         set(p) {
             // Cancel any loading on old photo
@@ -131,7 +131,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
             return media
         }
     }
-
+    
     // Get and display image
     func displayImage() {
         if media != nil && photoImageView.image == nil {
@@ -154,7 +154,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
                 let photoImageViewFrame = CGRect(origin: CGPoint.zero, size: img.size)
                 photoImageView.frame = photoImageViewFrame
                 contentSize = photoImageViewFrame.size
-
+                
                 // Set zoom to minimum zoom
                 setMaxMinZoomScalesForCurrentBounds()
                 
@@ -167,7 +167,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
             setNeedsLayout()
         }
     }
-
+    
     // Image failed so just show grey!
     func displayImageFailure() {
         hideLoadingIndicator()
@@ -198,16 +198,16 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
             }
         }
     }
-
+    
     private func hideImageFailure() {
         if let e = loadingError {
             e.removeFromSuperview()
             loadingError = nil
         }
     }
-
+    
     //MARK: - Loading Progress
-
+    
     public func setProgressFromNotification(notification: NSNotification) {
         DispatchQueue.main.async() {
             let dict = notification.object as! [String : AnyObject]
@@ -221,7 +221,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
     private func hideLoadingIndicator() {
         loadingIndicator.isHidden = true
     }
-
+    
     private func showLoadingIndicator() {
         zoomScale = 0.0
         minimumZoomScale = 0.0
@@ -231,9 +231,9 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
         
         hideImageFailure()
     }
-
+    
     //MARK: - Setup
-
+    
     private func initialZoomScaleWithMinScale() -> CGFloat {
         var zoomScale = minimumZoomScale
         if let pb = mediaBrowser,let image = photoImageView.image, pb.zoomPhotosToFill {
@@ -255,7 +255,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
         
         return zoomScale
     }
-
+    
     func setMaxMinZoomScalesForCurrentBounds() {
         // Reset
         maximumZoomScale = 1.0
@@ -309,14 +309,14 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
             maximumZoomScale = zoomScale
             minimumZoomScale = zoomScale
         }
-
+        
         // Layout
         setNeedsLayout()
     }
-
+    
     //MARK: - Layout
-
-    public override func layoutSubviews() {
+    
+    override func layoutSubviews() {
         // Update tap view frame
         tapView.frame = bounds
         
@@ -336,7 +336,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
                 width: le.frame.size.width,
                 height: le.frame.size.height)
         }
-    
+        
         // Super
         super.layoutSubviews()
         
@@ -367,34 +367,34 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
     }
     
     //MARK: - UIScrollViewDelegate
-    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return photoImageView
     }
     
-    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         mediaBrowser.cancelControlHiding()
     }
     
-    public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
         isScrollEnabled = true // reset
         mediaBrowser.cancelControlHiding()
     }
-
-    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         mediaBrowser.hideControlsAfterDelay()
     }
-
-    public func scrollViewDidZoom(_ scrollView: UIScrollView) {
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
         setNeedsLayout()
         layoutIfNeeded()
     }
-
+    
     //MARK: - Tap Detection
-    private func handleSingleTap(touchPoint: CGPoint) {
+    func handleSingleTap(touchPoint: CGPoint) {
         mediaBrowser.perform(#selector(MediaBrowser.toggleControls), with: nil, afterDelay: 0.2)
     }
-
-    private func handleDoubleTap(touchPoint: CGPoint) {
+    
+    func handleDoubleTap(touchPoint: CGPoint) {
         // Dont double tap to zoom if showing a video
         if displayingVideo() {
             return
@@ -419,22 +419,22 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
         // Delay controls
         mediaBrowser.hideControlsAfterDelay()
     }
-
+    
     // Image View
-    public func singleTapDetectedInImageView(view: UIImageView, touch: UITouch) {
+    func singleTapDetectedInImageView(view: UIImageView, touch: UITouch) {
         handleSingleTap(touchPoint: touch.location(in: view))
     }
     
-    public func doubleTapDetectedInImageView(view: UIImageView, touch: UITouch) {
+    func doubleTapDetectedInImageView(view: UIImageView, touch: UITouch) {
         handleDoubleTap(touchPoint: touch.location(in: view))
     }
     
-    public func tripleTapDetectedInImageView(view: UIImageView, touch: UITouch) {
+    func tripleTapDetectedInImageView(view: UIImageView, touch: UITouch) {
         
     }
-
+    
     // Background View
-    public func singleTapDetectedInView(view: UIView, touch: UITouch) {
+    func singleTapDetectedInView(view: UIView, touch: UITouch) {
         // Translate touch location to image view location
         var touchX = touch.location(in: view).x
         var touchY = touch.location(in: view).y
@@ -446,7 +446,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
         handleSingleTap(touchPoint: CGPoint(x: touchX, y: touchY))
     }
     
-    public func doubleTapDetectedInView(view: UIView, touch: UITouch) {
+    func doubleTapDetectedInView(view: UIView, touch: UITouch) {
         // Translate touch location to image view location
         var touchX = touch.location(in: view).x
         var touchY = touch.location(in: view).y
@@ -458,7 +458,7 @@ public class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDete
         handleDoubleTap(touchPoint: CGPoint(x: touchX, y: touchY))
     }
     
-    public func tripleTapDetectedInView(view: UIView, touch: UITouch) {
+    func tripleTapDetectedInView(view: UIView, touch: UITouch) {
         
     }
 }

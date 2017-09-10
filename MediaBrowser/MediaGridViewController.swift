@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MediaGridViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class MediaGridViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     weak var browser: MediaBrowser?
     var selectionMode = false
     var initialContentOffset = CGPoint(x: 0.0, y: CGFloat.greatestFiniteMagnitude)
@@ -16,14 +16,14 @@ public class MediaGridViewController: UICollectionViewController, UICollectionVi
     init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
-
-    public required init?(coder aDecoder: NSCoder) {
+    
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
     //MARK: - View
-
-    public override func viewDidLoad() {
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         if let cv = collectionView {
@@ -32,8 +32,8 @@ public class MediaGridViewController: UICollectionViewController, UICollectionVi
             cv.backgroundColor = UIColor.black
         }
     }
-
-    public override func viewWillDisappear(_ animated: Bool) {
+    
+    override func viewWillDisappear(_ animated: Bool) {
         // Cancel outstanding loading
         if let cv = collectionView {
             for cell in cv.visibleCells {
@@ -47,16 +47,16 @@ public class MediaGridViewController: UICollectionViewController, UICollectionVi
         
         super.viewWillDisappear(animated)
     }
-
-    public override func viewWillLayoutSubviews() {
+    
+    override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
     }
-
-    public override func viewDidLayoutSubviews() {
+    
+    override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-
+    
     func adjustOffsetsAsRequired() {
         // Move to previous content offset
         if initialContentOffset.y != CGFloat.greatestFiniteMagnitude {
@@ -83,29 +83,29 @@ public class MediaGridViewController: UICollectionViewController, UICollectionVi
             }
         }
     }
-
+    
     //MARK: - Layout
-
-    private var columns: CGFloat {
+    
+    var columns: CGFloat {
         return floorcgf(x: view.bounds.width / 93.0)
     }
-
-    private var margin = CGFloat(5.0)
-    private var gutter = CGFloat(5.0)
+    
+    var margin = CGFloat(5.0)
+    var gutter = CGFloat(5.0)
     
     
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: nil) { _ in
             if let cv = self.collectionView {
                 cv.reloadData()
             }
         }
-
+        
         super.viewWillTransition(to: size, with: coordinator)
     }
     //MARK: - Collection View
-
-    public override func collectionView(_ view: UICollectionView, numberOfItemsInSection section: Int) -> NSInteger {
+    
+    override func collectionView(_ view: UICollectionView, numberOfItemsInSection section: Int) -> NSInteger {
         if let b = browser {
             return b.numberOfMedias
         }
@@ -113,18 +113,15 @@ public class MediaGridViewController: UICollectionViewController, UICollectionVi
         return 0
     }
     
-    public override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaGridCell", for: indexPath as IndexPath) as! MediaGridCell
-        
-        if let b = browser,
-            let photo = b.thumbPhotoAtIndex(index: indexPath.row)
-        {
+        if let b = browser, let photo = b.thumbPhotoAtIndex(index: indexPath.row) {
             cell.photo = photo
             cell.gridController = self
             cell.selectionMode = selectionMode
             cell.index = indexPath.row
             cell.isSelected = b.photoIsSelectedAtIndex(index: indexPath.row)
-        
+            
             if let _ = b.imageForPhoto(photo: photo) {
                 cell.displayImage()
             }
@@ -136,14 +133,14 @@ public class MediaGridViewController: UICollectionViewController, UICollectionVi
         return cell
     }
     
-    public override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let b = browser {
             b.currentPhotoIndex = indexPath.row
             b.hideGrid()
         }
     }
-
-    public override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    
+    override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let gridCell = cell as? MediaGridCell {
             if let gcp = gridCell.photo {
                 gcp.cancelAnyLoading()
@@ -151,21 +148,21 @@ public class MediaGridViewController: UICollectionViewController, UICollectionVi
         }
     }
     
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let value = CGFloat(floorf(Float((view.bounds.size.width - (columns - 1.0) * gutter - 2.0 * margin) / columns)))
         
         return CGSize(width: value, height: value)
     }
-
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return gutter
     }
-
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return gutter
     }
-
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let margin = self.margin
         return UIEdgeInsetsMake(margin, margin, margin, margin)
     }

@@ -53,7 +53,7 @@ class ViewController: UITableViewController {
     }
 }
 
-//MARK: PhotoBrowserDelegate
+//MARK: MediaBrowserDelegate
 extension ViewController: MediaBrowserDelegate {
     func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser) {
         self.dismiss(animated: true, completion: nil)

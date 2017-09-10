@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MediaBrowser  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="MediaBrowser  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">MediaBrowser Docs</a> (3% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">MediaBrowser Reference</a>
+        <img id="carat" src="img/carat.png" />
+        MediaBrowser  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Media.html">Media</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/MediaBrowser.html">MediaBrowser</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/MediaCaptionView.html">MediaCaptionView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/UIImage.html">UIImage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/MediaBrowserDelegate.html">MediaBrowserDelegate</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <p><img src="https://github.com/younatics/MediaBrowser/blob/master/Images/MediaBrowser_w.png?raw=true" alt="title"></p>
+
+<p align="center">
+  <a href="(https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat"></a>
+  <img alt="Swift" src="https://img.shields.io/badge/Swift-3.1-orange.svg">
+  <img alt="iOS 8.1+" src="https://img.shields.io/badge/iOS-8.1%2B-blue.svg">
+  <a href="https://travis-ci.org/younatics/MediaBrowser" target="_blank"><img alt="travis" src="https://travis-ci.org/younatics/MediaBrowser.svg?branch=master"></a>
+  <a href="https://cocoapods.org/pods/MediaBrowser" target="_blank"><img alt="CocoaPods" src="http://img.shields.io/cocoapods/v/MediaBrowser.svg"></a>
+  <a href="https://younatics.github.io/MediaBrowser" target="_blank"><img alt="CocoaDocs" src="https://github.com/younatics/MediaBrowser/blob/master/docs/badge.svg"></a>
+  <a href="https://github.com/Carthage/Carthage" target="_blank"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
+  <a href="https://github.com/younatics/MediaBrowser/blob/master/README-KR.md" target="_blank"><img alt="ReadMe-KR" src="https://img.shields.io/badge/한국어-리드미-red.svg"></a>
+  
+</p>
+<h2 id='intoduction' class='heading'>Intoduction</h2>
+
+<p>🏞 <strong>MediaBrowser</strong> can display one or more images or videos by providing either <code>UIImage</code> objects, <code>PHAsset</code> objects, or <code>URLs</code> to library assets, web images/videos or local files. MediaBrowser handles the downloading and caching of photos from the web seamlessly. Photos can be zoomed and panned, and optional (customisable) captions can be displayed. This can also be used to allow the user to select one or more photos using either the grid or main image view.</p>
+
+<p>Also, MediaBrowser use latest <a href="https://github.com/rs/SDWebImage">SDWebImage</a> version for caching, motivated by <a href="https://github.com/mwaterfall/MWPhotoBrowser">MWPhotoBrowser</a></p>
+
+<table><thead>
+<tr>
+<th>Single Photo</th>
+<th>Multiple Photos And Video</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><img src="https://github.com/younatics/MediaBrowser/blob/master/Images/SinglePhoto.gif?raw=true" alt="SinglePhoto"></td>
+<td><img src="https://github.com/younatics/MediaBrowser/blob/master/Images/MultiplePhotosAndVideo.gif?raw=true" alt="MultiplePhotosAndVideo"></td>
+</tr>
+<tr>
+<td>Multiple Photo Grid</td>
+<td>Multiple Photo Selection</td>
+</tr>
+<tr>
+<td><img src="https://github.com/younatics/MediaBrowser/blob/master/Images/MultiplePhotoGrid.gif?raw=true" alt="MultiplePhotoGrid"></td>
+<td><img src="https://github.com/younatics/MediaBrowser/blob/master/Images/PhotoSelection.gif?raw=true" alt="PhotoSelection"></td>
+</tr>
+<tr>
+<td>Web Photos</td>
+<td>Web Photos Grid</td>
+</tr>
+<tr>
+<td><img src="https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotos.gif?raw=true" alt="WebPhotos"></td>
+<td><img src="https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotoGrid.gif?raw=true" alt="WebPhotoGrid"></td>
+</tr>
+</tbody></table>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<p><code>MediaBrowser</code> is written in Swift 3. Compatible with iOS 8.1+</p>
+<h2 id='usage' class='heading'>Usage</h2>
+<h3 id='basic' class='heading'>Basic</h3>
+
+<p>Get <code>MediaBrowser</code> and set <code>MediaBrowserDelegate</code></p>
+<pre class="highlight plaintext"><code>let browser = MediaBrowser(delegate: self)
+self.navigationController?.pushViewController(browser, animated: true)
+
+//MediaBrowserDelegate
+func numberOfMedia(in mediaBrowser: MediaBrowser) -&gt; Int {
+  return mediaArray.count
+}
+
+func media(for mediaBrowser: MediaBrowser, at index: Int) -&gt; Media {
+  if index &lt; mediaArray.count {
+    return mediaArray[index]
+  }
+  return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "Photo at index is Wrong")
+}
+</code></pre>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='cocoapods' class='heading'>Cocoapods</h3>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'MediaBrowser'</span>
+</code></pre>
+<h3 id='carthage' class='heading'>Carthage</h3>
+<pre class="highlight plaintext"><code>github "younatics/MediaBrowser"
+</code></pre>
+<h2 id='references' class='heading'>References</h2>
+<h4 id='please-tell-me-or-make-pull-request-if-you-use-this-library-in-your-application' class='heading'>Please tell me or make pull request if you use this library in your application :)</h4>
+<h2 id='author' class='heading'>Author</h2>
+
+<p><a href="https://twitter.com/younatics">younatics 🇰🇷</a></p>
+<h2 id='license' class='heading'>License</h2>
+
+<p><strong>MediaBrowser</strong> is available under the MIT license. See the LICENSE file for more info.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://github.com/younatics/MediaBrowser" target="_blank" rel="external">Seungyoun Yi</a>. All rights reserved. (Last updated: 2017-09-09)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

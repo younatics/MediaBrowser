@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MBProgressHUD
 import MediaPlayer
 import QuartzCore
 import SDWebImage
@@ -59,9 +58,17 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var previousViewControllerBackButton: UIBarButtonItem?
     private var previousStatusBarStyle: UIStatusBarStyle = .lightContent
     
+    
+    /// UINavigationBar Translucent
     public var navigationBarTranslucent = true
+    
+    /// UINavigationBar Text Color
     public var navigationBarTextColor = UIColor.white
+    
+    /// UINavigationBar Background Color
     public var navigationBarBackgroundColor = UIColor.black
+    
+    /// UINavigationBar Tint Color
     public var navigationBarTintColor = UIColor.black.withAlphaComponent(0.5)
     public var statusBarStyle: UIStatusBarStyle = .lightContent
     
@@ -114,10 +121,13 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var loadingIndicatorFontColor = UIColor.white
     public var loadingIndicatorShouldShowValueText = true
     
-    // Customise image selection icons as they are the only icons with a colour tint
-    // Icon should be located in the app's main bundle
-    public var customImageSelectedIconName = ""
-    public var customImageSelectedSmallIconName = ""
+    public var mediaSelectedOnIcon: UIImage?
+    public var mediaSelectedOffIcon: UIImage?
+    
+    public var mediaSelectedGridOnIcon: UIImage?
+    public var mediaSelectedGridOffIcon: UIImage?
+    
+    public var cachingImageCount = 1
     
     //MARK: - Init
     public override init(nibName: String?, bundle nibBundle: Bundle?) {
@@ -878,7 +888,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             // If page is current page then initiate loading of previous and next pages
             let pageIndex = p.index
             if currentPageIndex == pageIndex {
-                if pageIndex > 0 {
+                if pageIndex > 0  && mediaArray.count >= cachingImageCount {
                     // Preload index - 1
                     if let photo = mediaAtIndex(index: pageIndex - 1) {
                         if nil == photo.underlyingImage {
@@ -1025,15 +1035,18 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // Add selected button
                 if self.displaySelectionButtons {
                     let selectedButton = UIButton(type: .custom)
-                    selectedButton.setImage(UIImage(named: "ImageSelectedSmallOff", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .normal)
-                    let selectedOnImage: UIImage?
-                    if customImageSelectedIconName.characters.count > 0 {
-                        selectedOnImage = UIImage(named: customImageSelectedIconName)
+                    if let selectedOffImage = mediaSelectedOffIcon {
+                        selectedButton.setImage(selectedOffImage, for: .normal)
                     } else {
-                        selectedOnImage = UIImage(named: "ImageSelectedSmallOn", in: Bundle(for: MediaBrowser.self), compatibleWith: nil)
+                        selectedButton.setImage(UIImage(named: "ImageSelectedSmallOff", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .normal)
                     }
                     
-                    selectedButton.setImage(selectedOnImage, for: .selected)
+                    if let selectedOnImage = mediaSelectedOnIcon {
+                        selectedButton.setImage(selectedOnImage, for: .selected)
+                    } else {
+                        selectedButton.setImage(UIImage(named: "ImageSelectedSmallOn", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .selected)
+                    }
+
                     selectedButton.sizeToFit()
                     selectedButton.adjustsImageWhenHighlighted = false
                     selectedButton.addTarget(self, action: #selector(selectedButtonTapped), for: .touchUpInside)
@@ -1885,49 +1898,5 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 setControlsHidden(hidden: false, animated: true, permanent: true)
             }
         }
-    }
-
-    //MARK: - Action Progress
-    var mediaProgressView: MBProgressHUD?
-
-    var progressHUD: MBProgressHUD {
-        if nil == mediaProgressView {
-            mediaProgressView = MBProgressHUD(view: self.view)
-            mediaProgressView!.minSize = CGSize(width: 120, height: 120)
-            mediaProgressView!.minShowTime = 1.0
-            
-            view.addSubview(mediaProgressView!)
-        }
-        return mediaProgressView!
-    }
-
-    private func showProgressHUDWithMessage(message: String!) {
-        progressHUD.labelText = message
-        progressHUD.mode = MBProgressHUDMode.indeterminate
-        progressHUD.show(true)
-        
-        navigationController?.navigationBar.isUserInteractionEnabled = false
-    }
-
-    private func hideProgressHUD(animated: Bool) {
-        progressHUD.hide(animated)
-        
-        navigationController?.navigationBar.isUserInteractionEnabled = true
-    }
-
-    private func showProgressHUDCompleteMessage(message: String?) {
-        if let msg = message {
-            if progressHUD.isHidden {
-                progressHUD.show(true)
-            }
-    
-            progressHUD.labelText = msg
-            progressHUD.mode = MBProgressHUDMode.customView
-            progressHUD.hide(true, afterDelay: 1.5)
-        } else {
-            progressHUD.hide(true)
-        }
-    
-        navigationController?.navigationBar.isUserInteractionEnabled = true
     }
 }
