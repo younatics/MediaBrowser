@@ -53,6 +53,8 @@ func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
 ### Advanced
 <a href="https://younatics.github.io/MediaBrowser" target="_blank"><img alt="CocoaDocs" src="https://github.com/younatics/MediaBrowser/blob/master/docs/badge.svg"></a> is the best place to start!
 
+You can also see all usage in demo project.
+
 #### MediaBrowser
 | Property | Type |
 | -------- | ---  |
