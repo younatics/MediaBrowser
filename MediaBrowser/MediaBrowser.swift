@@ -1400,29 +1400,27 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     //MARK: - Interactions
 
-    func selectedButtonTapped(sender: AnyObject) {
-        let selectedButton = sender as! UIButton
-        selectedButton.isSelected = !selectedButton.isSelected
+    func selectedButtonTapped(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
     
         var index = Int.max
         for page in visiblePages {
-            if page.selectedButton == selectedButton {
+            if page.selectedButton == sender {
                 index = page.index
                 break
             }
         }
     
         if index != Int.max {
-            setPhotoSelected(selected: selectedButton.isSelected, atIndex: index)
+            setPhotoSelected(selected: sender.isSelected, atIndex: index)
         }
     }
 
-    func playButtonTapped(sender: AnyObject) {
-        let playButton = sender as! UIButton
+    func playButtonTapped(sender: UIButton) {
         var index = Int.max
     
         for page in visiblePages {
-            if page.playButton == playButton {
+            if page.playButton == sender {
                 index = page.index
                 break
             }
