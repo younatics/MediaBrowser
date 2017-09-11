@@ -1,5 +1,5 @@
 language: objective-c
 osx_image: xcode8
-- pod install --repo-update
 script:
-    - xcodebuild -scheme 'MediaBrowser' -sdk iphonesimulator CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty -c
+- pod install --repo-update
+- xcodebuild -scheme 'MediaBrowser' -sdk iphonesimulator CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty -c
