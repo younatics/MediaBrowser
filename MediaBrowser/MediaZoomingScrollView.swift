@@ -118,7 +118,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
                 media!.cancelAnyLoading()
             }
             media = p
-            if mediaBrowser.imageForPhoto(photo: media) != nil {
+            if mediaBrowser.image(for: media) != nil {
                 self.displayImage()
             } else {
                 // Will be loading so show loading
@@ -141,7 +141,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
             contentSize = CGSize.zero
             
             // Get image from browser as it handles ordering of fetching
-            if let img = mediaBrowser.imageForPhoto(photo: photo) {
+            if let img = mediaBrowser.image(for: photo) {
                 // Hide indicator
                 hideLoadingIndicator()
                 

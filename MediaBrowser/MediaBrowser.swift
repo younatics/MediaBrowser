@@ -911,47 +911,47 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     func mediaAtIndex(index: Int) -> Media? {
-        var photo: Media? = nil
+        var media: Media? = nil
         
         if index < mediaArray.count {
             if mediaArray[index] == nil {
                 if let d = delegate {
-                    photo = d.media(for: self, at: index)
+                    media = d.media(for: self, at: index)
                     
-                    if nil == photo && fixedMediasArray != nil && index < fixedMediasArray!.count {
-                        photo = fixedMediasArray![index]
+                    if nil == media && fixedMediasArray != nil && index < fixedMediasArray!.count {
+                        media = fixedMediasArray![index]
                     }
                     
-                    if photo != nil {
-                        mediaArray[index] = photo
+                    if media != nil {
+                        mediaArray[index] = media
                     }
                 }
             } else {
-                photo = mediaArray[index]
+                media = mediaArray[index]
             }
         }
         
-        return photo
+        return media
     }
 
     func thumbPhotoAtIndex(index: Int) -> Media? {
-        var photo: Media?
+        var media: Media?
         
         if index < thumbMedias.count {
             if nil == thumbMedias[index] {
                 if let d = delegate {
-                    photo = d.thumbnail(for: self, at: index)
+                    media = d.thumbnail(for: self, at: index)
                 
-                    if let p = photo {
+                    if let p = media {
                         thumbMedias[index] = p
                     }
                 }
             } else {
-                photo = thumbMedias[index]
+                media = thumbMedias[index]
             }
         }
         
-        return photo
+        return media
     }
 
     func captionViewForPhotoAtIndex(index: Int) -> MediaCaptionView? {
@@ -993,8 +993,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
     }
 
-    func imageForPhoto(photo: Media?) -> UIImage? {
-        if let p = photo {
+    func image(for media: Media?) -> UIImage? {
+        if let p = media {
             // Get image or obtain in background
             if let img = p.underlyingImage {
                 return img
@@ -1226,7 +1226,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func pageDisplayingPhoto(photo: Media) -> MediaZoomingScrollView? {
         var thePage: MediaZoomingScrollView?
         for page in visiblePages {
-            if page.photo != nil && page.photo!.equals(photo: photo) {
+            if let _media = page.media, _media.equals(photo: photo) {
                 thePage = page
                 break
             }
@@ -1237,7 +1237,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func configurePage(page: MediaZoomingScrollView, forIndex index: Int) {
         page.frame = frameForPageAtIndex(index: index)
         page.index = index
-        page.photo = mediaAtIndex(index: index)
+        page.media = mediaAtIndex(index: index)
 //        page.backgroundColor = areControlsHidden ? UIColor.black : UIColor.white
     }
 

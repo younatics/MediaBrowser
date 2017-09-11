@@ -122,7 +122,7 @@ class MediaGridViewController: UICollectionViewController, UICollectionViewDeleg
             cell.index = indexPath.row
             cell.isSelected = b.photoIsSelectedAtIndex(index: indexPath.row)
             
-            if let _ = b.imageForPhoto(photo: photo) {
+            if let _ = b.image(for: photo) {
                 cell.displayImage()
             } else {
                 photo.loadUnderlyingImageAndNotify()
