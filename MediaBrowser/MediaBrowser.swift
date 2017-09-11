@@ -1797,6 +1797,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Animations & positions
         let animatonOffset = CGFloat(20)
         let animationDuration = CFTimeInterval(animated ? 0.35 : 0.0)
+
+        // Navigation bar
+        self.navigationController?.setNavigationBarHidden(hidden, animated: true)
         
         // Status bar
         if !leaveStatusBarAlone {
@@ -1804,16 +1807,16 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             if !isVCBasedStatusBarAppearance {
                 // falsen-view controller based
                 statusBarShouldBeHidden = hidden
+                UIApplication.shared.setStatusBarHidden(hidden, with: animated ? UIStatusBarAnimation.slide : UIStatusBarAnimation.none)
+                
+            } else {
+                // View controller based so animate away
+                statusBarShouldBeHidden = hidden
                 UIView.animate(
                     withDuration: animationDuration,
                     animations: {
                         self.setNeedsStatusBarAppearanceUpdate()
                 })
-                
-            } else {
-                // View controller based so animate away
-                statusBarShouldBeHidden = hidden
-                UIApplication.shared.setStatusBarHidden(hidden, with: animated ? UIStatusBarAnimation.slide : UIStatusBarAnimation.none)
             }
         }
         
@@ -1833,10 +1836,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 }
             }
         }
-        
+
         UIView.animate(withDuration: animationDuration, animations: {
-            self.navigationController?.setNavigationBarHidden(hidden, animated: true)
-            
+
             // Toolbar
             self.toolbar.frame = self.frameForToolbar
             
@@ -1890,6 +1892,10 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     /// preferredStatusBarUpdateAnimation
     public override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .slide
+    }
+
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.statusBarStyle
     }
 
     func cancelControlHiding() {
