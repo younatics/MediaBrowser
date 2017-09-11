@@ -1226,7 +1226,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func pageDisplayingPhoto(photo: Media) -> MediaZoomingScrollView? {
         var thePage: MediaZoomingScrollView?
         for page in visiblePages {
-            if let _media = page.media, _media.equals(photo: photo) {
+            if let _media = page.photo, _media.equals(photo: photo) {
                 thePage = page
                 break
             }
@@ -1237,7 +1237,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func configurePage(page: MediaZoomingScrollView, forIndex index: Int) {
         page.frame = frameForPageAtIndex(index: index)
         page.index = index
-        page.media = mediaAtIndex(index: index)
+        page.photo = mediaAtIndex(index: index)
 //        page.backgroundColor = areControlsHidden ? UIColor.black : UIColor.white
     }
 
