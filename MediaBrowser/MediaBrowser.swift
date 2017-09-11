@@ -201,10 +201,10 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     /// Caching image count both side (e.g. when index 1, caching 0 and 2)
     public var cachingImageCount = 1
     
-    /// Caching before MediaBrowser comes up
-    public var precachingEnabled = false {
+    /// Caching before MediaBrowser comes up, set
+    public var preCachingEnabled = false {
         didSet {
-            if precachingEnabled {
+            if preCachingEnabled {
                 startPreCaching()
             }
         }
@@ -1037,7 +1037,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     
     func startPreCaching() {
         if let d = delegate {
-            let media = d.media(for: self, at: 0)
+            let media = d.media(for: self, at: currentPageIndex)
             media.loadUnderlyingImageAndNotify()
 
         } else {
@@ -1064,6 +1064,32 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     //MARK: - Paging
+    
+    /**
+     setCurrentIndex to show first. 
+     When precaching, set this method first.
+     
+     - Parameter index:  Int
+     */
+    public func setCurrentIndex(at index: Int) {
+        var internalIndex = 0
+        let mediaCount = self.numberOfMedias
+        if mediaCount != 0 {
+            if index >= mediaCount {
+                internalIndex = self.numberOfMedias - 1
+            } else {
+                internalIndex = index
+            }
+            
+            currentPageIndex = internalIndex
+            if self.isViewLoaded {
+                self.jumpToPageAtIndex(index: internalIndex, animated: false)
+                if !viewIsActive {
+                    self.tilePages()
+                }
+            }
+        }
+    }
 
     func tilePages() {
         // Calculate which pages should be visible

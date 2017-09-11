@@ -33,8 +33,10 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         
-        // Set delegate and pre-cahing when you need
+//        Set delegate and pre-cahing when you need - add current index when you need to caching index
 //        browser = MediaBrowser(delegate: self)
+//        browser.setCurrentIndex(at: 1)
+//        
 //        browser.precachingEnabled = true
         
         let font = UIFont.systemFont(ofSize: 12)
@@ -192,6 +194,7 @@ extension ViewController {
         browser.startOnGrid = startOnGrid
         browser.enableSwipeToDismiss = true
         browser.autoPlayOnAppear = autoPlayOnAppear
+//        browser.setCurrentIndex(at: 1)
         
         
         if displaySelectionButtons {
