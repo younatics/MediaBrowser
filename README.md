@@ -56,50 +56,57 @@ func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
 You can also see all usage in demo project.
 
 #### MediaBrowser
+
 | Property | Type |
 | -------- | ---  |
-| navigationBarTranslucent | Bool |
-| navigationBarTextColor | UIColor |
-| navigationBarTintColor | UIColor |
-| statusBarStyle | UIStatusBarStyle |
-| toolbarTextColor | UIColor |
-| toolbarBarTintColor | UIColor |
-| toolbarBackgroundColor | UIColor |
-| hasBelongedToViewController | Bool |
-| isVCBasedStatusBarAppearance | Bool |
-| statusBarShouldBeHidden | Bool |
-| displayActionButton | Bool |
-| leaveStatusBarAlone | Bool |
-| performingLayout | Bool |
-| rotating | Bool |
-| viewIsActive | Bool |
-| didSavePreviousStateOfNavBar | Bool |
-| skipNextPagingScrollViewPositioning | Bool |
-| viewHasAppearedInitially | Bool |
-| currentGridContentOffset | CGPoint |
-| zoomPhotosToFill | Bool |
-| displayMediaNavigationArrows | Bool |
-| displaySelectionButtons | Bool |
-| alwaysShowControls | Bool |
-| enableGrid | Bool |
-| enableSwipeToDismiss | Bool |
-| startOnGrid | Bool |
-| autoPlayOnAppear | Bool |
-| hideControlsOnStartup | Bool |
-| delayToHideElements | TimeInterval |
-| captionAlpha | CGFloat |
-| toolbarAlpha | CGFloat |
-| loadingIndicatorInnerRingColor | UIColor |
-| loadingIndicatorOuterRingColor | UIColor |
-| loadingIndicatorInnerRingWidth | CGFloat |
-| loadingIndicatorOuterRingWidth | CGFloat |
-| loadingIndicatorFont | UIFont |
-| loadingIndicatorFontColor | UIColor |
-| loadingIndicatorShouldShowValueText | Bool |
-| mediaSelectedOnIcon | UIImage? |
-| mediaSelectedOffIcon | UIImage? |
-| mediaSelectedGridOnIcon | UIImage? |
-| mediaSelectedGridOffIcon | UIImage? |
+| `navigationBarTranslucent` | `Bool` |
+| `navigationBarTextColor` | `UIColor` |
+| `navigationBarTintColor` | `UIColor` |
+| `statusBarStyle` | `UIStatusBarStyle` |
+| `toolbarTextColor` | `UIColor` |
+| `toolbarBarTintColor` | `UIColor` |
+| `toolbarBackgroundColor` | `UIColor` |
+| `hasBelongedToViewController` | `Bool` |
+| `isVCBasedStatusBarAppearance` | `Bool` |
+| `statusBarShouldBeHidden` | `Bool` |
+| `displayActionButton` | `Bool` |
+| `leaveStatusBarAlone` | `Bool` |
+| `performingLayout` | `Bool` |
+| `rotating` | `Bool` |
+| `viewIsActive` | `Bool` |
+| `didSavePreviousStateOfNavBar` | `Bool` |
+| `skipNextPagingScrollViewPositioning` | `Bool` |
+| `viewHasAppearedInitially` | `Bool` |
+| `currentGridContentOffset` | `CGPoint` |
+| `zoomPhotosToFill` | `Bool` |
+| `displayMediaNavigationArrows` | `Bool` |
+| `displaySelectionButtons` | `Bool` |
+| `alwaysShowControls` | `Bool` |
+| `enableGrid` | `Bool` |
+| `enableSwipeToDismiss` | `Bool` |
+| `startOnGrid` | `Bool` |
+| `autoPlayOnAppear` | `Bool` |
+| `hideControlsOnStartup` | `Bool` |
+| `delayToHideElements` | `TimeInterval` |
+| `captionAlpha` | `CGFloat` |
+| `toolbarAlpha` | `CGFloat` |
+| `loadingIndicatorInnerRingColor` | `UIColor` |
+| `loadingIndicatorOuterRingColor` | `UIColor` |
+| `loadingIndicatorInnerRingWidth` | `CGFloat` |
+| `loadingIndicatorOuterRingWidth` | `CGFloat` |
+| `loadingIndicatorFont` | `UIFont` |
+| `loadingIndicatorFontColor` | `UIColor` |
+| `loadingIndicatorShouldShowValueText` | `Bool` |
+| `mediaSelectedOnIcon` | `UIImage?` |
+| `mediaSelectedOffIcon` | `UIImage?` |
+| `mediaSelectedGridOnIcon` | `UIImage?` |
+| `mediaSelectedGridOffIcon` | `UIImage?` |
+| `preCachingEnabled` | `Bool` |
+
+
+| Method | Explanation |
+| -------- | ---  |
+| `setCurrentIndex(at index: Int)` | Set current indexPath when start. Also, set first before `preCachingEnabled` |
 
 ## Installation
 ### Cocoapods
