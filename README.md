@@ -4,7 +4,7 @@
 <p align="center">
   <a href="(https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat"></a>
   <img alt="Swift" src="https://img.shields.io/badge/Swift-3.1-orange.svg">
-  <img alt="iOS 8.1+" src="https://img.shields.io/badge/iOS-8.1%2B-blue.svg">
+  <img alt="iOS 8.0+" src="https://img.shields.io/badge/iOS-8.0%2B-blue.svg">
   <a href="https://travis-ci.org/younatics/MediaBrowser" target="_blank"><img alt="travis" src="https://travis-ci.org/younatics/MediaBrowser.svg?branch=master"></a>
   <a href="https://cocoapods.org/pods/MediaBrowser" target="_blank"><img alt="CocoaPods" src="http://img.shields.io/cocoapods/v/MediaBrowser.svg"></a>
   <a href="https://younatics.github.io/MediaBrowser" target="_blank"><img alt="CocoaDocs" src="https://github.com/younatics/MediaBrowser/blob/master/docs/badge.svg"></a>
@@ -27,7 +27,7 @@ Also, MediaBrowser use latest [SDWebImage](https://github.com/rs/SDWebImage) ver
 | ![WebPhotos](https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotos.gif?raw=true)  | ![WebPhotoGrid](https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotoGrid.gif?raw=true)  |
 
 ## Requirements
-`MediaBrowser` is written in Swift 3. Compatible with iOS 8.1+
+`MediaBrowser` is written in Swift 3. Compatible with iOS 8.0+
 
 ## Usage
 ### Basic
