@@ -120,8 +120,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
             media = p
             if mediaBrowser.imageForPhoto(photo: media) != nil {
                 self.displayImage()
-            }
-            else {
+            } else {
                 // Will be loading so show loading
                 self.showLoadingIndicator()
             }
@@ -158,8 +157,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
                 // Set zoom to minimum zoom
                 setMaxMinZoomScalesForCurrentBounds()
                 
-            }
-            else  {
+            } else {
                 // Show image failure
                 displayImageFailure()
             }
@@ -347,16 +345,14 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         // Horizontally
         if frameToCenter.size.width < boundsSize.width {
             frameToCenter.origin.x = floorcgf(x: (boundsSize.width - frameToCenter.size.width) / 2.0)
-        }
-        else {
+        } else {
             frameToCenter.origin.x = 0.0
         }
         
         // Vertically
         if frameToCenter.size.height < boundsSize.height {
             frameToCenter.origin.y = floorcgf(x: (boundsSize.height - frameToCenter.size.height) / 2.0)
-        }
-        else {
+        } else {
             frameToCenter.origin.y = 0.0
         }
         
@@ -407,8 +403,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         if zoomScale != minimumZoomScale && zoomScale != initialZoomScaleWithMinScale() {
             // Zoom out
             setZoomScale(minimumZoomScale, animated: true)
-        }
-        else {
+        } else {
             // Zoom in to twice the size
             let newZoomScale = ((maximumZoomScale + minimumZoomScale) / 2.0)
             let xsize = bounds.size.width / newZoomScale

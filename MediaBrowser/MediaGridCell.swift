@@ -182,12 +182,10 @@ class MediaGridCell: UICollectionViewCell {
                 
                 if nil == ph.underlyingImage {
                     showLoadingIndicator()
-                }
-                else {
+                } else {
                     hideLoadingIndicator()
                 }
-            }
-            else {
+            } else {
                 showImageFailure()
             }
         }
@@ -306,14 +304,11 @@ class MediaGridCell: UICollectionViewCell {
     }
     
     func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
-        if let p = notification.object as? Media,
-            let mwp = Media, photosEqual(p1: p, mwp)
-        {
+        if let p = notification.object as? Media, let mwp = Media, photosEqual(p1: p, mwp) {
             if p.underlyingImage != nil {
                 // Successful load
                 displayImage()
-            }
-            else {
+            } else {
                 // Failed to load
                 showImageFailure()
             }

@@ -113,8 +113,7 @@ public class Media: NSObject {
     func getVideoURL(completion: @escaping (URL?) -> ()) {
         if let vurl = videoURL {
             completion(vurl)
-        }
-        else if let a = asset {
+        } else if let a = asset {
             if a.mediaType == PHAssetMediaType.video {
                 let options = PHVideoRequestOptions()
                 options.isNetworkAccessAllowed = true
@@ -125,8 +124,7 @@ public class Media: NSObject {
                     resultHandler: { asset, audioMix, info in
                         if let urlAsset = asset as? AVURLAsset {
                             completion(urlAsset.url)
-                        }
-                        else {
+                        } else {
                             completion(nil)
                         }
                 })
@@ -149,8 +147,7 @@ public class Media: NSObject {
         //try {
             if underlyingImage != nil {
                 imageLoadingComplete()
-            }
-            else {
+            } else {
                 performLoadUnderlyingImageAndNotify()
             }
         //}
@@ -168,30 +165,22 @@ public class Media: NSObject {
             // We have UIImage!
             underlyingImage = img
             imageLoadingComplete()
-        }
-        else
-        if let purl = photoURL {
+        } else if let purl = photoURL {
             // Check what type of url it is
             if purl.scheme?.lowercased() == "assets-library" {
                 // Load from assets library
                 performLoadUnderlyingImageAndNotifyWithAssetsLibraryURL(url: purl)
-            }
-            else
-            if purl.isFileURL {
+            } else if purl.isFileURL {
                 // Load from local file async
                 performLoadUnderlyingImageAndNotifyWithLocalFileURL(url: purl)
-            }
-            else {
+            } else {
                 // Load async from web (using SDWebImage)
                 performLoadUnderlyingImageAndNotifyWithWebURL(url: purl)
             }
-        }
-        else
-        if let a = asset {
+        } else if let a = asset {
             // Load from photos asset
             performLoadUnderlyingImageAndNotifyWithAsset(asset: a, targetSize: assetTargetSize)
-        }
-        else {
+        } else {
             // Image is empty
             imageLoadingComplete()
         }
@@ -327,9 +316,7 @@ public class Media: NSObject {
         if let op = self.operation {
             op.cancel()
             loadingInProgress = false
-        }
-        else
-        if assetRequestID != PHInvalidImageRequestID {
+        } else if assetRequestID != PHInvalidImageRequestID {
             PHImageManager.default().cancelImageRequest(assetRequestID)
             assetRequestID = PHInvalidImageRequestID
         }

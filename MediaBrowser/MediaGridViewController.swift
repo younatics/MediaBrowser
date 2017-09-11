@@ -124,8 +124,7 @@ class MediaGridViewController: UICollectionViewController, UICollectionViewDeleg
             
             if let _ = b.imageForPhoto(photo: photo) {
                 cell.displayImage()
-            }
-            else {
+            } else {
                 photo.loadUnderlyingImageAndNotify()
             }
         }

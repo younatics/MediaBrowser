@@ -58,8 +58,7 @@ public class MediaCaptionView: UIToolbar {
                 options: .usesLineFragmentOrigin,
                 attributes: [NSFontAttributeName : label.font],
                 context: nil).size
-        }
-        else {
+        } else {
             textSize = CGSize(width: 0, height: 0)
         }
         

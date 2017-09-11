@@ -471,8 +471,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 style: .plain,
                 target: self,
                 action: #selector(MediaBrowser.showGridAnimated)))
-        }
-        else {
+        } else {
             items.append(fixedSpace)
         }
 
@@ -485,16 +484,14 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             items.append(flexSpace)
             items.append(nextButton!)
             items.append(flexSpace)
-        }
-        else {
+        } else {
             items.append(flexSpace)
         }
 
         // Right - Action
         if actionButton != nil && !(!hasItems && nil == navigationItem.rightBarButtonItem) {
             items.append(actionButton!)
-        }
-        else {
+        } else {
             // We're falset showing the toolbar so try and show in top right
             if actionButton != nil {
                 navigationItem.rightBarButtonItem = actionButton!
@@ -515,8 +512,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         if hideToolbar {
             toolbar.removeFromSuperview()
-        }
-        else {
+        } else {
             view.addSubview(toolbar)
         }
         
@@ -533,8 +529,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var presenting = presentingViewController
         if let p = presenting as? UINavigationController {
             presenting = p.topViewController
-        }
-        else {
+        } else {
             // We're in a navigation controller so get previous one!
             if let navi = navigationController, navi.viewControllers.count > 1 {
                 presenting = navi.viewControllers[navi.viewControllers.count - 2]
@@ -584,8 +579,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Update UI
         if hideControlsOnStartup {
             hideControls()
-        }
-        else {
+        } else {
             hideControlsAfterDelay()
         }
         
@@ -874,8 +868,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Update current page index
         if numberOfMedias > 0 {
             currentPageIndex = max(0, min(currentPageIndex, photosNum - 1))
-        }
-        else {
+        } else {
             currentPageIndex = 0
         }
         
@@ -924,8 +917,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                         mediaArray[index] = photo
                     }
                 }
-            }
-            else {
+            } else {
                 photo = mediaArray[index]
             }
         }
@@ -945,8 +937,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                         thumbMedias[index] = p
                     }
                 }
-            }
-            else {
+            } else {
                 photo = thumbMedias[index]
             }
         }
@@ -998,8 +989,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             // Get image or obtain in background
             if let img = p.underlyingImage {
                 return img
-            }
-            else {
+            } else {
                 p.loadUnderlyingImageAndNotify()
             }
         }
@@ -1044,8 +1034,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     // Successful load
                     page.displayImage()
                     loadAdjacentPhotosIfNecessary(photo: photo)
-                }
-                else {
+                } else {
                     // Failed to load
                     page.displayImageFailure()
                 }
@@ -1445,22 +1434,18 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if let gc = gridController {
             if gc.selectionMode {
                 self.title = NSLocalizedString("Select Photos", comment: "")
-            }
-            else {
+            } else {
                 let photosText: String
                 
                 if 1 == medias {
                     photosText = NSLocalizedString("photo", comment: "Used in the context: '1 photo'")
-                }
-                else {
+                } else {
                     photosText = NSLocalizedString("photos", comment: "Used in the context: '3 photos'")
                 }
                 
                 title = "\(medias) \(photosText)"
             }
-        }
-        else
-        if medias > 1 {
+        } else if medias > 1 {
             if let d = delegate {
                 title = d.title(for: self, at: currentPageIndex)
             }
@@ -1469,8 +1454,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 let str = NSLocalizedString("of", comment: "Used in the context: 'Showing 1 of 3 items'")
                 title = "\(currentPageIndex + 1) \(str) \(numberOfMedias)"
             }
-        }
-        else {
+        } else {
             title = nil
         }
         
@@ -1490,8 +1474,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             if photo != nil && (photo!.underlyingImage == nil || photo!.isVideo) {
                 ab.isEnabled = false
                 ab.tintColor = UIColor.clear // Tint to hide button
-            }
-            else {
+            } else {
                 ab.isEnabled = true
                 ab.tintColor = nil
             }
@@ -1513,6 +1496,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func gotoPreviousPage() {
         showPreviousPhotoAnimated(animated: false)
     }
+    
     func gotoNextPage() {
         showNextPhotoAnimated(animated: false)
     }
@@ -1577,8 +1561,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     DispatchQueue.main.async() {
                         self.playVideo(videoURL: u, atPhotoIndex: index)
                     }
-                }
-                else {
+                } else {
                     self.setVideoLoadingIndicatorVisible(visible: false, atPageIndex: index)
                 }
             }
@@ -1713,8 +1696,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             if navigationItem.rightBarButtonItem == actionButton {
                 gridPreviousRightNavItem = actionButton
                 navigationItem.setRightBarButton(nil, animated: true)
-            }
-            else {
+            } else {
                 gridPreviousRightNavItem = nil
             }
             
@@ -1940,9 +1922,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
             if 0 == photoCount {
                 index = 0
-            }
-            else
-            if index >= photoCount {
+            } else if index >= photoCount {
                 index = photoCount - 1
             }
             
@@ -1971,9 +1951,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 if startOnGrid && nil == gridController {
                     showGrid(animated: true)
                     return
-                }
-                else
-                if !startOnGrid && gridController != nil {
+                } else if !startOnGrid && gridController != nil {
                     hideGrid()
                     return
                 }
