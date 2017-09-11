@@ -1,4 +1,6 @@
 # Updates
+## [v0.3.1](https://github.com/younatics/MediaBrowser/releases/tag/0.3.1)
+* Change target to 8.0 +
 
 ## [v0.3.0](https://github.com/younatics/MediaBrowser/releases/tag/0.3.0)
 * Add more docs for 1.0.0 version
