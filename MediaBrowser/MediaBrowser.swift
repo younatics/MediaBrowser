@@ -864,19 +864,19 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         mediaCount = -1
         
         // Get data
-        let photosNum = numberOfMedias
+        let mediaNum = numberOfMedias
         releaseAllUnderlyingPhotos(preserveCurrent: true)
         mediaArray.removeAll()
         thumbMedias.removeAll()
         
-        for _ in 0...(photosNum - 1) {
+        for _ in 0...(mediaNum - 1) {
             mediaArray.append(nil)
             thumbMedias.append(nil)
         }
 
         // Update current page index
         if numberOfMedias > 0 {
-            currentPageIndex = max(0, min(currentPageIndex, photosNum - 1))
+            currentPageIndex = max(0, min(currentPageIndex, mediaNum - 1))
         } else {
             currentPageIndex = 0
         }
