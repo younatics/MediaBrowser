@@ -60,9 +60,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var previousStatusBarStyle: UIStatusBarStyle = .lightContent
     
     // Video
-    var currentVideoPlayerViewController: MPMoviePlayerViewController?
-    var currentVideoIndex = 0
-    var currentVideoLoadingIndicator: UIActivityIndicatorView?
+    private var currentVideoPlayerViewController: MPMoviePlayerViewController?
+    private var currentVideoIndex = 0
+    private var currentVideoLoadingIndicator: UIActivityIndicatorView?
 
     var activityViewController: UIActivityViewController?
 
@@ -200,6 +200,15 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     
     /// Caching image count both side (e.g. when index 1, caching 0 and 2)
     public var cachingImageCount = 1
+    
+    /// Caching before MediaBrowser comes up
+    public var precachingEnabled = false {
+        didSet {
+            if precachingEnabled {
+                startPreCaching()
+            }
+        }
+    }
     
     //MARK: - Init
     
@@ -1005,9 +1014,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             if currentPageIndex == pageIndex {
                 if pageIndex > 0  && mediaArray.count >= cachingImageCount {
                     // Preload index - 1
-                    if let photo = mediaAtIndex(index: pageIndex - 1) {
-                        if nil == photo.underlyingImage {
-                            photo.loadUnderlyingImageAndNotify()
+                    if let media = mediaAtIndex(index: pageIndex - 1) {
+                        if nil == media.underlyingImage {
+                            media.loadUnderlyingImageAndNotify()
 //                            print("Pre-loading image at index \(pageIndex-1)")
                         }
                     }
@@ -1015,14 +1024,24 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 
                 if pageIndex < numberOfMedias - 1 {
                     // Preload index + 1
-                    if let photo = mediaAtIndex(index: pageIndex + 1) {
-                        if nil == photo.underlyingImage {
-                            photo.loadUnderlyingImageAndNotify()
+                    if let media = mediaAtIndex(index: pageIndex + 1) {
+                        if nil == media.underlyingImage {
+                            media.loadUnderlyingImageAndNotify()
 //                            print("Pre-loading image at index \(pageIndex+1)")
                         }
                     }
                 }
             }
+        }
+    }
+    
+    func startPreCaching() {
+        if let d = delegate {
+            let media = d.media(for: self, at: 0)
+            media.loadUnderlyingImageAndNotify()
+
+        } else {
+            fatalError("Set delegate first for pre-caching")
         }
     }
 

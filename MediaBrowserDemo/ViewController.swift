@@ -14,8 +14,15 @@ class ViewController: UITableViewController {
     @IBOutlet var segmentedControl: UISegmentedControl!
     
     var selections = [Bool]()
+    
+    // Set your Image first when you need pre-caching
+//    browser = MediaBrowser(delegate: self)
+    //    var mediaArray = DemoData.webPhotos()
     var mediaArray = [Media]()
     var thumbs = [Media]()
+    
+//    var browser = MediaBrowser()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -24,6 +31,11 @@ class ViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // Set delegate and pre-cahing when you need
+//        browser = MediaBrowser(delegate: self)
+//        browser.precachingEnabled = true
         
         let font = UIFont.systemFont(ofSize: 12)
         segmentedControl.setTitleTextAttributes([NSFontAttributeName: font],
