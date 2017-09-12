@@ -1,7 +1,6 @@
 language: objective-c
 osx_image: xcode8
 script:
-- pod repo remove master
-- pod setup
-- pod install
+- pod repo update
+- pod update
 - xcodebuild -scheme 'MediaBrowser' -sdk iphonesimulator CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty -c
