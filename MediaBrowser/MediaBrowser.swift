@@ -699,7 +699,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         navigationController?.setNavigationBarHidden(false, animated: animated)
     
         if let navBar = navigationController?.navigationBar {
-            navBar.titleTextAttributes = [NSForegroundColorAttributeName:navigationBarTextColor]
+            navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:navigationBarTextColor]
             navBar.backgroundColor = navigationBarBackgroundColor
             navBar.tintColor = navigationBarTextColor
             navBar.barTintColor = navigationBarTintColor
@@ -727,7 +727,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             navi.setNavigationBarHidden(previousNavigationBarHidden, animated: animated)
             
             let navBar = navi.navigationBar
-            navBar.titleTextAttributes = [NSForegroundColorAttributeName:previousNavigationBarTextColor ?? UIColor.black]
+            navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:previousNavigationBarTextColor ?? UIColor.black]
             navBar.backgroundColor = previousNavigationBarBackgroundColor
             navBar.tintColor = previousNavigationBarTextColor
             navBar.isTranslucent = previousNavigationBarTranslucent
@@ -1046,7 +1046,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     //MARK: - Media Loading falsetification
-    func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
+    @objc func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
         if let photo = notification.object as? Media {
             if let page = pageDisplayingPhoto(photo: photo) {
                 if photo.underlyingImage != nil {
@@ -1538,11 +1538,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         hideControlsAfterDelay()
     }
 
-    func gotoPreviousPage() {
+    @objc func gotoPreviousPage() {
         showPreviousPhotoAnimated(animated: false)
     }
     
-    func gotoNextPage() {
+    @objc func gotoNextPage() {
         showNextPhotoAnimated(animated: false)
     }
 
@@ -1556,7 +1556,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     //MARK: - Interactions
 
-    func selectedButtonTapped(sender: UIButton) {
+    @objc func selectedButtonTapped(sender: UIButton) {
         sender.isSelected = !sender.isSelected
     
         var index = Int.max
@@ -1572,7 +1572,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
     }
 
-    func playButtonTapped(sender: UIButton) {
+    @objc func playButtonTapped(sender: UIButton) {
         var index = Int.max
     
         for page in visiblePages {
@@ -1641,7 +1641,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
     }
 
-    func videoFinishedCallback(notification: NSNotification) {
+    @objc func videoFinishedCallback(notification: NSNotification) {
         if let player = currentVideoPlayerViewController {
             // Remove observer
             NotificationCenter.default.removeObserver(
@@ -1704,7 +1704,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     //MARK: - Grid
 
-    func showGridAnimated() {
+    @objc func showGridAnimated() {
         showGrid(animated: true)
     }
 
@@ -1950,7 +1950,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return 0.0 == toolbar.alpha
     }
     
-    func hideControls() {
+    @objc func hideControls() {
         setControlsHidden(hidden: true, animated: true, permanent: false)
     }
     
@@ -1994,7 +1994,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     //MARK: - Misc
 
-    func doneButtonPressed(sender: AnyObject) {
+    @objc func doneButtonPressed(sender: AnyObject) {
         // Only if we're modal and there's a done button
         if doneButton != nil {
             // See if we actually just want to show/hide grid
@@ -2019,7 +2019,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     //MARK: - Actions
 
-    func actionButtonPressed(_ sender: Any) {
+    @objc func actionButtonPressed(_ sender: Any) {
         // Only react when image has loaded
         if let photo = mediaAtIndex(index: currentPageIndex) {
             if numberOfMedias > 0 && photo.underlyingImage != nil {
