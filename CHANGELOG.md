@@ -1,4 +1,11 @@
 # Updates
+
+## [v0.3.3](https://github.com/younatics/MediaBrowser/releases/tag/0.3.3)
+* add setCurrentIndex method
+
+## [v0.3.2](https://github.com/younatics/MediaBrowser/releases/tag/0.3.2)
+* Bug fixed
+
 ## [v0.3.1](https://github.com/younatics/MediaBrowser/releases/tag/0.3.1)
 * Change target to 8.0 +
 
