@@ -1,5 +1,9 @@
 language: objective-c
 osx_image: xcode8
+
+before_install:
+  - gem install cocoapods
+  - brew update
 script:
 - pod repo update
 - pod update
