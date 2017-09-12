@@ -10,7 +10,6 @@
   <a href="https://younatics.github.io/MediaBrowser" target="_blank"><img alt="CocoaDocs" src="https://github.com/younatics/MediaBrowser/blob/master/docs/badge.svg"></a>
   <a href="https://github.com/Carthage/Carthage" target="_blank"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
   <a href="https://github.com/younatics/MediaBrowser/blob/master/README-KR.md" target="_blank"><img alt="ReadMe-KR" src="https://img.shields.io/badge/한국어-리드미-red.svg"></a>
-  
 </p>
 
 ## Introduction
@@ -125,7 +124,8 @@ github "younatics/MediaBrowser"
 See [CHANGELOG](https://github.com/younatics/MediaBrowser/blob/master/CHANGELOG.md) for details
 
 ## Author
-[younatics 🇰🇷](https://twitter.com/younatics)
+[younatics](https://twitter.com/younatics)
+<a href="http://twitter.com/younatics" target="_blank"><img alt="Twitter" src="https://img.shields.io/twitter/follow/younatics.svg?style=social&label=Follow"></a>
 
 ## License
 **MediaBrowser** is available under the MIT license. See the LICENSE file for more info.
