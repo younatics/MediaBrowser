@@ -1958,7 +1958,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         setControlsHidden(hidden: false, animated: true, permanent: false)
     }
     
-    func toggleControls() {
+    @objc func toggleControls() {
         setControlsHidden(hidden: !areControlsHidden, animated: true, permanent: false)
     }
 
