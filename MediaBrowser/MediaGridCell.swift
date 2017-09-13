@@ -219,10 +219,8 @@ class MediaGridCell: UICollectionViewCell {
     @objc func selectionButtonPressed() {
         selectedButton.isSelected = !selectedButton.isSelected
         
-        if let gc = gridController {
-            if let browser = gc.browser {
-                browser.setPhotoSelected(selected: selectedButton.isSelected, atIndex: index)
-            }
+        if let gc = gridController, let browser = gc.browser {
+            browser.setPhotoSelected(selected: selectedButton.isSelected, atIndex: index)
         }
     }
     

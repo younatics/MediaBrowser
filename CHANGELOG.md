@@ -1,5 +1,8 @@
 # Updates
 
+## [v0.3.4](https://github.com/younatics/MediaBrowser/releases/tag/0.3.4)
+* change podspec
+
 ## [v0.3.3](https://github.com/younatics/MediaBrowser/releases/tag/0.3.3)
 * add setCurrentIndex method
 

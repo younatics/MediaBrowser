@@ -140,10 +140,8 @@ class MediaGridViewController: UICollectionViewController, UICollectionViewDeleg
     }
     
     override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let gridCell = cell as? MediaGridCell {
-            if let gcp = gridCell.photo {
-                gcp.cancelAnyLoading()
-            }
+        if let gridCell = cell as? MediaGridCell, let gcp = gridCell.photo {
+            gcp.cancelAnyLoading()
         }
     }
     
