@@ -114,3 +114,9 @@ public extension MediaBrowserDelegate {
     
     func title(for mediaBrowser: MediaBrowser, at index: Int) -> String { return "" }
 }
+
+public extension MediaBrowserDelegate where Self: UIViewController {
+    func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser) {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
