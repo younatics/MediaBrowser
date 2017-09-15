@@ -1075,8 +1075,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
      
      - Parameter index:  Int
      */
-    public func setCurrentIndex(at index: UInt) {
-        var internalIndex = Int(index)
+    public func setCurrentIndex(at index: Int) {
+        var internalIndex = index
         let mediaCount = self.numberOfMedias
         if mediaCount == 0 {
             internalIndex = 0
