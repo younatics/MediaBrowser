@@ -913,7 +913,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     func mediaAtIndex(index: Int) -> Media? {
         var media: Media? = nil
         
-        if index < mediaArray.count {
+        if index < mediaArray.count && index >= 0 {
             if mediaArray[index] == nil {
                 if let d = delegate {
                     media = d.media(for: self, at: index)
@@ -1014,20 +1014,24 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             if currentPageIndex == pageIndex {
                 if pageIndex > 0  && mediaArray.count >= cachingImageCount {
                     // Preload index - 1
-                    if let media = mediaAtIndex(index: pageIndex - 1) {
-                        if nil == media.underlyingImage {
-                            media.loadUnderlyingImageAndNotify()
-//                            print("Pre-loading image at index \(pageIndex-1)")
+                    for i in 1...cachingImageCount {
+                        if let media = mediaAtIndex(index: pageIndex - i) {
+                            if nil == media.underlyingImage {
+                                media.loadUnderlyingImageAndNotify()
+                                print("Pre-loading image at index \(pageIndex - i)")
+                            }
                         }
                     }
                 }
-                
+
                 if pageIndex < numberOfMedias - 1 {
                     // Preload index + 1
-                    if let media = mediaAtIndex(index: pageIndex + 1) {
-                        if nil == media.underlyingImage {
-                            media.loadUnderlyingImageAndNotify()
-//                            print("Pre-loading image at index \(pageIndex+1)")
+                    for i in 1...cachingImageCount {
+                        if let media = mediaAtIndex(index: pageIndex + i) {
+                            if nil == media.underlyingImage {
+                                media.loadUnderlyingImageAndNotify()
+                                print("Pre-loading image at index \(pageIndex + i)")
+                            }
                         }
                     }
                 }
@@ -1071,22 +1075,22 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
      
      - Parameter index:  Int
      */
-    public func setCurrentIndex(at index: Int) {
-        var internalIndex = 0
+    public func setCurrentIndex(at index: UInt) {
+        var internalIndex = Int(index)
         let mediaCount = self.numberOfMedias
-        if mediaCount != 0 {
+        if mediaCount == 0 {
+            internalIndex = 0
+        } else {
             if index >= mediaCount {
                 internalIndex = self.numberOfMedias - 1
-            } else {
-                internalIndex = index
             }
-            
-            currentPageIndex = internalIndex
-            if self.isViewLoaded {
-                self.jumpToPageAtIndex(index: internalIndex, animated: false)
-                if !viewIsActive {
-                    self.tilePages()
-                }
+        }
+
+        currentPageIndex = internalIndex
+        if self.isViewLoaded {
+            self.jumpToPageAtIndex(index: internalIndex, animated: false)
+            if !viewIsActive {
+                self.tilePages() // Force tiling if view is not visible
             }
         }
     }

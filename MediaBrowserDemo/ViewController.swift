@@ -190,6 +190,7 @@ extension ViewController {
         browser.startOnGrid = startOnGrid
         browser.enableSwipeToDismiss = true
         browser.autoPlayOnAppear = autoPlayOnAppear
+        browser.cachingImageCount = 2
 //        browser.setCurrentIndex(at: 1)
         
         
