@@ -94,7 +94,7 @@ public protocol MediaBrowserDelegate: class {
      - Parameter mediaBrowser: MediaBrowser
      - Parameter index: Int
      */
-    func title(for mediaBrowser: MediaBrowser, at index: Int) -> String
+    func title(for mediaBrowser: MediaBrowser, at index: Int) -> String?
 }
 
 public extension MediaBrowserDelegate {
@@ -114,5 +114,5 @@ public extension MediaBrowserDelegate {
     
     func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser) { }
     
-    func title(for mediaBrowser: MediaBrowser, at index: Int) -> String { return "" }
+    func title(for mediaBrowser: MediaBrowser, at index: Int) -> String? { return nil }
 }
