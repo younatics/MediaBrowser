@@ -98,7 +98,9 @@ public protocol MediaBrowserDelegate: class {
 }
 
 public extension MediaBrowserDelegate {
-    func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser) { }
+    func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser) {
+        mediaBrowser.dismiss(animated: true, completion: nil)
+    }
 
     func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media { return Media() }
 
@@ -113,10 +115,4 @@ public extension MediaBrowserDelegate {
     func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser) { }
     
     func title(for mediaBrowser: MediaBrowser, at index: Int) -> String { return "" }
-}
-
-public extension MediaBrowserDelegate where Self: UIViewController {
-    func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser) {
-        self.dismiss(animated: true, completion: nil)
-    }
 }
