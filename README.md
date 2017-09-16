@@ -54,8 +54,6 @@ func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
 
 You can also see all usage in demo project.
 
-#### MediaBrowser
-
 | Property | Type |
 | -------- | ---  |
 | `navigationBarTranslucent` | `Bool` |
@@ -101,11 +99,24 @@ You can also see all usage in demo project.
 | `mediaSelectedGridOnIcon` | `UIImage?` |
 | `mediaSelectedGridOffIcon` | `UIImage?` |
 | `preCachingEnabled` | `Bool` |
-
+| `cachingImageCount` | `Int` |
 
 | Method | Explanation |
-| -------- | ---  |
+| ------ | ----------- |
 | `setCurrentIndex(at index: Int)` | Set current indexPath when start. Also, set first before `preCachingEnabled` |
+
+| Delegate | Explanation |
+| -------- | ----------- |
+| `func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int` | Required protocol to use MediaBrowser. return media count | 
+| `func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media` | Required protocol to use MediaBrowser. return media | 
+| `func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser)` | Optional protocol to mediaBrowser Did Finish Modal Presentation | 
+| `func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media` | Optional protocol to show thumbnail. return media. Recommand small size | 
+| `func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView?` | Optional protocol to show captionView. return MediaCaptionView. | 
+| `func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser)` | Optional protocol when need callback | 
+| `func actionButtonPressed(at photoIndex: Int, in mediaBrowser: MediaBrowser)` | Optional protocol when need callback about action button | 
+| `func isMediaSelected(at index: Int, in mediaBrowser: MediaBrowser) -> Bool` | Optional protocol when need callback about isMediaSelected | 
+| `func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser)` | Optional protocol when need callback about media selection | 
+| `func title(for mediaBrowser: MediaBrowser, at index: Int) -> String?` | Optional protocol for title | 
 
 ## Installation
 ### Cocoapods
