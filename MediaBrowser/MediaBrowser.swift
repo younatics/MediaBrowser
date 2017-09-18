@@ -23,7 +23,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var mediaCount = -1
     private var mediaArray = [Media?]()
     private var thumbMedias = [Media?]()
-	private var fixedMediasArray: [Media]? // Provided via init
+    /// Provided via init
+	private var fixedMediasArray: [Media]?
 	
 	// Views
 	private var pagingScrollView = UIScrollView()
@@ -209,6 +210,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             }
         }
     }
+
+    /// Placeholder image
+    public var placeholderImage: (image: UIImage, isAppliedForAll: Bool)?
     
     //MARK: - Init
     
@@ -921,6 +925,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     if nil == media && fixedMediasArray != nil && index < fixedMediasArray!.count {
                         media = fixedMediasArray![index]
                     }
+                    media?.placeholderImage = self.placeholderImage?.image
                     
                     if media != nil {
                         mediaArray[index] = media
@@ -928,6 +933,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 }
             } else {
                 media = mediaArray[index]
+                media?.placeholderImage = self.placeholderImage?.image
             }
         }
         
@@ -1003,7 +1009,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             }
         }
         
-        return nil
+        return self.placeholderImage?.image
     }
 
     func loadAdjacentPhotosIfNecessary(photo: Media) {
@@ -1173,6 +1179,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 
                 visiblePages.insert(page)
                 configurePage(page: page, forIndex: index)
+                setPlaceholderForPage(page: page, forIndex: index)
 
                 pagingScrollView.addSubview(page)
                 
@@ -1269,6 +1276,22 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         page.index = index
         page.photo = mediaAtIndex(index: index)
 //        page.backgroundColor = areControlsHidden ? UIColor.black : UIColor.white
+    }
+
+    func setPlaceholderForPage(page: MediaZoomingScrollView, forIndex index: Int) {
+        if let placeholder = self.placeholderImage {
+            if placeholder.isAppliedForAll || (!placeholder.isAppliedForAll && index == self.currentPageIndex) {
+                if page.photoImageView.image == nil || page.photoImageView.image === placeholder.image {
+                    page.photoImageView.image = self.placeholderImage?.image
+                    page.photoImageView.transform = CGAffineTransform.identity
+                    page.photoImageView.alpha = 0.8
+                    page.alignCenterMedia()
+
+                    // Set zoom to minimum zoom
+                    page.setMaxMinZoomScalesForCurrentBounds()
+                }
+            }
+        }
     }
 
     var dequeueRecycledPage: MediaZoomingScrollView? {

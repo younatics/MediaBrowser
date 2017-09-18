@@ -1,4 +1,4 @@
-//
+	//
 //  MediaZoomingScrollView.swift
 //  MediaBrowser
 //
@@ -80,7 +80,8 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         selectedButton = nil
         playButton = nil
         photoImageView.isHidden = false
-        photoImageView.image = nil
+        photoImageView.image = self.mediaBrowser.placeholderImage?.image
+        photoImageView.alpha = 0.8
         index = Int.max
     }
     
@@ -118,7 +119,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
                 media!.cancelAnyLoading()
             }
             media = p
-            if mediaBrowser.image(for: media) != nil {
+            if let image = mediaBrowser.image(for: media), image !== mediaBrowser.placeholderImage?.image {
                 self.displayImage()
             } else {
                 // Will be loading so show loading
@@ -133,7 +134,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
     
     // Get and display image
     func displayImage() {
-        if media != nil && photoImageView.image == nil {
+        if media != nil && (photoImageView.image == nil || photoImageView.image === self.mediaBrowser.placeholderImage?.image) {
             // Reset
             maximumZoomScale = 1.0
             minimumZoomScale = 1.0
@@ -141,11 +142,12 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
             contentSize = CGSize.zero
             
             // Get image from browser as it handles ordering of fetching
-            if let img = mediaBrowser.image(for: photo) {
+            if let img = mediaBrowser.image(for: photo), img !== mediaBrowser.placeholderImage?.image {
                 // Hide indicator
                 hideLoadingIndicator()
                 
                 // Set image
+                photoImageView.alpha = 1.0
                 photoImageView.image = img
                 photoImageView.isHidden = false
                 
@@ -169,7 +171,8 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
     // Image failed so just show grey!
     func displayImageFailure() {
         hideLoadingIndicator()
-        photoImageView.image = nil
+        photoImageView.image = self.mediaBrowser.placeholderImage?.image
+        photoImageView.alpha = 0.8
         
         // Show if image is not empty
         if let p = photo {
@@ -338,24 +341,29 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         // Super
         super.layoutSubviews()
         
+        self.alignCenterMedia()
+    }
+
+    func alignCenterMedia() {
+
         // Center the image as it becomes smaller than the size of the screen
         let boundsSize = bounds.size
         var frameToCenter = photoImageView.frame
-        
+
         // Horizontally
         if frameToCenter.size.width < boundsSize.width {
             frameToCenter.origin.x = floorcgf(x: (boundsSize.width - frameToCenter.size.width) / 2.0)
         } else {
             frameToCenter.origin.x = 0.0
         }
-        
+
         // Vertically
         if frameToCenter.size.height < boundsSize.height {
             frameToCenter.origin.y = floorcgf(x: (boundsSize.height - frameToCenter.size.height) / 2.0)
         } else {
             frameToCenter.origin.y = 0.0
         }
-        
+
         // Center
         if !photoImageView.frame.equalTo(frameToCenter) {
             photoImageView.frame = frameToCenter

@@ -31,6 +31,7 @@ public class Media: NSObject {
     
     /// underlyingImage
     public var underlyingImage: UIImage?
+    public var placeholderImage: UIImage?
 
     private let uuid = NSUUID().uuidString
     private var image: UIImage?

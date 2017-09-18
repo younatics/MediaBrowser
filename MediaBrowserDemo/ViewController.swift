@@ -191,7 +191,8 @@ extension ViewController {
         browser.enableSwipeToDismiss = true
         browser.autoPlayOnAppear = autoPlayOnAppear
         browser.cachingImageCount = 2
-//        browser.setCurrentIndex(at: 1)
+        browser.setCurrentIndex(at: 2)
+        browser.placeholderImage = (image: #imageLiteral(resourceName: "mediaBrowserDefault_white"), isAppliedForAll: false)
         
         
         if displaySelectionButtons {
