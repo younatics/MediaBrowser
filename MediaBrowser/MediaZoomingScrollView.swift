@@ -235,7 +235,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         zoomScale = 0.0
         minimumZoomScale = 0.0
         maximumZoomScale = 0.0
-        loadingIndicator.setProgress(value: 0.0, animationDuration: 1)
+        loadingIndicator.setProgress(value: 0.0, animationDuration: 0)
         loadingIndicator.isHidden = false
         
         hideImageFailure()
