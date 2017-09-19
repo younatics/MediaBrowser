@@ -211,9 +211,14 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
     }
 
-    /// Placeholder image
+    /**
+     Placeholder image
+     - image: placeholder image
+     - isAppliedForAll: This is indicated whether the placeholder will be showed for all image page or cell.
+                         If you want to use the placeholder image only for one special image page or cell, you should set the **currentIndex** variable.
+     */
     public var placeholderImage: (image: UIImage, isAppliedForAll: Bool)?
-    
+
     //MARK: - Init
     
     /**
