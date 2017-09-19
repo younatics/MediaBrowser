@@ -186,15 +186,9 @@ public class Media: NSObject {
             imageLoadingComplete()
         }
     }
-    
-    func cancelDownload() {
-        self.operation?.cancel()
-    }
 
     // Load from local file
     private func performLoadUnderlyingImageAndNotifyWithWebURL(url: URL) {
-        cancelDownload()
-        
         operation = SDWebImageManager.shared().loadImage(with: url, options: [], progress: { (receivedSize, expectedSize, targetURL) in
             let dict = [
             "progress" : CGFloat(receivedSize)/CGFloat(expectedSize),

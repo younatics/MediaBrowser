@@ -75,12 +75,16 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
     
     func prepareForReuse() {
         hideImageFailure()
-        photo = nil
+//        photo = nil
         captionView = nil
         selectedButton = nil
         playButton = nil
         photoImageView.isHidden = false
-        photoImageView.image = self.mediaBrowser.placeholderImage?.image
+        if let placeholder = self.mediaBrowser.placeholderImage, placeholder.isAppliedForAll || (!placeholder.isAppliedForAll && self.index == self.mediaBrowser.currentIndex) {
+            photoImageView.image = self.mediaBrowser.placeholderImage?.image
+        } else {
+            photoImageView.image = nil
+        }
         photoImageView.alpha = 0.8
         index = Int.max
     }
@@ -171,7 +175,11 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
     // Image failed so just show grey!
     func displayImageFailure() {
         hideLoadingIndicator()
-        photoImageView.image = self.mediaBrowser.placeholderImage?.image
+        if let placeholder = self.mediaBrowser.placeholderImage, placeholder.isAppliedForAll || (!placeholder.isAppliedForAll && self.index == self.mediaBrowser.currentIndex) {
+            photoImageView.image = self.mediaBrowser.placeholderImage?.image
+        } else {
+            photoImageView.image = nil
+        }
         photoImageView.alpha = 0.8
         
         // Show if image is not empty
