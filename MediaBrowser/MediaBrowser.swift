@@ -863,7 +863,6 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     //MARK: - Data
-
     var currentIndex: Int {
         return currentPageIndex
     }
@@ -877,6 +876,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         releaseAllUnderlyingPhotos(preserveCurrent: true)
         mediaArray.removeAll()
         thumbMedias.removeAll()
+        
+        if mediaNum < 1 { return }
         
         for _ in 0...(mediaNum - 1) {
             mediaArray.append(nil)

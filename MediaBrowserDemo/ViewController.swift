@@ -192,7 +192,7 @@ extension ViewController {
         browser.autoPlayOnAppear = autoPlayOnAppear
         browser.cachingImageCount = 2
         browser.setCurrentIndex(at: 2)
-        browser.placeholderImage = (image: #imageLiteral(resourceName: "mediaBrowserDefault_white"), isAppliedForAll: false)
+//        browser.placeholderImage = (image: #imageLiteral(resourceName: "mediaBrowserDefault_white"), isAppliedForAll: false)
         
         
         if displaySelectionButtons {

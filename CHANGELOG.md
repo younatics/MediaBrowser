@@ -1,5 +1,8 @@
 # Updates
 
+## [v1.0.1](https://github.com/younatics/MediaBrowser/releases/tag/1.0.1)
+* Update version
+
 ## [v1.0.0](https://github.com/younatics/MediaBrowser/releases/tag/1.0.0)
 * Update version
 
