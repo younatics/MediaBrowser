@@ -100,6 +100,7 @@ You can also see all usage in demo project.
 | `mediaSelectedGridOffIcon` | `UIImage?` |
 | `preCachingEnabled` | `Bool` |
 | `cachingImageCount` | `Int` |
+| `placeholderImage` | `(image: UIImage, isAppliedForAll: Bool)?` |
 
 | Method | Explanation |
 | ------ | ----------- |
