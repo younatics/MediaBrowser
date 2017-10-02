@@ -1,5 +1,8 @@
 # Updates
 
+## [v1.0.0](https://github.com/younatics/MediaBrowser/releases/tag/1.0.0)
+* Update version
+
 ## [v0.3.4](https://github.com/younatics/MediaBrowser/releases/tag/0.3.4)
 * change podspec
 
