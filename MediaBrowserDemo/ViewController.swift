@@ -213,6 +213,15 @@ extension ViewController {
         
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    // Uncomment this to resize the grid cells when viewing with grid
+    /*
+    func gridCellSize() -> CGSize? {
+        let desiredWidth = self.view.frame.size.width * 0.3
+        
+        return CGSize(width: desiredWidth, height: desiredWidth)
+    }
+     */
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellCheck = tableView.dequeueReusableCell(withIdentifier: "Cell")
