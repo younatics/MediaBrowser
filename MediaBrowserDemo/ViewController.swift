@@ -217,9 +217,9 @@ extension ViewController {
     // Uncomment this to resize the grid cells when viewing with grid
     /*
     func gridCellSize() -> CGSize? {
-        let desiredWidth = self.view.frame.size.width * 0.3
+        let desiredSize = self.view.frame.size.width * 0.3
         
-        return CGSize(width: desiredWidth, height: desiredWidth)
+        return CGSize(width: desiredSize, height: desiredSize)
     }
      */
 
