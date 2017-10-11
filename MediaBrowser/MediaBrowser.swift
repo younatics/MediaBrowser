@@ -1512,6 +1512,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if let gc = gridController {
             if gc.selectionMode {
                 self.title = NSLocalizedString("Select Photos", comment: "")
+                if let ab = actionButton {
+                    self.navigationItem.rightBarButtonItem = ab
+                }
             } else {
                 let photosText: String
                 
@@ -2059,7 +2062,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // If they have defined a delegate method then just message them
                 // Let delegate handle things
                 if let d = delegate {
-                    d.actionButtonPressed(at: currentPageIndex, in: self)
+                    d.actionButtonPressed(at: currentPageIndex, in: self, sender: sender)
+                    return
                 }
 
                 // Show activity view controller
