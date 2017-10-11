@@ -150,6 +150,10 @@ class MediaGridViewController: UICollectionViewController, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if let delegateSize = self.browser?.delegate?.gridCellSize() {
+            return delegateSize
+        }
+        
         let value = CGFloat(floorf(Float((view.bounds.size.width - (columns - 1.0) * gutter - 2.0 * margin) / columns)))
         
         return CGSize(width: value, height: value)

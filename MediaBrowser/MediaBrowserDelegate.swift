@@ -95,6 +95,12 @@ public protocol MediaBrowserDelegate: class {
      - Parameter index: Int
      */
     func title(for mediaBrowser: MediaBrowser, at index: Int) -> String?
+    
+    /**
+     Optional protocol for grid cells resizing
+     - Returns: Optional CGSize
+     */
+    func gridCellSize() -> CGSize?
 }
 
 public extension MediaBrowserDelegate {
@@ -115,4 +121,6 @@ public extension MediaBrowserDelegate {
     func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser) { }
     
     func title(for mediaBrowser: MediaBrowser, at index: Int) -> String? { return nil }
+    
+    func gridCellSize() -> CGSize? { return nil }
 }
