@@ -2031,26 +2031,23 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     //MARK: - Misc
 
     func doneButtonPressed(sender: AnyObject) {
-        // Only if we're modal and there's a done button
-        if doneButton != nil {
-            // See if we actually just want to show/hide grid
-            if enableGrid {
-                if startOnGrid && nil == gridController {
-                    showGrid(animated: true)
-                    return
-                } else if !startOnGrid && gridController != nil {
-                    hideGrid()
-                    return
-                }
+        // See if we actually just want to show/hide grid
+        if enableGrid {
+            if startOnGrid && nil == gridController {
+                showGrid(animated: true)
+                return
+            } else if !startOnGrid && gridController != nil {
+                hideGrid()
+                return
             }
-        
-            // Dismiss view controller
-            // Call delegate method and let them dismiss us
-            if let d = delegate {
-                d.mediaBrowserDidFinishModalPresentation(mediaBrowser: self)
-            }
-            // dismissViewControllerAnimated:true completion:nil]
         }
+    
+        // Dismiss view controller
+        // Call delegate method and let them dismiss us
+        if let d = delegate {
+            d.mediaBrowserDidFinishModalPresentation(mediaBrowser: self)
+        }
+        // dismissViewControllerAnimated:true completion:nil]
     }
 
     //MARK: - Actions
