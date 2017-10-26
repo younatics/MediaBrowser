@@ -221,7 +221,7 @@ class MediaGridCell: UICollectionViewCell {
         }
     }
     
-    func selectionButtonPressed() {
+    @objc func selectionButtonPressed() {
         selectedButton.isSelected = !selectedButton.isSelected
         
         if let gc = gridController, let browser = gc.browser {
@@ -296,7 +296,7 @@ class MediaGridCell: UICollectionViewCell {
     }
     
     //MARK: - Notifications
-    func setProgressFromNotification(notification: NSNotification) {
+    @objc func setProgressFromNotification(notification: NSNotification) {
         DispatchQueue.main.async() {
             let dict = notification.object as! [String : AnyObject]
             
@@ -306,7 +306,7 @@ class MediaGridCell: UICollectionViewCell {
         }
     }
     
-    func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
+    @objc func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
         if let p = notification.object as? Media, let mwp = Media, photosEqual(p1: p, mwp) {
             if p.underlyingImage != nil {
                 // Successful load
