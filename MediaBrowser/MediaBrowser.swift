@@ -420,8 +420,35 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
      - Parameter coordinator: UIViewControllerTransitionCoordinator
      */
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: nil) { _ in
+
+        // Remember page index before rotation
+        pageIndexBeforeRotation = currentPageIndex
+        rotating = true
+
+        // In iOS 7 the nav bar gets shown after rotation, but might as well do this for everything!
+        if areControlsHidden {
+            // Force hidden
+            navigationController?.isNavigationBarHidden = true
+        }
+
+        coordinator.animate(alongsideTransition: { (context) in
             self.toolbar.frame = self.frameForToolbar
+
+            // Perform layout
+            self.currentPageIndex = self.pageIndexBeforeRotation
+
+            // Delay control holding
+            self.hideControlsAfterDelay()
+
+            // Layout
+            self.layoutVisiblePages()
+        }) { (context) in
+            self.rotating = false
+            // Ensure nav bar isn't re-displayed
+            if let navi = self.navigationController, self.areControlsHidden {
+                navi.isNavigationBarHidden = false
+                navi.navigationBar.alpha = 0
+            }
         }
         
         super.viewWillTransition(to: size, with: coordinator)
@@ -825,41 +852,6 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     /// supported interface orientations
     public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .all
-    }
-
-    /// will rotate to interfaceOrientation
-    public override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
-        // Remember page index before rotation
-        pageIndexBeforeRotation = currentPageIndex
-        rotating = true
-        
-        // In iOS 7 the nav bar gets shown after rotation, but might as well do this for everything!
-        if areControlsHidden {
-            // Force hidden
-            navigationController?.isNavigationBarHidden = true
-        }
-    }
-    
-    /// will animate rotation
-    public override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
-        // Perform layout
-        currentPageIndex = pageIndexBeforeRotation
-        
-        // Delay control holding
-        hideControlsAfterDelay()
-        
-        // Layout
-        layoutVisiblePages()
-    }
-    
-    /// did rotate
-    public override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        rotating = false
-        // Ensure nav bar isn't re-displayed
-        if let navi = navigationController, areControlsHidden {
-            navi.isNavigationBarHidden = false
-            navi.navigationBar.alpha = 0
-        }
     }
 
     //MARK: - Data
