@@ -1,5 +1,8 @@
 # Updates
-## [v1.0.2](https://github.com/younatics/MediaBrowser/releases/tag/1.0.1)
+## [v1.0.5](https://github.com/younatics/MediaBrowser/releases/tag/1.0.5)
+* Release SDWebImage version
+
+## [v1.0.2](https://github.com/younatics/MediaBrowser/releases/tag/1.0.2)
 * Update SDWebImage Version
 
 ## [v1.0.1](https://github.com/younatics/MediaBrowser/releases/tag/1.0.1)
