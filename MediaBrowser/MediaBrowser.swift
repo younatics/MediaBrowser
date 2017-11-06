@@ -965,7 +965,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             captionView = d.captionView(for: self, at: index)
             
             if let p = mediaAtIndex(index: index), nil == captionView {
-                if p.caption.characters.count > 0 {
+                if p.caption.count > 0 {
                     captionView = MediaCaptionView(media: p)
                 }
             }

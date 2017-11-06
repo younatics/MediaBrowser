@@ -40,7 +40,7 @@ class ViewController: UITableViewController {
 //        browser.precachingEnabled = true
         
         let font = UIFont.systemFont(ofSize: 12)
-        segmentedControl.setTitleTextAttributes([NSFontAttributeName: font],
+        segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: font],
                                                 for: .normal)
         segmentedControl.addTarget(self, action: #selector(segmentControlChanged), for: .valueChanged)
     }
@@ -62,7 +62,7 @@ class ViewController: UITableViewController {
         return .none
     }
     
-    func segmentControlChanged() {
+    @objc func segmentControlChanged() {
         self.tableView.reloadData()
     }
 }

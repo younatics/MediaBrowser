@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MediaBrowser'
-  s.version          = '1.0.6'
+  s.version          = '2.0.0'
   s.summary          = 'A simple iOS photo and video browser with optional grid view, captions and selections written in Swift3.'
 
   s.description = <<-DESCRIPTION
