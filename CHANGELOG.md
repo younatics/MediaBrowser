@@ -1,4 +1,8 @@
 # Updates
+
+## [v1.0.6](https://github.com/younatics/MediaBrowser/releases/tag/1.0.5)
+* Change Media class to open
+
 ## [v1.0.5](https://github.com/younatics/MediaBrowser/releases/tag/1.0.5)
 * Release SDWebImage version
 
