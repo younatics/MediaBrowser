@@ -365,8 +365,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         toolbar.barTintColor = toolbarBarTintColor
         toolbar.backgroundColor = toolbarBackgroundColor
         toolbar.alpha = toolbarAlpha
-        toolbar.setBackgroundImage(nil, forToolbarPosition: .any, barMetrics: .default)
-        toolbar.setBackgroundImage(nil, forToolbarPosition: .any, barMetrics: .compact)
+        toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
+        toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .compact)
         toolbar.barStyle = .default
         toolbar.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
         
