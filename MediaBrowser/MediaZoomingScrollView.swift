@@ -217,7 +217,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
     
     //MARK: - Loading Progress
     
-    public func setProgressFromNotification(notification: NSNotification) {
+    @objc public func setProgressFromNotification(notification: NSNotification) {
         DispatchQueue.main.async() {
             let dict = notification.object as! [String : AnyObject]
             

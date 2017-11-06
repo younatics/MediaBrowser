@@ -56,7 +56,7 @@ public class MediaCaptionView: UIToolbar {
             textSize = text.boundingRect(
                 with: CGSize(width: size.width - labelPadding * 2.0, height: maxHeight),
                 options: .usesLineFragmentOrigin,
-                attributes: [NSFontAttributeName : label.font],
+                attributes: [NSAttributedStringKey.font : label.font],
                 context: nil).size
         } else {
             textSize = CGSize(width: 0, height: 0)
