@@ -1650,6 +1650,13 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             player.moviePlayer.shouldAutoplay = true
             player.moviePlayer.scalingMode = .aspectFit
             player.modalTransitionStyle = .crossDissolve
+            
+            do {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+                try AVAudioSession.sharedInstance().setActive(true)
+            } catch let error as NSError {
+                print(error)
+            }
         
             // Remove the movie player view controller from the "playback did finish" falsetification observers
             // Observe ourselves so we can get it to use the crossfade transition
