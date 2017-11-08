@@ -1,5 +1,18 @@
 # Updates
-## [v1.0.2](https://github.com/younatics/MediaBrowser/releases/tag/1.0.1)
+
+## [v2.0.1](https://github.com/younatics/MediaBrowser/releases/tag/2.0.1)
+* [request] Change Media access level to open #24
+
+## [v2.0.0](https://github.com/younatics/MediaBrowser/releases/tag/2.0.0)
+* Migrate to Swift 4
+
+## [v1.0.6](https://github.com/younatics/MediaBrowser/releases/tag/1.0.6)
+* Change Media class to open
+
+## [v1.0.5](https://github.com/younatics/MediaBrowser/releases/tag/1.0.5)
+* Release SDWebImage version
+
+## [v1.0.2](https://github.com/younatics/MediaBrowser/releases/tag/1.0.2)
 * Update SDWebImage Version
 
 ## [v1.0.1](https://github.com/younatics/MediaBrowser/releases/tag/1.0.1)

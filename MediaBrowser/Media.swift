@@ -18,7 +18,8 @@ let MEDIA_PROGRESS_NOTIFICATION  = "MEDIA_PROGRESS_NOTIFICATION"
 var PHInvalidImageRequestID = PHImageRequestID(0)
 
 /// Media is object for photo and video
-public class Media: NSObject {
+@objcMembers
+open class Media: NSObject {
     
     /// caption
     public var caption = ""
