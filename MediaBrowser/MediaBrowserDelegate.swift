@@ -114,7 +114,7 @@ public extension MediaBrowserDelegate {
     
     func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser) { }
     
-    func actionButtonPressed(at photoIndex: Int, in mediaBrowser: MediaBrowser, sender: Any? = nil) { }
+    func actionButtonPressed(at photoIndex: Int, in mediaBrowser: MediaBrowser, sender: Any? = nil) { mediaBrowser.defaultActionForMedia(atIndex: photoIndex) }
     
     func isMediaSelected(at index: Int, in mediaBrowser: MediaBrowser) -> Bool { return false }
     
