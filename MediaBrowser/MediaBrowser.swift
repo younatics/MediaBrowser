@@ -2052,16 +2052,16 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     //MARK: - Actions
 
     @objc func actionButtonPressed(_ sender: Any) {
-        // Only react when image has loaded
-        if let photo = mediaAtIndex(index: currentPageIndex) {
-            if numberOfMedias > 0 && photo.underlyingImage != nil {
-                // If they have defined a delegate method then just message them
-                // Let delegate handle things
-                if let d = delegate {
-                    d.actionButtonPressed(at: currentPageIndex, in: self, sender: sender)
-                    return
-                }
+        // Let delegate handle things
+        if let d = delegate {
+            d.actionButtonPressed(at: currentPageIndex, in: self, sender: sender)
+        }
+    }
 
+    internal func defaultActionForMedia(atIndex index: Int) {
+        // Only react when image has loaded
+        if let photo = mediaAtIndex(index: index) {
+            if numberOfMedias > 0 && photo.underlyingImage != nil {
                 // Show activity view controller
                 var items: [Any] = [Any]()
                 if let image = photo.underlyingImage {
@@ -2071,7 +2071,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     items.append(photo.caption)
                 }
                 activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-                
+
                 // Show
                 if let vc = self.activityViewController {
                     vc.completionWithItemsHandler = { [weak self] (activityType, completed, returnedItems, activityError) in
@@ -2084,7 +2084,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
                     self.present(vc, animated: true, completion: nil)
                 }
-                
+
                 // Keep controls hidden
                 setControlsHidden(hidden: false, animated: true, permanent: true)
             }
