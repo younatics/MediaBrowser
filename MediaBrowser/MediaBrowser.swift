@@ -128,7 +128,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var currentGridContentOffset = CGPoint(x: 0, y: CGFloat.greatestFiniteMagnitude)
     
     /// Set MediaBrowserDelegate for MediaBrowser
-    public var delegate: MediaBrowserDelegate?
+    public weak var delegate: MediaBrowserDelegate?
     
     /// Available zoom photos to fill
     public var zoomPhotosToFill = true
