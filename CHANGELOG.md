@@ -1,5 +1,8 @@
 # Updates
 
+## [v2.0.4](https://github.com/younatics/MediaBrowser/releases/tag/2.0.4)
+* Add PR
+
 ## [v2.0.1](https://github.com/younatics/MediaBrowser/releases/tag/2.0.1)
 * [request] Change Media access level to open #24
 
