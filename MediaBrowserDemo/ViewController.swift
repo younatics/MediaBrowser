@@ -27,7 +27,6 @@ class ViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.tintColor = UIColor.black
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +37,8 @@ class ViewController: UITableViewController {
 //        browser.setCurrentIndex(at: 1)
 //        
 //        browser.precachingEnabled = true
+
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         
         let font = UIFont.systemFont(ofSize: 12)
         segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: font],
@@ -192,6 +193,7 @@ extension ViewController {
         browser.autoPlayOnAppear = autoPlayOnAppear
         browser.cachingImageCount = 2
         browser.setCurrentIndex(at: 2)
+        browser.navigationBarBackgroundColor = .clear
 //        browser.placeholderImage = (image: #imageLiteral(resourceName: "mediaBrowserDefault_white"), isAppliedForAll: false)
         
         
