@@ -446,8 +446,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             self.rotating = false
             // Ensure nav bar isn't re-displayed
             if let navi = self.navigationController, self.areControlsHidden {
-                navi.isNavigationBarHidden = false
-                navi.navigationBar.alpha = 0
+                navi.isNavigationBarHidden = true
             }
         }
         
@@ -715,6 +714,15 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public override func willMove(toParentViewController parent: UIViewController?) {
         if parent != nil && hasBelongedToViewController {
             fatalError("MediaBrowser Instance Reuse")
+        }
+
+        if let navBar = navigationController?.navigationBar, didSavePreviousStateOfNavBar, parent == nil {
+            navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:previousNavigationBarTextColor ?? UIColor.black]
+            navBar.backgroundColor = previousNavigationBarBackgroundColor
+            if previousNavigationBarTintColor != nil {
+                navBar.barTintColor = previousNavigationBarTintColor
+            }
+            navBar.tintColor = previousNavigationBarTextColor
         }
     }
     
