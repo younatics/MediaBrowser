@@ -27,8 +27,9 @@ class ViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.tintColor = UIColor.black
-        
+        navigationController?.navigationBar.barTintColor = .white
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -446,8 +446,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             self.rotating = false
             // Ensure nav bar isn't re-displayed
             if let navi = self.navigationController, self.areControlsHidden {
-                navi.isNavigationBarHidden = false
-                navi.navigationBar.alpha = 0
+                navi.isNavigationBarHidden = true
             }
         }
         
@@ -715,6 +714,15 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public override func willMove(toParentViewController parent: UIViewController?) {
         if parent != nil && hasBelongedToViewController {
             fatalError("MediaBrowser Instance Reuse")
+        }
+
+        if let navBar = navigationController?.navigationBar, didSavePreviousStateOfNavBar, parent == nil {
+            navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:previousNavigationBarTextColor ?? UIColor.black]
+            navBar.backgroundColor = previousNavigationBarBackgroundColor
+            if previousNavigationBarTintColor != nil {
+                navBar.barTintColor = previousNavigationBarTintColor
+            }
+            navBar.tintColor = previousNavigationBarTextColor
         }
     }
     
@@ -1751,14 +1759,13 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Init grid controller
         gridController = MediaGridViewController()
         
-        if let gc = gridController, let navBar = navigationController?.navigationBar {
+        if let gc = gridController {
             let bounds = view.bounds
-            let naviHeight = navBar.frame.height + UIApplication.shared.statusBarFrame.height
             
             gc.initialContentOffset = currentGridContentOffset
             gc.browser = self
             gc.selectionMode = displaySelectionButtons
-            gc.view.frame = CGRect(x: 0.0, y: naviHeight, width: bounds.width, height: bounds.height - naviHeight)
+            gc.view.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
             gc.view.alpha = 0.0
             
             // Stop specific layout being triggered
