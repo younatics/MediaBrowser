@@ -1,5 +1,8 @@
 # Updates
 
+## [v2.0.5](https://github.com/younatics/MediaBrowser/releases/tag/2.0.5)
+* Improved UINavigatinController transistions
+
 ## [v2.0.4](https://github.com/younatics/MediaBrowser/releases/tag/2.0.4)
 * Add PR
 
