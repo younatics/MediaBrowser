@@ -85,12 +85,13 @@ open class Media: NSObject {
     }
     
     /// init with video URL
-    public convenience init(videoURL: URL) {
+    public convenience init(videoURL: URL, previewImageURL: URL? = nil) {
         self.init()
     
         self.videoURL = videoURL
         isVideo = true
-        emptyImage = true
+        emptyImage = (previewImageURL == nil) ? true : false
+        self.photoURL = previewImageURL
     }
 
     //MARK: - Video

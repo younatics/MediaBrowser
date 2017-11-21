@@ -208,13 +208,13 @@ class DemoData {
     class func multiVideos() -> [Media] {
         var photos = [Media]()
         
-        var photo = webMediaVideo(url: "https://player.vimeo.com/external/199627560.sd.mp4?s=4d51ea25ca083b46834911fc794db2e99e6075c7&profile_id=165")
+        var photo = webMediaVideo(url: "https://player.vimeo.com/external/199627560.sd.mp4?s=4d51ea25ca083b46834911fc794db2e99e6075c7&profile_id=165", previewImageURL: "https://i.vimeocdn.com/video/612917789_640x360.jpg")
         photos.append(photo)
         
-        photo = webMediaVideo(url: "https://player.vimeo.com/external/199224619.sd.mp4?s=801da27765a835ea41aa8b957553287d12661142&profile_id=165")
+        photo = webMediaVideo(url: "https://player.vimeo.com/external/199224619.sd.mp4?s=801da27765a835ea41aa8b957553287d12661142&profile_id=165", previewImageURL: "https://i.vimeocdn.com/video/612415426_640x360.jpg")
         photos.append(photo)
-        
-        photo = webMediaVideo(url: "https://player.vimeo.com/external/220312371.sd.mp4?s=67b5f45dfcc1a4e59a6e6739c34551e69a70844d&profile_id=165")
+
+        photo = webMediaVideo(url: "https://player.vimeo.com/external/220312371.sd.mp4?s=67b5f45dfcc1a4e59a6e6739c34551e69a70844d&profile_id=165", previewImageURL: "https://i.vimeocdn.com/video/638284371_640x360.jpg")
         photos.append(photo)
 
 
@@ -231,7 +231,7 @@ class DemoData {
         thumb = webMediaPhoto(url: "https://i.vimeocdn.com/video/612415426_640x360.jpg", caption: nil)
         thumb.isVideo = true
         thumbs.append(thumb)
-        
+
         thumb = webMediaPhoto(url: "https://i.vimeocdn.com/video/638284371_640x360.jpg", caption: nil)
         thumb.isVideo = true
         thumbs.append(thumb)
@@ -263,12 +263,12 @@ class DemoData {
         return photo
     }
     
-    class func webMediaVideo(url: String) -> Media {
+    class func webMediaVideo(url: String, previewImageURL: String? = nil) -> Media {
         guard let validUrl = URL(string: url) else {
             fatalError("Video is nil")
         }
-        
-        let photo = Media(videoURL: validUrl)
+
+        let photo = Media(videoURL: validUrl, previewImageURL: URL(string: previewImageURL ?? ""))
         return photo
     }
 }
