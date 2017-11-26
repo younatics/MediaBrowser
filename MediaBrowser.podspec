@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'MediaBrowser'
   s.version          = '2.0.5'
-  s.summary          = 'A simple iOS photo and video browser with optional grid view, captions and selections written in Swift3.'
+  s.summary          = 'A simple iOS photo and video browser with optional grid view, captions and selections written in Swift4.'
 
   s.description = <<-DESCRIPTION
 MediaBrowser can display one or more images or videos by providing either UIImage objects, PHAsset objects, or URLs to library assets, web images/videos or local files. MediaBrowser handles the downloading and caching of photos from the web seamlessly. Photos can be zoomed and panned, and optional (customisable) captions can be displayed. This can also be used to allow the user to select one or more photos using either the grid or main image view. Also, MediaBrowser use latest SDWebImage version for caching, motivated by MWPhotoBrowser            
@@ -38,6 +38,6 @@ MediaBrowser can display one or more images or videos by providing either UIImag
 
   s.dependency 'SDWebImage'
   s.dependency 'UICircularProgressRing', '~> 1.7.2'
-
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
   s.requires_arc = true
 end
