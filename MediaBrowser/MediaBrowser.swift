@@ -538,7 +538,10 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         } else {
             // We're falset showing the toolbar so try and show in top right
             if actionButton != nil {
-                navigationItem.rightBarButtonItem = actionButton!
+                // only show Action button on top right if this place is empty (no Done button there)
+                if nil == self.navigationItem.rightBarButtonItem {
+                	navigationItem.rightBarButtonItem = actionButton!
+                }
             }
             items.append(fixedSpace)
         }
@@ -1513,7 +1516,10 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             if gc.selectionMode {
                 self.title = NSLocalizedString("Select Photos", comment: "")
                 if let ab = actionButton {
-                    self.navigationItem.rightBarButtonItem = ab
+                    // only show Action button on top right if this place is empty (no Done button there)
+                    if nil == self.navigationItem.rightBarButtonItem {
+                    	self.navigationItem.rightBarButtonItem = ab
+                    }
                 }
             } else {
                 let photosText: String
