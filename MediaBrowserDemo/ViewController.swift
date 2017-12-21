@@ -44,6 +44,7 @@ class ViewController: UITableViewController {
         segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: font],
                                                 for: .normal)
         segmentedControl.addTarget(self, action: #selector(segmentControlChanged), for: .valueChanged)
+        segmentedControl.selectedSegmentIndex = 1
     }
 
     override func didReceiveMemoryWarning() {
@@ -151,7 +152,8 @@ extension ViewController {
             mediaArray = DemoData.photoSelection()
             thumbs = DemoData.photoSelection()
             
-            displayActionButton = false
+            //displayActionButton = false
+            displayMediaNavigationArrows = true
             displaySelectionButtons = true
             startOnGrid = indexPath.row == 4
             enableGrid = false
