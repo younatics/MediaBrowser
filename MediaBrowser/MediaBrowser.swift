@@ -1412,12 +1412,20 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     var frameForToolbar: CGRect {
         var height = CGFloat(44.0)
-        
+
         if view.bounds.height < 768.0 && view.bounds.height < view.bounds.width {
             height = 32.0
         }
-        
-        return CGRect(x: 0.0, y: view.bounds.size.height - height, width: view.bounds.size.width, height: height).integral
+
+        var safeAreaBottomInset = CGFloat(0)
+        if #available(iOS 11, *) {
+            safeAreaBottomInset = view.safeAreaInsets.bottom
+        }
+
+        let y = view.bounds.size.height - height - safeAreaBottomInset
+        let width = view.bounds.size.width
+
+        return CGRect(x: 0.0, y: y, width: width, height: height).integral
     }
 
     func frameForCaptionView(captionView: MediaCaptionView?, index: Int) -> CGRect {
