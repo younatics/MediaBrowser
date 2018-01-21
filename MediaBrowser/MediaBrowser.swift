@@ -1873,7 +1873,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         let animationDuration = CFTimeInterval(animated ? 0.35 : 0.0)
 
         // Navigation bar
-        self.navigationController?.setNavigationBarHidden(hidden, animated: true)
+        if viewIsActive {
+            self.navigationController?.setNavigationBarHidden(hidden, animated: true)
+        }
         
         // Status bar
         if !leaveStatusBarAlone {
