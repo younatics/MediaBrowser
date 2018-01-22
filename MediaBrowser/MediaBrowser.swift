@@ -150,6 +150,10 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     
     /// Start on Grid
     public var startOnGrid = false
+
+    /// If you observe flashes to the screen when you move between the grid
+    /// and the photos, set this to true to disable the transition animations.
+    public var disableGridAnimations = false
     
     /// Auto play video on appear
     public var autoPlayOnAppear = false
@@ -1807,15 +1811,25 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             
             // Animate grid in and photo scroller out
             gc.willMove(toParentViewController: self)
-            UIView.animate(
-                withDuration: animated ? 0.3 : 0,
-                animations: {
-                    gc.view.alpha = 1.0
-                    self.pagingScrollView.alpha = 0.0
-                },
-                completion: { finished in
-                    gc.didMove(toParentViewController: self)
-                })
+
+            let changes: () -> Void = {
+                gc.view.alpha = 1.0
+                self.pagingScrollView.alpha = 0.0
+            }
+
+            let completion: (Bool) -> Void = { _ in
+                gc.didMove(toParentViewController: self)
+            }
+
+            if disableGridAnimations {
+                changes()
+                completion(true)
+            } else {
+                UIView.animate(
+                    withDuration: animated ? 0.3 : 0,
+                    animations: changes,
+                    completion: completion)
+            }
         }
     }
 
@@ -1845,21 +1859,30 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             view.layoutSubviews()
             
             self.pagingScrollView.frame = self.frameForPagingScrollView
-            
-            // Animate, hide grid and show paging scroll view
-            UIView.animate(
-                withDuration: 0.3,
-                animations: {
-                    gc.view.alpha = 0.0
-                    self.pagingScrollView.alpha = 1.0
-                },
-                completion: { finished in
-                    gc.willMove(toParentViewController: nil)
-                    gc.view.removeFromSuperview()
-                    gc.removeFromParentViewController()
-            
-                    self.setControlsHidden(hidden: false, animated: true, permanent: false) // retrigger timer
-                })
+
+            let changes: () -> Void = {
+                gc.view.alpha = 0.0
+                self.pagingScrollView.alpha = 1.0
+            }
+
+            let completion: (Bool) -> Void = { _ in
+                gc.willMove(toParentViewController: nil)
+                gc.view.removeFromSuperview()
+                gc.removeFromParentViewController()
+
+                self.setControlsHidden(hidden: false, animated: true, permanent: false) // retrigger timer
+            }
+
+            if disableGridAnimations {
+                changes()
+                completion(true)
+            } else {
+                // Animate, hide grid and show paging scroll view
+                UIView.animate(
+                    withDuration: 0.3,
+                    animations: changes,
+                    completion: completion)
+            }
         }
     }
 
