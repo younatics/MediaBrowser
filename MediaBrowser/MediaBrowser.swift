@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MediaPlayer
+import AVKit
 import QuartzCore
 import SDWebImage
 
@@ -16,7 +16,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
 }
 
 /// MediaBrwoser is based in UIViewController, UIScrollViewDelegate and UIActionSheetDelegate. So you can push, or make modal.
-open class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDelegate {
+open class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDelegate, AVPlayerViewControllerDelegate {
     private let padding = CGFloat(0.0)
 
     // Data
@@ -59,9 +59,14 @@ open class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDe
     private var previousNavigationBarTintColor: UIColor?
     private var previousViewControllerBackButton: UIBarButtonItem?
     private var previousStatusBarStyle: UIStatusBarStyle = .lightContent
-    
+
     // Video
-    private var currentVideoPlayerViewController: MPMoviePlayerViewController?
+    lazy private var currentVideoPlayerViewController: AVPlayerViewController = {
+        if #available(iOS 9.0, *) {
+            $0.delegate = self
+        }
+        return $0
+    }(AVPlayerViewController())
     private var currentVideoIndex = 0
     private var currentVideoLoadingIndicator: UIActivityIndicatorView?
 
@@ -1638,7 +1643,7 @@ open class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDe
         }
         
         if index != Int.max {
-            if nil == currentVideoPlayerViewController {
+            if nil == currentVideoPlayerViewController.player {
                 playVideoAtIndex(index: index)
             }
         }
@@ -1670,74 +1675,94 @@ open class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDe
 
     func playVideo(videoURL: URL, atPhotoIndex index: Int) {
         // Setup player
-        currentVideoPlayerViewController = MPMoviePlayerViewController(contentURL: videoURL as URL!)
-        
-        if let player = currentVideoPlayerViewController {
-            player.moviePlayer.prepareToPlay()
-            player.moviePlayer.shouldAutoplay = true
-            player.moviePlayer.scalingMode = .aspectFit
-            player.modalTransitionStyle = .crossDissolve
-            
+        currentVideoPlayerViewController.player = AVPlayer(url: videoURL)
+
+        if #available(iOS 9.0, *) {
+            currentVideoPlayerViewController.allowsPictureInPicturePlayback = false
+        } else {
+            // Fallback on earlier versions
+        }
+
+        if let player = currentVideoPlayerViewController.player {
+
             do {
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
                 try AVAudioSession.sharedInstance().setActive(true)
             } catch let error as NSError {
                 print(error)
             }
-        
-            // Remove the movie player view controller from the "playback did finish" falsetification observers
-            // Observe ourselves so we can get it to use the crossfade transition
+
             NotificationCenter.default.removeObserver(
-                player,
-                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                object: player.moviePlayer)
-        
+                self,
+                name:NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                object: player.currentItem
+            )
+
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(videoFinishedCallback),
-                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                object: player.moviePlayer)
+                name:NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                object: player.currentItem
+            )
+
+            // Remove the movie player view controller from the "playback did finish" falsetification observers
+            // Observe ourselves so we can get it to use the crossfade transition
+//            NotificationCenter.default.removeObserver(
+//                player,
+//                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
+//                object: player.moviePlayer)
+//
+//            NotificationCenter.default.addObserver(
+//                self,
+//                selector: #selector(videoFinishedCallback),
+//                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
+//                object: player.moviePlayer)
 
             // Show
-            present(player, animated: true, completion: nil)
+            present(currentVideoPlayerViewController, animated: true, completion: {
+                player.play()
+            })
         }
     }
 
     @objc func videoFinishedCallback(notification: NSNotification) {
-        if let player = currentVideoPlayerViewController {
+        if let player = currentVideoPlayerViewController.player {
             // Remove observer
             NotificationCenter.default.removeObserver(
                 self,
-                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                object: player.moviePlayer)
-            
+                name:NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                object: player.currentItem
+            )
+
             // Clear up
             clearCurrentVideo()
             
             // Dismiss
-            if let errorObj = notification.userInfo?[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] {
-                let error = MPMovieFinishReason(rawValue: errorObj as! Int)
-            
-                if error == .playbackError {
-                    // Error occured so dismiss with a delay incase error was immediate and we need to wait to dismiss the VC
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + Double(1.0 * Double(NSEC_PER_SEC)), execute: {
-                        self.dismiss(animated: true, completion: nil)
-
-                    })
-                    
-                    return
-                }
-            }
+//            if let errorObj = notification.userInfo?[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] {
+//                let error = MPMovieFinishReason(rawValue: errorObj as! Int)
+//
+//                if error == .playbackError {
+//                    // Error occured so dismiss with a delay incase error was immediate and we need to wait to dismiss the VC
+//
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + Double(1.0 * Double(NSEC_PER_SEC)), execute: {
+//                        self.dismiss(animated: true, completion: nil)
+//
+//                    })
+//
+//                    return
+//                }
+//            }
         }
         
         dismiss(animated: true, completion: nil)
     }
 
     func clearCurrentVideo() {
-        if currentVideoPlayerViewController != nil {
+        if let player = currentVideoPlayerViewController.player {
+            player.replaceCurrentItem(with: nil)
+            currentVideoPlayerViewController.dismiss(animated: true, completion: nil)
             currentVideoLoadingIndicator?.removeFromSuperview()
-            currentVideoPlayerViewController = nil
+            currentVideoPlayerViewController.player = nil
             currentVideoLoadingIndicator = nil
             currentVideoIndex = Int.max
         }
