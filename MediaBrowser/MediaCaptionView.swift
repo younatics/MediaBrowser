@@ -69,11 +69,12 @@ public class MediaCaptionView: UIToolbar {
         isUserInteractionEnabled = false
         tintColor = nil
         barTintColor = nil
-        backgroundColor = UIColor.black
+        backgroundColor = UIColor.clear
 //        isOpaque = false
 //        isTranslucent = true
 //        clipsToBounds = true
         barStyle = .blackTranslucent
+        isTranslucent = true
 
         autoresizingMask =
             [.flexibleWidth, .flexibleTopMargin, .flexibleLeftMargin, .flexibleRightMargin]

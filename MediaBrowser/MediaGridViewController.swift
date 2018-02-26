@@ -90,8 +90,8 @@ class MediaGridViewController: UICollectionViewController, UICollectionViewDeleg
         return floorcgf(x: view.bounds.width / 93.0)
     }
     
-    var margin = CGFloat(5.0)
-    var gutter = CGFloat(5.0)
+    var margin = CGFloat(1.0)
+    var gutter = CGFloat(1.0)
     
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -155,7 +155,7 @@ class MediaGridViewController: UICollectionViewController, UICollectionViewDeleg
         }
         
         let value = CGFloat(floorf(Float((view.bounds.size.width - (columns - 1.0) * gutter - 2.0 * margin) / columns)))
-        
+
         return CGSize(width: value, height: value)
     }
     
