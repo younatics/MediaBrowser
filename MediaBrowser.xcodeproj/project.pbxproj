@@ -215,7 +215,6 @@
 				1906ABAD1F5F81110052DC3A /* Frameworks */,
 				1906ABAE1F5F81110052DC3A /* Headers */,
 				1906ABAF1F5F81110052DC3A /* Resources */,
-				E4339274C9FAA1618BEEEE8B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -235,7 +234,6 @@
 				1906ABBD1F5F812D0052DC3A /* Frameworks */,
 				1906ABBE1F5F812D0052DC3A /* Resources */,
 				369573559A2B17E91D9089BA /* [CP] Embed Pods Frameworks */,
-				9BD587AB7EFBDA9DDAD0ECB9 /* [CP] Copy Pods Resources */,
 				1937C44A1F5FE9EA00D8724E /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -351,36 +349,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MediaBrowserDemo/Pods-MediaBrowserDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9BD587AB7EFBDA9DDAD0ECB9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MediaBrowserDemo/Pods-MediaBrowserDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E4339274C9FAA1618BEEEE8B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MediaBrowser/Pods-MediaBrowser-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EE79300A0D923DC6E0E0A33D /* [CP] Check Pods Manifest.lock */ = {

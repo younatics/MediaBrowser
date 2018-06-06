@@ -122,7 +122,7 @@ extension ViewController {
         mediaArray = [Media]()
         thumbs = [Media]()
         
-        var displayActionButton = true
+        let displayActionButton = true
         var displaySelectionButtons = false
         var displayMediaNavigationArrows = false
         var enableGrid = true
