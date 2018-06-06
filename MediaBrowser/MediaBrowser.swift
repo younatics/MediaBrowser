@@ -10,6 +10,7 @@ import UIKit
 import MediaPlayer
 import QuartzCore
 import SDWebImage
+import AVKit
 
 func floorcgf(x: CGFloat) -> CGFloat {
     return CGFloat(floorf(Float(x)))
@@ -61,7 +62,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var previousStatusBarStyle: UIStatusBarStyle = .lightContent
     
     // Video
-    private var currentVideoPlayerViewController: MPMoviePlayerViewController?
+    private var currentVideoPlayerViewController: AVPlayerViewController?
     private var currentVideoIndex = 0
     private var currentVideoLoadingIndicator: UIActivityIndicatorView?
 
@@ -1669,35 +1670,35 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     func playVideo(videoURL: URL, atPhotoIndex index: Int) {
         // Setup player
-        currentVideoPlayerViewController = MPMoviePlayerViewController(contentURL: videoURL as URL!)
-        
-        if let player = currentVideoPlayerViewController {
-            player.moviePlayer.prepareToPlay()
-            player.moviePlayer.shouldAutoplay = true
-            player.moviePlayer.scalingMode = .aspectFit
+        currentVideoPlayerViewController = AVPlayerViewController()
+        let avPlayer = AVPlayer(url: videoURL)
+        avPlayer.play()
+
+        if let player  = currentVideoPlayerViewController {
+            player.player = avPlayer
             player.modalTransitionStyle = .crossDissolve
-            
             do {
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
                 try AVAudioSession.sharedInstance().setActive(true)
             } catch let error as NSError {
                 print(error)
             }
-        
+
             // Remove the movie player view controller from the "playback did finish" falsetification observers
             // Observe ourselves so we can get it to use the crossfade transition
             NotificationCenter.default.removeObserver(
                 player,
-                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                object: player.moviePlayer)
-        
+                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                object: avPlayer.currentItem)
+
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(videoFinishedCallback),
-                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                object: player.moviePlayer)
+                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                object: avPlayer.currentItem)
 
             // Show
+
             present(player, animated: true, completion: nil)
         }
     }
@@ -1707,8 +1708,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             // Remove observer
             NotificationCenter.default.removeObserver(
                 self,
-                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                object: player.moviePlayer)
+                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                object: player.player?.currentItem)
             
             // Clear up
             clearCurrentVideo()
