@@ -462,7 +462,7 @@ open class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDe
         super.viewWillTransition(to: size, with: coordinator)
     }
     
-    func performLayout() {
+    open func performLayout() {
         // Setup
         performingLayout = true
         let photos = numberOfMedias
@@ -1527,7 +1527,7 @@ open class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDe
 
     //MARK: - Navigation
 
-    func updateNavigation() {
+    open func updateNavigation() {
         // Title
         let medias = numberOfMedias
         if let gc = gridController {
