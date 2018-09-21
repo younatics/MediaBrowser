@@ -22,7 +22,6 @@
 		1906ABE61F5F83960052DC3A /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDB1F5F83960052DC3A /* UIImageExtension.swift */; };
 		1906ABE71F5F83960052DC3A /* MediaZoomingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDC1F5F83960052DC3A /* MediaZoomingScrollView.swift */; };
 		1906ABE91F5F9A100052DC3A /* MediaBrowser.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1906ABE81F5F9A100052DC3A /* MediaBrowser.xcassets */; };
-		1937C4461F5FE9EA00D8724E /* MediaBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1906ABB11F5F81110052DC3A /* MediaBrowser.framework */; };
 		1937C4471F5FE9EA00D8724E /* MediaBrowser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1906ABB11F5F81110052DC3A /* MediaBrowser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1937C44C1F610CBF00D8724E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1937C44B1F610CBF00D8724E /* Assets.xcassets */; };
 		1937C44E1F62243F00D8724E /* DemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1937C44D1F62243F00D8724E /* DemoData.swift */; };
@@ -35,7 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1937C4481F5FE9EA00D8724E /* PBXContainerItemProxy */ = {
+		FCC0BA742154FA7E00503933 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1906ABA81F5F81110052DC3A /* Project object */;
 			proxyType = 1;
@@ -107,7 +106,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1937C4461F5FE9EA00D8724E /* MediaBrowser.framework in Frameworks */,
 				786961890EA7C05AB0704224 /* Pods_MediaBrowserDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,7 +213,6 @@
 				1906ABAD1F5F81110052DC3A /* Frameworks */,
 				1906ABAE1F5F81110052DC3A /* Headers */,
 				1906ABAF1F5F81110052DC3A /* Resources */,
-				E4339274C9FAA1618BEEEE8B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -235,13 +232,12 @@
 				1906ABBD1F5F812D0052DC3A /* Frameworks */,
 				1906ABBE1F5F812D0052DC3A /* Resources */,
 				369573559A2B17E91D9089BA /* [CP] Embed Pods Frameworks */,
-				9BD587AB7EFBDA9DDAD0ECB9 /* [CP] Copy Pods Resources */,
 				1937C44A1F5FE9EA00D8724E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1937C4491F5FE9EA00D8724E /* PBXTargetDependency */,
+				FCC0BA752154FA7E00503933 /* PBXTargetDependency */,
 			);
 			name = MediaBrowserDemo;
 			productName = MediaBrowserDemo;
@@ -255,7 +251,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Seungyoun Yi";
 				TargetAttributes = {
 					1906ABB01F5F81110052DC3A = {
@@ -338,49 +334,18 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MediaBrowserDemo/Pods-MediaBrowserDemo-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/MediaBrowser/MediaBrowser.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework",
+				"${BUILT_PRODUCTS_DIR}/MediaBrowser/MediaBrowser.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MediaBrowser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICircularProgressRing.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MediaBrowserDemo/Pods-MediaBrowserDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9BD587AB7EFBDA9DDAD0ECB9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MediaBrowserDemo/Pods-MediaBrowserDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E4339274C9FAA1618BEEEE8B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MediaBrowser/Pods-MediaBrowser-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EE79300A0D923DC6E0E0A33D /* [CP] Check Pods Manifest.lock */ = {
@@ -434,10 +399,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1937C4491F5FE9EA00D8724E /* PBXTargetDependency */ = {
+		FCC0BA752154FA7E00503933 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1906ABB01F5F81110052DC3A /* MediaBrowser */;
-			targetProxy = 1937C4481F5FE9EA00D8724E /* PBXContainerItemProxy */;
+			targetProxy = FCC0BA742154FA7E00503933 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -476,6 +441,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -483,6 +449,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -538,6 +505,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -545,6 +513,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -589,10 +558,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = MediaBrowser/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -601,7 +567,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -616,10 +582,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = MediaBrowser/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -627,7 +590,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seungyounyi.MediaBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -643,7 +606,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seungyounyi.MediaBrowserDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -659,7 +622,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seungyounyi.MediaBrowserDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
