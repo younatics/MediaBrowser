@@ -46,7 +46,12 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         loadingIndicator.isUserInteractionEnabled = false
         loadingIndicator.autoresizingMask =
             [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin, .flexibleRightMargin]
-        
+        loadingIndicator.ringStyle = .ontop
+        loadingIndicator.innerRingColor = UIColor.white
+        loadingIndicator.outerRingColor = UIColor.gray
+        loadingIndicator.innerRingWidth = 1
+        loadingIndicator.outerRingWidth = 1
+
         addSubview(loadingIndicator)
         
         // Listen progress notifications
