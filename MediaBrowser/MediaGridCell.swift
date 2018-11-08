@@ -21,7 +21,7 @@ class MediaGridCell: UICollectionViewCell {
     var loadingError: UIImageView?
     let selectedButton = UIButton(type: .custom)
     
-    let loadingIndicator = UICircularProgressRingView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+    let loadingIndicator = UICircularProgressRing(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,7 +56,7 @@ class MediaGridCell: UICollectionViewCell {
         addSubview(videoIndicator)
         
         // Selection button
-        selectedButton.contentMode = UIViewContentMode.topRight
+        selectedButton.contentMode = UIView.ContentMode.topRight
         selectedButton.adjustsImageWhenHighlighted = false
         
         selectedButton.setImage(
@@ -121,7 +121,8 @@ class MediaGridCell: UICollectionViewCell {
                     } else {
                         selectedButton.setImage(UIImage(named: "ImageSelectedSmallOn", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .selected)
                     }
-                    
+
+                    loadingIndicator.ringStyle = .ontop
                     loadingIndicator.innerRingColor = browser.loadingIndicatorInnerRingColor
                     loadingIndicator.outerRingColor = browser.loadingIndicatorOuterRingColor
                     loadingIndicator.innerRingWidth = browser.loadingIndicatorInnerRingWidth
@@ -163,7 +164,7 @@ class MediaGridCell: UICollectionViewCell {
         photo = nil
         mwGridController = nil
         imageView.image = self.placeholderImage
-        loadingIndicator.setProgress(value: 0.0, animationDuration: 1)
+        loadingIndicator.startProgress(to: 0.0, duration: 1)
         selectedButton.isHidden = true
         hideImageFailure()
         
@@ -253,7 +254,7 @@ class MediaGridCell: UICollectionViewCell {
     }
     
     func showLoadingIndicator() {
-        loadingIndicator.setProgress(value: 0.0, animationDuration: 1)
+        loadingIndicator.startProgress(to: 0.0, duration: 1)
         loadingIndicator.isHidden = false
         
         hideImageFailure()
@@ -301,7 +302,7 @@ class MediaGridCell: UICollectionViewCell {
             let dict = notification.object as! [String : AnyObject]
             
             if let photoWithProgress = dict["photo"] as? Media, let progress = dict["progress"] as? CGFloat, let p = self.photo, photoWithProgress.equals(photo: p) {
-                self.loadingIndicator.setProgress(value: progress * 100, animationDuration: 0.1)
+                self.loadingIndicator.startProgress(to: progress * 100, duration: 0.1)
             }
         }
     }

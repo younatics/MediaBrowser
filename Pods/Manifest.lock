@@ -1,0 +1,29 @@
+PODS:
+  - MediaBrowser (2.1.1):
+    - SDWebImage
+    - UICircularProgressRing
+  - SDWebImage (4.4.2):
+    - SDWebImage/Core (= 4.4.2)
+  - SDWebImage/Core (4.4.2)
+  - UICircularProgressRing (4.1.0)
+
+DEPENDENCIES:
+  - MediaBrowser (from `./`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SDWebImage
+    - UICircularProgressRing
+
+EXTERNAL SOURCES:
+  MediaBrowser:
+    :path: "./"
+
+SPEC CHECKSUMS:
+  MediaBrowser: d9f30f4f0397785f370b1956d01551de91d80a32
+  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  UICircularProgressRing: 5a32c01f54474571b1e66e8fa050c0f83d6d981b
+
+PODFILE CHECKSUM: 4ed25a2f6f75083ef5b5fdd841cb8158670d0492
+
+COCOAPODS: 1.6.0.beta.1

@@ -56,7 +56,7 @@ public class MediaCaptionView: UIToolbar {
             textSize = text.boundingRect(
                 with: CGSize(width: size.width - labelPadding * 2.0, height: maxHeight),
                 options: .usesLineFragmentOrigin,
-                attributes: [NSAttributedStringKey.font : label.font],
+                attributes: [NSAttributedString.Key.font : label.font],
                 context: nil).size
         } else {
             textSize = CGSize(width: 0, height: 0)
@@ -69,11 +69,12 @@ public class MediaCaptionView: UIToolbar {
         isUserInteractionEnabled = false
         tintColor = nil
         barTintColor = nil
-        backgroundColor = UIColor.black
+        backgroundColor = UIColor.clear
 //        isOpaque = false
 //        isTranslucent = true
 //        clipsToBounds = true
         barStyle = .blackTranslucent
+        isTranslucent = true
 
         autoresizingMask =
             [.flexibleWidth, .flexibleTopMargin, .flexibleLeftMargin, .flexibleRightMargin]
