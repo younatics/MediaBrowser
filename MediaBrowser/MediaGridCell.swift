@@ -121,7 +121,8 @@ class MediaGridCell: UICollectionViewCell {
                     } else {
                         selectedButton.setImage(UIImage(named: "ImageSelectedSmallOn", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .selected)
                     }
-                    
+
+                    loadingIndicator.ringStyle = .ontop
                     loadingIndicator.innerRingColor = browser.loadingIndicatorInnerRingColor
                     loadingIndicator.outerRingColor = browser.loadingIndicatorOuterRingColor
                     loadingIndicator.innerRingWidth = browser.loadingIndicatorInnerRingWidth
