@@ -79,7 +79,7 @@ class MediaGridViewController: UICollectionViewController, UICollectionViewDeleg
             }
             
             if !currentVisible {
-                collectionView!.scrollToItem(at: currentPhotoIndexPath, at: UICollectionViewScrollPosition.left, animated: false)
+                collectionView!.scrollToItem(at: currentPhotoIndexPath, at: UICollectionView.ScrollPosition.left, animated: false)
             }
         }
     }
@@ -90,8 +90,8 @@ class MediaGridViewController: UICollectionViewController, UICollectionViewDeleg
         return floorcgf(x: view.bounds.width / 93.0)
     }
     
-    var margin = CGFloat(5.0)
-    var gutter = CGFloat(5.0)
+    var margin = CGFloat(1.0)
+    var gutter = CGFloat(1.0)
     
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -169,6 +169,6 @@ class MediaGridViewController: UICollectionViewController, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let margin = self.margin
-        return UIEdgeInsetsMake(margin, margin, margin, margin)
+        return UIEdgeInsets.init(top: margin, left: margin, bottom: margin, right: margin)
     }
 }

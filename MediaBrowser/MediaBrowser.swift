@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MediaPlayer
+import AVKit
 import QuartzCore
 import SDWebImage
 
@@ -16,8 +16,8 @@ func floorcgf(x: CGFloat) -> CGFloat {
 }
 
 /// MediaBrwoser is based in UIViewController, UIScrollViewDelegate and UIActionSheetDelegate. So you can push, or make modal.
-public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDelegate {
-    private let padding = CGFloat(10.0)
+open class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDelegate, AVPlayerViewControllerDelegate {
+    private let padding = CGFloat(0.0)
 
     // Data
     private var mediaCount = -1
@@ -59,9 +59,14 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var previousNavigationBarTintColor: UIColor?
     private var previousViewControllerBackButton: UIBarButtonItem?
     private var previousStatusBarStyle: UIStatusBarStyle = .lightContent
-    
+
     // Video
-    private var currentVideoPlayerViewController: MPMoviePlayerViewController?
+    lazy private var currentVideoPlayerViewController: AVPlayerViewController = {
+        if #available(iOS 9.0, *) {
+            $0.delegate = self
+        }
+        return $0
+    }(AVPlayerViewController())
     private var currentVideoIndex = 0
     private var currentVideoLoadingIndicator: UIActivityIndicatorView?
 
@@ -321,7 +326,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
     }
     /// didReceiveMemoryWarning
-    public override func didReceiveMemoryWarning() {
+    open override func didReceiveMemoryWarning() {
         // Release any cached data, images, etc that aren't in use.
         releaseAllUnderlyingPhotos(preserveCurrent: true)
         recycledPages.removeAll(keepingCapacity: false)
@@ -333,7 +338,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     //MARK: - View Loading
 
     /// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         // Validate grid settings
         if startOnGrid {
             enableGrid = true
@@ -369,11 +374,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         toolbar.barTintColor = toolbarBarTintColor
         toolbar.backgroundColor = toolbarBackgroundColor
         toolbar.alpha = toolbarAlpha
-        toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
-        toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .compact)
-        toolbar.barStyle = .default
+        toolbar.barStyle = .blackTranslucent
+        toolbar.isTranslucent = true
         toolbar.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
-        
+
+
         // Toolbar Items
         if displayMediaNavigationArrows {
             let arrowPathFormat = "UIBarButtonItemArrow"
@@ -388,20 +393,20 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             
             previousButton = UIBarButtonItem(
                 image: previousButtonImage,
-                style: UIBarButtonItemStyle.plain,
+                style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(MediaBrowser.gotoPreviousPage))
             
             nextButton = UIBarButtonItem(
                 image: nextButtonImage,
-                style: UIBarButtonItemStyle.plain,
+                style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(MediaBrowser.gotoNextPage))
         }
         
         if displayActionButton {
             actionButton = UIBarButtonItem(
-                barButtonSystemItem: UIBarButtonSystemItem.action,
+                barButtonSystemItem: UIBarButtonItem.SystemItem.action,
                 target: self,
                 action: #selector(actionButtonPressed(_:)))
         }
@@ -423,7 +428,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
      - Parameter size: size
      - Parameter coordinator: UIViewControllerTransitionCoordinator
      */
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 
         // Remember page index before rotation
         pageIndexBeforeRotation = currentPageIndex
@@ -471,10 +476,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             if navi.viewControllers.count > 0 && navi.viewControllers[0] == self {
                 // We're first on stack so show done button
                 doneButton = UIBarButtonItem(
-                    barButtonSystemItem: UIBarButtonSystemItem.done,
+                    title: NSLocalizedString("Done", comment: ""),
+                    style: .done,
                     target: self,
                     action: #selector(doneButtonPressed))
-                
+
                 // Set appearance
                 if let done = doneButton {
                     done.setBackgroundImage(nil, for: .normal, barMetrics: .default)
@@ -601,7 +607,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
      
      - Parameter animated: Bool
      */
-    public override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         // Super
         super.viewWillAppear(animated)
         
@@ -653,7 +659,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
      
      - Parameter animated: Bool
      */
-    public override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewIsActive = true
         
@@ -674,7 +680,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
      
      - Parameter animated: Bool
      */
-    public override func viewWillDisappear(_ animated: Bool) {
+    open override func viewWillDisappear(_ animated: Bool) {
         // Detect if rotation occurs while we're presenting a modal
         pageIndexBeforeRotation = currentPageIndex
         
@@ -718,13 +724,13 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
      
      - Parameter parent: UIViewController
      */
-    public override func willMove(toParentViewController parent: UIViewController?) {
+    open override func willMove(toParent parent: UIViewController?) {
         if parent != nil && hasBelongedToViewController {
             fatalError("MediaBrowser Instance Reuse")
         }
 
         if let navBar = navigationController?.navigationBar, didSavePreviousStateOfNavBar, parent == nil {
-            navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:previousNavigationBarTextColor ?? UIColor.black]
+            navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:previousNavigationBarTextColor ?? UIColor.black]
             navBar.backgroundColor = previousNavigationBarBackgroundColor
             if previousNavigationBarTintColor != nil {
                 navBar.barTintColor = previousNavigationBarTintColor
@@ -738,7 +744,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
      
      - Parameter parent: UIViewController
      */
-    public override func didMove(toParentViewController parent: UIViewController?) {
+    open override func didMove(toParent parent: UIViewController?) {
         if nil == parent {
             hasBelongedToViewController = true
         }
@@ -750,7 +756,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         navigationController?.setNavigationBarHidden(false, animated: animated)
     
         if let navBar = navigationController?.navigationBar {
-            navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:navigationBarTextColor]
+            navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:navigationBarTextColor]
             navBar.backgroundColor = navigationBarBackgroundColor
             navBar.tintColor = navigationBarTextColor
             navBar.barTintColor = navigationBarTintColor
@@ -778,7 +784,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             navi.setNavigationBarHidden(previousNavigationBarHidden, animated: animated)
             
             let navBar = navi.navigationBar
-            navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:previousNavigationBarTextColor ?? UIColor.black]
+            navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:previousNavigationBarTextColor ?? UIColor.black]
             navBar.backgroundColor = previousNavigationBarBackgroundColor
             navBar.tintColor = previousNavigationBarTextColor
             navBar.isTranslucent = previousNavigationBarTranslucent
@@ -797,7 +803,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     //MARK: - Layout
     /// viewWillLayoutSubviews
-    public override func viewWillLayoutSubviews() {
+    open override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         layoutVisiblePages()
     }
@@ -865,7 +871,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     //MARK: - Rotation
     /// supported interface orientations
-    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .all
     }
 
@@ -874,7 +880,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         return currentPageIndex
     }
 
-    func reloadData() {
+    open func reloadData() {
         // Reset
         mediaCount = -1
         
@@ -1637,7 +1643,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
         if index != Int.max {
-            if nil == currentVideoPlayerViewController {
+            if nil == currentVideoPlayerViewController.player {
                 playVideoAtIndex(index: index)
             }
         }
@@ -1669,74 +1675,104 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     func playVideo(videoURL: URL, atPhotoIndex index: Int) {
         // Setup player
-        currentVideoPlayerViewController = MPMoviePlayerViewController(contentURL: videoURL as URL!)
-        
-        if let player = currentVideoPlayerViewController {
-            player.moviePlayer.prepareToPlay()
-            player.moviePlayer.shouldAutoplay = true
-            player.moviePlayer.scalingMode = .aspectFit
-            player.modalTransitionStyle = .crossDissolve
-            
+
+        if let accessToken = delegate?.accessToken(for: videoURL) {
+            let headerFields: [String: String] = ["Authorization": accessToken]
+            let urlAsset = AVURLAsset(url: videoURL, options: ["AVURLAssetHTTPHeaderFieldsKey": headerFields])
+            let playerItem = AVPlayerItem(asset: urlAsset)
+            currentVideoPlayerViewController.player = AVPlayer(playerItem: playerItem)
+        } else {
+            currentVideoPlayerViewController.player = AVPlayer(url: videoURL)
+        }
+
+        if #available(iOS 9.0, *) {
+            currentVideoPlayerViewController.allowsPictureInPicturePlayback = false
+        } else {
+            // Fallback on earlier versions
+        }
+
+        if let player = currentVideoPlayerViewController.player {
+
             do {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+                if #available(iOS 10.0, *) {
+                    try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+                }
                 try AVAudioSession.sharedInstance().setActive(true)
             } catch let error as NSError {
                 print(error)
             }
-        
-            // Remove the movie player view controller from the "playback did finish" falsetification observers
-            // Observe ourselves so we can get it to use the crossfade transition
+
             NotificationCenter.default.removeObserver(
-                player,
-                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                object: player.moviePlayer)
-        
+                self,
+                name:NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                object: player.currentItem
+            )
+
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(videoFinishedCallback),
-                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                object: player.moviePlayer)
+                name:NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                object: player.currentItem
+            )
+
+            // Remove the movie player view controller from the "playback did finish" falsetification observers
+            // Observe ourselves so we can get it to use the crossfade transition
+//            NotificationCenter.default.removeObserver(
+//                player,
+//                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
+//                object: player.moviePlayer)
+//
+//            NotificationCenter.default.addObserver(
+//                self,
+//                selector: #selector(videoFinishedCallback),
+//                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
+//                object: player.moviePlayer)
 
             // Show
-            present(player, animated: true, completion: nil)
+            present(currentVideoPlayerViewController, animated: true, completion: {
+                player.play()
+            })
         }
     }
 
     @objc func videoFinishedCallback(notification: NSNotification) {
-        if let player = currentVideoPlayerViewController {
+        if let player = currentVideoPlayerViewController.player {
             // Remove observer
             NotificationCenter.default.removeObserver(
                 self,
-                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                object: player.moviePlayer)
-            
+                name:NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                object: player.currentItem
+            )
+
             // Clear up
             clearCurrentVideo()
             
             // Dismiss
-            if let errorObj = notification.userInfo?[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] {
-                let error = MPMovieFinishReason(rawValue: errorObj as! Int)
-            
-                if error == .playbackError {
-                    // Error occured so dismiss with a delay incase error was immediate and we need to wait to dismiss the VC
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + Double(1.0 * Double(NSEC_PER_SEC)), execute: {
-                        self.dismiss(animated: true, completion: nil)
-
-                    })
-                    
-                    return
-                }
-            }
+//            if let errorObj = notification.userInfo?[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] {
+//                let error = MPMovieFinishReason(rawValue: errorObj as! Int)
+//
+//                if error == .playbackError {
+//                    // Error occured so dismiss with a delay incase error was immediate and we need to wait to dismiss the VC
+//
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + Double(1.0 * Double(NSEC_PER_SEC)), execute: {
+//                        self.dismiss(animated: true, completion: nil)
+//
+//                    })
+//
+//                    return
+//                }
+//            }
         }
         
         dismiss(animated: true, completion: nil)
     }
 
     func clearCurrentVideo() {
-        if currentVideoPlayerViewController != nil {
+        if let player = currentVideoPlayerViewController.player {
+            player.replaceCurrentItem(with: nil)
+            currentVideoPlayerViewController.dismiss(animated: true, completion: nil)
             currentVideoLoadingIndicator?.removeFromSuperview()
-            currentVideoPlayerViewController = nil
+            currentVideoPlayerViewController.player = nil
             currentVideoLoadingIndicator = nil
             currentVideoIndex = Int.max
         }
@@ -1790,7 +1826,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             skipNextPagingScrollViewPositioning = true
             
             // Add as a child view controller
-            addChildViewController(gc)
+            addChild(gc)
             view.addSubview(gc.view)
         
             // Perform any adjustments
@@ -1810,7 +1846,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             setControlsHidden(hidden: false, animated: true, permanent: true)
             
             // Animate grid in and photo scroller out
-            gc.willMove(toParentViewController: self)
+            gc.willMove(toParent: self)
 
             let changes: () -> Void = {
                 gc.view.alpha = 1.0
@@ -1818,7 +1854,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             }
 
             let completion: (Bool) -> Void = { _ in
-                gc.didMove(toParentViewController: self)
+                gc.didMove(toParent: self)
             }
 
             if disableGridAnimations {
@@ -1866,9 +1902,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             }
 
             let completion: (Bool) -> Void = { _ in
-                gc.willMove(toParentViewController: nil)
+                gc.willMove(toParent: nil)
                 gc.view.removeFromSuperview()
-                gc.removeFromParentViewController()
+                gc.removeFromParent()
 
                 self.setControlsHidden(hidden: false, animated: true, permanent: false) // retrigger timer
             }
@@ -1904,10 +1940,10 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         let animationDuration = CFTimeInterval(animated ? 0.35 : 0.0)
 
         // Navigation bar
-        if viewIsActive {
+        if viewIsActive, !hidden {
             self.navigationController?.setNavigationBarHidden(hidden, animated: true)
         }
-        
+
         // Status bar
         if !leaveStatusBarAlone {
             // Hide status bar
@@ -1920,11 +1956,16 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 // View controller based so animate away
                 statusBarShouldBeHidden = hidden
                 UIView.animate(
-                    withDuration: animationDuration,
+                    withDuration: hidden ? 0.1 : animationDuration,
                     animations: {
                         self.setNeedsStatusBarAppearanceUpdate()
                 })
             }
+        }
+
+        // Navigation bar
+        if viewIsActive, hidden {
+            self.navigationController?.setNavigationBarHidden(hidden, animated: true)
         }
         
         // Toolbar, nav bar and captions
@@ -1988,7 +2029,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     /// prefersStatusBarHidden
-    public override var prefersStatusBarHidden: Bool {
+    open override var prefersStatusBarHidden: Bool {
         if !leaveStatusBarAlone {
             return statusBarShouldBeHidden
         }
@@ -1997,11 +2038,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
     
     /// preferredStatusBarUpdateAnimation
-    public override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    open override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .slide
     }
 
-    public override var preferredStatusBarStyle: UIStatusBarStyle {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
         return self.statusBarStyle
     }
 

@@ -101,6 +101,11 @@ public protocol MediaBrowserDelegate: class {
      - Returns: Optional CGSize
      */
     func gridCellSize() -> CGSize?
+
+    /**
+     Optional protocol for access token
+     */
+    func accessToken(for url: URL?) -> String?
 }
 
 public extension MediaBrowserDelegate {
@@ -123,4 +128,6 @@ public extension MediaBrowserDelegate {
     func title(for mediaBrowser: MediaBrowser, at index: Int) -> String? { return nil }
     
     func gridCellSize() -> CGSize? { return nil }
+
+    func accessToken(for url: URL?) -> String? { return nil }
 }
