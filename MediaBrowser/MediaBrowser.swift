@@ -72,6 +72,9 @@ open class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDe
 
     var activityViewController: UIActivityViewController?
 
+    /// Paging Scroll View Background Color for MediaBrowser
+    public var scrollViewBackgroundColor = UIColor.black
+
     /// UINavigationBar Translucent for MediaBrowser
     public var navigationBarTranslucent = true
     
@@ -364,7 +367,7 @@ open class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDe
         pagingScrollView.delegate = self
         pagingScrollView.showsHorizontalScrollIndicator = false
         pagingScrollView.showsVerticalScrollIndicator = false
-        pagingScrollView.backgroundColor = UIColor.black
+        pagingScrollView.backgroundColor = scrollViewBackgroundColor
         pagingScrollView.contentSize = contentSizeForPagingScrollView()
         view.addSubview(pagingScrollView)
         
