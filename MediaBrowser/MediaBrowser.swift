@@ -83,7 +83,10 @@ open class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDe
     
     /// UINavigationBar Tint Color for MediaBrowser
     public var navigationBarTintColor = UIColor.black.withAlphaComponent(0.5)
-    
+
+    /// UINavigationBar Style for MediaBrowser
+    public var navigationBarStyle = UIBarStyle.black
+
     /// UIStatusBarStyle for MediaBrowser
     public var statusBarStyle: UIStatusBarStyle = .lightContent
     
@@ -762,7 +765,7 @@ open class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheetDe
             navBar.barTintColor = navigationBarTintColor
             navBar.shadowImage = nil
             navBar.isTranslucent = navigationBarTranslucent
-            navBar.barStyle = .black
+            navBar.barStyle = navigationBarStyle
         }
     }
 
