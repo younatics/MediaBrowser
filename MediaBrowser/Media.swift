@@ -18,7 +18,8 @@ let MEDIA_PROGRESS_NOTIFICATION  = "MEDIA_PROGRESS_NOTIFICATION"
 var PHInvalidImageRequestID = PHImageRequestID(0)
 
 /// Media is object for photo and video
-public class Media: NSObject {
+@objcMembers
+open class Media: NSObject {
     
     /// caption
     public var caption = ""
@@ -84,12 +85,13 @@ public class Media: NSObject {
     }
     
     /// init with video URL
-    public convenience init(videoURL: URL) {
+    public convenience init(videoURL: URL, previewImageURL: URL? = nil) {
         self.init()
     
         self.videoURL = videoURL
         isVideo = true
-        emptyImage = true
+        emptyImage = (previewImageURL == nil) ? true : false
+        self.photoURL = previewImageURL
     }
 
     //MARK: - Video
@@ -191,7 +193,7 @@ public class Media: NSObject {
     private func performLoadUnderlyingImageAndNotifyWithWebURL(url: URL) {
         operation = SDWebImageManager.shared().loadImage(with: url, options: [], progress: { (receivedSize, expectedSize, targetURL) in
             let dict = [
-            "progress" : CGFloat(receivedSize)/CGFloat(expectedSize),
+            "progress" : min(1.0, CGFloat(receivedSize)/CGFloat(expectedSize)),
             "photo" : self
             ] as [String : Any]
             

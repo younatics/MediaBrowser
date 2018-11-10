@@ -27,8 +27,9 @@ class ViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.tintColor = UIColor.black
-        
+        navigationController?.navigationBar.barTintColor = .white
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,9 +41,10 @@ class ViewController: UITableViewController {
 //        browser.precachingEnabled = true
         
         let font = UIFont.systemFont(ofSize: 12)
-        segmentedControl.setTitleTextAttributes([NSFontAttributeName: font],
+        segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: font],
                                                 for: .normal)
         segmentedControl.addTarget(self, action: #selector(segmentControlChanged), for: .valueChanged)
+        segmentedControl.selectedSegmentIndex = 1
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,7 +64,7 @@ class ViewController: UITableViewController {
         return .none
     }
     
-    func segmentControlChanged() {
+    @objc func segmentControlChanged() {
         self.tableView.reloadData()
     }
 }
@@ -120,7 +122,7 @@ extension ViewController {
         mediaArray = [Media]()
         thumbs = [Media]()
         
-        var displayActionButton = true
+        let displayActionButton = true
         var displaySelectionButtons = false
         var displayMediaNavigationArrows = false
         var enableGrid = true
@@ -150,7 +152,8 @@ extension ViewController {
             mediaArray = DemoData.photoSelection()
             thumbs = DemoData.photoSelection()
             
-            displayActionButton = false
+            //displayActionButton = false
+            displayMediaNavigationArrows = true
             displaySelectionButtons = true
             startOnGrid = indexPath.row == 4
             enableGrid = false
