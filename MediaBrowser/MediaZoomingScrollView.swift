@@ -33,13 +33,13 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         tapView = MediaTapDetectingView(frame: bounds)
         tapView.tapDelegate = self
         tapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        tapView.backgroundColor = UIColor.black
+        tapView.backgroundColor = .clear
         addSubview(tapView)
         
         // Image view
         photoImageView.tapDelegate = self
         photoImageView.contentMode = .center
-        photoImageView.backgroundColor = UIColor.black
+        photoImageView.backgroundColor = .clear
         addSubview(photoImageView)
         
         // Loading indicator
