@@ -9,7 +9,7 @@
 import UIKit
 
 /// Required delegate to use MediaBrowser
-public protocol MediaBrowserDelegate: class {
+@objc public protocol MediaBrowserDelegate: class {
     //MARK: Required methods
     
     /**
@@ -100,7 +100,7 @@ public protocol MediaBrowserDelegate: class {
      Optional protocol for grid cells resizing
      - Returns: Optional CGSize
      */
-    func gridCellSize() -> CGSize?
+    func gridCellSize() -> CGSize
 
     /**
      Optional protocol for access token
@@ -127,7 +127,7 @@ public extension MediaBrowserDelegate {
     
     func title(for mediaBrowser: MediaBrowser, at index: Int) -> String? { return nil }
     
-    func gridCellSize() -> CGSize? { return nil }
+    func gridCellSize() -> CGSize { return CGSize(width: 128, height: 128) }
 
     func accessToken(for url: URL?) -> String? { return nil }
 }
