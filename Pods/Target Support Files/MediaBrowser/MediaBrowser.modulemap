@@ -1,6 +1,0 @@
-framework module MediaBrowser {
-  umbrella header "MediaBrowser-umbrella.h"
-
-  export *
-  module * { export * }
-}
