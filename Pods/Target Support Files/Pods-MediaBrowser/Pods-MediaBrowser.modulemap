@@ -1,6 +1,0 @@
-framework module Pods_MediaBrowser {
-  umbrella header "Pods-MediaBrowser-umbrella.h"
-
-  export *
-  module * { export * }
-}
