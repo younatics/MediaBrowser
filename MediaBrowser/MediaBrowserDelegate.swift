@@ -9,7 +9,8 @@
 import UIKit
 
 /// Required delegate to use MediaBrowser
-public protocol MediaBrowserDelegate: NSObject {
+@objc
+public protocol MediaBrowserDelegate {
     //MARK: Required methods
     
     /**
