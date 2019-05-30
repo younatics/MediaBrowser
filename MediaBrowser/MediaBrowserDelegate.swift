@@ -18,7 +18,7 @@ public protocol MediaBrowserDelegate {
      
      - Parameter mediaBrowser: MediaBrowser
      */
-    func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int
+    @objc func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int
     
     /**
      Required protocol to use MediaBrowser. return media
@@ -26,7 +26,7 @@ public protocol MediaBrowserDelegate {
      - Parameter mediaBrowser: MediaBrowser
      - Parameter index: Int
      */
-    func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media
+    @objc func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media
     
     //MARK: Optional methods
     
@@ -35,7 +35,7 @@ public protocol MediaBrowserDelegate {
      
      - Parameter mediaBrowser: MediaBrowser
      */
-    func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser)
+    @objc func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser)
 
     /**
      Optional protocol to show thumbnail. return media.
@@ -44,7 +44,7 @@ public protocol MediaBrowserDelegate {
      - Parameter mediaBrowser: MediaBrowser
      - Parameter index: Int
      */
-    func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media
+    @objc func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media
 
     /**
      Optional protocol to show captionView. return MediaCaptionView.
@@ -52,7 +52,7 @@ public protocol MediaBrowserDelegate {
      - Parameter mediaBrowser: MediaBrowser
      - Parameter index: Int
      */
-    func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView?
+    @objc func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView?
     
     /**
      Optional protocol when need callback
@@ -60,7 +60,7 @@ public protocol MediaBrowserDelegate {
      - Parameter index: Int
      - Parameter mediaBrowser: MediaBrowser
      */
-    func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser)
+    @objc func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser)
     
     /**
      Optional protocol when need callback about action button
@@ -68,7 +68,7 @@ public protocol MediaBrowserDelegate {
      - Parameter photoIndex: Int
      - Parameter mediaBrowser: MediaBrowser
      */
-    func actionButtonPressed(at photoIndex: Int, in mediaBrowser: MediaBrowser, sender: Any?)
+    @objc func actionButtonPressed(at photoIndex: Int, in mediaBrowser: MediaBrowser, sender: Any?)
     
     /**
      Optional protocol when need callback about isMediaSelected
@@ -76,7 +76,7 @@ public protocol MediaBrowserDelegate {
      - Parameter index: Int
      - Parameter mediaBrowser: MediaBrowser
      */
-    func isMediaSelected(at index: Int, in mediaBrowser: MediaBrowser) -> Bool
+    @objc func isMediaSelected(at index: Int, in mediaBrowser: MediaBrowser) -> Bool
     
     /**
      Optional protocol when need callback about media selection
@@ -85,7 +85,7 @@ public protocol MediaBrowserDelegate {
      - Parameter index: Int
      - Parameter mediaBrowser: MediaBrowser
      */
-    func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser)
+    @objc func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser)
     
     /**
      Optional protocol for title
@@ -93,18 +93,18 @@ public protocol MediaBrowserDelegate {
      - Parameter mediaBrowser: MediaBrowser
      - Parameter index: Int
      */
-    func title(for mediaBrowser: MediaBrowser, at index: Int) -> String?
+    @objc func title(for mediaBrowser: MediaBrowser, at index: Int) -> String?
     
     /**
      Optional protocol for grid cells resizing
      - Returns: Optional CGSize
      */
-    func gridCellSize() -> CGSize
+    @objc func gridCellSize() -> CGSize
 
     /**
      Optional protocol for access token
      */
-    func accessToken(for url: URL?) -> String?
+    @objc func accessToken(for url: URL?) -> String?
 }
 
 public extension MediaBrowserDelegate {
