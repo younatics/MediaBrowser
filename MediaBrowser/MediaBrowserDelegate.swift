@@ -9,8 +9,7 @@
 import UIKit
 
 /// Required delegate to use MediaBrowser
-@objc
-public protocol MediaBrowserDelegate {
+public protocol MediaBrowserDelegate: NSObject {
     //MARK: Required methods
     
     /**
@@ -18,7 +17,7 @@ public protocol MediaBrowserDelegate {
      
      - Parameter mediaBrowser: MediaBrowser
      */
-    @objc func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int
+    func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int
     
     /**
      Required protocol to use MediaBrowser. return media
@@ -26,7 +25,7 @@ public protocol MediaBrowserDelegate {
      - Parameter mediaBrowser: MediaBrowser
      - Parameter index: Int
      */
-    @objc func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media
+    func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media
     
     //MARK: Optional methods
     
@@ -35,8 +34,8 @@ public protocol MediaBrowserDelegate {
      
      - Parameter mediaBrowser: MediaBrowser
      */
-    @objc func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser)
-
+    func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser)
+    
     /**
      Optional protocol to show thumbnail. return media.
      Recommand small size
@@ -44,15 +43,15 @@ public protocol MediaBrowserDelegate {
      - Parameter mediaBrowser: MediaBrowser
      - Parameter index: Int
      */
-    @objc func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media
-
+    func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media
+    
     /**
      Optional protocol to show captionView. return MediaCaptionView.
      
      - Parameter mediaBrowser: MediaBrowser
      - Parameter index: Int
      */
-    @objc func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView?
+    func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView?
     
     /**
      Optional protocol when need callback
@@ -60,7 +59,7 @@ public protocol MediaBrowserDelegate {
      - Parameter index: Int
      - Parameter mediaBrowser: MediaBrowser
      */
-    @objc func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser)
+    func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser)
     
     /**
      Optional protocol when need callback about action button
@@ -68,7 +67,7 @@ public protocol MediaBrowserDelegate {
      - Parameter photoIndex: Int
      - Parameter mediaBrowser: MediaBrowser
      */
-    @objc func actionButtonPressed(at photoIndex: Int, in mediaBrowser: MediaBrowser, sender: Any?)
+    func actionButtonPressed(at photoIndex: Int, in mediaBrowser: MediaBrowser, sender: Any?)
     
     /**
      Optional protocol when need callback about isMediaSelected
@@ -76,7 +75,7 @@ public protocol MediaBrowserDelegate {
      - Parameter index: Int
      - Parameter mediaBrowser: MediaBrowser
      */
-    @objc func isMediaSelected(at index: Int, in mediaBrowser: MediaBrowser) -> Bool
+    func isMediaSelected(at index: Int, in mediaBrowser: MediaBrowser) -> Bool
     
     /**
      Optional protocol when need callback about media selection
@@ -85,7 +84,7 @@ public protocol MediaBrowserDelegate {
      - Parameter index: Int
      - Parameter mediaBrowser: MediaBrowser
      */
-    @objc func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser)
+    func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser)
     
     /**
      Optional protocol for title
@@ -93,27 +92,27 @@ public protocol MediaBrowserDelegate {
      - Parameter mediaBrowser: MediaBrowser
      - Parameter index: Int
      */
-    @objc func title(for mediaBrowser: MediaBrowser, at index: Int) -> String?
+    func title(for mediaBrowser: MediaBrowser, at index: Int) -> String?
     
     /**
      Optional protocol for grid cells resizing
      - Returns: Optional CGSize
      */
-    @objc func gridCellSize() -> CGSize
-
+    func gridCellSize() -> CGSize
+    
     /**
      Optional protocol for access token
      */
-    @objc func accessToken(for url: URL?) -> String?
+    func accessToken(for url: URL?) -> String?
 }
 
 public extension MediaBrowserDelegate {
     func mediaBrowserDidFinishModalPresentation(mediaBrowser: MediaBrowser) {
         mediaBrowser.dismiss(animated: true, completion: nil)
     }
-
+    
     func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media { return Media() }
-
+    
     func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView? { return nil }
     
     func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser) { }
@@ -127,6 +126,6 @@ public extension MediaBrowserDelegate {
     func title(for mediaBrowser: MediaBrowser, at index: Int) -> String? { return nil }
     
     func gridCellSize() -> CGSize { return CGSize(width: 128, height: 128) }
-
+    
     func accessToken(for url: URL?) -> String? { return nil }
 }
