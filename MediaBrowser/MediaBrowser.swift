@@ -1247,11 +1247,11 @@ func floorcgf(x: CGFloat) -> CGFloat {
             next.isEnabled = (currentPageIndex < medias - 1)
         }
         
-        // Disable action button if there is false image or it's a video
+        // Disable action button if there is false image
         if let ab = actionButton {
-            let photo = mediaAtIndex(index: currentPageIndex)
+            let media = mediaAtIndex(index: currentPageIndex)
             
-            if photo != nil && (photo!.underlyingImage == nil || photo!.isVideo) {
+            if media != nil && (media!.underlyingImage == nil) {
                 ab.isEnabled = false
                 ab.tintColor = UIColor.clear // Tint to hide button
             } else {
@@ -1822,15 +1822,17 @@ func floorcgf(x: CGFloat) -> CGFloat {
     
     internal func defaultActionForMedia(atIndex index: Int) {
         // Only react when image has loaded
-        if let photo = mediaAtIndex(index: index) {
-            if numberOfMedias > 0 && photo.underlyingImage != nil {
+        if let media = mediaAtIndex(index: index) {
+            if numberOfMedias > 0 && media.underlyingImage != nil {
                 // Show activity view controller
                 var items: [Any] = [Any]()
-                if let image = photo.underlyingImage {
+                if let videoUrl = media.videoURL {
+                    items.append(videoUrl)
+                } else if let image = media.underlyingImage {
                     items.append(image)
                 }
-                if photo.caption != "" {
-                    items.append(photo.caption)
+                if media.caption != "" {
+                    items.append(media.caption)
                 }
                 activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
                 
