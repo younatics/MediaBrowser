@@ -114,6 +114,9 @@ func floorcgf(x: CGFloat) -> CGFloat {
     /// Display action button (share)
     public var displayActionButton = true
     
+    /// Display action button (share)
+    public var actionButtonImage:UIImage?
+    
     /// Make status bar not hide
     public var leaveStatusBarAlone = false
     
@@ -304,7 +307,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
         pagingScrollView.delegate = nil
         NotificationCenter.default.removeObserver(self)
         releaseAllUnderlyingPhotos(preserveCurrent: false)
-        SDImageCache.shared().clearMemory() // clear memory
+        SDImageCache.shared.clearMemory() // clear memory
     }
 
     private func releaseAllUnderlyingPhotos(preserveCurrent: Bool) {
@@ -411,10 +414,18 @@ func floorcgf(x: CGFloat) -> CGFloat {
         }
         
         if displayActionButton {
-            actionButton = UIBarButtonItem(
-                barButtonSystemItem: UIBarButtonItem.SystemItem.action,
-                target: self,
-                action: #selector(actionButtonPressed(_:)))
+            // Check if custom button if not add default SystemItem action
+            if let buttonImage = actionButtonImage{
+                actionButton = UIBarButtonItem(image: buttonImage,
+                                               style: .done,
+                                               target: self,
+                                               action: #selector(actionButtonPressed(_:)))
+            }else{
+                actionButton = UIBarButtonItem(
+                    barButtonSystemItem: UIBarButtonItem.SystemItem.action,
+                    target: self,
+                    action: #selector(actionButtonPressed(_:)))
+            }
         }
         
         reloadData()
