@@ -114,7 +114,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
     /// Display action button (share)
     public var displayActionButton = true
     
-    /// Display action button (share)
+    /// Image can added actionbutton
     public var actionButtonImage:UIImage?
     
     /// Make status bar not hide
