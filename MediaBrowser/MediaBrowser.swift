@@ -503,7 +503,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
                     done.setBackgroundImage(nil, for: .normal, barMetrics: .default)
                     done.setBackgroundImage(nil, for: .highlighted, barMetrics: .compact)
                     
-                    self.navigationItem.rightBarButtonItem = done
+                    self.navigationItem.leftBarButtonItems = [done]
                 }
             } else {
                 // We're not first so show back button
