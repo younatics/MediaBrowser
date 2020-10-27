@@ -8,7 +8,6 @@
 //
 
 import UIKit
-import AssetsLibrary
 import Photos
 import SDWebImage
 
@@ -172,7 +171,7 @@ open class Media: NSObject {
             // Check what type of url it is
             if purl.scheme?.lowercased() == "assets-library" {
                 // Load from assets library
-                performLoadUnderlyingImageAndNotifyWithAssetsLibraryURL(url: purl)
+//                performLoadUnderlyingImageAndNotifyWithAssetsLibraryURL(url: purl)
             } else if purl.isFileURL {
                 // Load from local file async
                 performLoadUnderlyingImageAndNotifyWithLocalFileURL(url: purl)
@@ -229,6 +228,7 @@ open class Media: NSObject {
     }
     
     // Load from asset library async
+    /* Ramesh: My case no need to assess from Library
     private func performLoadUnderlyingImageAndNotifyWithAssetsLibraryURL(url: URL) {
         DispatchQueue.global(qos: .default).async {
             let assetslibrary = ALAssetsLibrary()
@@ -252,6 +252,7 @@ open class Media: NSObject {
                     })
         }
     }
+     */
 
     // Load from photos library
     private func performLoadUnderlyingImageAndNotifyWithAsset(asset: PHAsset, targetSize: CGSize) {
