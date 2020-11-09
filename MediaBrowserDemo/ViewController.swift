@@ -195,6 +195,7 @@ extension ViewController {
         browser.autoPlayOnAppear = autoPlayOnAppear
         browser.cachingImageCount = 2
         browser.setCurrentIndex(at: 2)
+        browser.actionButtonImage = UIImage(named: "iconCommon")
 //        browser.placeholderImage = (image: #imageLiteral(resourceName: "mediaBrowserDefault_white"), isAppliedForAll: false)
         
         

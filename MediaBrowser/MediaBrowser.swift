@@ -114,6 +114,9 @@ func floorcgf(x: CGFloat) -> CGFloat {
     /// Display action button (share)
     public var displayActionButton = true
     
+    /// Image can added actionbutton
+    public var actionButtonImage:UIImage?
+    
     /// Make status bar not hide
     public var leaveStatusBarAlone = false
     
@@ -411,10 +414,18 @@ func floorcgf(x: CGFloat) -> CGFloat {
         }
         
         if displayActionButton {
-            actionButton = UIBarButtonItem(
-                barButtonSystemItem: UIBarButtonItem.SystemItem.action,
-                target: self,
-                action: #selector(actionButtonPressed(_:)))
+            // Check if custom button if not add default SystemItem action
+            if let buttonImage = actionButtonImage{
+                actionButton = UIBarButtonItem(image: buttonImage,
+                                               style: .done,
+                                               target: self,
+                                               action: #selector(actionButtonPressed(_:)))
+            }else{
+                actionButton = UIBarButtonItem(
+                    barButtonSystemItem: UIBarButtonItem.SystemItem.action,
+                    target: self,
+                    action: #selector(actionButtonPressed(_:)))
+            }
         }
         
         reloadData()
@@ -492,7 +503,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
                     done.setBackgroundImage(nil, for: .normal, barMetrics: .default)
                     done.setBackgroundImage(nil, for: .highlighted, barMetrics: .compact)
                     
-                    self.navigationItem.rightBarButtonItem = done
+                    self.navigationItem.leftBarButtonItems = [done]
                 }
             } else {
                 // We're not first so show back button
