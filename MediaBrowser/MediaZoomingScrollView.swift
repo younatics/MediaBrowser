@@ -292,7 +292,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         
         // Calculate Max
         var maxScale: CGFloat = 3.0
-        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             // Let them go a bit bigger on a bigger screen!
             maxScale = 4.0
         }
