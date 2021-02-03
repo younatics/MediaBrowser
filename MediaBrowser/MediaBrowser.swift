@@ -67,6 +67,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
         }
         return $0
     }(AVPlayerViewController())
+    
     internal var currentVideoIndex = 0
     internal var currentVideoLoadingIndicator: UIActivityIndicatorView?
 
@@ -287,7 +288,6 @@ func floorcgf(x: CGFloat) -> CGFloat {
         } else {
             isVCBasedStatusBarAppearance = true
         }
-        
         
         hidesBottomBarWhenPushed = true
         automaticallyAdjustsScrollViewInsets = false
