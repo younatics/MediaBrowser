@@ -67,6 +67,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
         }
         return $0
     }(AVPlayerViewController())
+    
     internal var currentVideoIndex = 0
     internal var currentVideoLoadingIndicator: UIActivityIndicatorView?
 
@@ -288,11 +289,8 @@ func floorcgf(x: CGFloat) -> CGFloat {
             isVCBasedStatusBarAppearance = true
         }
         
-        
         hidesBottomBarWhenPushed = true
-        automaticallyAdjustsScrollViewInsets = false
-//        extendedLayoutIncludesOpaqueBars = true
-//        navigationController?.view.backgroundColor = UIColor.white
+        pagingScrollView.contentInsetAdjustmentBehavior = .never
         
         // Listen for Media falsetifications
         NotificationCenter.default.addObserver(
@@ -383,7 +381,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
         toolbar.barTintColor = toolbarBarTintColor
         toolbar.backgroundColor = toolbarBackgroundColor
         toolbar.alpha = toolbarAlpha
-        toolbar.barStyle = .blackTranslucent
+        toolbar.barStyle = .black
         toolbar.isTranslucent = true
         toolbar.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
 
@@ -643,7 +641,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
         }
         
         // Set style
-        if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
+        if !leaveStatusBarAlone && UIDevice.current.userInterfaceIdiom == .phone {
             previousStatusBarStyle = UIApplication.shared.statusBarStyle
             UIApplication.shared.setStatusBarStyle(statusBarStyle, animated: animated)
         }
@@ -728,7 +726,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
         setControlsHidden(hidden: false, animated: false, permanent: true)
         
         // Status bar
-        if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
+        if !leaveStatusBarAlone && UIDevice.current.userInterfaceIdiom == .phone {
             UIApplication.shared.setStatusBarStyle(previousStatusBarStyle, animated: animated)
         }
 
