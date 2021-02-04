@@ -891,7 +891,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
     }
 
     //MARK: - Data
-    var currentIndex: Int {
+    public var currentIndex: Int {
         return currentPageIndex
     }
 
