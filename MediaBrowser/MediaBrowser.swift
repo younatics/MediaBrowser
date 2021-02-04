@@ -16,7 +16,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
 }
 
 /// MediaBrwoser is based in UIViewController, UIScrollViewDelegate and UIActionSheetDelegate. So you can push, or make modal.
-@objcMembers public class MediaBrowser: UIViewController, AVPlayerViewControllerDelegate {
+@objcMembers open class MediaBrowser: UIViewController, AVPlayerViewControllerDelegate {
     internal let padding = CGFloat(0.0)
 
     // Data
