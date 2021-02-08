@@ -44,49 +44,48 @@ open class Media: NSObject {
     private var assetRequestID = PHInvalidImageRequestID
     
     //MARK: - Init
-    /// init
-    public override init() {}
-
     
+    public override init() {
+        super.init()
+    }
+
     /// init with image
-    public convenience init(image: UIImage) {
-        self.init()
+    public init(image: UIImage) {
+        super.init()
         self.image = image
     }
     
     /// init with image and caption
-    public convenience init(image: UIImage, caption: String) {
-        self.init()
+    public init(image: UIImage, caption: String) {
+        super.init()
         self.image = image
         self.caption = caption
     }
 
     /// init with image url and caption
-    public convenience init(url: URL, caption: String) {
-        self.init()
+    public init(url: URL, caption: String) {
+        super.init()
         self.photoURL = url
         self.caption = caption
     }
 
     /// init with image url
-    public convenience init(url: URL) {
-        self.init()
+    public init(url: URL) {
+        super.init()
         self.photoURL = url
     }
 
     /// init with PHAsset and targetSize
-    public convenience init(asset: PHAsset, targetSize: CGSize) {
-        self.init()
-        
+    public init(asset: PHAsset, targetSize: CGSize) {
+        super.init()
         self.asset = asset
         assetTargetSize = targetSize
         isVideo = asset.mediaType == PHAssetMediaType.video
     }
     
     /// init with video URL
-    public convenience init(videoURL: URL, previewImageURL: URL? = nil) {
-        self.init()
-    
+    public init(videoURL: URL, previewImageURL: URL? = nil) {
+        super.init()
         self.videoURL = videoURL
         isVideo = true
         emptyImage = (previewImageURL == nil) ? true : false
