@@ -15,7 +15,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "SDWebImage", url: "https://github.com/SDWebImage/SDWebImage.git", .branch("master")),
-        .package(name: "UICircularProgressRing", url: "https://github.com/luispadron/UICircularProgressRing.git", .branch("master"))
+        .package(name: "UICircularProgressRing", url: "https://github.com/luispadron/UICircularProgressRing.git", from: "6.3.0")
     ],
     targets: [
         .target(
