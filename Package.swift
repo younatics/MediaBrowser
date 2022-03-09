@@ -14,7 +14,7 @@ let package = Package(
             targets: ["MediaBrowser"])
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
+        .package(name: "SDWebImage", url: "https://github.com/SDWebImage/SDWebImage.git", .branch("master"))
     ],
     targets: [
         .target(
