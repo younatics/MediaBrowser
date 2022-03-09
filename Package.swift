@@ -20,7 +20,7 @@ let package = Package(
         .target(
             name: "MediaBrowser",
             dependencies: [],
-            path: "MediaBrowser",
+            path: "MediaBrowser"
         )
     ]
 )
