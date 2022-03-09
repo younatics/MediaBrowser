@@ -14,12 +14,13 @@ let package = Package(
             targets: ["MediaBrowser"])
     ],
     dependencies: [
-        .package(name: "SDWebImage", url: "https://github.com/SDWebImage/SDWebImage.git", .branch("master"))
+        .package(name: "SDWebImage", url: "https://github.com/SDWebImage/SDWebImage.git", .branch("master")),
+        .package(name: "UICircularProgressRing", url: "https://github.com/luispadron/UICircularProgressRing.git", .branch("master"))
     ],
     targets: [
         .target(
             name: "MediaBrowser",
-            dependencies: ["SDWebImage"],
+            dependencies: ["SDWebImage", "UICircularProgressRing"],
             path: "MediaBrowser"
         )
     ]
