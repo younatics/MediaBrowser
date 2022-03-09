@@ -4,11 +4,6 @@
 import PackageDescription
 
 let package = Package(
-    name: "MediaBrowser"
-)
-
-
-let package = Package(
     name: "MediaBrowser",
     platforms: [
         .iOS(.v11)
