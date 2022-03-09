@@ -19,7 +19,7 @@ let package = Package(
     targets: [
         .target(
             name: "MediaBrowser",
-            dependencies: [],
+            dependencies: ["SDWebImage"],
             path: "MediaBrowser"
         )
     ]
