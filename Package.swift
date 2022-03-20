@@ -22,7 +22,9 @@ let package = Package(
             name: "MediaBrowser",
             dependencies: ["SDWebImage", "UICircularProgressRing"],
             path: "MediaBrowser",
-            resources: ["Info.plist"]
+            resources: [
+                .process("Info.plist")
+            ]
         )
     ]
 )
