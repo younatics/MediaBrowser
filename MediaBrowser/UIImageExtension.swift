@@ -7,7 +7,7 @@
 //
 //
 
-import Foundation
+import UIKit
 
 public extension UIImage {
     /// Get bundle Image or return nil when it is not exist
