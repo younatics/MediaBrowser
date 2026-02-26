@@ -1,4 +1,4 @@
-platform :ios, '8.1'
+platform :ios, '15.6'
 
 target 'MediaBrowser' do
   use_frameworks!
