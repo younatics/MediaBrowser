@@ -7,7 +7,7 @@
 //
 //
 
-import Foundation
+import UIKit
 
 class MediaTapDetectingView: UIView {
     weak var tapDelegate: TapDetectingViewDelegate?

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Seungyoun Yi. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension MediaBrowser: UIScrollViewDelegate {
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
