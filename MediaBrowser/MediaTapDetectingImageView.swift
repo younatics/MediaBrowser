@@ -7,7 +7,7 @@
 //
 //
 
-import Foundation
+import UIKit
 
 class MediaTapDetectingImageView: UIImageView {
     weak var tapDelegate: TapDetectingImageViewDelegate?
@@ -58,7 +58,8 @@ class MediaTapDetectingImageView: UIImageView {
     }
 }
 
-protocol TapDetectingImageViewDelegate: class {
+@MainActor
+protocol TapDetectingImageViewDelegate: AnyObject {
     func singleTapDetectedInImageView(view: UIImageView, touch: UITouch)
     func doubleTapDetectedInImageView(view: UIImageView, touch: UITouch)
     func tripleTapDetectedInImageView(view: UIImageView, touch: UITouch)

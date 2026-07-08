@@ -290,7 +290,6 @@ func floorcgf(x: CGFloat) -> CGFloat {
         
         
         hidesBottomBarWhenPushed = true
-        automaticallyAdjustsScrollViewInsets = false
 //        extendedLayoutIncludesOpaqueBars = true
 //        navigationController?.view.backgroundColor = UIColor.white
         
@@ -302,7 +301,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
             object: nil)
     }
 
-    deinit {
+    isolated deinit {
         clearCurrentVideo()
         pagingScrollView.delegate = nil
         NotificationCenter.default.removeObserver(self)
@@ -383,7 +382,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
         toolbar.barTintColor = toolbarBarTintColor
         toolbar.backgroundColor = toolbarBackgroundColor
         toolbar.alpha = toolbarAlpha
-        toolbar.barStyle = .blackTranslucent
+        toolbar.barStyle = .black
         toolbar.isTranslucent = true
         toolbar.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
 
@@ -643,7 +642,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
         }
         
         // Set style
-        if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
+        if !leaveStatusBarAlone && UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             previousStatusBarStyle = UIApplication.shared.statusBarStyle
             UIApplication.shared.setStatusBarStyle(statusBarStyle, animated: animated)
         }
@@ -728,7 +727,7 @@ func floorcgf(x: CGFloat) -> CGFloat {
         setControlsHidden(hidden: false, animated: false, permanent: true)
         
         // Status bar
-        if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
+        if !leaveStatusBarAlone && UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone {
             UIApplication.shared.setStatusBarStyle(previousStatusBarStyle, animated: animated)
         }
 

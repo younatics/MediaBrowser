@@ -3,8 +3,8 @@
 
 <p align="center">
   <a href="(https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat"></a>
-  <img alt="Swift" src="https://img.shields.io/badge/Swift-5.0-orange.svg">
-  <img alt="iOS 8.1+" src="https://img.shields.io/badge/iOS-8.1%2B-blue.svg">
+  <img alt="Swift" src="https://img.shields.io/badge/Swift-6.0-orange.svg">
+  <img alt="iOS 13.0+" src="https://img.shields.io/badge/iOS-13.0%2B-blue.svg">
   <a href="https://travis-ci.org/younatics/MediaBrowser" target="_blank"><img alt="travis" src="https://travis-ci.org/younatics/MediaBrowser.svg?branch=master"></a>
   <a href="https://cocoapods.org/pods/MediaBrowser" target="_blank"><img alt="CocoaPods" src="http://img.shields.io/cocoapods/v/MediaBrowser.svg"></a>
   <a href="https://younatics.github.io/MediaBrowser" target="_blank"><img alt="CocoaDocs" src="https://github.com/younatics/MediaBrowser/blob/master/docs/badge.svg"></a>
@@ -26,7 +26,7 @@ Also, MediaBrowser use latest [SDWebImage](https://github.com/rs/SDWebImage) ver
 | ![WebPhotos](https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotos.gif?raw=true)  | ![WebPhotoGrid](https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotoGrid.gif?raw=true)  |
 
 ## Requirements
-`MediaBrowser` is written in Swift 5.0 Compatible with iOS 8.0+
+`MediaBrowser` is written in Swift 6. Compatible with iOS 13.0+. Supports Swift Package Manager, CocoaPods, and Carthage.
 
 ## Usage
 ### Basic
@@ -120,6 +120,17 @@ You can also see all usage in demo project.
 | `func title(for mediaBrowser: MediaBrowser, at index: Int) -> String?` | Optional protocol for title | 
 
 ## Installation
+### Swift Package Manager
+In Xcode, choose **File ▸ Add Package Dependencies…** and enter:
+```
+https://github.com/younatics/MediaBrowser.git
+```
+Or add it to your `Package.swift`:
+```swift
+dependencies: [
+    .package(url: "https://github.com/younatics/MediaBrowser.git", from: "3.0.0")
+]
+```
 ### Cocoapods
 ```ruby
 pod 'MediaBrowser'

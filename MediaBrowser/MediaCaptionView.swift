@@ -73,7 +73,7 @@ public class MediaCaptionView: UIToolbar {
 //        isOpaque = false
 //        isTranslucent = true
 //        clipsToBounds = true
-        barStyle = .blackTranslucent
+        barStyle = .black
         isTranslucent = true
 
         autoresizingMask =

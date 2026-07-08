@@ -14,11 +14,16 @@ import SDWebImage
 let MEDIA_LOADING_DID_END_NOTIFICATION  = "MEDIA_LOADING_DID_END_NOTIFICATION"
 let MEDIA_PROGRESS_NOTIFICATION  = "MEDIA_PROGRESS_NOTIFICATION"
 
-var PHInvalidImageRequestID = PHImageRequestID(0)
+let PHInvalidImageRequestID = PHImageRequestID(0)
 
 /// Media is object for photo and video
+///
+/// `@unchecked Sendable`: image/asset loading runs on background queues, but
+/// every mutation of this object's state is dispatched to the main queue (see
+/// `imageLoadingComplete()` / the `DispatchQueue.main.async` hops in the load
+/// methods), so instances are effectively main-thread confined at runtime.
 @objcMembers
-open class Media: NSObject {
+open class Media: NSObject, @unchecked Sendable {
     
     /// caption
     public var caption = ""
