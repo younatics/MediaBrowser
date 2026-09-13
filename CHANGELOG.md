@@ -1,5 +1,13 @@
 # Updates
 
+## Unreleased
+* Remove the obsolete Carthage configuration and installation instructions. Use Swift Package Manager or CocoaPods to install MediaBrowser.
+
+## [v3.0.0](https://github.com/younatics/MediaBrowser/releases/tag/3.0.0)
+* Migrate to Swift 6 and raise the minimum deployment target to iOS 13.0
+* Add a working Swift Package Manager manifest and unit tests
+* Update the CocoaPods specification to version 3.0.0
+
 ## [v2.0.5](https://github.com/younatics/MediaBrowser/releases/tag/2.0.5)
 * Improved UINavigatinController transistions
 
@@ -45,4 +53,3 @@
 
 ## [v0.2.2](https://github.com/younatics/MediaBrowser/releases/tag/0.2.2)
 * Add more docs for 1.0.0 version
-
