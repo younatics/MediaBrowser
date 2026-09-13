@@ -2,14 +2,13 @@
 ![title](https://github.com/younatics/MediaBrowser/blob/master/Images/MediaBrowser_w.png?raw=true)
 
 <p align="center">
-  <a href="(https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat"></a>
-  <img alt="Swift" src="https://img.shields.io/badge/Swift-3.1-orange.svg">
-  <img alt="iOS 8.1+" src="https://img.shields.io/badge/iOS-8.1%2B-blue.svg">
-  <a href="https://cocoapods.org/pods/MediaBrowser" target="_blank"><img alt="CocoaPods" src="http://img.shields.io/cocoapods/v/MediaBrowser.svg"></a>
+  <a href="https://github.com/younatics/MediaBrowser" target="_blank"><img alt="Swift Package Manager" src="https://img.shields.io/badge/Swift_Package_Manager-compatible-brightgreen.svg"></a>
+  <a href="https://cocoapods.org/pods/MediaBrowser" target="_blank"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/MediaBrowser.svg"></a>
+  <img alt="iOS 13.0+" src="https://img.shields.io/badge/iOS-13.0%2B-blue.svg">
+  <img alt="Swift 6.0" src="https://img.shields.io/badge/Swift-6.0-orange.svg">
+  <a href="https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat"></a>
   <a href="https://younatics.github.io/MediaBrowser" target="_blank"><img alt="CocoaDocs" src="https://github.com/younatics/MediaBrowser/blob/master/docs/badge.svg"></a>
-  <a href="https://github.com/Carthage/Carthage" target="_blank"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
-  <a href="https://github.com/Carthage/Carthage" target="_blank"><img alt="ReadMe-KR" src="https://img.shields.io/badge/한국어-리드미-red.svg"></a>
-  
+  <a href="https://github.com/younatics/MediaBrowser/blob/master/README.md" target="_blank"><img alt="ReadMe-EN" src="https://img.shields.io/badge/English-README-red.svg"></a>
 </p>
 
 
@@ -29,7 +28,7 @@ Also, MediaBrowser 캐싱에 대해서 [SDWebImage](https://github.com/rs/SDWebI
 | ![WebPhotos](https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotos.gif?raw=true)  | ![WebPhotoGrid](https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotoGrid.gif?raw=true)  |
 
 ## Requirements
-`MediaBrowser` 는 스위프트 3으로 작성 되었으며 iOS 8.1이상이 요구 됩니다.
+`MediaBrowser`는 Swift 6으로 작성되었으며 iOS 13.0 이상이 필요합니다. Swift Package Manager와 CocoaPods를 지원합니다.
 
 ## 사용법
 ### 기본
@@ -45,21 +44,26 @@ func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int {
 }
     
 func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
-  if index < mediaArray.count {
-    return mediaArray[index]
-  }
-  return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "Photo at index is Wrong")
+  guard mediaArray.indices.contains(index) else { return Media() }
+  return mediaArray[index]
 }
 ```
 
 ## 설치법
-### Cocoapods
+### Swift Package Manager
+Xcode에서 **File ▸ Add Package Dependencies…**를 선택하고 다음 저장소 URL을 입력하세요.
+```
+https://github.com/younatics/MediaBrowser.git
+```
+또는 `Package.swift`에 다음을 추가하세요.
+```swift
+dependencies: [
+    .package(url: "https://github.com/younatics/MediaBrowser.git", from: "3.0.0")
+]
+```
+### CocoaPods
 ```ruby
-pod 'MediaBrowser'
-```
-### Carthage
-```
-github "younatics/MediaBrowser"
+pod 'MediaBrowser', '~> 3.0.0'
 ```
 
 ## References

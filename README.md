@@ -2,13 +2,12 @@
 ![title](https://github.com/younatics/MediaBrowser/blob/master/Images/MediaBrowser_w.png?raw=true)
 
 <p align="center">
-  <a href="(https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat"></a>
-  <img alt="Swift" src="https://img.shields.io/badge/Swift-6.0-orange.svg">
+  <a href="https://github.com/younatics/MediaBrowser" target="_blank"><img alt="Swift Package Manager" src="https://img.shields.io/badge/Swift_Package_Manager-compatible-brightgreen.svg"></a>
+  <a href="https://cocoapods.org/pods/MediaBrowser" target="_blank"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/MediaBrowser.svg"></a>
   <img alt="iOS 13.0+" src="https://img.shields.io/badge/iOS-13.0%2B-blue.svg">
-  <a href="https://travis-ci.org/younatics/MediaBrowser" target="_blank"><img alt="travis" src="https://travis-ci.org/younatics/MediaBrowser.svg?branch=master"></a>
-  <a href="https://cocoapods.org/pods/MediaBrowser" target="_blank"><img alt="CocoaPods" src="http://img.shields.io/cocoapods/v/MediaBrowser.svg"></a>
+  <img alt="Swift 6.0" src="https://img.shields.io/badge/Swift-6.0-orange.svg">
+  <a href="https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat"></a>
   <a href="https://younatics.github.io/MediaBrowser" target="_blank"><img alt="CocoaDocs" src="https://github.com/younatics/MediaBrowser/blob/master/docs/badge.svg"></a>
-  <a href="https://github.com/Carthage/Carthage" target="_blank"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
   <a href="https://github.com/younatics/MediaBrowser/blob/master/README-KR.md" target="_blank"><img alt="ReadMe-KR" src="https://img.shields.io/badge/한국어-리드미-red.svg"></a>
 </p>
 
@@ -26,7 +25,7 @@ Also, MediaBrowser use latest [SDWebImage](https://github.com/rs/SDWebImage) ver
 | ![WebPhotos](https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotos.gif?raw=true)  | ![WebPhotoGrid](https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotoGrid.gif?raw=true)  |
 
 ## Requirements
-`MediaBrowser` is written in Swift 6. Compatible with iOS 13.0+. Supports Swift Package Manager, CocoaPods, and Carthage.
+`MediaBrowser` is written in Swift 6 and requires iOS 13.0 or later. It supports Swift Package Manager and CocoaPods.
 
 ## Usage
 ### Basic
@@ -42,10 +41,8 @@ func numberOfMedia(in mediaBrowser: MediaBrowser) -> Int {
 }
     
 func media(for mediaBrowser: MediaBrowser, at index: Int) -> Media {
-  if index < mediaArray.count {
-    return mediaArray[index]
-  }
-  return DemoData.localMediaPhoto(imageName: "MotionBookIcon", caption: "Photo at index is Wrong")
+  guard mediaArray.indices.contains(index) else { return Media() }
+  return mediaArray[index]
 }
 ```
 
@@ -56,9 +53,12 @@ You can also see all usage in demo project.
 
 | Property | Type |
 | -------- | ---  |
+| `scrollViewBackgroundColor` | `UIColor` |
 | `navigationBarTranslucent` | `Bool` |
 | `navigationBarTextColor` | `UIColor` |
+| `navigationBarBackgroundColor` | `UIColor` |
 | `navigationBarTintColor` | `UIColor` |
+| `navigationBarStyle` | `UIBarStyle` |
 | `statusBarStyle` | `UIStatusBarStyle` |
 | `toolbarTextColor` | `UIColor` |
 | `toolbarBarTintColor` | `UIColor` |
@@ -67,6 +67,7 @@ You can also see all usage in demo project.
 | `isVCBasedStatusBarAppearance` | `Bool` |
 | `statusBarShouldBeHidden` | `Bool` |
 | `displayActionButton` | `Bool` |
+| `actionButtonImage` | `UIImage?` |
 | `leaveStatusBarAlone` | `Bool` |
 | `performingLayout` | `Bool` |
 | `rotating` | `Bool` |
@@ -82,6 +83,7 @@ You can also see all usage in demo project.
 | `enableGrid` | `Bool` |
 | `enableSwipeToDismiss` | `Bool` |
 | `startOnGrid` | `Bool` |
+| `disableGridAnimations` | `Bool` |
 | `autoPlayOnAppear` | `Bool` |
 | `hideControlsOnStartup` | `Bool` |
 | `delayToHideElements` | `TimeInterval` |
@@ -114,10 +116,12 @@ You can also see all usage in demo project.
 | `func thumbnail(for mediaBrowser: MediaBrowser, at index: Int) -> Media` | Optional protocol to show thumbnail. return media. Recommand small size | 
 | `func captionView(for mediaBrowser: MediaBrowser, at index: Int) -> MediaCaptionView?` | Optional protocol to show captionView. return MediaCaptionView. | 
 | `func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser)` | Optional protocol when need callback | 
-| `func actionButtonPressed(at photoIndex: Int, in mediaBrowser: MediaBrowser)` | Optional protocol when need callback about action button | 
+| `func actionButtonPressed(at photoIndex: Int, in mediaBrowser: MediaBrowser, sender: Any?)` | Optional protocol when need callback about action button |
 | `func isMediaSelected(at index: Int, in mediaBrowser: MediaBrowser) -> Bool` | Optional protocol when need callback about isMediaSelected | 
 | `func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser)` | Optional protocol when need callback about media selection | 
 | `func title(for mediaBrowser: MediaBrowser, at index: Int) -> String?` | Optional protocol for title | 
+| `func gridCellSize() -> CGSize` | Optional protocol for grid cell size |
+| `func accessToken(for url: URL?) -> String?` | Optional protocol for an access token |
 
 ## Installation
 ### Swift Package Manager
@@ -131,13 +135,9 @@ dependencies: [
     .package(url: "https://github.com/younatics/MediaBrowser.git", from: "3.0.0")
 ]
 ```
-### Cocoapods
+### CocoaPods
 ```ruby
-pod 'MediaBrowser'
-```
-### Carthage
-```
-github "younatics/MediaBrowser"
+pod 'MediaBrowser', '~> 3.0.0'
 ```
 
 ## References
