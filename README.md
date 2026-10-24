@@ -4,7 +4,7 @@
 <p align="center">
   <a href="https://github.com/younatics/MediaBrowser" target="_blank"><img alt="Swift Package Manager" src="https://img.shields.io/badge/Swift_Package_Manager-compatible-brightgreen.svg"></a>
   <a href="https://cocoapods.org/pods/MediaBrowser" target="_blank"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/MediaBrowser.svg"></a>
-  <img alt="iOS 13.0+" src="https://img.shields.io/badge/iOS-13.0%2B-blue.svg">
+  <img alt="iOS 15.0+" src="https://img.shields.io/badge/iOS-13.0%2B-blue.svg">
   <img alt="Swift 6.0" src="https://img.shields.io/badge/Swift-6.0-orange.svg">
   <a href="https://github.com/younatics/MediaBrowser/blob/master/LICENSE" target="_blank"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat"></a>
   <a href="https://younatics.github.io/MediaBrowser" target="_blank"><img alt="CocoaDocs" src="https://github.com/younatics/MediaBrowser/blob/master/docs/badge.svg"></a>
@@ -25,7 +25,7 @@ Also, MediaBrowser use latest [SDWebImage](https://github.com/rs/SDWebImage) ver
 | ![WebPhotos](https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotos.gif?raw=true)  | ![WebPhotoGrid](https://github.com/younatics/MediaBrowser/blob/master/Images/WebPhotoGrid.gif?raw=true)  |
 
 ## Requirements
-`MediaBrowser` is written in Swift 6 and requires iOS 13.0 or later. It supports Swift Package Manager and CocoaPods.
+`MediaBrowser` is written in Swift 6 and requires iOS 15.0 or later. It supports Swift Package Manager and CocoaPods.
 
 ## Usage
 ### Basic

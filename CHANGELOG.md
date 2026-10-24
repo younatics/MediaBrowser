@@ -1,4 +1,6 @@
 # Updates
+## [v3.1.0](https://github.com/younatics/MediaBrowser/releases/tag/3.1.0)
+* Raise the minimum deployment target to iOS 15.0 (Xcode 26/27 no longer build for iOS 13/14)
 
 ## Unreleased
 * Remove the obsolete Carthage configuration and installation instructions. Use Swift Package Manager or CocoaPods to install MediaBrowser.

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MediaBrowser'
-  s.version          = '3.0.0'
+  s.version          = '3.1.0'
   s.summary          = 'A simple iOS photo and video browser with optional grid view, captions and selections written in Swift 6.'
 
   s.description = <<-DESCRIPTION
@@ -32,7 +32,7 @@ MediaBrowser can display one or more images or videos by providing either UIImag
   s.resources        = "MediaBrowser/*.xcassets"
 
   s.swift_version = '6.0'
-  s.ios.deployment_target = '13.0'
+  s.ios.deployment_target = '15.0'
 
   s.frameworks = 'UIKit', 'ImageIO', 'QuartzCore', 'AVKit', 'MediaPlayer'
   s.weak_frameworks = 'Photos'
